@@ -1,0 +1,112 @@
+.appointment-booking-admin {
+  .appointment-booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h1 {
+      margin: 0;
+    }
+  }
+
+  .appointments-table {
+    .appointments-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 15px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      font-weight: 600;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .appointment-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 15px;
+      padding: 15px;
+      border-bottom: 1px solid #dee2e6;
+      align-items: center;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .appointment-cell {
+      display: flex;
+      align-items: center;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .appointment-actions {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  .appointment-edit-form {
+    .components-base-control {
+      margin-bottom: 16px;
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .appointment-booking-admin {
+    .appointments-table {
+      .appointments-header,
+      .appointment-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .appointments-header {
+        display: none;
+      }
+
+      .appointment-row {
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        padding: 15px;
+
+        .appointment-cell {
+          margin-bottom: 8px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .appointment-actions {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+}
