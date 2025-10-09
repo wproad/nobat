@@ -9,6 +9,7 @@ A WordPress plugin that allows clients to book appointments through a simple for
 - **Time Slot Management**: Hardcoded time slots with availability checking
 - **Status Management**: Track appointment status (pending, confirmed, completed, cancelled)
 - **Responsive Design**: Works on desktop and mobile devices
+- **Admin Calendar View**: Weekly calendar with day columns and visual blocks per appointment
 
 ## Installation
 
@@ -37,6 +38,7 @@ Add the booking form to any page or post using the shortcode:
 2. View all appointments in a table format
 3. Edit appointment status or delete appointments
 4. Use the refresh button to reload the list
+5. Open the **Appointments → Calendar** submenu for a weekly calendar view with navigation
 
 ## Development
 
@@ -58,14 +60,28 @@ appointment-booking/
 ├── package.json              # Node dependencies
 ├── webpack.config.js         # Webpack configuration
 ├── src/
-│   ├── admin/               # Admin React components
-│   │   ├── index.js
+│   ├── admin/                # Admin list page app
+│   │   ├── index.js          # mounts into #appointment-booking-admin
 │   │   ├── admin.scss
 │   │   └── components/
-│   └── frontend/            # Frontend React components
-│       ├── index.js
+│   │       ├── index.js
+│   │       ├── admin-appointments-list.jsx
+│   │       └── appointment-row.jsx
+│   ├── calendar/             # Admin calendar app
+│   │   ├── index.js          # mounts into #appointment-booking-calendar
+│   │   ├── calendar.scss
+│   │   └── components/
+│   │       ├── index.js
+│   │       ├── calendar-view.jsx
+│   │       ├── day-column.jsx
+│   │       └── time-block.jsx
+│   └── frontend/             # Frontend booking app
+│       ├── index.js          # mounts into #appointment-booking-form
 │       ├── frontend.scss
 │       └── components/
+│           ├── index.js
+│           ├── booking-form.jsx
+│           └── time-slot-selector.jsx
 └── build/                   # Compiled assets (generated)
 ```
 
@@ -111,7 +127,16 @@ Edit the `appointment_booking_get_available_slots` function in `index.php` to mo
 Edit the SCSS files in the `src/` directory:
 
 - `src/admin/admin.scss` - Admin interface styles
+- `src/calendar/calendar.scss` - Admin calendar styles
 - `src/frontend/frontend.scss` - Frontend booking form styles
+
+## Admin Asset Loading
+
+Assets are enqueued only on this plugin's admin pages. The calendar bundle is loaded for the Calendar submenu. REST nonce (`wpApiSettings.nonce`) is localized for authenticated requests in admin.
+
+## Frontend Notes
+
+- Phone field is configured for browser autofill/history via `name="tel"`, `autoComplete="tel"`, `inputMode="tel"`.
 
 ### Adding New Fields
 
