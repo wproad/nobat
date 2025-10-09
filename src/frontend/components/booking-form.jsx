@@ -173,6 +173,12 @@ const BookingForm = () => {
                   "appointment-booking"
                 )}
                 type="tel"
+                name="tel"
+                id="appointment-booking-phone"
+                autoComplete="tel"
+                inputMode="tel"
+                autoCorrect="off"
+                autoCapitalize="off"
               />
             </div>
 
