@@ -32,7 +32,7 @@ const TimeBlock = ({ appointment }) => {
   };
 
   const formatTime = (timeSlot) => {
-    return timeSlot.replace("-", " - ");
+    return String(timeSlot).split("-")[0];
   };
 
   return (

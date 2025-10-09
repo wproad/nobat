@@ -148,6 +148,55 @@ register_setting( 'appointment_booking_settings', 'appointment_booking_notify_ad
 		'appointment_booking_settings'
 	);
 
+	// Time slots section
+	add_settings_section(
+		'appointment_booking_timeslots_section',
+		__( 'Time Slots', 'appointment-booking' ),
+		'__return_false',
+		'appointment_booking_settings'
+	);
+
+	// Slot interval (minutes)
+	register_setting( 'appointment_booking_settings', 'appointment_booking_slot_interval', array(
+		'type' => 'integer',
+		'default' => 60,
+		'sanitize_callback' => function( $value ) {
+			$value = absint( $value );
+			$allowed = array( 10, 15, 20, 30, 45, 60, 90, 120 );
+			return in_array( $value, $allowed, true ) ? $value : 60;
+		},
+	) );
+
+	// Day start and end (HH:MM)
+	register_setting( 'appointment_booking_settings', 'appointment_booking_day_start', array(
+		'type' => 'string',
+		'default' => '09:00',
+		'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
+	) );
+	register_setting( 'appointment_booking_settings', 'appointment_booking_day_end', array(
+		'type' => 'string',
+		'default' => '17:00',
+		'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
+	) );
+
+	// Break ranges (one per line, HH:MM-HH:MM)
+	register_setting( 'appointment_booking_settings', 'appointment_booking_breaks', array(
+		'type' => 'string',
+		'default' => "12:00-14:00",
+		'sanitize_callback' => function( $value ) {
+			$lines = preg_split( '/\r\n|\r|\n/', (string) $value );
+			$clean = array();
+			foreach ( $lines as $line ) {
+				$line = trim( $line );
+				if ( $line === '' ) { continue; }
+				if ( preg_match( '/^([01]?\d|2[0-3]):[0-5]\d-([01]?\d|2[0-3]):[0-5]\d$/', $line ) ) {
+					$clean[] = $line;
+				}
+			}
+			return implode( "\n", $clean );
+		},
+	) );
+
 add_settings_field(
     'appointment_booking_notify_admin',
     __( 'Notify Admin', 'appointment-booking' ),
@@ -170,6 +219,36 @@ add_settings_field(
 		'appointment_booking_field_reminder_minutes',
 		'appointment_booking_settings',
 		'appointment_booking_notifications_section'
+	);
+
+	// Time slots fields
+	add_settings_field(
+		'appointment_booking_slot_interval',
+		__( 'Slot interval (minutes)', 'appointment-booking' ),
+		'appointment_booking_field_slot_interval',
+		'appointment_booking_settings',
+		'appointment_booking_timeslots_section'
+	);
+	add_settings_field(
+		'appointment_booking_day_start',
+		__( 'Day start (HH:MM)', 'appointment-booking' ),
+		'appointment_booking_field_day_start',
+		'appointment_booking_settings',
+		'appointment_booking_timeslots_section'
+	);
+	add_settings_field(
+		'appointment_booking_day_end',
+		__( 'Day end (HH:MM)', 'appointment-booking' ),
+		'appointment_booking_field_day_end',
+		'appointment_booking_settings',
+		'appointment_booking_timeslots_section'
+	);
+	add_settings_field(
+		'appointment_booking_breaks',
+		__( 'Breaks (one per line, HH:MM-HH:MM)', 'appointment-booking' ),
+		'appointment_booking_field_breaks',
+		'appointment_booking_settings',
+		'appointment_booking_timeslots_section'
 	);
 }
 add_action( 'admin_init', 'appointment_booking_register_settings' );
@@ -205,6 +284,45 @@ function appointment_booking_field_reminder_minutes() {
 		'<input type="number" name="appointment_booking_reminder_minutes" value="%d" min="1" step="1" style="width:100px;" />',
 		$val
 	);
+}
+
+/**
+ * Settings field renderers for time slots
+ */
+function appointment_booking_field_slot_interval() {
+	$val = (int) get_option( 'appointment_booking_slot_interval', 60 );
+	$options = array( 10, 15, 20, 30, 45, 60, 90, 120 );
+	echo '<select name="appointment_booking_slot_interval" style="min-width:160px">';
+	foreach ( $options as $opt ) {
+		printf( '<option value="%d" %s>%d</option>', $opt, selected( $val === (int) $opt, true, false ), $opt );
+	}
+	echo '</select>';
+}
+
+function appointment_booking_field_day_start() {
+	$val = esc_attr( (string) get_option( 'appointment_booking_day_start', '09:00' ) );
+	printf( '<input type="time" name="appointment_booking_day_start" value="%s" />', $val );
+}
+
+function appointment_booking_field_day_end() {
+	$val = esc_attr( (string) get_option( 'appointment_booking_day_end', '17:00' ) );
+	printf( '<input type="time" name="appointment_booking_day_end" value="%s" />', $val );
+}
+
+function appointment_booking_field_breaks() {
+	$val = (string) get_option( 'appointment_booking_breaks', "12:00-14:00" );
+	printf( '<textarea name="appointment_booking_breaks" rows="4" cols="40" placeholder="12:00-13:00\n15:30-16:00">%s</textarea>', esc_textarea( $val ) );
+}
+
+/**
+ * Sanitize time in HH:MM (24h)
+ */
+function appointment_booking_sanitize_time_hhmm( $time ) {
+	$time = (string) $time;
+	if ( preg_match( '/^([01]?\d|2[0-3]):[0-5]\d$/', $time ) ) {
+		return $time;
+	}
+	return '09:00';
 }
 
 function appointment_booking_settings_page_html() {
@@ -361,6 +479,13 @@ function appointment_booking_register_rest_routes() {
 		'callback' => 'appointment_booking_get_available_slots',
 		'permission_callback' => '__return_true',
 	) );
+
+	// Returns the full-day slot template based on settings (includes breaks as empty rows)
+	register_rest_route( 'appointment-booking/v1', '/time-slots-template', array(
+		'methods' => 'GET',
+		'callback' => 'appointment_booking_get_slot_template',
+		'permission_callback' => function() { return current_user_can( 'manage_options' ); },
+	) );
 }
 add_action( 'rest_api_init', 'appointment_booking_register_rest_routes' );
 
@@ -484,16 +609,8 @@ function appointment_booking_get_available_slots( $request ) {
 	
 	$table_name = $wpdb->prefix . 'appointments';
 	$date = $request->get_param( 'date' );
-	
-	// Hardcoded time slots
-	$all_slots = array(
-		'9:00-10:00',
-		'10:00-11:00',
-		'11:00-12:00',
-		'14:00-15:00',
-		'15:00-16:00',
-		'16:00-17:00'
-	);
+
+	$all_slots = appointment_booking_generate_slots_from_settings( false ); // exclude breaks from availability
 	
 	if ( $date ) {
 		// Get booked slots for the date
@@ -509,6 +626,108 @@ function appointment_booking_get_available_slots( $request ) {
 	}
 	
 	return new WP_REST_Response( array_values( $available_slots ), 200 );
+}
+
+/**
+ * Return the full-day slot template (includes breaks as rows)
+ */
+function appointment_booking_get_slot_template() {
+	// Build template with excluded flags
+	$interval = (int) get_option( 'appointment_booking_slot_interval', 60 );
+	$start = (string) get_option( 'appointment_booking_day_start', '09:00' );
+	$end = (string) get_option( 'appointment_booking_day_end', '17:00' );
+	$breaks_raw = (string) get_option( 'appointment_booking_breaks', '12:00-14:00' );
+
+	$break_ranges = array();
+	foreach ( preg_split( '/\r\n|\r|\n/', $breaks_raw ) as $line ) {
+		$line = trim( $line );
+		if ( $line === '' ) { continue; }
+		list( $bStart, $bEnd ) = array_map( 'trim', explode( '-', $line ) );
+		$break_ranges[] = array( $bStart, $bEnd );
+	}
+
+	$template = array();
+	$cursor = appointment_booking_time_to_minutes( $start );
+	$end_minutes = appointment_booking_time_to_minutes( $end );
+	while ( $cursor + $interval <= $end_minutes ) {
+		$slot_start = $cursor;
+		$slot_end = $cursor + $interval;
+		$label = appointment_booking_minutes_to_time( $slot_start ) . '-' . appointment_booking_minutes_to_time( $slot_end );
+		$in_break = false;
+		foreach ( $break_ranges as $br ) {
+			list( $bs, $be ) = $br;
+			$bs_m = appointment_booking_time_to_minutes( $bs );
+			$be_m = appointment_booking_time_to_minutes( $be );
+			if ( $slot_start < $be_m && $slot_end > $bs_m ) {
+				$in_break = true;
+				break;
+			}
+		}
+		$template[] = array(
+			'label' => $label,
+			'excluded' => $in_break,
+		);
+		$cursor += $interval;
+	}
+
+	return new WP_REST_Response( $template, 200 );
+}
+
+/**
+ * Generate time slots from settings.
+ *
+ * @param bool $include_breaks If true, includes slots within breaks (for calendar layout). If false, excludes them (for availability).
+ * @return array List of slot strings like "09:00-10:00".
+ */
+function appointment_booking_generate_slots_from_settings( $include_breaks = false ) {
+	$interval = (int) get_option( 'appointment_booking_slot_interval', 60 );
+	$start = (string) get_option( 'appointment_booking_day_start', '09:00' );
+	$end = (string) get_option( 'appointment_booking_day_end', '17:00' );
+	$breaks_raw = (string) get_option( 'appointment_booking_breaks', '12:00-14:00' );
+
+	$break_ranges = array();
+	foreach ( preg_split( '/\r\n|\r|\n/', $breaks_raw ) as $line ) {
+		$line = trim( $line );
+		if ( $line === '' ) { continue; }
+		list( $bStart, $bEnd ) = array_map( 'trim', explode( '-', $line ) );
+		$break_ranges[] = array( $bStart, $bEnd );
+	}
+
+	$slots = array();
+	$cursor = appointment_booking_time_to_minutes( $start );
+	$end_minutes = appointment_booking_time_to_minutes( $end );
+	while ( $cursor + $interval <= $end_minutes ) {
+		$slot_start = $cursor;
+		$slot_end = $cursor + $interval;
+		$label = appointment_booking_minutes_to_time( $slot_start ) . '-' . appointment_booking_minutes_to_time( $slot_end );
+		
+		$in_break = false;
+		foreach ( $break_ranges as $br ) {
+			list( $bs, $be ) = $br;
+			$bs_m = appointment_booking_time_to_minutes( $bs );
+			$be_m = appointment_booking_time_to_minutes( $be );
+			if ( $slot_start < $be_m && $slot_end > $bs_m ) {
+				$in_break = true;
+				break;
+			}
+		}
+		if ( $include_breaks || ! $in_break ) {
+			$slots[] = $label;
+		}
+		$cursor += $interval;
+	}
+	return $slots;
+}
+
+function appointment_booking_time_to_minutes( $hhmm ) {
+	list( $h, $m ) = array_map( 'intval', explode( ':', $hhmm ) );
+	return $h * 60 + $m;
+}
+
+function appointment_booking_minutes_to_time( $minutes ) {
+	$h = floor( $minutes / 60 );
+	$m = $minutes % 60;
+	return sprintf( '%02d:%02d', $h, $m );
 }
 
 /**

@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { TimeBlock } from "./time-block";
 
-const DayColumn = ({ date, appointments, isToday }) => {
+const DayColumn = ({ date, appointments, isToday, timeSlots = [] }) => {
   const formatDate = (date) => {
     return date.toLocaleDateString("en-US", {
       weekday: "short",
@@ -10,21 +10,25 @@ const DayColumn = ({ date, appointments, isToday }) => {
     });
   };
 
-  const timeSlots = [
-    "9:00-10:00",
-    "10:00-11:00",
-    "11:00-12:00",
-    "14:00-15:00",
-    "15:00-16:00",
-    "16:00-17:00",
-  ];
+  const slots = (
+    timeSlots.length
+      ? timeSlots
+      : [
+          { label: "9:00-10:00", excluded: false },
+          { label: "10:00-11:00", excluded: false },
+          { label: "11:00-12:00", excluded: false },
+          { label: "14:00-15:00", excluded: false },
+          { label: "15:00-16:00", excluded: false },
+          { label: "16:00-17:00", excluded: false },
+        ]
+  ).map((s) => (typeof s === "string" ? { label: s, excluded: false } : s));
 
-  const getAppointmentForSlot = (timeSlot) => {
-    return appointments.find((apt) => apt.time_slot === timeSlot);
+  const getAppointmentForSlot = (label) => {
+    return appointments.find((apt) => apt.time_slot === label);
   };
 
-  const getSlotTimeRange = (timeSlot) => {
-    const [startStr, endStr] = timeSlot.split("-");
+  const getSlotTimeRange = (label) => {
+    const [startStr, endStr] = label.split("-");
     const [sH, sM] = startStr.split(":").map((n) => parseInt(n, 10));
     const [eH, eM] = endStr.split(":").map((n) => parseInt(n, 10));
     const start = new Date(date);
@@ -34,9 +38,9 @@ const DayColumn = ({ date, appointments, isToday }) => {
     return { start, end };
   };
 
-  const getPastClassForSlot = (timeSlot) => {
+  const getPastClassForSlot = (label) => {
     const now = new Date();
-    const { start, end } = getSlotTimeRange(timeSlot);
+    const { start, end } = getSlotTimeRange(label);
     if (end < now) return "past-full"; // fully in the past
     if (start < now) return "past-partial"; // started but not ended
     return "";
@@ -52,15 +56,21 @@ const DayColumn = ({ date, appointments, isToday }) => {
       </div>
 
       <div className="time-slots">
-        {timeSlots.map((timeSlot, index) => {
-          const appointment = getAppointmentForSlot(timeSlot);
-
-          const pastClass = getPastClassForSlot(timeSlot);
+        {slots.map((slot, index) => {
+          const label = slot.label;
+          const appointment = getAppointmentForSlot(label);
+          const pastClass = getPastClassForSlot(label);
+          const excludedClass = slot.excluded ? "excluded" : "";
           return (
-            <div key={index} className={`time-slot-container ${pastClass}`}>
+            <div
+              key={index}
+              className={`time-slot-container ${pastClass} ${excludedClass}`}
+            >
               <div className="time-slot-content">
                 {appointment ? (
                   <TimeBlock appointment={appointment} />
+                ) : slot.excluded ? (
+                  <div className="empty-slot" />
                 ) : (
                   <div className="empty-slot">
                     {__("Available", "appointment-booking")}
