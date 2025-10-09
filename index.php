@@ -79,6 +79,16 @@ function appointment_booking_admin_page() {
 		'appointment-booking-calendar',
 		'appointment_booking_calendar_page_html'
 	);
+
+	// Add settings subpage
+	add_submenu_page(
+		'appointment-booking',
+		__( 'Settings', 'appointment-booking' ),
+		__( 'Settings', 'appointment-booking' ),
+		'manage_options',
+		'appointment-booking-settings',
+		'appointment_booking_settings_page_html'
+	);
 }
 add_action( 'admin_menu', 'appointment_booking_admin_page' );
 
@@ -100,6 +110,120 @@ function appointment_booking_calendar_page_html() {
 		'<div class="wrap" id="appointment-booking-calendar">%s</div>',
 		esc_html__( 'Loading calendar...', 'appointment-booking' )
 	);
+}
+
+/**
+ * Settings: register options and fields
+ */
+function appointment_booking_register_settings() {
+register_setting( 'appointment_booking_settings', 'appointment_booking_notify_admin', array(
+    'type' => 'integer',
+    'default' => 0,
+    'sanitize_callback' => function( $value ) {
+        return absint( $value );
+    },
+) );
+
+	register_setting( 'appointment_booking_settings', 'appointment_booking_notify_client', array(
+		'type' => 'boolean',
+		'default' => false,
+		'sanitize_callback' => function( $value ) {
+			return (bool) $value;
+		},
+	) );
+
+	register_setting( 'appointment_booking_settings', 'appointment_booking_reminder_minutes', array(
+		'type' => 'integer',
+		'default' => 15,
+		'sanitize_callback' => function( $value ) {
+			$value = absint( $value );
+			return $value > 0 ? $value : 15;
+		},
+	) );
+
+	add_settings_section(
+		'appointment_booking_notifications_section',
+		__( 'SMS Notifications', 'appointment-booking' ),
+		'__return_false',
+		'appointment_booking_settings'
+	);
+
+add_settings_field(
+    'appointment_booking_notify_admin',
+    __( 'Notify Admin', 'appointment-booking' ),
+    'appointment_booking_field_notify_admin',
+    'appointment_booking_settings',
+    'appointment_booking_notifications_section'
+);
+
+	add_settings_field(
+		'appointment_booking_notify_client',
+		__( 'Notify Client', 'appointment-booking' ),
+		'appointment_booking_field_notify_client',
+		'appointment_booking_settings',
+		'appointment_booking_notifications_section'
+	);
+
+	add_settings_field(
+		'appointment_booking_reminder_minutes',
+		__( 'Reminder (minutes before)', 'appointment-booking' ),
+		'appointment_booking_field_reminder_minutes',
+		'appointment_booking_settings',
+		'appointment_booking_notifications_section'
+	);
+}
+add_action( 'admin_init', 'appointment_booking_register_settings' );
+
+function appointment_booking_field_notify_admin() {
+    $selected = (int) get_option( 'appointment_booking_notify_admin', 0 );
+    $admins = get_users( array( 'role__in' => array( 'administrator' ) ) );
+    echo '<select name="appointment_booking_notify_admin" style="min-width:260px;">';
+    echo '<option value="0">' . esc_html__( 'None', 'appointment-booking' ) . '</option>';
+    foreach ( $admins as $admin ) {
+        printf(
+            '<option value="%d" %s>%s</option>',
+            $admin->ID,
+            selected( $selected === (int) $admin->ID, true, false ),
+            esc_html( $admin->display_name )
+        );
+    }
+    echo '</select>';
+}
+
+function appointment_booking_field_notify_client() {
+	$val = (bool) get_option( 'appointment_booking_notify_client', false );
+	printf(
+		'<label><input type="checkbox" name="appointment_booking_notify_client" value="1" %s /> %s</label>',
+		checked( $val, true, false ),
+		esc_html__( 'Send notifications to client', 'appointment-booking' )
+	);
+}
+
+function appointment_booking_field_reminder_minutes() {
+	$val = (int) get_option( 'appointment_booking_reminder_minutes', 15 );
+	printf(
+		'<input type="number" name="appointment_booking_reminder_minutes" value="%d" min="1" step="1" style="width:100px;" />',
+		$val
+	);
+}
+
+function appointment_booking_settings_page_html() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	?>
+    <div class="wrap">
+        <h1><?php esc_html_e( 'Appointment Booking Settings', 'appointment-booking' ); ?></h1>
+        <form method="post" action="options.php">
+            <?php
+            // Default Settings API rendering: multiple sections appear stacked on a single page.
+            settings_fields( 'appointment_booking_settings' );
+            do_settings_sections( 'appointment_booking_settings' );
+            submit_button();
+            ?>
+        </form>
+    </div>
+	<?php
 }
 
 /**
