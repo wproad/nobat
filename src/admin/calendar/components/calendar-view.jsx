@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { DayColumn } from "./day-column";
+import { TimeColumn } from "./time-column";
 
 const CalendarView = () => {
   const [appointments, setAppointments] = useState([]);
@@ -121,6 +122,7 @@ const CalendarView = () => {
       </div>
 
       <div className="calendar-grid">
+        <TimeColumn />
         {weekDates.map((date, index) => (
           <DayColumn
             key={index}

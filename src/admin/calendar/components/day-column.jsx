@@ -23,6 +23,25 @@ const DayColumn = ({ date, appointments, isToday }) => {
     return appointments.find((apt) => apt.time_slot === timeSlot);
   };
 
+  const getSlotTimeRange = (timeSlot) => {
+    const [startStr, endStr] = timeSlot.split("-");
+    const [sH, sM] = startStr.split(":").map((n) => parseInt(n, 10));
+    const [eH, eM] = endStr.split(":").map((n) => parseInt(n, 10));
+    const start = new Date(date);
+    start.setHours(sH, sM || 0, 0, 0);
+    const end = new Date(date);
+    end.setHours(eH, eM || 0, 0, 0);
+    return { start, end };
+  };
+
+  const getPastClassForSlot = (timeSlot) => {
+    const now = new Date();
+    const { start, end } = getSlotTimeRange(timeSlot);
+    if (end < now) return "past-full"; // fully in the past
+    if (start < now) return "past-partial"; // started but not ended
+    return "";
+  };
+
   return (
     <div className={`day-column ${isToday ? "today" : ""}`}>
       <div className="day-header">
@@ -36,9 +55,9 @@ const DayColumn = ({ date, appointments, isToday }) => {
         {timeSlots.map((timeSlot, index) => {
           const appointment = getAppointmentForSlot(timeSlot);
 
+          const pastClass = getPastClassForSlot(timeSlot);
           return (
-            <div key={index} className="time-slot-container">
-              <div className="time-slot-label">{timeSlot}</div>
+            <div key={index} className={`time-slot-container ${pastClass}`}>
               <div className="time-slot-content">
                 {appointment ? (
                   <TimeBlock appointment={appointment} />
