@@ -192,43 +192,32 @@
     }
   }
 
-  // Status color variations
   .time-block[style*="#f0ad4e"] {
     background: linear-gradient(135deg, #f0ad4e, #ec971f);
   }
-
   .time-block[style*="#5cb85c"] {
     background: linear-gradient(135deg, #5cb85c, #449d44);
   }
-
   .time-block[style*="#337ab7"] {
     background: linear-gradient(135deg, #337ab7, #286090);
   }
-
   .time-block[style*="#d9534f"] {
     background: linear-gradient(135deg, #d9534f, #c9302c);
   }
 }
 
-// Responsive design
 @media (max-width: 1200px) {
   .appointment-booking-calendar {
     .calendar-grid {
       grid-template-columns: 60px repeat(7, 1fr);
     }
-
-    .calendar-time-column {
-      .time-slot {
-        padding: 15px 5px;
-        font-size: 11px;
-        height: 50px;
-      }
+    .calendar-time-column .time-slot {
+      padding: 15px 5px;
+      font-size: 11px;
+      height: 50px;
     }
-
-    .day-column {
-      .day-time-slots .time-slot-container {
-        height: 50px;
-      }
+    .day-column .day-time-slots .time-slot-container {
+      height: 50px;
     }
   }
 }
@@ -239,57 +228,38 @@
       flex-direction: column;
       gap: 15px;
       align-items: stretch;
-
-      .calendar-controls {
-        justify-content: center;
-      }
     }
-
     .calendar-grid {
       grid-template-columns: 50px repeat(7, 1fr);
       font-size: 10px;
     }
-
-    .calendar-time-column {
-      .time-header {
-        padding: 10px 5px;
-        font-size: 12px;
-      }
-
-      .time-slot {
-        padding: 10px 3px;
-        font-size: 10px;
-        height: 40px;
-      }
+    .calendar-time-column .time-header {
+      padding: 10px 5px;
+      font-size: 12px;
     }
-
-    .day-column {
-      .day-header {
-        padding: 10px 5px;
-        font-size: 12px;
-      }
-
-      .day-time-slots .time-slot-container {
-        height: 40px;
-      }
+    .calendar-time-column .time-slot {
+      padding: 10px 3px;
+      font-size: 10px;
+      height: 40px;
     }
-
-    .time-block {
-      .time-block-content {
-        padding: 2px 4px;
-
-        .client-name {
-          font-size: 10px;
-        }
-
-        .time-slot {
-          font-size: 9px;
-        }
-
-        .status-badge {
-          font-size: 8px;
-        }
-      }
+    .day-column .day-header {
+      padding: 10px 5px;
+      font-size: 12px;
+    }
+    .day-column .day-time-slots .time-slot-container {
+      height: 40px;
+    }
+    .time-block .time-block-content {
+      padding: 2px 4px;
+    }
+    .time-block .client-name {
+      font-size: 10px;
+    }
+    .time-block .time-slot {
+      font-size: 9px;
+    }
+    .time-block .status-badge {
+      font-size: 8px;
     }
   }
 }

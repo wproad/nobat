@@ -67,14 +67,14 @@ appointment-booking/
 │   │       ├── index.js
 │   │       ├── admin-appointments-list.jsx
 │   │       └── appointment-row.jsx
-│   ├── calendar/             # Admin calendar app
-│   │   ├── index.js          # mounts into #appointment-booking-calendar
-│   │   ├── calendar.scss
-│   │   └── components/
-│   │       ├── index.js
-│   │       ├── calendar-view.jsx
-│   │       ├── day-column.jsx
-│   │       └── time-block.jsx
+│   │   └── calendar/         # Admin calendar view
+│   │       ├── index.js      # mounts into #appointment-booking-calendar
+│   │       ├── calendar.scss
+│   │       └── components/
+│   │           ├── index.js
+│   │           ├── calendar-view.jsx
+│   │           ├── day-column.jsx
+│   │           └── time-block.jsx
 │   └── frontend/             # Frontend booking app
 │       ├── index.js          # mounts into #appointment-booking-form
 │       ├── frontend.scss
@@ -127,7 +127,7 @@ Edit the `appointment_booking_get_available_slots` function in `index.php` to mo
 Edit the SCSS files in the `src/` directory:
 
 - `src/admin/admin.scss` - Admin interface styles
-- `src/calendar/calendar.scss` - Admin calendar styles
+- `src/admin/calendar/calendar.scss` - Admin calendar styles
 - `src/frontend/frontend.scss` - Frontend booking form styles
 
 ## Admin Asset Loading

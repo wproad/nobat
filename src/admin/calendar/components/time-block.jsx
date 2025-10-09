@@ -56,5 +56,3 @@ const TimeBlock = ({ appointment }) => {
 };
 
 export { TimeBlock };
-
-

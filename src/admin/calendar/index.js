@@ -11,4 +11,3 @@ domReady(() => {
 
   root.render(<CalendarView />);
 });
-
