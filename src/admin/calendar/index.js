@@ -4,7 +4,6 @@ import { createRoot } from "@wordpress/element";
 import { CalendarView } from "./components";
 
 domReady(() => {
-  console.log("Calendar");
   const root = createRoot(
     document.getElementById("appointment-booking-calendar")
   );

@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { TimeBlock } from "./time-block";
+import { TimeBlock } from "./TimeBlock";
 
 const DayColumn = ({ date, appointments, isToday, timeSlots = [] }) => {
   const formatDate = (date) => {
