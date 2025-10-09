@@ -69,6 +69,16 @@ function appointment_booking_admin_page() {
 		'dashicons-calendar-alt',
 		30
 	);
+
+	// Add calendar subpage
+	add_submenu_page(
+		'appointment-booking',
+		__( 'Calendar View', 'appointment-booking' ),
+		__( 'Calendar', 'appointment-booking' ),
+		'manage_options',
+		'appointment-booking-calendar',
+		'appointment_booking_calendar_page_html'
+	);
 }
 add_action( 'admin_menu', 'appointment_booking_admin_page' );
 
@@ -83,14 +93,34 @@ function appointment_booking_admin_page_html() {
 }
 
 /**
+ * Outputs the root element for the calendar React component
+ */
+function appointment_booking_calendar_page_html() {
+	printf(
+		'<div class="wrap" id="appointment-booking-calendar">%s</div>',
+		esc_html__( 'Loading calendar...', 'appointment-booking' )
+	);
+}
+
+/**
  * Enqueues the necessary styles and script only on the admin page
  */
 function appointment_booking_admin_enqueue_scripts( $admin_page ) {
-	if ( 'toplevel_page_appointment-booking' !== $admin_page ) {
-		return;
+    // Load assets only on our plugin pages; be flexible about the exact suffix
+    if ( strpos( $admin_page, 'appointment-booking' ) === false ) {
+        return;
+    }
+
+	// Determine which script to load
+	$script_name = 'admin';
+	$style_name = 'admin';
+	
+    if ( strpos( $admin_page, 'appointment-booking-calendar' ) !== false ) {
+		$script_name = 'calendar';
+		$style_name = 'calendar';
 	}
 
-	$asset_file = APPOINTMENT_BOOKING_PLUGIN_DIR . 'build/admin.asset.php';
+	$asset_file = APPOINTMENT_BOOKING_PLUGIN_DIR . "build/{$script_name}.asset.php";
 
 	if ( ! file_exists( $asset_file ) ) {
 		return;
@@ -99,8 +129,8 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 	$asset = include $asset_file;
 
 	wp_enqueue_script(
-		'appointment-booking-admin-script',
-		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/admin.js',
+		"appointment-booking-{$script_name}-script",
+		APPOINTMENT_BOOKING_PLUGIN_URL . "build/{$script_name}.js",
 		$asset['dependencies'],
 		$asset['version'],
 		array(
@@ -110,10 +140,16 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 
 	// Enqueue WordPress REST API script for nonce
 	wp_enqueue_script( 'wp-api' );
+	
+	// Localize script with REST API nonce
+	wp_localize_script( "appointment-booking-{$script_name}-script", 'wpApiSettings', array(
+		'root' => esc_url_raw( rest_url() ),
+		'nonce' => wp_create_nonce( 'wp_rest' ),
+	) );
 
 	wp_enqueue_style(
-		'appointment-booking-admin-style',
-		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/admin.css',
+		"appointment-booking-{$style_name}-style",
+		APPOINTMENT_BOOKING_PLUGIN_URL . "build/{$style_name}.css",
 		array_filter(
 			$asset['dependencies'],
 			function ( $style ) {

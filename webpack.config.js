@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     admin: "./src/admin/index.js",
     frontend: "./src/frontend/index.js",
+    calendar: "./src/calendar/index.js",
   },
   output: {
     ...defaultConfig.output,
