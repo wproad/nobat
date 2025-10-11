@@ -1,5 +1,4 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
 import {
   Button,
   TextControl,
@@ -11,142 +10,32 @@ import {
 } from "@wordpress/components";
 import { TimeSlotSelector } from "./timeSlotSelector";
 import { AppointmentTicket } from "./AppointmentTicket";
+import { useAvailableSlots, useBookingForm } from "../../hooks";
 
 const BookingForm = () => {
-  const [formData, setFormData] = useState({
-    client_name: "",
-    client_phone: "",
-    appointment_date: "",
-    time_slot: "",
-  });
-  const [availableSlots, setAvailableSlots] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingSlots, setLoadingSlots] = useState(false);
-  const [message, setMessage] = useState(null);
-  const [messageType, setMessageType] = useState("success");
-  const [bookedAppointment, setBookedAppointment] = useState(null);
+  // Use custom hooks for state management
+  const {
+    formData,
+    loading,
+    message,
+    messageType,
+    bookedAppointment,
+    handleInputChange,
+    submitBooking,
+    clearMessage,
+    getMinDate,
+    isFormValid,
+  } = useBookingForm();
 
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    // Clear message and ticket when user starts typing
-    if (message) {
-      setMessage(null);
-    }
-    if (bookedAppointment) {
-      setBookedAppointment(null);
-    }
-  };
-
-  const fetchAvailableSlots = async (date) => {
-    if (!date) {
-      setAvailableSlots([]);
-      return;
-    }
-
-    try {
-      setLoadingSlots(true);
-      const response = await fetch(
-        `/wp-json/appointment-booking/v1/available-slots?date=${date}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch available slots");
-      }
-      const data = await response.json();
-      setAvailableSlots(data);
-    } catch (err) {
-      setMessage("Failed to load available time slots");
-      setMessageType("error");
-    } finally {
-      setLoadingSlots(false);
-    }
-  };
-
-  useEffect(() => {
-    if (formData.appointment_date) {
-      fetchAvailableSlots(formData.appointment_date);
-    }
-  }, [formData.appointment_date]);
+  const {
+    availableSlots,
+    loading: loadingSlots,
+    error: slotsError,
+  } = useAvailableSlots(formData.appointment_date);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form
-    if (
-      !formData.client_name ||
-      !formData.client_phone ||
-      !formData.appointment_date ||
-      !formData.time_slot
-    ) {
-      setMessage("Please fill in all fields");
-      setMessageType("error");
-      return;
-    }
-
-    // Validate phone number (basic validation)
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    if (!phoneRegex.test(formData.client_phone.replace(/\s/g, ""))) {
-      setMessage("Please enter a valid phone number");
-      setMessageType("error");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await fetch(
-        "/wp-json/appointment-booking/v1/appointments",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to book appointment");
-      }
-
-      const data = await response.json();
-      console.log("API response data:", data);
-      setMessage(data.message || "Appointment booked successfully!");
-      setMessageType("success");
-
-      // Store the booked appointment data for the ticket
-      const appointmentData = {
-        ...formData,
-        id: data.appointment_id || Date.now(), // Use returned ID or fallback
-      };
-      console.log("Setting booked appointment:", appointmentData);
-      setBookedAppointment(appointmentData);
-
-      // Reset form
-      setFormData({
-        client_name: "",
-        client_phone: "",
-        appointment_date: "",
-        time_slot: "",
-      });
-      setAvailableSlots([]);
-    } catch (err) {
-      console.error("Booking error:", err);
-      setMessage(
-        err.message || "Failed to book appointment. Please try again."
-      );
-      setMessageType("error");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getMinDate = () => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
+    await submitBooking();
   };
 
   return (
@@ -157,14 +46,20 @@ const BookingForm = () => {
         </CardHeader>
         <CardBody>
           {/* {message && (
-            <Notice
-              status={messageType}
-              isDismissible
-              onRemove={() => setMessage(null)}
-            >
+            <Notice status={messageType} isDismissible onRemove={clearMessage}>
               {message}
             </Notice>
           )} */}
+
+          {slotsError && (
+            <Notice
+              status="error"
+              isDismissible
+              onRemove={() => {}} // Let the hook handle error clearing
+            >
+              {slotsError}
+            </Notice>
+          )}
 
           <form onSubmit={handleSubmit} className="booking-form">
             <div className="form-row">
@@ -183,10 +78,7 @@ const BookingForm = () => {
                 value={formData.client_phone}
                 onChange={(value) => handleInputChange("client_phone", value)}
                 required
-                placeholder={__(
-                  "Enter your phone number",
-                  "appointment-booking"
-                )}
+                placeholder="09xxxxxxxxx"
                 type="tel"
                 name="tel"
                 id="appointment-booking-phone"
@@ -235,13 +127,7 @@ const BookingForm = () => {
               <Button
                 type="submit"
                 variant="primary"
-                disabled={
-                  loading ||
-                  !formData.client_name ||
-                  !formData.client_phone ||
-                  !formData.appointment_date ||
-                  !formData.time_slot
-                }
+                disabled={loading || !isFormValid}
                 __next40pxDefaultSize
               >
                 {loading ? (
@@ -258,17 +144,6 @@ const BookingForm = () => {
         </CardBody>
       </Card>
 
-      {/* Show appointment ticket after successful booking */}
-      {/* <div
-        style={{
-          marginTop: "20px",
-          padding: "10px",
-          border: "1px solid red",
-          background: "yellow",
-        }}
-      >
-        Debug: bookedAppointment = {JSON.stringify(bookedAppointment)}
-      </div> */}
       <AppointmentTicket appointmentData={bookedAppointment} />
     </div>
   );

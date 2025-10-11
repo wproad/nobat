@@ -1,8 +1,7 @@
 import { TimeColumn } from "./timeColumn";
 import { DayColumn } from "./DayColumn";
-import { useAppointments } from "../hooks/useAppointments";
+import { useAppointments, useSlotTemplate } from "../../../hooks";
 import { __ } from "@wordpress/i18n";
-import { useSlotTemplate } from "../hooks/useSlotTemplate";
 
 const CalendarGrid = ({ weekDates, today }) => {
   const { appointments, loading, error, refetch } = useAppointments();
