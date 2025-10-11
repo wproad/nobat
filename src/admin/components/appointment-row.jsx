@@ -6,37 +6,16 @@ import {
   Modal,
   TextControl,
 } from "@wordpress/components";
+import {
+  getStatusColor,
+  getStatusLabel,
+  statusOptions,
+  formatDate,
+} from "../lib/appointmentUtils";
 
 const AppointmentRow = ({ appointment, onStatusUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  const statusOptions = [
-    { label: __("Pending", "appointment-booking"), value: "pending" },
-    { label: __("Confirmed", "appointment-booking"), value: "confirmed" },
-    { label: __("Completed", "appointment-booking"), value: "completed" },
-    { label: __("Cancelled", "appointment-booking"), value: "cancelled" },
-  ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "pending":
-        return "#f0ad4e";
-      case "confirmed":
-        return "#5cb85c";
-      case "completed":
-        return "#337ab7";
-      case "cancelled":
-        return "#d9534f";
-      default:
-        return "#777";
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
-  };
 
   return (
     <>
@@ -54,8 +33,7 @@ const AppointmentRow = ({ appointment, onStatusUpdate, onDelete }) => {
             className="status-badge"
             style={{ backgroundColor: getStatusColor(appointment.status) }}
           >
-            {statusOptions.find((opt) => opt.value === appointment.status)
-              ?.label || appointment.status}
+            {getStatusLabel(appointment.status)}
           </span>
         </div>
         <div className="appointment-cell">

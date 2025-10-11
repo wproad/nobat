@@ -1,11 +1,32 @@
-import { TimeColumn } from "./timeColumn";
+import { TimeColumn } from "./TimeColumn";
 import { DayColumn } from "./DayColumn";
-import { useAppointments, useSlotTemplate } from "../../../hooks";
+import {
+  useAppointments,
+  useSlotTemplate,
+  useAppointmentManagement,
+} from "../../../hooks";
 import { __ } from "@wordpress/i18n";
 
 const CalendarGrid = ({ weekDates, today }) => {
   const { appointments, loading, error, refetch } = useAppointments();
   const { slotTemplate } = useSlotTemplate();
+  const { handleStatusUpdate, handleDelete } = useAppointmentManagement();
+
+  const handleStatusUpdateWithRefresh = async (id, newStatus) => {
+    const success = await handleStatusUpdate(id, newStatus);
+    if (success) {
+      refetch(); // Refresh the appointments data
+    }
+    return success;
+  };
+
+  const handleDeleteWithRefresh = async (id) => {
+    const success = await handleDelete(id);
+    if (success) {
+      refetch(); // Refresh the appointments data
+    }
+    return success;
+  };
 
   const appointmentsByDate = (date) => {
     const dateString = date.toISOString().split("T")[0];
@@ -40,6 +61,8 @@ const CalendarGrid = ({ weekDates, today }) => {
           appointments={appointmentsByDate(date)}
           isToday={date.toDateString() === today.toDateString()}
           timeSlots={slotTemplate}
+          onStatusUpdate={handleStatusUpdateWithRefresh}
+          onDelete={handleDeleteWithRefresh}
         />
       ))}
     </div>

@@ -67,7 +67,7 @@
       font-size: 12px;
       color: #666;
       border-bottom: 1px solid #eee;
-      height: 60px; // must match .day-column .time-slot-container
+      height: 45px; // must match .day-column .time-slot-container
       display: flex;
       align-items: center;
       justify-content: center;
@@ -106,7 +106,7 @@
     }
     .time-slots {
       .time-slot-container {
-        height: 60px; // must match .time-column .time-slot
+        height: 45px; // must match .time-column .time-slot
         border-bottom: 1px solid #eee;
         position: relative;
         padding: 0; // ensure equal total height

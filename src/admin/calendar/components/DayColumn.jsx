@@ -1,7 +1,14 @@
 import { __ } from "@wordpress/i18n";
 import { TimeBlock } from "./TimeBlock";
 
-const DayColumn = ({ date, appointments, isToday, timeSlots }) => {
+const DayColumn = ({
+  date,
+  appointments,
+  isToday,
+  timeSlots,
+  onStatusUpdate,
+  onDelete,
+}) => {
   const formatDate = (date) => {
     return date.toLocaleDateString("en-US", {
       weekday: "short",
@@ -55,7 +62,11 @@ const DayColumn = ({ date, appointments, isToday, timeSlots }) => {
             >
               <div className="time-slot-content">
                 {appointment ? (
-                  <TimeBlock appointment={appointment} />
+                  <TimeBlock
+                    appointment={appointment}
+                    onStatusUpdate={onStatusUpdate}
+                    onDelete={onDelete}
+                  />
                 ) : slot.excluded ? (
                   <div className="empty-slot" />
                 ) : (

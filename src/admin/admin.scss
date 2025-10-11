@@ -73,6 +73,71 @@
     justify-content: flex-end;
     margin-top: 20px;
   }
+
+  // TimeBlock styles
+  .time-block {
+    &.clickable {
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  // AppointmentDetailModal styles
+  .appointment-detail-modal {
+    .appointment-detail-content {
+      .appointment-info {
+        margin-bottom: 20px;
+
+        .info-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 0;
+          border-bottom: 1px solid #f0f0f0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          strong {
+            color: #333;
+            min-width: 120px;
+          }
+
+          .time-slot {
+            font-weight: 600;
+            color: #0073aa;
+          }
+
+          .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .appointment-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .components-button {
+          min-width: 120px;
+        }
+      }
+    }
+  }
 }
 
 // Responsive design
