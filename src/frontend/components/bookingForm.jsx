@@ -10,6 +10,7 @@ import {
 } from "@wordpress/components";
 import { TimeSlotSelector } from "./timeSlotSelector";
 import { AppointmentTicket } from "./AppointmentTicket";
+import { WeekDaysSelector } from "./WeekDaysSelector";
 import { useAvailableSlots, useBookingForm } from "../../hooks";
 
 const BookingForm = () => {
@@ -90,15 +91,15 @@ const BookingForm = () => {
             </div>
 
             <div className="form-row">
-              <TextControl
-                label={__("Preferred Date", "appointment-booking")}
-                value={formData.appointment_date}
-                onChange={(value) =>
-                  handleInputChange("appointment_date", value)
+              <label className="date-selector-label">
+                {__("Select a Date", "appointment-booking")}
+              </label>
+              <WeekDaysSelector
+                selectedDate={formData.appointment_date}
+                onDateSelect={(date) =>
+                  handleInputChange("appointment_date", date)
                 }
-                required
-                type="date"
-                min={getMinDate()}
+                disabled={loading}
               />
             </div>
 

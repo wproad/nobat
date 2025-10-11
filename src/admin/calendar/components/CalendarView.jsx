@@ -3,7 +3,7 @@ import { useMemo } from "@wordpress/element";
 import { CalendarHeader } from "./CalendarHeader";
 import { WeekNavigation } from "./WeekNavigation";
 import { CalendarGrid } from "./CalendarGrid";
-import { useWeek } from "../hooks/useWeek";
+import { useWeek } from "../../../hooks/useWeek";
 
 const CalendarView = () => {
   // const { startOfWeekIndex } = useStartOfWeek();
