@@ -45,11 +45,11 @@ const BookingForm = () => {
           <h3>{__("Book an Appointment", "appointment-booking")}</h3>
         </CardHeader>
         <CardBody>
-          {/* {message && (
+          {message && (
             <Notice status={messageType} isDismissible onRemove={clearMessage}>
               {message}
             </Notice>
-          )} */}
+          )}
 
           {slotsError && (
             <Notice

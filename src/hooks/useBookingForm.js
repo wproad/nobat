@@ -23,15 +23,11 @@ export const useBookingForm = () => {
         [field]: value,
       }));
 
-      // Clear message and ticket when user starts typing
-      if (message) {
-        setMessage(null);
-      }
       if (bookedAppointment) {
         setBookedAppointment(null);
       }
     },
-    [message, bookedAppointment]
+    [bookedAppointment]
   );
 
   const validateForm = useCallback(() => {
@@ -83,8 +79,8 @@ export const useBookingForm = () => {
 
       const data = await response.json();
       console.log("API response data:", data);
-      setMessage(data.message || "Appointment booked successfully!");
-      setMessageType("success");
+      // setMessage(data.message || "Appointment booked successfully!");
+      // setMessageType("success");
 
       // Store the booked appointment data for the ticket
       const appointmentData = {
