@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { TimeBlock } from "./TimeBlock";
 
-const DayColumn = ({ date, appointments, isToday, timeSlots = [] }) => {
+const DayColumn = ({ date, appointments, isToday, timeSlots }) => {
   const formatDate = (date) => {
     return date.toLocaleDateString("en-US", {
       weekday: "short",
@@ -9,19 +9,6 @@ const DayColumn = ({ date, appointments, isToday, timeSlots = [] }) => {
       day: "numeric",
     });
   };
-
-  const slots = (
-    timeSlots.length
-      ? timeSlots
-      : [
-          { label: "9:00-10:00", excluded: false },
-          { label: "10:00-11:00", excluded: false },
-          { label: "11:00-12:00", excluded: false },
-          { label: "14:00-15:00", excluded: false },
-          { label: "15:00-16:00", excluded: false },
-          { label: "16:00-17:00", excluded: false },
-        ]
-  ).map((s) => (typeof s === "string" ? { label: s, excluded: false } : s));
 
   const getAppointmentForSlot = (label) => {
     return appointments.find((apt) => apt.time_slot === label);
@@ -56,7 +43,7 @@ const DayColumn = ({ date, appointments, isToday, timeSlots = [] }) => {
       </div>
 
       <div className="time-slots">
-        {slots.map((slot, index) => {
+        {timeSlots.map((slot, index) => {
           const label = slot.label;
           const appointment = getAppointmentForSlot(label);
           const pastClass = getPastClassForSlot(label);

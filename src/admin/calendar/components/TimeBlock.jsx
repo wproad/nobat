@@ -16,6 +16,21 @@ const TimeBlock = ({ appointment }) => {
     }
   };
 
+  const getStatusBorderColor = (status) => {
+    switch (status) {
+      case "pending":
+        return "#d58512";
+      case "confirmed":
+        return "#449d44";
+      case "completed":
+        return "#286090";
+      case "cancelled":
+        return "#b52b27";
+      default:
+        return "#333333";
+    }
+  };
+
   const getStatusLabel = (status) => {
     switch (status) {
       case "pending":
@@ -31,24 +46,18 @@ const TimeBlock = ({ appointment }) => {
     }
   };
 
-  const formatTime = (timeSlot) => {
-    return String(timeSlot).split("-")[0];
-  };
-
   return (
     <div
       className="time-block"
       style={{
         backgroundColor: getStatusColor(appointment.status),
-        borderLeftColor: getStatusColor(appointment.status),
+        borderLeftColor: getStatusBorderColor(appointment.status),
       }}
-      title={`${appointment.client_name} - ${
-        appointment.client_phone
-      } - ${getStatusLabel(appointment.status)}`}
     >
       <div className="time-block-content">
         <div className="client-name">{appointment.client_name}</div>
-        <div className="time-slot">{formatTime(appointment.time_slot)}</div>
+        <div className="client-phone">{appointment.client_phone}</div>
+        <div className="time-slot">{appointment.time_slot}</div>
         <div className="status-badge">{getStatusLabel(appointment.status)}</div>
       </div>
     </div>

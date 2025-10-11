@@ -1,4 +1,5 @@
 import { useEffect, useState } from "@wordpress/element";
+import { defaultTimeSlots } from "../lib/data";
 
 export const useSlotTemplate = () => {
   const [slotTemplate, setSlotTemplate] = useState([]);
@@ -33,14 +34,7 @@ export const useSlotTemplate = () => {
         console.error(e);
         setSlotsError(e.message);
         setSlotTemplate(
-          [
-            "9:00-10:00",
-            "10:00-11:00",
-            "11:00-12:00",
-            "14:00-15:00",
-            "15:00-16:00",
-            "16:00-17:00",
-          ].map((s) => ({ label: s, excluded: false }))
+          defaultTimeSlots.map((s) => ({ label: s, excluded: false }))
         );
       }
     };
