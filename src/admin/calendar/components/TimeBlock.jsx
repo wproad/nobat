@@ -57,8 +57,12 @@ const TimeBlock = ({ appointment }) => {
       <div className="time-block-content">
         <div className="client-name">{appointment.client_name}</div>
         <div className="client-phone">{appointment.client_phone}</div>
-        <div className="time-slot">{appointment.time_slot}</div>
-        <div className="status-badge">{getStatusLabel(appointment.status)}</div>
+        <div>
+          <span className="time-slot">{appointment.time_slot}</span>{ ' - ' }
+          <span className="status-badge">
+            {getStatusLabel(appointment.status)}
+          </span>
+        </div>
       </div>
     </div>
   );

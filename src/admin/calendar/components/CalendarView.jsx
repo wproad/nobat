@@ -3,11 +3,11 @@ import { useMemo } from "@wordpress/element";
 import { CalendarHeader } from "./CalendarHeader";
 import { WeekNavigation } from "./WeekNavigation";
 import { CalendarGrid } from "./CalendarGrid";
-import { useStartOfWeek } from "../hooks/useStartOfWeek";
 import { useWeek } from "../hooks/useWeek";
 
 const CalendarView = () => {
-  const { startOfWeekIndex } = useStartOfWeek();
+  // const { startOfWeekIndex } = useStartOfWeek();
+  const startOfWeekIndex = 6;
   const { weekDates, isCurrentWeek, goPrevWeek, goNextWeek, goToToday } =
     useWeek({ startOfWeekIndex });
 
@@ -27,10 +27,7 @@ const CalendarView = () => {
         />
       </div>
 
-      <CalendarGrid
-        weekDates={weekDates}
-        today={today}
-      />
+      <CalendarGrid weekDates={weekDates} today={today} />
     </div>
   );
 };
