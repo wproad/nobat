@@ -1,2 +1,3 @@
-export { BookingForm } from "./booking-form";
-export { TimeSlotSelector } from "./time-slot-selector";
+export { BookingForm } from "./bookingForm";
+export { TimeSlotSelector } from "./timeSlotSelector";
+export { AppointmentTicket } from "./AppointmentTicket";

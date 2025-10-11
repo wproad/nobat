@@ -9,7 +9,8 @@ import {
   CardHeader,
   Spinner,
 } from "@wordpress/components";
-import { TimeSlotSelector } from "./time-slot-selector";
+import { TimeSlotSelector } from "./timeSlotSelector";
+import { AppointmentTicket } from "./AppointmentTicket";
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ const BookingForm = () => {
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState("success");
+  const [bookedAppointment, setBookedAppointment] = useState(null);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
@@ -30,9 +32,12 @@ const BookingForm = () => {
       [field]: value,
     }));
 
-    // Clear message when user starts typing
+    // Clear message and ticket when user starts typing
     if (message) {
       setMessage(null);
+    }
+    if (bookedAppointment) {
+      setBookedAppointment(null);
     }
   };
 
@@ -108,8 +113,17 @@ const BookingForm = () => {
       }
 
       const data = await response.json();
+      console.log("API response data:", data);
       setMessage(data.message || "Appointment booked successfully!");
       setMessageType("success");
+
+      // Store the booked appointment data for the ticket
+      const appointmentData = {
+        ...formData,
+        id: data.appointment_id || Date.now(), // Use returned ID or fallback
+      };
+      console.log("Setting booked appointment:", appointmentData);
+      setBookedAppointment(appointmentData);
 
       // Reset form
       setFormData({
@@ -120,6 +134,7 @@ const BookingForm = () => {
       });
       setAvailableSlots([]);
     } catch (err) {
+      console.error("Booking error:", err);
       setMessage(
         err.message || "Failed to book appointment. Please try again."
       );
@@ -141,7 +156,7 @@ const BookingForm = () => {
           <h3>{__("Book an Appointment", "appointment-booking")}</h3>
         </CardHeader>
         <CardBody>
-          {message && (
+          {/* {message && (
             <Notice
               status={messageType}
               isDismissible
@@ -149,7 +164,7 @@ const BookingForm = () => {
             >
               {message}
             </Notice>
-          )}
+          )} */}
 
           <form onSubmit={handleSubmit} className="booking-form">
             <div className="form-row">
@@ -242,6 +257,19 @@ const BookingForm = () => {
           </form>
         </CardBody>
       </Card>
+
+      {/* Show appointment ticket after successful booking */}
+      {/* <div
+        style={{
+          marginTop: "20px",
+          padding: "10px",
+          border: "1px solid red",
+          background: "yellow",
+        }}
+      >
+        Debug: bookedAppointment = {JSON.stringify(bookedAppointment)}
+      </div> */}
+      <AppointmentTicket appointmentData={bookedAppointment} />
     </div>
   );
 };
