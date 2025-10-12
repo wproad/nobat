@@ -360,3 +360,14 @@ function appointment_booking_calendar_page_html() {
 		esc_html__( 'Loading calendar...', 'appointment-booking' )
 	);
 }
+
+
+/**
+ * Outputs the root element for the scheduling React component
+ */
+function appointment_booking_scheduling_page_html() {
+		printf(
+		'<div class="wrap" id="appointment-booking-scheduling">%s</div>',
+		esc_html__( 'Loading scheduling...', 'appointment-booking' )
+	);
+}

@@ -10,13 +10,10 @@ if ( ! defined('ABSPATH') ) {
 /**
  * Create appointments table on plugin activation
  */
-
-
 function appointment_booking_activate() {
-    error_log('Activation function ran');
-
 	global $wpdb;
 	
+	// 1. appointments table
 	$table_name = $wpdb->prefix . 'appointments';
 	
 	$charset_collate = $wpdb->get_charset_collate();
@@ -34,6 +31,26 @@ function appointment_booking_activate() {
 	
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	dbDelta( $sql );
+
+	// 2. schedules table
+	$table_name = $wpdb->prefix . 'schedules';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        admin_id bigint(20) NOT NULL,
+        is_active tinyint(1) DEFAULT 1,
+        start_day date NOT NULL,
+        end_day date NOT NULL,
+        meeting_duration int NOT NULL DEFAULT 30,
+        buffer int NOT NULL DEFAULT 0,
+        weekly_hours longtext NOT NULL,
+        PRIMARY KEY  (id),
+        UNIQUE KEY admin_id (admin_id)
+    ) $charset_collate;";
+
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    dbDelta( $sql );
 	
 	// Add version option
 	add_option( 'appointment_booking_version', '1.0.0' );
