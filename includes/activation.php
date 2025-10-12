@@ -46,7 +46,7 @@ function appointment_booking_activate() {
         buffer int NOT NULL DEFAULT 0,
         weekly_hours longtext NOT NULL,
         PRIMARY KEY  (id),
-        UNIQUE KEY admin_id (admin_id)
+        KEY admin_id (admin_id)
     ) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

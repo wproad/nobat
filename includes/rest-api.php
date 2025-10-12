@@ -52,6 +52,23 @@ function appointment_booking_register_rest_routes() {
 		'callback' => 'appointment_booking_get_slot_template',
 		'permission_callback' => function() { return current_user_can( 'manage_options' ); },
 	) );
+
+	register_rest_route('appointment-booking/v1', '/create-schedule', [
+        'methods' => 'POST',
+        'callback' => 'appointment_booking_create_schedule',
+        'permission_callback' => function() {
+            return current_user_can('manage_options'); // Only admins
+        },
+        'args' => [
+            'isActive' => ['required' => true],
+            'startDay' => ['required' => true],
+            'endDay' => ['required' => true],
+            'meetingDuration' => ['required' => true],
+            'buffer' => ['required' => true],
+            'selectedAdmin' => ['required' => true],
+            'weeklyHours' => ['required' => true],
+        ]
+    ]);
 }
 add_action( 'rest_api_init', 'appointment_booking_register_rest_routes' );
 
@@ -192,4 +209,41 @@ function appointment_booking_get_available_slots( $request ) {
 	}
 	
 	return new WP_REST_Response( array_values( $available_slots ), 200 );
+}
+
+
+function appointment_booking_create_schedule($request) {
+    global $wpdb;
+
+    $data = $request->get_json_params();
+
+    // Sanitize inputs
+    $is_active = $data['isActive'] ? true : false;
+    $start_day = sanitize_text_field($data['startDay']);
+    $end_day = sanitize_text_field($data['endDay']);
+    $meeting_duration = intval($data['meetingDuration']);
+    $buffer = intval($data['buffer']);
+    $admin_id = intval($data['selectedAdmin']);
+    $weekly_hours = wp_json_encode($data['weeklyHours']); // Store as JSON
+
+    $table_name = $wpdb->prefix . 'schedules';
+
+	$inserted = $wpdb->insert(
+		$table_name,
+		[
+			'admin_id' => $admin_id,
+			'is_active' => $is_active,
+			'start_day' => $start_day,
+			'end_day' => $end_day,
+			'meeting_duration' => $meeting_duration,
+			'buffer' => $buffer,
+			'weekly_hours' => $weekly_hours,
+		],
+		['%d','%d','%s','%s','%d','%d','%s']
+	);
+	if ($inserted === false) {
+		return new WP_Error('db_error', 'Failed to insert settings', ['status' => 500]);
+	}
+
+    return ['success' => true];
 }

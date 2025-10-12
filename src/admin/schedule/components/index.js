@@ -1,1 +1,1 @@
-export { ScheduleTemp } from "./Schedule";
+export { CreateSchedule } from "./CreateSchedule";
