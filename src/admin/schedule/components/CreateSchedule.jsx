@@ -12,6 +12,7 @@ import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { useSchedule } from "../hooks/useSchedule";
 
 function CreateSchedule() {
+  const [name, setName] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
@@ -24,6 +25,7 @@ function CreateSchedule() {
 
   const handleSubmit = () => {
     const payload = {
+      name,
       isActive,
       startDay,
       endDay,
@@ -46,6 +48,13 @@ function CreateSchedule() {
           {notice.message}
         </Notice>
       )}
+
+      <TextControl
+        label={__("Schedule Name")}
+        value={name}
+        onChange={setName}
+        placeholder={__("Enter a name for this schedule")}
+      />
 
       <ToggleControl
         label={__("Is Active?")}

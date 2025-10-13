@@ -21,22 +21,34 @@ export function useSchedule() {
 
   const saveSchedule = (payload) => {
     return apiFetch({
-      path: "appointment-booking/v1/create-schedule",
+      path: "appointment-booking/v1/schedule",
       method: "POST",
       data: payload,
     })
-      .then(() =>
+      .then((response) => {
+        console.log("Schedule save response:", response);
         setNotice({
           status: "success",
           message: __("Settings saved successfully!"),
-        })
-      )
-      .catch(() =>
+        });
+        return response;
+      })
+      .catch((error) => {
+        console.error("Schedule save error:", error);
+        let errorMessage = __("Error saving settings.");
+
+        if (error && error.message) {
+          errorMessage = error.message;
+        } else if (error && error.data && error.data.message) {
+          errorMessage = error.data.message;
+        }
+
         setNotice({
           status: "error",
-          message: __("Error saving settings."),
-        })
-      );
+          message: errorMessage,
+        });
+        throw error;
+      });
   };
 
   return { adminUsers, notice, setNotice, saveSchedule };

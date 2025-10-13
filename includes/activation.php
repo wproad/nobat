@@ -38,6 +38,7 @@ function appointment_booking_activate() {
 
     $sql = "CREATE TABLE $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
+        name varchar(255) NOT NULL,
         admin_id bigint(20) NOT NULL,
         is_active tinyint(1) DEFAULT 1,
         start_day date NOT NULL,
@@ -45,6 +46,7 @@ function appointment_booking_activate() {
         meeting_duration int NOT NULL DEFAULT 30,
         buffer int NOT NULL DEFAULT 0,
         weekly_hours longtext NOT NULL,
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY  (id),
         KEY admin_id (admin_id)
     ) $charset_collate;";

@@ -53,13 +53,14 @@ function appointment_booking_register_rest_routes() {
 		'permission_callback' => function() { return current_user_can( 'manage_options' ); },
 	) );
 
-	register_rest_route('appointment-booking/v1', '/create-schedule', [
+	register_rest_route('appointment-booking/v1', '/schedule', [
         'methods' => 'POST',
         'callback' => 'appointment_booking_create_schedule',
         'permission_callback' => function() {
             return current_user_can('manage_options'); // Only admins
         },
         'args' => [
+            'name' => ['required' => true],
             'isActive' => ['required' => true],
             'startDay' => ['required' => true],
             'endDay' => ['required' => true],
@@ -69,6 +70,13 @@ function appointment_booking_register_rest_routes() {
             'weeklyHours' => ['required' => true],
         ]
     ]);
+
+	register_rest_route( 'appointment-booking/v1', '/schedule/active', [
+        'methods'  => 'GET',
+        'callback' => 'appointment_booking_get_active_schedule',
+        'permission_callback' => '__return_true',
+    ] );
+
 }
 add_action( 'rest_api_init', 'appointment_booking_register_rest_routes' );
 
@@ -212,38 +220,143 @@ function appointment_booking_get_available_slots( $request ) {
 }
 
 
-function appointment_booking_create_schedule($request) {
+function appointment_booking_create_schedule( $request ) {
     global $wpdb;
 
+    // 1️⃣ Get and sanitize data from REST request
     $data = $request->get_json_params();
+    
+    // Debug logging
+    error_log('Schedule creation request data: ' . print_r($data, true));
 
-    // Sanitize inputs
-    $is_active = $data['isActive'] ? true : false;
-    $start_day = sanitize_text_field($data['startDay']);
-    $end_day = sanitize_text_field($data['endDay']);
-    $meeting_duration = intval($data['meetingDuration']);
-    $buffer = intval($data['buffer']);
-    $admin_id = intval($data['selectedAdmin']);
-    $weekly_hours = wp_json_encode($data['weeklyHours']); // Store as JSON
+    $name             = sanitize_text_field( $data['name'] );
+    $is_active        = ! empty( $data['isActive'] ) ? 1 : 0; // Use 1 or 0 for database consistency
+    $start_day        = sanitize_text_field( $data['startDay'] );
+    $end_day          = sanitize_text_field( $data['endDay'] );
+    $meeting_duration = intval( $data['meetingDuration'] );
+    $buffer           = intval( $data['buffer'] );
+    $admin_id         = intval( $data['selectedAdmin'] );
+
+    // Expected: array like:
+    // {
+    //   "monday": [{ "start": "09:00", "end": "17:00" }],
+    //   "tuesday": [{ "start": "10:00", "end": "15:00" }]
+    // }
+    $weekly_hours_raw = isset( $data['weeklyHours'] ) ? $data['weeklyHours'] : [];
 
     $table_name = $wpdb->prefix . 'schedules';
 
-	$inserted = $wpdb->insert(
-		$table_name,
-		[
-			'admin_id' => $admin_id,
-			'is_active' => $is_active,
-			'start_day' => $start_day,
-			'end_day' => $end_day,
-			'meeting_duration' => $meeting_duration,
-			'buffer' => $buffer,
-			'weekly_hours' => $weekly_hours,
-		],
-		['%d','%d','%s','%s','%d','%d','%s']
-	);
-	if ($inserted === false) {
-		return new WP_Error('db_error', 'Failed to insert settings', ['status' => 500]);
-	}
+    // 2️⃣ Validate required fields
+    if ( empty( $name ) || empty( $start_day ) || empty( $end_day ) || empty( $weekly_hours_raw ) ) {
+        return new WP_Error(
+            'invalid_data',
+            __( 'Missing required schedule data (name, start day, end day, or weekly hours)', 'appointment-booking' ),
+            [ 'status' => 400 ]
+        );
+    }
 
-    return ['success' => true];
+    // 3️⃣ Generate all time slots for each weekday based on weeklyHours, duration, and buffer
+// 3️⃣ Generate all time slots for each weekday based on weeklyHours, duration, and buffer
+$weekly_slots = [];
+
+foreach ( $weekly_hours_raw as $day => $periods ) {
+    if ( ! is_array( $periods ) || empty( $periods ) ) {
+        continue;
+    }
+
+    $day_slots = [];
+
+    foreach ( $periods as $period ) {
+        // Support both "09:00-17:00" string or {start,end} array
+        if ( is_string( $period ) ) {
+            $parts = explode( '-', $period );
+            $period = [
+                'start' => trim( $parts[0] ?? '' ),
+                'end'   => trim( $parts[1] ?? '' ),
+            ];
+        }
+
+        if ( empty( $period['start'] ) || empty( $period['end'] ) ) {
+            continue;
+        }
+
+        $start_time = strtotime( $period['start'] );
+        $end_time   = strtotime( $period['end'] );
+
+        // Generate slots
+        while ( $start_time + ( $meeting_duration * 60 ) <= $end_time ) {
+            $slot_end = $start_time + ( $meeting_duration * 60 );
+
+            $day_slots[] = [
+                'start'  => date( 'H:i', $start_time ),
+                'end'    => date( 'H:i', $slot_end ),
+                'status' => 'available',
+            ];
+
+            $start_time = $slot_end + ( $buffer * 60 );
+        }
+    }
+
+    $weekly_slots[ $day ] = $day_slots;
+}
+
+
+
+
+    // 4️⃣ Convert computed slots to JSON for database storage
+    $weekly_hours = wp_json_encode( $weekly_slots );
+
+	error_log( $weekly_hours );
+
+
+    // 5️⃣ Insert schedule into database (no update logic)
+    // Each new schedule is a separate entry
+    $inserted = $wpdb->insert(
+        $table_name,
+        [
+            'name'             => $name,
+            'admin_id'         => $admin_id,
+            'is_active'        => $is_active,
+            'start_day'        => $start_day,
+            'end_day'          => $end_day,
+            'meeting_duration' => $meeting_duration,
+            'buffer'           => $buffer,
+            'weekly_hours'     => $weekly_hours,
+        ],
+        [ '%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s' ]
+    );
+
+    // 6️⃣ Handle potential DB errors
+    if ( false === $inserted ) {
+        error_log('Database insert failed: ' . $wpdb->last_error);
+        return new WP_Error(
+            'db_error',
+            __( 'Failed to insert schedule: ' . $wpdb->last_error, 'appointment-booking' ),
+            [ 'status' => 500, 'error' => $wpdb->last_error ]
+        );
+    }
+
+    // 7️⃣ Return REST response
+    return rest_ensure_response(
+        [
+            'success' => true,
+            'message' => __( 'Schedule created successfully', 'appointment-booking' ),
+        ]
+    );
+}
+
+
+function appointment_booking_get_active_schedule( $request ) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'schedules';
+
+    $schedule = $wpdb->get_row( "SELECT * FROM $table_name WHERE is_active = 1 ORDER BY id DESC LIMIT 1", ARRAY_A );
+
+    if ( ! $schedule ) {
+        return new WP_Error( 'no_schedule', __( 'No active schedule found', 'appointment-booking' ), [ 'status' => 404 ] );
+    }
+
+    $schedule['weekly_hours'] = json_decode( $schedule['weekly_hours'], true );
+
+    return rest_ensure_response( $schedule );
 }
