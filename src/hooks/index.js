@@ -6,3 +6,4 @@ export { useAppointmentManagement } from "./useAppointmentManagement";
 
 export { useAvailableSlots } from "./useAvailableSlots";
 export { useBookingForm } from "./useBookingForm";
+export { useActiveSchedule } from "./useActiveSchedule";

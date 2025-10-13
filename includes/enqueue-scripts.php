@@ -75,7 +75,7 @@ add_action( 'admin_enqueue_scripts', 'appointment_booking_admin_enqueue_scripts'
  * Enqueues frontend booking form scripts
  */
 function appointment_booking_frontend_enqueue_scripts() {
-	$asset_file = APPOINTMENT_BOOKING_PLUGIN_DIR . 'build/frontend.asset.php';
+	$asset_file = APPOINTMENT_BOOKING_PLUGIN_DIR . 'build/booking.asset.php';
 
 	if ( ! file_exists( $asset_file ) ) {
 		return;
@@ -85,7 +85,7 @@ function appointment_booking_frontend_enqueue_scripts() {
 
 	wp_enqueue_script(
 		'appointment-booking-frontend-script',
-		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/frontend.js',
+		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/booking.js',
 		$asset['dependencies'],
 		$asset['version'],
 		array(
@@ -95,7 +95,7 @@ function appointment_booking_frontend_enqueue_scripts() {
 
 	wp_enqueue_style(
 		'appointment-booking-frontend-style',
-		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/frontend.css',
+		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/booking.css',
 		array_filter(
 			$asset['dependencies'],
 			function ( $style ) {

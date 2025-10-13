@@ -3,7 +3,7 @@ const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 module.exports = {
   ...defaultConfig,
   entry: {
-    frontend: "./src/frontend/index.js",
+    booking: "./src/booking/index.js",
     calendar: "./src/admin/calendar/index.js",
     schedule: "./src/admin/schedule/index.js",
   },
