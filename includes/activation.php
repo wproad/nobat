@@ -46,6 +46,7 @@ function appointment_booking_activate() {
         meeting_duration int NOT NULL DEFAULT 30,
         buffer int NOT NULL DEFAULT 0,
         weekly_hours longtext NOT NULL,
+        timeslots longtext,
         created_at datetime DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY  (id),
         KEY admin_id (admin_id)

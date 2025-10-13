@@ -1,4 +1,4 @@
-import { useState, useCallback } from "@wordpress/element";
+import { useState, useCallback, useMemo } from "@wordpress/element";
 
 /**
  * Custom hook for managing booking form state and validation
@@ -79,13 +79,11 @@ export const useBookingForm = () => {
 
       const data = await response.json();
       console.log("API response data:", data);
-      // setMessage(data.message || "Appointment booked successfully!");
-      // setMessageType("success");
 
       // Store the booked appointment data for the ticket
       const appointmentData = {
         ...formData,
-        id: data.appointment_id || Date.now(),
+        id: data.id || Date.now(),
       };
       console.log("Setting booked appointment:", appointmentData);
       setBookedAppointment(appointmentData);
@@ -131,6 +129,21 @@ export const useBookingForm = () => {
     return today.toISOString().split("T")[0];
   }, []);
 
+  // Reactive form validation that updates when formData changes
+  const isFormValid = useMemo(() => {
+    return !!(
+      formData.client_name &&
+      formData.client_phone &&
+      formData.appointment_date &&
+      formData.time_slot
+    );
+  }, [
+    formData.client_name,
+    formData.client_phone,
+    formData.appointment_date,
+    formData.time_slot,
+  ]);
+
   return {
     formData,
     loading,
@@ -142,10 +155,6 @@ export const useBookingForm = () => {
     clearMessage,
     resetForm,
     getMinDate,
-    isFormValid:
-      formData.client_name &&
-      formData.client_phone &&
-      formData.appointment_date &&
-      formData.time_slot,
+    isFormValid,
   };
 };

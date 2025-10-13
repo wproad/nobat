@@ -308,6 +308,33 @@ foreach ( $weekly_hours_raw as $day => $periods ) {
 
 	error_log( $weekly_hours );
 
+    // 4.5️⃣ Generate timeslots for all days in the schedule period
+    $timeslots = [];
+    $current_date = new DateTime($start_day);
+    $end_date_obj = new DateTime($end_day);
+    
+    while ($current_date <= $end_date_obj) {
+        // Get 3-letter day abbreviation (lowercase) to match weekly_slots keys
+        $day_of_week = strtolower($current_date->format('D')); // mon, tue, wed, etc.
+        $formatted_date = $current_date->format('l, F j'); // e.g., "Monday, October 13"
+        
+        $day_entry = [
+            'date' => $current_date->format('Y-m-d'),
+            'formatted_date' => $formatted_date,
+            'slots' => []
+        ];
+        
+        // If this day has slots in weekly_slots, add them
+        if (isset($weekly_slots[$day_of_week]) && is_array($weekly_slots[$day_of_week])) {
+            $day_entry['slots'] = $weekly_slots[$day_of_week];
+        }
+        
+        $timeslots[] = $day_entry;
+        $current_date->modify('+1 day');
+    }
+    
+    $timeslots_json = wp_json_encode($timeslots);
+    error_log('Generated timeslots: ' . $timeslots_json);
 
     // 5️⃣ Insert schedule into database (no update logic)
     // Each new schedule is a separate entry
@@ -322,8 +349,9 @@ foreach ( $weekly_hours_raw as $day => $periods ) {
             'meeting_duration' => $meeting_duration,
             'buffer'           => $buffer,
             'weekly_hours'     => $weekly_hours,
+            'timeslots'        => $timeslots_json,
         ],
-        [ '%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s' ]
+        [ '%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s', '%s' ]
     );
 
     // 6️⃣ Handle potential DB errors
@@ -357,6 +385,11 @@ function appointment_booking_get_active_schedule( $request ) {
     }
 
     $schedule['weekly_hours'] = json_decode( $schedule['weekly_hours'], true );
+    
+    // Decode timeslots if it exists
+    if ( isset( $schedule['timeslots'] ) && ! empty( $schedule['timeslots'] ) ) {
+        $schedule['timeslots'] = json_decode( $schedule['timeslots'], true );
+    }
 
     return rest_ensure_response( $schedule );
 }

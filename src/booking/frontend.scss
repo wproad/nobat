@@ -148,6 +148,114 @@
   }
 }
 
+// Time Slots Container
+.time-slots-container {
+  margin-top: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
+
+  .time-slots-title {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e1e1e;
+  }
+
+  .time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+
+    .time-slot-button {
+      display: inline-block;
+      padding: 12px 16px;
+      border: 2px solid #8c8f94;
+      border-radius: 6px;
+      background: white;
+      color: #1e1e1e;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+
+      // Available state (default)
+      &.available {
+        border-color: #2271b1;
+        background: white;
+        color: #2271b1;
+
+        &:hover {
+          background: #2271b1;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(34, 113, 177, 0.25);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        // Selected state for available slots
+        &.selected {
+          background: #2271b1;
+          color: white;
+          border-color: #135e96;
+          font-weight: 600;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(34, 113, 177, 0.4);
+
+          &:hover {
+            background: #135e96;
+            border-color: #0f4c78;
+            box-shadow: 0 6px 16px rgba(34, 113, 177, 0.5);
+          }
+        }
+      }
+
+      // Reserved state (span element)
+      &.reserved {
+        border-color: #dc3545;
+        background: #fef2f2;
+        color: #dc3545;
+        cursor: not-allowed;
+        opacity: 0.7;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: -10%;
+          right: -10%;
+          height: 2px;
+          background: #dc3545;
+          transform: translateY(-50%) rotate(-15deg);
+        }
+      }
+
+      // Unavailable state
+      &.unavailable {
+        border-color: #8c8f94;
+        background: #f8f9fa;
+        color: #8c8f94;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+// Legacy selector for backwards compatibility
 .time-slot-selector {
   &.disabled {
     padding: 20px;
@@ -164,42 +272,6 @@
     background: #fcf0f1;
     border-radius: 4px;
     border: 1px solid #f0a0a0;
-  }
-
-  .time-slots-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-
-    .time-slot-button {
-      padding: 12px 16px;
-      border: 2px solid #8c8f94;
-      border-radius: 6px;
-      background: white;
-      color: #1e1e1e;
-      font-size: 14px;
-      font-weight: 500;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover {
-        border-color: #2271b1;
-        background: #f0f6fc;
-      }
-
-      &.selected {
-        border-color: #2271b1;
-        background: #2271b1;
-        color: white;
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-    }
   }
 }
 
@@ -247,6 +319,25 @@
       .time-slots-grid {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 8px;
+
+        .time-slot-button {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .time-slots-container {
+      padding: 16px;
+
+      .time-slots-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+
+      .time-slots-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
 
         .time-slot-button {
           padding: 10px 12px;

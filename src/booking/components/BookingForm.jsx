@@ -33,15 +33,31 @@ const BookingForm = () => {
     error: scheduleError,
   } = useActiveSchedule();
 
-  console.log("schedule", schedule);
-  console.log("loadingSchedule", loadingSchedule);
-  console.log("scheduleError", scheduleError);
+  const handleSlotSelection = (selectionData) => {
+    if (selectionData) {
+      handleInputChange("appointment_date", selectionData.date);
+      handleInputChange("time_slot", selectionData.timeSlot);
+    } else {
+      handleInputChange("appointment_date", "");
+      handleInputChange("time_slot", "");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await submitBooking();
   };
 
+  // If appointment is booked successfully, show only the ticket
+  if (bookedAppointment) {
+    return (
+      <div className="appointment-booking-form">
+        <AppointmentTicket appointmentData={bookedAppointment} />
+      </div>
+    );
+  }
+
+  // Otherwise show the booking form
   return (
     <div className="appointment-booking-form">
       <Card>
@@ -103,7 +119,10 @@ const BookingForm = () => {
                 <label className="date-selector-label">
                   {__("Select a Date", "appointment-booking")}
                 </label>
-                <TimeSlotSelector schedule={schedule} />
+                <TimeSlotSelector
+                  schedule={schedule}
+                  onSlotSelect={handleSlotSelection}
+                />
               </div>
             )}
 
@@ -127,8 +146,6 @@ const BookingForm = () => {
           </form>
         </CardBody>
       </Card>
-
-      <AppointmentTicket appointmentData={bookedAppointment} />
     </div>
   );
 };
