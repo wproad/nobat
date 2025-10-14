@@ -49,6 +49,16 @@ function appointment_booking_admin_page() {
 		'appointment_booking_calendar_page_html'
 	);
 
+	// Add calendar subpage 2
+	add_submenu_page(
+		'appointment-booking',
+		__( 'Cal View', 'appointment-booking' ),
+		__( 'Cal', 'appointment-booking' ),
+		'manage_options',
+		'appointment-booking-cal',
+		'appointment_booking_cal_page_html'
+	);
+
 	// Add settings subpage
 	add_submenu_page(
 		'appointment-booking',

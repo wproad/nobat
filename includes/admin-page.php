@@ -457,6 +457,14 @@ function appointment_booking_calendar_page_html() {
 	);
 }
 
+function appointment_booking_cal_page_html() {
+	printf(
+		'<div class="wrap" id="appointment-booking-cal">%s</div>',
+		esc_html__( 'Loading cal...', 'appointment-booking' )
+	);
+}
+
+
 
 /**
  * Outputs the root element for the scheduling React component

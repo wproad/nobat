@@ -1,0 +1,14 @@
+import "./cal.scss";
+import domReady from "@wordpress/dom-ready";
+import { createRoot } from "@wordpress/element";
+import { CalendarView } from "./components";
+
+domReady(() => {
+  const root = createRoot(
+    document.getElementById("appointment-booking-cal")
+  );
+
+  console.log("CalendarView");
+
+  root.render(<CalendarView />);
+});

@@ -25,6 +25,11 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 		$style_name = 'calendar';
 	}
 
+	if ( strpos( $admin_page, 'appointment-booking-cal' ) !== false ) {
+		$script_name = 'cal';
+		$style_name = 'cal';
+	}
+
 	    // Use 'schedule' assets for the schedule page
     if ( strpos( $admin_page, 'appointment-booking-scheduling' ) !== false ) {
         $script_name = 'schedule';
