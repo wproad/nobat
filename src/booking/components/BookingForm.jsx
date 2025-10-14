@@ -71,16 +71,6 @@ const BookingForm = () => {
             </Notice>
           )}
 
-          {scheduleError && (
-            <Notice
-              status="error"
-              isDismissible
-              onRemove={() => {}} // Let the hook handle error clearing
-            >
-              {scheduleError}
-            </Notice>
-          )}
-
           <form onSubmit={handleSubmit} className="booking-form">
             <div className="form-row">
               <TextControl

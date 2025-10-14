@@ -5,7 +5,7 @@ export function WeeklyHoursEditor({ weekdays, weeklyHours, setWeeklyHours }) {
   const addWorkingHour = (day) => {
     setWeeklyHours((prev) => ({
       ...prev,
-      [day]: [...prev[day], "9:00-18:00"],
+      [day]: [...prev[day], "10:00-14:00"],
     }));
   };
 

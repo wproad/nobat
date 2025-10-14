@@ -69,5 +69,15 @@ function appointment_booking_admin_page() {
 		'appointment_booking_scheduling_page_html'
 	);
 
+	// Add all schedules sub page
+	add_submenu_page(
+		'appointment-booking',
+		__( 'All Schedules', 'appointment-booking' ),
+		__( 'All Schedules', 'appointment-booking' ),
+		'manage_options',
+		'appointment-booking-all-schedules',
+		'schedule_list_page_callback'
+	);
+
 }
 add_action( 'admin_menu', 'appointment_booking_admin_page' );
