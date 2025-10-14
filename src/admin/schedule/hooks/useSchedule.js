@@ -26,7 +26,7 @@ export function useSchedule() {
       data: payload,
     })
       .then((response) => {
-        console.log("Schedule save response:", response);
+        // console.log("Schedule save response:", response);
         setNotice({
           status: "success",
           message: __("Settings saved successfully!"),

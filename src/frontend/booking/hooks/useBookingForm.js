@@ -78,14 +78,14 @@ export const useBookingForm = () => {
       }
 
       const data = await response.json();
-      console.log("API response data:", data);
+      // console.log("API response data:", data);
 
       // Store the booked appointment data for the ticket
       const appointmentData = {
         ...formData,
         id: data.id || Date.now(),
       };
-      console.log("Setting booked appointment:", appointmentData);
+      // console.log("Setting booked appointment:", appointmentData);
       setBookedAppointment(appointmentData);
 
       // Reset form

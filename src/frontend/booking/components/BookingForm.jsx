@@ -32,6 +32,7 @@ const BookingForm = () => {
     loading: loadingSchedule,
     error: scheduleError,
   } = useActiveSchedule();
+  console.log("schedule", schedule);
 
   const handleSlotSelection = (selectionData) => {
     if (selectionData) {

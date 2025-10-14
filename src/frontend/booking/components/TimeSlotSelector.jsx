@@ -6,14 +6,6 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-
-  // Auto-select the first day when schedule loads
-  useEffect(() => {
-    if (schedule?.timeslots?.length > 0 && !selectedDate) {
-      setSelectedDate(schedule.timeslots[0].date);
-    }
-  }, [schedule]);
-
   const handleDateClick = (date) => {
     setSelectedDate(date);
     // Clear selected slot when changing date
@@ -35,7 +27,7 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
     } else {
       onSlotSelect?.(null);
     }
-  }, [selectedDate, selectedSlot, onSlotSelect]);
+  }, [selectedDate, selectedSlot]);
 
   // Return early if no schedule or no timeslots
   if (!schedule || !schedule.timeslots || schedule.timeslots.length === 0) {
@@ -62,9 +54,10 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
       <div className="week-days-selector">
         <div className="week-days-grid">
           {schedule.timeslots.map((dayData) => {
+            if (dayData.slots.length === 0) return;
+
             const isSelected = selectedDate === dayData.date;
             const isTodayDate = isToday(dayData.date);
-            const hasSlots = dayData.slots && dayData.slots.length > 0;
 
             return (
               <DayButton
@@ -73,7 +66,6 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
                 formattedDate={dayData.formatted_date}
                 isSelected={isSelected}
                 isToday={isTodayDate}
-                hasSlots={hasSlots}
                 onClick={handleDateClick}
               />
             );

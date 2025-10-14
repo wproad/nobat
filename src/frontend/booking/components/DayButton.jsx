@@ -3,7 +3,6 @@ const DayButton = ({
   formattedDate,
   isSelected,
   isToday,
-  hasSlots,
   onClick,
 }) => {
   const parseDateInfo = (formattedDate) => {
@@ -24,9 +23,8 @@ const DayButton = ({
       type="button"
       className={`day-button ${isSelected ? "selected" : ""} ${
         isToday ? "today" : ""
-      } ${!hasSlots ? "no-slots" : ""}`}
+      }`}
       onClick={() => onClick(date)}
-      disabled={!hasSlots}
     >
       <div className="day-name">{dayName}</div>
       <div className="day-number">{dayNumber}</div>
