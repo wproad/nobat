@@ -62,8 +62,8 @@ function appointment_booking_admin_page() {
     // Add scheduling sub page
     add_submenu_page(
 		'appointment-booking',
-		__( 'Scheduling', 'appointment-booking' ),
-		__( 'Schedulings', 'appointment-booking' ),
+		__( 'Add Schedule', 'appointment-booking' ),
+		__( 'Add Schedule', 'appointment-booking' ),
 		'manage_options',
 		'appointment-booking-scheduling',
 		'appointment_booking_scheduling_page_html'

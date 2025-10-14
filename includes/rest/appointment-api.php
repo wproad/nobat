@@ -25,22 +25,20 @@ function appointment_booking_create_appointment( $request ) {
 	$client_phone = sanitize_text_field( $request->get_param( 'client_phone' ) );
 	$appointment_date = sanitize_text_field( $request->get_param( 'appointment_date' ) );
 	$time_slot = sanitize_text_field( $request->get_param( 'time_slot' ) );
-	$schedule_id = intval( $request->get_param( 'schedule_id' ) );
 	
 	// Validate required fields
-	if ( empty( $client_name ) || empty( $client_phone ) || empty( $appointment_date ) || empty( $time_slot ) || empty( $schedule_id ) ) {
-		return new WP_Error( 'missing_fields', 'All fields are required (including schedule_id)', array( 'status' => 400 ) );
+	if ( empty( $client_name ) || empty( $client_phone ) || empty( $appointment_date ) || empty( $time_slot ) ) {
+		return new WP_Error( 'missing_fields', 'All fields are required', array( 'status' => 400 ) );
 	}
 	
-	// Get the schedule
-	$schedule = $wpdb->get_row( $wpdb->prepare(
-		"SELECT * FROM $schedules_table WHERE id = %d",
-		$schedule_id
-	), ARRAY_A );
+	// Get the active schedule
+	$schedule = $wpdb->get_row( "SELECT * FROM $schedules_table WHERE is_active = 1 ORDER BY id DESC LIMIT 1", ARRAY_A );
 	
 	if ( ! $schedule ) {
-		return new WP_Error( 'schedule_not_found', 'Schedule not found', array( 'status' => 404 ) );
+		return new WP_Error( 'schedule_not_found', 'No active schedule found', array( 'status' => 404 ) );
 	}
+	
+	$schedule_id = $schedule['id'];
 	
 	// Check if slot is already taken
 	$existing = $wpdb->get_var( $wpdb->prepare(

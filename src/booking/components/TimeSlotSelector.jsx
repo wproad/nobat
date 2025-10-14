@@ -6,17 +6,21 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  console.log("TimeSlotSelector schedule:", schedule);
+
+  // Auto-select the first day when schedule loads
+  useEffect(() => {
+    if (schedule?.timeslots?.length > 0 && !selectedDate) {
+      setSelectedDate(schedule.timeslots[0].date);
+    }
+  }, [schedule]);
 
   const handleDateClick = (date) => {
-    console.log("handleDateClick", date);
     setSelectedDate(date);
     // Clear selected slot when changing date
     setSelectedSlot(null);
   };
 
   const handleSlotClick = (slot) => {
-    console.log("handleSlotClick", slot);
     setSelectedSlot(slot);
   };
 
