@@ -1,31 +1,5 @@
 <?php
 
-/**
- * Get available time slots for a date
- */
-function appointment_booking_get_available_slots( $request ) {
-	global $wpdb;
-	
-	$table_name = $wpdb->prefix . 'appointments';
-	$date = $request->get_param( 'date' );
-
-	$all_slots = appointment_booking_generate_slots_from_settings( false ); // exclude breaks from availability
-	
-	if ( $date ) {
-		// Get booked slots for the date
-		$booked_slots = $wpdb->get_col( $wpdb->prepare(
-			"SELECT time_slot FROM $table_name WHERE appointment_date = %s",
-			$date
-		) );
-		
-		// Return available slots
-		$available_slots = array_diff( $all_slots, $booked_slots );
-	} else {
-		$available_slots = $all_slots;
-	}
-	
-	return new WP_REST_Response( array_values( $available_slots ), 200 );
-}
 
 
 function appointment_booking_create_schedule( $request ) {

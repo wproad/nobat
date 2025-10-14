@@ -42,53 +42,53 @@ function appointment_booking_register_settings() {
 	) );
 
 	// Time slots section
-	add_settings_section(
-		'appointment_booking_timeslots_section',
-		__( 'Time Slots', 'appointment-booking' ),
-		'__return_false',
-		'appointment_booking_settings'
-	);
+	// add_settings_section(
+	// 	'appointment_booking_timeslots_section',
+	// 	__( 'Time Slots', 'appointment-booking' ),
+	// 	'__return_false',
+	// 	'appointment_booking_settings'
+	// );
 
-	// Slot interval (minutes)
-	register_setting( 'appointment_booking_settings', 'appointment_booking_slot_interval', array(
-		'type' => 'integer',
-		'default' => 60,
-		'sanitize_callback' => function( $value ) {
-			$value = absint( $value );
-			$allowed = array( 10, 15, 20, 30, 45, 60, 90, 120 );
-			return in_array( $value, $allowed, true ) ? $value : 60;
-		},
-	) );
+	// // Slot interval (minutes)
+	// register_setting( 'appointment_booking_settings', 'appointment_booking_slot_interval', array(
+	// 	'type' => 'integer',
+	// 	'default' => 60,
+	// 	'sanitize_callback' => function( $value ) {
+	// 		$value = absint( $value );
+	// 		$allowed = array( 10, 15, 20, 30, 45, 60, 90, 120 );
+	// 		return in_array( $value, $allowed, true ) ? $value : 60;
+	// 	},
+	// ) );
 
-	// Day start and end (HH:MM)
-	register_setting( 'appointment_booking_settings', 'appointment_booking_day_start', array(
-		'type' => 'string',
-		'default' => '09:00',
-		'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
-	) );
-	register_setting( 'appointment_booking_settings', 'appointment_booking_day_end', array(
-		'type' => 'string',
-		'default' => '17:00',
-		'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
-	) );
+	// // Day start and end (HH:MM)
+	// register_setting( 'appointment_booking_settings', 'appointment_booking_day_start', array(
+	// 	'type' => 'string',
+	// 	'default' => '09:00',
+	// 	'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
+	// ) );
+	// register_setting( 'appointment_booking_settings', 'appointment_booking_day_end', array(
+	// 	'type' => 'string',
+	// 	'default' => '17:00',
+	// 	'sanitize_callback' => 'appointment_booking_sanitize_time_hhmm',
+	// ) );
 
-	// Break ranges (one per line, HH:MM-HH:MM)
-	register_setting( 'appointment_booking_settings', 'appointment_booking_breaks', array(
-		'type' => 'string',
-		'default' => "12:00-14:00",
-		'sanitize_callback' => function( $value ) {
-			$lines = preg_split( '/\r\n|\r|\n/', (string) $value );
-			$clean = array();
-			foreach ( $lines as $line ) {
-				$line = trim( $line );
-				if ( $line === '' ) { continue; }
-				if ( preg_match( '/^([01]?\d|2[0-3]):[0-5]\d-([01]?\d|2[0-3]):[0-5]\d$/', $line ) ) {
-					$clean[] = $line;
-				}
-			}
-			return implode( "\n", $clean );
-		},
-	) );
+	// // Break ranges (one per line, HH:MM-HH:MM)
+	// register_setting( 'appointment_booking_settings', 'appointment_booking_breaks', array(
+	// 	'type' => 'string',
+	// 	'default' => "12:00-14:00",
+	// 	'sanitize_callback' => function( $value ) {
+	// 		$lines = preg_split( '/\r\n|\r|\n/', (string) $value );
+	// 		$clean = array();
+	// 		foreach ( $lines as $line ) {
+	// 			$line = trim( $line );
+	// 			if ( $line === '' ) { continue; }
+	// 			if ( preg_match( '/^([01]?\d|2[0-3]):[0-5]\d-([01]?\d|2[0-3]):[0-5]\d$/', $line ) ) {
+	// 				$clean[] = $line;
+	// 			}
+	// 		}
+	// 		return implode( "\n", $clean );
+	// 	},
+	// ) );
 
     add_settings_field(
         'appointment_booking_notify_admin',
@@ -114,35 +114,35 @@ function appointment_booking_register_settings() {
 		'appointment_booking_notifications_section'
 	);
 
-	// Time slots fields
-	add_settings_field(
-		'appointment_booking_slot_interval',
-		__( 'Slot interval (minutes)', 'appointment-booking' ),
-		'appointment_booking_field_slot_interval',
-		'appointment_booking_settings',
-		'appointment_booking_timeslots_section'
-	);
-	add_settings_field(
-		'appointment_booking_day_start',
-		__( 'Day start (HH:MM)', 'appointment-booking' ),
-		'appointment_booking_field_day_start',
-		'appointment_booking_settings',
-		'appointment_booking_timeslots_section'
-	);
-	add_settings_field(
-		'appointment_booking_day_end',
-		__( 'Day end (HH:MM)', 'appointment-booking' ),
-		'appointment_booking_field_day_end',
-		'appointment_booking_settings',
-		'appointment_booking_timeslots_section'
-	);
-	add_settings_field(
-		'appointment_booking_breaks',
-		__( 'Breaks (one per line, HH:MM-HH:MM)', 'appointment-booking' ),
-		'appointment_booking_field_breaks',
-		'appointment_booking_settings',
-		'appointment_booking_timeslots_section'
-	);
+	// // Time slots fields
+	// add_settings_field(
+	// 	'appointment_booking_slot_interval',
+	// 	__( 'Slot interval (minutes)', 'appointment-booking' ),
+	// 	'appointment_booking_field_slot_interval',
+	// 	'appointment_booking_settings',
+	// 	'appointment_booking_timeslots_section'
+	// );
+	// add_settings_field(
+	// 	'appointment_booking_day_start',
+	// 	__( 'Day start (HH:MM)', 'appointment-booking' ),
+	// 	'appointment_booking_field_day_start',
+	// 	'appointment_booking_settings',
+	// 	'appointment_booking_timeslots_section'
+	// );
+	// add_settings_field(
+	// 	'appointment_booking_day_end',
+	// 	__( 'Day end (HH:MM)', 'appointment-booking' ),
+	// 	'appointment_booking_field_day_end',
+	// 	'appointment_booking_settings',
+	// 	'appointment_booking_timeslots_section'
+	// );
+	// add_settings_field(
+	// 	'appointment_booking_breaks',
+	// 	__( 'Breaks (one per line, HH:MM-HH:MM)', 'appointment-booking' ),
+	// 	'appointment_booking_field_breaks',
+	// 	'appointment_booking_settings',
+	// 	'appointment_booking_timeslots_section'
+	// );
 }
 add_action( 'admin_init', 'appointment_booking_register_settings' );
 
