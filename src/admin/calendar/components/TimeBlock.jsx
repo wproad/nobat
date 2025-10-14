@@ -4,7 +4,7 @@ import { AppointmentDetailModal } from "./AppointmentDetailModal";
 import {
   getStatusColor,
   getStatusBorderColor,
-} from "../../lib/appointmentUtils";
+} from "../../../lib/appointmentUtils";
 
 const TimeBlock = ({ appointment, onStatusUpdate, onDelete }) => {
   const [showDetailModal, setShowDetailModal] = useState(false);

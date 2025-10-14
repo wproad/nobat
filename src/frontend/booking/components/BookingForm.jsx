@@ -10,7 +10,7 @@ import {
 } from "@wordpress/components";
 import { useBookingForm } from "../hooks";
 import TimeSlotSelector from "./TimeSlotSelector";
-import { useActiveSchedule } from "../../hooks";
+import { useActiveSchedule } from "../../../hooks";
 import { AppointmentTicket } from "./AppointmentTicket";
 
 const BookingForm = () => {

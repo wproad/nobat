@@ -13,7 +13,7 @@ import {
   formatDate,
   generateWhatsAppLink,
   getDefaultWhatsAppMessage,
-} from "../../lib/appointmentUtils";
+} from "../../../lib/appointmentUtils";
 
 const AppointmentDetailModal = ({
   appointment,
