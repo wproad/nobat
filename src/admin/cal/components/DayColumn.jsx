@@ -1,7 +1,8 @@
 import { __ } from "@wordpress/i18n";
 import { AppointmentSlot } from "./AppointmentSlot";
+import { Slot } from "./Slot";
 
-const DayColumn = ({ day, onStatusUpdate, onDelete }) => {
+const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
   return (
     <div className="day-column">
       <div className="day-header">
@@ -27,11 +28,11 @@ const DayColumn = ({ day, onStatusUpdate, onDelete }) => {
                     onDelete={onDelete}
                   />
                 ) : (
-                  <div className="empty-slot">
-                    {isUnavailable
-                      ? __("unavailable", "appointment-booking")
-                      : slot.status}
-                  </div>
+                  <Slot
+                    slot={slot}
+                    date={day.date}
+                    onChangeStatus={onChangeSlotStatus}
+                  />
                 )}
               </div>
             </div>

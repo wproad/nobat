@@ -113,6 +113,15 @@ function appointment_booking_register_rest_routes() {
 		},
 	] );
 
+	// UPDATE single schedule slot status (available/unavailable)
+	register_rest_route( 'appointment-booking/v1', '/schedule/slot', [
+		'methods'  => 'PUT',
+		'callback' => 'appointment_booking_update_schedule_slot',
+		'permission_callback' => function() {
+			return current_user_can( 'manage_options' );
+		},
+	] );
+
 }
 add_action( 'rest_api_init', 'appointment_booking_register_rest_routes' );
 
