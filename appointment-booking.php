@@ -33,7 +33,7 @@ require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/activation.php';
 require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/admin-menu.php';
 require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/admin-page.php';
 require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/admin-settings.php';
-require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/rest-api.php';
+require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/rest/register.php';
 require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/enqueue-scripts.php';
 require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/helpers.php';
 

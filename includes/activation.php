@@ -25,8 +25,10 @@ function appointment_booking_activate() {
 		appointment_date date NOT NULL,
 		time_slot varchar(20) NOT NULL,
 		status varchar(20) DEFAULT 'pending',
+		schedule_id mediumint(9) NOT NULL,
 		created_at datetime DEFAULT CURRENT_TIMESTAMP,
-		PRIMARY KEY (id)
+		PRIMARY KEY (id),
+		KEY schedule_id (schedule_id)
 	) $charset_collate;";
 	
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
