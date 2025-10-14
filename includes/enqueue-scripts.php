@@ -20,11 +20,6 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 	$script_name = 'admin';
 	$style_name = 'admin';
 	
-    if ( strpos( $admin_page, 'appointment-booking-calendar' ) !== false ) {
-		$script_name = 'calendar';
-		$style_name = 'calendar';
-	}
-
 	if ( strpos( $admin_page, 'appointment-booking-cal' ) !== false ) {
 		$script_name = 'cal';
 		$style_name = 'cal';

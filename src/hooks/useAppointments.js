@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "@wordpress/element";
 
-export const useAppointments = () => {
+export const useAppointments = (scheduleId) => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,8 +9,11 @@ export const useAppointments = () => {
     try {
       setLoading(true);
       setError(null);
+      const params = scheduleId
+        ? `?schedule_id=${encodeURIComponent(scheduleId)}`
+        : "";
       const response = await fetch(
-        "/wp-json/appointment-booking/v1/appointments",
+        `/wp-json/appointment-booking/v1/appointments${params}`,
         {
           method: "GET",
           headers: {
@@ -31,7 +34,7 @@ export const useAppointments = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [scheduleId]);
 
   useEffect(() => {
     fetchAppointments();

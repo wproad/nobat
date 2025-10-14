@@ -7,7 +7,20 @@ function appointment_booking_get_appointments( $request ) {
 	global $wpdb;
 	
 	$table_name = $wpdb->prefix . 'appointments';
-	$appointments = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY appointment_date DESC, time_slot ASC" );
+
+	// Optional schedule_id filter
+	$schedule_id = intval( $request->get_param( 'schedule_id' ) );
+
+	if ( $schedule_id > 0 ) {
+		$appointments = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM $table_name WHERE schedule_id = %d ORDER BY appointment_date DESC, time_slot ASC",
+				$schedule_id
+			)
+		);
+	} else {
+		$appointments = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY appointment_date DESC, time_slot ASC" );
+	}
 	
 	return new WP_REST_Response( $appointments, 200 );
 }

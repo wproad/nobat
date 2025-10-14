@@ -9,12 +9,6 @@ const CalendarView = () => {
         <CalendarHeader
           title={__("Scehdule Calendar", "appointment-booking")}
         />
-        {/* <WeekNavigation
-          isCurrentWeek={isCurrentWeek}
-          onPrev={goPrevWeek}
-          onToday={goToToday}
-          onNext={goNextWeek}
-        /> */}
       </div>
 
       <CalendarGrid />

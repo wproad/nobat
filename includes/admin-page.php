@@ -450,13 +450,6 @@ function appointment_add_new_page_callback() {
 /**
  * Outputs the root element for the calendar React component
  */
-function appointment_booking_calendar_page_html() {
-	printf(
-		'<div class="wrap" id="appointment-booking-calendar">%s</div>',
-		esc_html__( 'Loading calendar...', 'appointment-booking' )
-	);
-}
-
 function appointment_booking_cal_page_html() {
 	printf(
 		'<div class="wrap" id="appointment-booking-cal">%s</div>',

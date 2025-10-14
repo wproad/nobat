@@ -4,7 +4,6 @@ module.exports = {
   ...defaultConfig,
   entry: {
     booking: "./src/frontend/booking/index.js",
-    calendar: "./src/admin/calendar/index.js",
     cal: "./src/admin/cal/index.js",
     schedule: "./src/admin/schedule/index.js",
   },

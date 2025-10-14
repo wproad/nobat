@@ -6,7 +6,7 @@ import {
   getStatusBorderColor,
 } from "../../../lib/appointmentUtils";
 
-const TimeBlock = ({ appointment, onStatusUpdate, onDelete }) => {
+const AppointmentSlot = ({ appointment, onStatusUpdate, onDelete }) => {
   const [showDetailModal, setShowDetailModal] = useState(false);
 
   const handleTimeBlockClick = () => {
@@ -40,4 +40,4 @@ const TimeBlock = ({ appointment, onStatusUpdate, onDelete }) => {
   );
 };
 
-export { TimeBlock };
+export { AppointmentSlot };
