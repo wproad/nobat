@@ -8,6 +8,116 @@ if ( ! defined('ABSPATH') ) {
 }
 
 /**
+ * Handle appointment deletions early, before any output
+ */
+function appointment_booking_handle_appointment_deletions() {
+	// Only run on our appointments page
+	if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'appointment-booking' ) {
+		return;
+	}
+
+	global $wpdb;
+	$table = $wpdb->prefix . 'appointments';
+
+	// Handle single delete
+	if ( isset( $_GET['action'] ) && $_GET['action'] === 'delete' && isset( $_GET['id'] ) ) {
+		$id = intval( $_GET['id'] );
+		check_admin_referer( 'delete_appointment_' . $id );
+		
+		$wpdb->delete( $table, [ 'id' => $id ], [ '%d' ] );
+		
+		wp_redirect( add_query_arg( 'deleted', 1, remove_query_arg( [ 'action', 'id', '_wpnonce' ] ) ) );
+		exit;
+	}
+
+	// Handle bulk delete from top dropdown
+	if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'delete' && isset( $_REQUEST['appointment'] ) ) {
+		check_admin_referer( 'bulk-appointments' );
+		
+		$ids = array_map( 'intval', (array) $_REQUEST['appointment'] );
+		
+		if ( ! empty( $ids ) ) {
+			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
+			
+			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'appointment', '_wpnonce' ] ) ) );
+			exit;
+		}
+	}
+
+	// Handle bulk delete from bottom dropdown
+	if ( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] === 'delete' && isset( $_REQUEST['appointment'] ) ) {
+		check_admin_referer( 'bulk-appointments' );
+		
+		$ids = array_map( 'intval', (array) $_REQUEST['appointment'] );
+		
+		if ( ! empty( $ids ) ) {
+			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
+			
+			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'appointment', '_wpnonce' ] ) ) );
+			exit;
+		}
+	}
+}
+add_action( 'admin_init', 'appointment_booking_handle_appointment_deletions' );
+
+/**
+ * Handle schedule deletions early, before any output
+ */
+function appointment_booking_handle_schedule_deletions() {
+	// Only run on our schedules page
+	if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'appointment-booking-all-schedules' ) {
+		return;
+	}
+
+	global $wpdb;
+	$table = $wpdb->prefix . 'schedules';
+
+	// Handle single delete
+	if ( isset( $_GET['action'] ) && $_GET['action'] === 'delete' && isset( $_GET['id'] ) ) {
+		$id = intval( $_GET['id'] );
+		check_admin_referer( 'delete_schedule_' . $id );
+		
+		$wpdb->delete( $table, [ 'id' => $id ], [ '%d' ] );
+		
+		wp_redirect( add_query_arg( 'deleted', 1, remove_query_arg( [ 'action', 'id', '_wpnonce' ] ) ) );
+		exit;
+	}
+
+	// Handle bulk delete from top dropdown
+	if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
+		check_admin_referer( 'bulk-schedules' );
+		
+		$ids = array_map( 'intval', (array) $_REQUEST['schedule'] );
+		
+		if ( ! empty( $ids ) ) {
+			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
+			
+			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'schedule', '_wpnonce' ] ) ) );
+			exit;
+		}
+	}
+
+	// Handle bulk delete from bottom dropdown
+	if ( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
+		check_admin_referer( 'bulk-schedules' );
+		
+		$ids = array_map( 'intval', (array) $_REQUEST['schedule'] );
+		
+		if ( ! empty( $ids ) ) {
+			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
+			
+			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'schedule', '_wpnonce' ] ) ) );
+			exit;
+		}
+	}
+}
+add_action( 'admin_init', 'appointment_booking_handle_schedule_deletions' );
+
+/**
  * Callback for main appointments page
  */
 
@@ -82,27 +192,13 @@ function appointment_list_page_callback() {
 			}
 		}
 
-		// TODO: bulk action has waring
 		protected function get_bulk_actions() {
 			return [ 'delete' => __( 'Delete', 'appointment-booking' ) ];
 		}
 
 		public function process_bulk_action() {
-			global $wpdb;
-			$table = $wpdb->prefix . 'appointments';
-
-			if ( 'delete' === $this->current_action() ) {
-				check_admin_referer( 'bulk-' . $this->_args['plural'] );
-
-				$ids = isset( $_REQUEST['appointment'] ) ? array_map( 'intval', (array) $_REQUEST['appointment'] ) : [];
-				if ( ! empty( $ids ) ) {
-					$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
-					$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
-
-					wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'appointment' ] ) ) );
-					exit;
-				}
-			}
+			// Bulk actions are now handled in the main callback function
+			// This method is kept for compatibility but does nothing
 		}
 
 		public function extra_tablenav( $which ) {
@@ -448,33 +544,8 @@ function schedule_list_page_callback() {
 		}
 
 		public function process_bulk_action() {
-			global $wpdb;
-			$table = $wpdb->prefix . 'schedules';
-
-			// Handle single delete
-			if ( 'delete' === $this->current_action() && isset( $_GET['id'] ) ) {
-				$id = intval( $_GET['id'] );
-				check_admin_referer( 'delete_schedule_' . $id );
-				
-				$wpdb->delete( $table, [ 'id' => $id ], [ '%d' ] );
-				
-				wp_redirect( add_query_arg( 'deleted', 1, remove_query_arg( [ 'action', 'id', '_wpnonce' ] ) ) );
-				exit;
-			}
-
-			// Handle bulk delete
-			if ( 'delete' === $this->current_action() ) {
-				check_admin_referer( 'bulk-' . $this->_args['plural'] );
-
-				$ids = isset( $_REQUEST['schedule'] ) ? array_map( 'intval', (array) $_REQUEST['schedule'] ) : [];
-				if ( ! empty( $ids ) ) {
-					$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
-					$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
-
-					wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'schedule' ] ) ) );
-					exit;
-				}
-			}
+			// Bulk actions are now handled in the main callback function
+			// This method is kept for compatibility but does nothing
 		}
 
 		public function extra_tablenav( $which ) {
