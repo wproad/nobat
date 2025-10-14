@@ -49,6 +49,13 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
     ? schedule.timeslots.find((day) => day.date === selectedDate)
     : null;
 
+  // Filter out slots marked as unavailable for the selected day
+  const visibleSlots = selectedDayData
+    ? (selectedDayData.slots || []).filter(
+        (slot) => slot.status !== "unavailable"
+      )
+    : [];
+
   return (
     <div className="appointment-selector">
       <div className="week-days-selector">
@@ -73,11 +80,11 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
         </div>
       </div>
 
-      {selectedDayData && selectedDayData.slots.length > 0 && (
+      {selectedDayData && visibleSlots.length > 0 && (
         <div className="time-slots-container">
           <h4 className="time-slots-title">Available Time Slots</h4>
           <div className="time-slots-grid">
-            {selectedDayData.slots.map((slot, index) => {
+            {visibleSlots.map((slot, index) => {
               const isSlotSelected =
                 selectedSlot &&
                 selectedSlot.start === slot.start &&

@@ -69,8 +69,8 @@
   }
 
   .week-days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 16px;
 

@@ -1,22 +1,18 @@
-const DayButton = ({
-  date,
-  formattedDate,
-  isSelected,
-  isToday,
-  onClick,
-}) => {
+const DayButton = ({ date, formattedDate, isSelected, isToday, onClick }) => {
   const parseDateInfo = (formattedDate) => {
     // formattedDate is in format: "Monday, October 13"
     const parts = formattedDate.split(", ");
     const dayName = parts[0]; // "Monday"
+    const dayNameShort = dayName.slice(0, 3).toLowerCase(); // "mon"
     const dateParts = parts[1].split(" "); // ["October", "13"]
     const monthName = dateParts[0]; // "October"
     const dayNumber = dateParts[1]; // "13"
 
-    return { dayName, dayNumber, monthName };
+    return { dayName, dayNameShort, dayNumber, monthName };
   };
 
-  const { dayName, dayNumber, monthName } = parseDateInfo(formattedDate);
+  const { dayName, dayNameShort, dayNumber, monthName } =
+    parseDateInfo(formattedDate);
 
   return (
     <button
@@ -26,7 +22,7 @@ const DayButton = ({
       }`}
       onClick={() => onClick(date)}
     >
-      <div className="day-name">{dayName}</div>
+      <div className="day-name">{dayNameShort || dayName}</div>
       <div className="day-number">{dayNumber}</div>
       <div className="month-name">{monthName}</div>
     </button>
