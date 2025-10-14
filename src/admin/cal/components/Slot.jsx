@@ -4,16 +4,17 @@ import { Modal, SelectControl, Button } from "@wordpress/components";
 
 const Slot = ({ slot, date, onChangeStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [newStatus, setNewStatus] = useState(
-    slot?.status === "unavailable" ? "available" : slot?.status || "available"
-  );
+  const [newStatus, setNewStatus] = useState(slot?.status || "available");
 
   const label =
     slot?.status === "unavailable"
       ? __("unavailable", "appointment-booking")
       : slot?.status || "";
 
-  const open = () => setIsOpen(true);
+  const open = () => {
+    setNewStatus(slot?.status || "available");
+    setIsOpen(true);
+  };
   const close = () => setIsOpen(false);
 
   const handleSave = async () => {
