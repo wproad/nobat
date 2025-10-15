@@ -31,6 +31,7 @@ const BookingForm = () => {
     schedule,
     loading: loadingSchedule,
     error: scheduleError,
+    refetch,
   } = useActiveSchedule();
   console.log("schedule", schedule);
 
@@ -105,6 +106,21 @@ const BookingForm = () => {
                 <Spinner />
                 <span>{__("Loading schedule...", "appointment-booking")}</span>
               </div>
+            ) : scheduleError ? (
+              <div className="form-row">
+                <Notice status="error" isDismissible={false}>
+                  {scheduleError}
+                </Notice>
+                <div className="form-actions">
+                  <Button
+                    onClick={refetch}
+                    variant="secondary"
+                    __next40pxDefaultSize
+                  >
+                    {__("Retry", "appointment-booking")}
+                  </Button>
+                </div>
+              </div>
             ) : (
               <div className="form-row">
                 <label className="date-selector-label">
@@ -121,7 +137,9 @@ const BookingForm = () => {
               <Button
                 type="submit"
                 variant="primary"
-                disabled={loading || !isFormValid}
+                disabled={
+                  loading || loadingSchedule || !!scheduleError || !isFormValid
+                }
                 __next40pxDefaultSize
               >
                 {loading ? (

@@ -54,13 +54,7 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 	);
 
 	// Load JS translations for the admin handle
-	// wp_set_script_translations( "appointment-booking-{$script_name}-script", 'appointment-booking', APPOINTMENT_BOOKING_PLUGIN_DIR . 'languages' );
-
-	wp_set_script_translations(
-		"appointment-booking-{$script_name}-script",
-		'appointment-booking',
-		plugin_dir_path( APPOINTMENT_BOOKING_PLUGIN_FILE ) . 'languages'
-	);
+	wp_set_script_translations( "appointment-booking-{$script_name}-script", 'appointment-booking', APPOINTMENT_BOOKING_PLUGIN_DIR . 'languages' );
 
 	// Enqueue WordPress REST API script for nonce
 	wp_enqueue_script( 'wp-api' );

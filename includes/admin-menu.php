@@ -12,8 +12,8 @@ if ( ! defined('ABSPATH') ) {
  */
 function appointment_booking_admin_page() {
 	add_menu_page(
-        __( 'Appointments', 'appointment-booking' ),
-        __( 'Appointments', 'appointment-booking' ),
+        __( 'Appointment Booking', 'appointment-booking' ),
+        __( 'Appointment Booking', 'appointment-booking' ),
         'manage_options',
         'appointment-booking',
         'appointment_list_page_callback',

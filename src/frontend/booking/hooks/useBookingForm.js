@@ -44,12 +44,12 @@ export const useBookingForm = () => {
     }
 
     // Phone number validation (Iranian format: 09xxxxxxxxx)
-    const phoneRegex = /^09\d{9}$/;
-    if (!phoneRegex.test(formData.client_phone.replace(/\s/g, ""))) {
-      setMessage("Please enter a valid phone number");
-      setMessageType("error");
-      return false;
-    }
+    // const phoneRegex = /^09\d{9}$/;
+    // if (!phoneRegex.test(formData.client_phone.replace(/\s/g, ""))) {
+    //   setMessage("Please enter a valid phone number");
+    //   setMessageType("error");
+    //   return false;
+    // }
 
     return true;
   }, [formData]);

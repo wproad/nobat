@@ -7,9 +7,7 @@ const Slot = ({ slot, date, onChangeStatus }) => {
   const [newStatus, setNewStatus] = useState(slot?.status || "available");
 
   const label =
-    slot?.status === "unavailable"
-      ? __("unavailable", "appointment-booking")
-      : slot?.status || "";
+    slot?.status === "available" ? __("available", "appointment-booking") : "";
 
   const open = () => {
     setNewStatus(slot?.status || "available");

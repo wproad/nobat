@@ -91,7 +91,12 @@ const AppointmentDetailModal = ({
               </div>
             </div>
 
-            <div className="appointment-actions">
+            <div className="appointment-actions" style={{
+                display: "flex",
+                gap: 8,
+                marginTop: 16,
+                justifyContent: "flex-end",
+              }}>
               <Button variant="secondary" onClick={() => setIsEditing(true)}>
                 {__("Edit Status", "appointment-booking")}
               </Button>
@@ -159,7 +164,12 @@ const AppointmentDetailModal = ({
               "appointment-booking"
             )}
           </p>
-          <div className="modal-actions">
+          <div className="modal-actions" style={{
+                display: "flex",
+                gap: 8,
+                marginTop: 16,
+                justifyContent: "flex-end",
+              }}>
             <Button
               variant="secondary"
               onClick={() => setShowDeleteModal(false)}

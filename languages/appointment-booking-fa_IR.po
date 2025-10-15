@@ -18,7 +18,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: appointment-booking.php
 msgid "Appointment Booking"
-msgstr "رزرو نوبت"
+msgstr "نوبت دهی"
 
 #. Plugin URI of the plugin
 #: appointment-booking.php
@@ -28,7 +28,7 @@ msgstr "https://github.com/your-username/appointment-booking"
 #. Description of the plugin
 #: appointment-booking.php
 msgid "A simple appointment booking system for clients with admin management."
-msgstr "یک سیستم ساده برای رزرو نوبت با مدیریت در پیشخوان."
+msgstr "یک سیستم ساده برای نوبت دهی با مدیریت در پیشخوان."
 
 #. Author of the plugin
 #: appointment-booking.php
@@ -77,13 +77,13 @@ msgstr "تنظیمات"
 #: includes/admin-menu.php:65
 #: includes/admin-menu.php:66
 msgid "Add Schedule"
-msgstr "افزودن برنامه"
+msgstr "افزودن زمانبندی"
 
 #: includes/admin-menu.php:75
 #: includes/admin-menu.php:76
 #: includes/admin-page.php:630
 msgid "All Schedules"
-msgstr "همه برنامه‌ها"
+msgstr "همه زمانبندی ها"
 
 #: includes/admin-page.php:135
 msgid "Appointment"
@@ -207,21 +207,21 @@ msgstr "در حال بارگذاری تقویم..."
 
 #: includes/admin-page.php:468
 msgid "Loading scheduling..."
-msgstr "در حال بارگذاری برنامه‌ها..."
+msgstr "در حال بارگذاری زمانبندی..."
 
 #: includes/admin-page.php:485
 msgid "Schedule"
-msgstr "برنامه"
+msgstr "زمانبندی"
 
 #: includes/admin-page.php:486
 msgid "Schedules"
-msgstr "برنامه‌ها"
+msgstr "زمانبندی ها"
 
 #: includes/admin-page.php:495
 #: build/schedule.js:1
 #: src/admin/schedule/components/CreateSchedule.jsx:57
 msgid "Schedule Name"
-msgstr "نام برنامه"
+msgstr "نام زمانبندی"
 
 #: includes/admin-page.php:496
 msgid "Start Date"
@@ -241,7 +241,7 @@ msgstr "وقفه (دقیقه)"
 
 #: includes/admin-page.php:517
 msgid "Are you sure you want to delete this schedule?"
-msgstr "آیا مطمئن هستید که می‌خواهید این برنامه را حذف کنید؟"
+msgstr "آیا مطمئن هستید که می‌خواهید این زمانبندی را حذف کنید؟"
 
 #: includes/admin-page.php:523
 msgid "Show Detail"
@@ -260,7 +260,7 @@ msgstr "غیرفعال"
 #: includes/admin-page.php:636
 #, php-format
 msgid "%d schedule(s) deleted."
-msgstr "%d برنامه حذف شد."
+msgstr "%d زمانبندی حذف شد."
 
 #: includes/admin-settings.php:14
 msgid "SMS Notifications"
@@ -288,7 +288,7 @@ msgstr "ارسال اعلان برای مشتری"
 
 #: includes/admin-settings.php:214
 msgid "Appointment Booking Settings"
-msgstr "تنظیمات رزرو نوبت"
+msgstr "تنظیمات نوبت دهی"
 
 #: includes/helpers.php:117
 #: build/booking.js:1
@@ -303,19 +303,19 @@ msgstr "در حال بارگذاری فرم رزرو..."
 #: includes/rest/schedule-api.php:35
 #: includes/rest/schedule-api.php:364
 msgid "Missing required schedule data (name, start day, end day, or weekly hours)"
-msgstr "داده‌های لازم برای برنامه (نام، روز شروع، روز پایان یا ساعات هفتگی) ناقص است."
+msgstr "داده‌های لازم برای زمانبندی (نام، روز شروع، روز پایان یا ساعات هفتگی) ناقص است."
 
 #: includes/rest/schedule-api.php:140
 msgid "Failed to insert schedule: "
-msgstr "افزودن برنامه ناموفق بود: "
+msgstr "افزودن زمانبندی ناموفق بود: "
 
 #: includes/rest/schedule-api.php:149
 msgid "Schedule created successfully"
-msgstr "برنامه با موفقیت ایجاد شد"
+msgstr "زمانبندی با موفقیت ایجاد شد"
 
 #: includes/rest/schedule-api.php:162
 msgid "No active schedule found"
-msgstr "هیچ برنامه فعالی یافت نشد"
+msgstr "هیچ زمانبندی فعالی یافت نشد"
 
 #: includes/rest/schedule-api.php:189
 msgid "Missing required parameters"
@@ -330,11 +330,11 @@ msgstr "مقدار وضعیت نامعتبر است"
 #: includes/rest/schedule-api.php:343
 #: includes/rest/schedule-api.php:490
 msgid "Schedule not found"
-msgstr "برنامه پیدا نشد"
+msgstr "زمانبندی پیدا نشد"
 
 #: includes/rest/schedule-api.php:207
 msgid "Schedule timeslots are invalid"
-msgstr "بازه‌های زمانی برنامه نامعتبر هستند"
+msgstr "بازه‌های زمانی نامعتبر هستند"
 
 #: includes/rest/schedule-api.php:214
 msgid "Invalid time slot format"
@@ -346,31 +346,31 @@ msgstr "امکان تغییر بازه رزروشده از طریق این مس�
 
 #: includes/rest/schedule-api.php:254
 msgid "Slot not found in schedule"
-msgstr "بازه در برنامه پیدا نشد"
+msgstr "بازه در زمانبندی پیدا نشد"
 
 #: includes/rest/schedule-api.php:267
 msgid "Failed to update schedule timeslots"
-msgstr "به‌روزرسانی بازه‌های زمانی برنامه ناموفق بود"
+msgstr "به‌روزرسانی بازه‌های زمانی زمانبندی ناموفق بود"
 
 #: includes/rest/schedule-api.php:461
 msgid "Failed to update schedule: "
-msgstr "به‌روزرسانی برنامه ناموفق بود: "
+msgstr "به‌روزرسانی زمانبندی ناموفق بود: "
 
 #: includes/rest/schedule-api.php:469
 msgid "Schedule updated successfully"
-msgstr "برنامه با موفقیت به‌روزرسانی شد"
+msgstr "زمانبندی با موفقیت به‌روزرسانی شد"
 
 #: includes/rest/schedule-api.php:503
 msgid "Cannot delete schedule with existing appointments. Delete appointments first."
-msgstr "برنامه‌ای که دارای نوبت‌های فعال است قابل حذف نیست. ابتدا نوبت‌ها را حذف کنید."
+msgstr "زمانبندی ای که دارای نوبت‌های فعال است قابل حذف نیست. ابتدا نوبت‌ها را حذف کنید."
 
 #: includes/rest/schedule-api.php:518
 msgid "Failed to delete schedule"
-msgstr "حذف برنامه ناموفق بود"
+msgstr "حذف زمانبندی ناموفق بود"
 
 #: includes/rest/schedule-api.php:526
 msgid "Schedule deleted successfully"
-msgstr "برنامه با موفقیت حذف شد"
+msgstr "زمانبندی با موفقیت حذف شد"
 
 #: build/booking.js:1
 #: src/frontend/booking/components/TimeSlotSelector.jsx:37
@@ -418,7 +418,7 @@ msgstr "نام کامل خود را وارد کنید"
 #: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:106
 msgid "Loading schedule..."
-msgstr "در حال بارگذاری برنامه..."
+msgstr "در حال بارگذاری زمانبندی..."
 
 #: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:111
@@ -544,12 +544,12 @@ msgstr "انصراف"
 #: src/admin/cal/components/Slot.jsx:11
 #: src/admin/cal/components/Slot.jsx:55
 msgid "unavailable"
-msgstr "غیردر دسترس"
+msgstr "غیر قابل دسترس"
 
 #: build/cal.js:1
 #: src/admin/cal/components/Slot.jsx:37
 msgid "Update Slot Status"
-msgstr "به‌روزرسانی وضعیت بازه"
+msgstr "تغییر وضعیت بازه"
 
 #: build/cal.js:1
 #: src/admin/cal/components/Slot.jsx:43
@@ -619,7 +619,7 @@ msgstr "خطا در ذخیره تنظیمات."
 #: build/schedule.js:1
 #: src/admin/schedule/components/CreateSchedule.jsx:60
 msgid "Enter a name for this schedule"
-msgstr "برای این برنامه نامی وارد کنید"
+msgstr "برای این زمانبندی نامی وارد کنید"
 
 #: build/schedule.js:1
 #: src/admin/schedule/components/CreateSchedule.jsx:67
