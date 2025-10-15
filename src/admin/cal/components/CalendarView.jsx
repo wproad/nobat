@@ -2,16 +2,14 @@ import { __ } from "@wordpress/i18n";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarGrid } from "./CalendarGrid";
 
-const CalendarView = ({ scheduleId }) => {
+const CalendarView = () => {
   return (
     <div className="calendar-view">
       <div className="calendar-header">
-        <CalendarHeader
-          title={__("Scehdule Calendar", "appointment-booking")}
-        />
+        <CalendarHeader />
       </div>
 
-      <CalendarGrid scheduleId={scheduleId} />
+      <CalendarGrid />
     </div>
   );
 };

@@ -7,3 +7,4 @@ export { useActiveSchedule } from "./useActiveSchedule";
 
 export { useAvailableSlots } from "./useAvailableSlots";
 export { useBookingForm } from "./useBookingForm";
+export { ScheduleProvider, useSchedule } from "./ScheduleContext";

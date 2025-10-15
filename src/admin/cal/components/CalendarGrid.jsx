@@ -2,18 +2,18 @@ import { TimeColumn } from "./TimeColumn";
 import { DayColumn } from "./DayColumn";
 import { __ } from "@wordpress/i18n";
 import {
-  useActiveSchedule,
+  useSchedule,
   useAppointments,
   useAppointmentManagement,
 } from "../../../hooks";
 
-const CalendarGrid = ({ scheduleId }) => {
+const CalendarGrid = () => {
   const {
     schedule,
     loading: loadingSchedule,
     error: scheduleError,
     refetch: refetchSchedule,
-  } = useActiveSchedule(scheduleId);
+  } = useSchedule();
 
   const scheduleIdFromData = schedule?.id;
   const {
