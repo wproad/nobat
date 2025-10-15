@@ -2,7 +2,7 @@ import { __ } from "@wordpress/i18n";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarGrid } from "./CalendarGrid";
 
-const CalendarView = () => {
+const CalendarView = ({ scheduleId }) => {
   return (
     <div className="calendar-view">
       <div className="calendar-header">
@@ -11,7 +11,7 @@ const CalendarView = () => {
         />
       </div>
 
-      <CalendarGrid />
+      <CalendarGrid scheduleId={scheduleId} />
     </div>
   );
 };

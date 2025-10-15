@@ -517,6 +517,11 @@ function schedule_list_page_callback() {
 					esc_js( __( 'Are you sure you want to delete this schedule?', 'appointment-booking' ) ),
 					__( 'Delete', 'appointment-booking' )
 				),
+				'show' => sprintf(
+					'<a href="%s">%s</a>',
+					esc_url( admin_url( 'admin.php?page=appointment-booking-cal&schedule_id=' . intval( $item['id'] ) ) ),
+					__( 'Show Detail', 'appointment-booking' )
+				),
 			];
 
 			return sprintf(

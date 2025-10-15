@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "@wordpress/element";
  * Custom hook for fetching and managing active schedule data
  * @returns {Object} - { schedule, loading, error, refetch }
  */
-export const useActiveSchedule = () => {
+export const useActiveSchedule = (scheduleId) => {
   const [schedule, setSchedule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,9 +14,23 @@ export const useActiveSchedule = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(
-        `/wp-json/appointment-booking/v1/schedule/active`
-      );
+      const path = scheduleId
+        ? `/wp-json/appointment-booking/v1/schedule/${encodeURIComponent(
+            scheduleId
+          )}`
+        : `/wp-json/appointment-booking/v1/schedule/active`;
+
+      const response = await fetch(path, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // Provided by wp_localize_script in admin enqueue
+          "X-WP-Nonce":
+            typeof wpApiSettings !== "undefined"
+              ? wpApiSettings.nonce
+              : undefined,
+        },
+      });
 
       if (!response.ok) {
         if (response.status === 404) {
@@ -38,11 +52,11 @@ export const useActiveSchedule = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [scheduleId]);
 
   useEffect(() => {
     fetchActiveSchedule();
-  }, []);
+  }, [fetchActiveSchedule]);
 
   return {
     schedule,

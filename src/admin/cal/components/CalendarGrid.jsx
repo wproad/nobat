@@ -7,21 +7,21 @@ import {
   useAppointmentManagement,
 } from "../../../hooks";
 
-const CalendarGrid = () => {
+const CalendarGrid = ({ scheduleId }) => {
   const {
     schedule,
     loading: loadingSchedule,
     error: scheduleError,
     refetch: refetchSchedule,
-  } = useActiveSchedule();
+  } = useActiveSchedule(scheduleId);
 
-  const scheduleId = schedule?.id;
+  const scheduleIdFromData = schedule?.id;
   const {
     appointments,
     loading: loadingAppointments,
     error: appointmentsError,
     refetch: refetchAppointments,
-  } = useAppointments(scheduleId);
+  } = useAppointments(scheduleIdFromData);
 
   const { handleStatusUpdate, handleDelete } = useAppointmentManagement();
   const updateSlotStatus = async (date, timeSlot, status) => {
@@ -35,7 +35,7 @@ const CalendarGrid = () => {
             "X-WP-Nonce": wpApiSettings.nonce,
           },
           body: JSON.stringify({
-            schedule_id: scheduleId,
+            schedule_id: scheduleIdFromData,
             date,
             time_slot: timeSlot,
             status,
