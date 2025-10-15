@@ -20,15 +20,17 @@ export const useActiveSchedule = (scheduleId) => {
           )}`
         : `/wp-json/appointment-booking/v1/schedule/active`;
 
+      console.log("path", path);
+
       const response = await fetch(path, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           // Provided by wp_localize_script in admin enqueue
-          "X-WP-Nonce":
-            typeof wpApiSettings !== "undefined"
-              ? wpApiSettings.nonce
-              : undefined,
+          // "X-WP-Nonce":
+          //   typeof wpApiSettings !== "undefined"
+          //     ? wpApiSettings.nonce
+          //     : undefined,
         },
       });
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
 import DayButton from "./DayButton";
 import TimeSlotButton from "./TimeSlotButton";
 
@@ -31,7 +32,11 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
 
   // Return early if no schedule or no timeslots
   if (!schedule || !schedule.timeslots || schedule.timeslots.length === 0) {
-    return <div className="no-slots">No available dates</div>;
+    return (
+      <div className="no-slots">
+        {__("No available dates", "appointment-booking")}
+      </div>
+    );
   }
 
   const isToday = (dateString) => {
@@ -82,7 +87,9 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
 
       {selectedDayData && visibleSlots.length > 0 && (
         <div className="time-slots-container">
-          <h4 className="time-slots-title">Available Time Slots</h4>
+          <h4 className="time-slots-title">
+            {__("Available Time Slots", "appointment-booking")}
+          </h4>
           <div className="time-slots-grid">
             {visibleSlots.map((slot, index) => {
               const isSlotSelected =

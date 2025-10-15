@@ -18,7 +18,12 @@ const AppointmentTicket = ({ appointmentData }) => {
                 "appointment-booking"
               )}
             </h3>
-            <p>You'll get an sms after admin's confirmation</p>
+            <p>
+              {__(
+                "You'll get an sms after admin's confirmation",
+                "appointment-booking"
+              )}
+            </p>
           </div>
         </CardHeader>
         <CardBody className="ticket-body">

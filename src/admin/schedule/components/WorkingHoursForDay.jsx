@@ -1,4 +1,9 @@
-import { PanelBody, PanelRow, Button, TextControl } from "@wordpress/components";
+import {
+  PanelBody,
+  PanelRow,
+  Button,
+  TextControl,
+} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 export function WorkingHoursForDay({ day, hours, onAdd, onRemove, onUpdate }) {
@@ -12,15 +17,15 @@ export function WorkingHoursForDay({ day, hours, onAdd, onRemove, onUpdate }) {
           <TextControl
             value={slot}
             onChange={(val) => onUpdate(day, index, val)}
-            placeholder="e.g. 9:00-12:00"
+            placeholder={__("e.g. 9:00-12:00", "appointment-booking")}
           />
           <Button isDestructive onClick={() => onRemove(day, index)}>
-            {__("Remove")}
+            {__("Remove", "appointment-booking")}
           </Button>
         </PanelRow>
       ))}
       <Button isPrimary onClick={() => onAdd(day)}>
-        {__("Add Working Hour")}
+        {__("Add Working Hour", "appointment-booking")}
       </Button>
     </PanelBody>
   );

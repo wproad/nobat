@@ -1,4 +1,5 @@
 import { useMemo } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
 
 const TimeColumn = ({ schedule }) => {
   const meetingDuration = Number(schedule?.meeting_duration || 30);
@@ -67,7 +68,7 @@ const TimeColumn = ({ schedule }) => {
 
   return (
     <div className="time-column">
-      <div className="time-header">Time</div>
+      <div className="time-header">{__("Time", "appointment-booking")}</div>
       {entries.map((entry, index) => (
         <div key={`slot-${index}`} className="time-slot">
           {entry.label}

@@ -14,7 +14,7 @@ export function useSchedule() {
       .catch(() =>
         setNotice({
           status: "error",
-          message: __("Error fetching users."),
+          message: __("Error fetching users.", "appointment-booking"),
         })
       );
   }, []);
@@ -29,13 +29,13 @@ export function useSchedule() {
         // console.log("Schedule save response:", response);
         setNotice({
           status: "success",
-          message: __("Settings saved successfully!"),
+          message: __("Settings saved successfully!", "appointment-booking"),
         });
         return response;
       })
       .catch((error) => {
         console.error("Schedule save error:", error);
-        let errorMessage = __("Error saving settings.");
+        let errorMessage = __("Error saving settings.", "appointment-booking");
 
         if (error && error.message) {
           errorMessage = error.message;

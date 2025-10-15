@@ -11,6 +11,8 @@
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: appointment-booking
+ * Domain Path: /languages
+
  *
  * @package appointment-booking
  */
@@ -39,3 +41,15 @@ require_once APPOINTMENT_BOOKING_PLUGIN_DIR . 'includes/helpers.php';
 
 // Register activation hook
 register_activation_hook( __FILE__, 'appointment_booking_activate' );
+
+function appointment_booking_load_textdomain() {
+    load_plugin_textdomain(
+        'appointment-booking',
+        false,
+        dirname( plugin_basename( __FILE__ ) ) . '/languages'
+    );
+
+    error_log( 'Locale: ' . determine_locale() );
+    error_log( 'Translation loaded: ' . ( is_textdomain_loaded( 'appointment-booking' ) ? 'yes' : 'no' ) );
+}
+add_action( 'plugins_loaded', 'appointment_booking_load_textdomain' );

@@ -38,6 +38,11 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 
 	$asset = include $asset_file;
 
+	// Ensure wp-i18n is available for translatable JS strings
+	if ( empty( $asset['dependencies'] ) || ! in_array( 'wp-i18n', $asset['dependencies'], true ) ) {
+		$asset['dependencies'][] = 'wp-i18n';
+	}
+
 	wp_enqueue_script(
 		"appointment-booking-{$script_name}-script",
 		APPOINTMENT_BOOKING_PLUGIN_URL . "build/{$script_name}.js",
@@ -46,6 +51,15 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
 		array(
 			'in_footer' => true,
 		)
+	);
+
+	// Load JS translations for the admin handle
+	// wp_set_script_translations( "appointment-booking-{$script_name}-script", 'appointment-booking', APPOINTMENT_BOOKING_PLUGIN_DIR . 'languages' );
+
+	wp_set_script_translations(
+		"appointment-booking-{$script_name}-script",
+		'appointment-booking',
+		plugin_dir_path( APPOINTMENT_BOOKING_PLUGIN_FILE ) . 'languages'
 	);
 
 	// Enqueue WordPress REST API script for nonce
@@ -83,6 +97,11 @@ function appointment_booking_frontend_enqueue_scripts() {
 
 	$asset = include $asset_file;
 
+	// Ensure wp-i18n is available for translatable JS strings
+	if ( empty( $asset['dependencies'] ) || ! in_array( 'wp-i18n', $asset['dependencies'], true ) ) {
+		$asset['dependencies'][] = 'wp-i18n';
+	}
+
 	wp_enqueue_script(
 		'appointment-booking-frontend-script',
 		APPOINTMENT_BOOKING_PLUGIN_URL . 'build/booking.js',
@@ -92,6 +111,9 @@ function appointment_booking_frontend_enqueue_scripts() {
 			'in_footer' => true,
 		)
 	);
+
+	// Load JS translations for the frontend handle
+	wp_set_script_translations( 'appointment-booking-frontend-script', 'appointment-booking', APPOINTMENT_BOOKING_PLUGIN_DIR . 'languages' );
 
 	wp_enqueue_style(
 		'appointment-booking-frontend-style',

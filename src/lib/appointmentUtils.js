@@ -64,9 +64,11 @@ export const generateWhatsAppLink = (phone, message) => {
 };
 
 export const getDefaultWhatsAppMessage = (appointment) => {
-  return `Hello ${
-    appointment.client_name
-  }, this is regarding your appointment on ${formatDate(
-    appointment.appointment_date
-  )} at ${appointment.time_slot}.`;
+  return __(
+    "Hello {name}, this is regarding your appointment on {date} at {time}.",
+    "appointment-booking"
+  )
+    .replace("{name}", appointment.client_name)
+    .replace("{date}", formatDate(appointment.appointment_date))
+    .replace("{time}", appointment.time_slot);
 };

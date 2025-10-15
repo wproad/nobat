@@ -297,8 +297,8 @@ function appointment_list_page_callback() {
 
 	}
 
-	echo '<div class="wrap"><h1 class="wp-heading-inline">All Appointments</h1>';
-	echo ' <a href="' . admin_url( 'admin.php?page=appointment_add_new' ) . '" class="page-title-action">Add New</a></h1>';
+	echo '<div class="wrap"><h1 class="wp-heading-inline">' . esc_html__( 'All Appointments', 'appointment-booking' ) . '</h1>';
+	echo ' <a href="' . admin_url( 'admin.php?page=appointment_add_new' ) . '" class="page-title-action">' . esc_html__( 'Add New', 'appointment-booking' ) . '</a></h1>';
 
 	if ( isset( $_GET['deleted'] ) ) {
 		printf(
@@ -627,8 +627,8 @@ function schedule_list_page_callback() {
 
 	}
 
-	echo '<div class="wrap"><h1 class="wp-heading-inline">All Schedules</h1>';
-	echo ' <a href="' . admin_url( 'admin.php?page=appointment-booking-scheduling' ) . '" class="page-title-action">Add New</a></h1>';
+	echo '<div class="wrap"><h1 class="wp-heading-inline">' . esc_html__( 'All Schedules', 'appointment-booking' ) . '</h1>';
+	echo ' <a href="' . admin_url( 'admin.php?page=appointment-booking-scheduling' ) . '" class="page-title-action">' . esc_html__( 'Add New', 'appointment-booking' ) . '</a></h1>';
 
 	if ( isset( $_GET['deleted'] ) ) {
 		printf(

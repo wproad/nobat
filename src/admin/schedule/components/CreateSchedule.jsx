@@ -54,48 +54,51 @@ function CreateSchedule() {
       )}
 
       <TextControl
-        label={__("Schedule Name")}
+        label={__("Schedule Name", "appointment-booking")}
         value={name}
         onChange={setName}
-        placeholder={__("Enter a name for this schedule")}
+        placeholder={__(
+          "Enter a name for this schedule",
+          "appointment-booking"
+        )}
       />
 
       <ToggleControl
-        label={__("Is Active?")}
+        label={__("Is Active?", "appointment-booking")}
         checked={isActive}
         onChange={setIsActive}
       />
 
       <TextControl
-        label={__("Start Day")}
+        label={__("Start Day", "appointment-booking")}
         type="date"
         value={startDay}
         onChange={setStartDay}
       />
 
       <TextControl
-        label={__("End Day")}
+        label={__("End Day", "appointment-booking")}
         type="date"
         value={endDay}
         onChange={setEndDay}
       />
 
       <TextControl
-        label={__("Meeting Duration (mins)")}
+        label={__("Meeting Duration (mins)", "appointment-booking")}
         type="number"
         value={meetingDuration}
         onChange={(val) => setMeetingDuration(parseInt(val, 10))}
       />
 
       <TextControl
-        label={__("Buffer Between Meetings (mins)")}
+        label={__("Buffer Between Meetings (mins)", "appointment-booking")}
         type="number"
         value={buffer}
         onChange={(val) => setBuffer(parseInt(val, 10))}
       />
 
       <SelectControl
-        label={__("Select Admin")}
+        label={__("Select Admin", "appointment-booking")}
         value={selectedAdmin}
         options={adminUsers}
         onChange={setSelectedAdmin}
@@ -108,7 +111,7 @@ function CreateSchedule() {
       />
 
       <Button isPrimary onClick={handleSubmit} style={{ marginTop: "20px" }}>
-        {__("Save Settings")}
+        {__("Save Settings", "appointment-booking")}
       </Button>
     </div>
   );

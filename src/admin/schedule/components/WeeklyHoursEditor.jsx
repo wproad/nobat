@@ -27,7 +27,7 @@ export function WeeklyHoursEditor({ weekdays, weeklyHours, setWeeklyHours }) {
 
   return (
     <>
-      <h3>{__("Weekly Hours")}</h3>
+      <h3>{__("Weekly Hours", "appointment-booking")}</h3>
       {weekdays.map((day) => (
         <WorkingHoursForDay
           key={day}

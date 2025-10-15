@@ -114,14 +114,14 @@ function appointment_booking_minutes_to_time( $minutes ) {
  */
 function appointment_booking_shortcode( $atts ) {
 	$atts = shortcode_atts( array(
-		'title' => 'Book an Appointment',
+		'title' => __( 'Book an Appointment', 'appointment-booking' ),
 	), $atts );
 	
 	ob_start();
 	?>
 	<div id="appointment-booking-form">
 		<h3><?php echo esc_html( $atts['title'] ); ?></h3>
-		<div class="appointment-loading">Loading booking form...</div>
+		<div class="appointment-loading"><?php esc_html_e( 'Loading booking form...', 'appointment-booking' ); ?></div>
 	</div>
 	<?php
 	return ob_get_clean();
