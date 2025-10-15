@@ -112,7 +112,7 @@
         padding: 0; // ensure equal total height
         cursor: pointer;
         &.excluded {
-          // background: #f5f5f5; // slight gray for unavailable (excluded) time slots
+          background: #f5f5f5; // slight gray for unavailable (excluded) time slots
         }
         &.past-full {
           opacity: 0.55;

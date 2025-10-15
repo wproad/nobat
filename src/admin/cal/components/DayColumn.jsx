@@ -3,12 +3,14 @@ import { AppointmentSlot } from "./AppointmentSlot";
 import { Slot } from "./Slot";
 
 const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
+  console.log(day, day.slots)
   return (
     <div className="day-column">
       <div className="day-header">
-        <div className="day-name">{day.formatted_date}</div>
+        <div className="day-name">{day.date}</div>
       </div>
 
+    
       <div className="time-slots">
         {(day.slots || []).map((slot, index) => {
           const isUnavailable = slot.status === "unavailable";
