@@ -17,6 +17,7 @@ const TimeSlotButton = ({ slot, isSelected, onClick }) => {
       className={`time-slot-button ${status} ${isSelected ? "selected" : ""}`}
       onClick={() => onClick(slot)}
       disabled={status === "unavailable"}
+      dir="ltr"
     >
       {timeText}
     </button>

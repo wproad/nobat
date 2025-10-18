@@ -3,9 +3,11 @@ import { AppointmentSlot } from "./AppointmentSlot";
 import { Slot } from "./Slot";
 
 const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
-  console.log(day, day.slots)
+  const today = new Date().toISOString().split("T")[0];
+  const isToday = day.date === today;
+
   return (
-    <div className="day-column">
+    <div className={`day-column ${isToday ? "today" : ""}`}>
       <div className="day-header">
         <div className="day-name">{day.date}</div>
       </div>
