@@ -4,6 +4,10 @@
   *::after {
     box-sizing: border-box;
   }
+  & {
+    overflow-x: auto;
+  }
+
   .calendar-header {
     display: flex;
     justify-content: space-between;
@@ -39,12 +43,13 @@
 
   .calendar-grid {
     display: grid;
-    grid-template-columns: 100px repeat(7, 1fr);
+    grid-template-columns: 100px repeat(7, 100px);
     gap: 1px;
     background: #ddd;
     border: 1px solid #ddd;
     border-radius: 4px;
     overflow: hidden;
+    width: fit-content;
   }
 
   .time-column {
@@ -77,6 +82,7 @@
 
   .day-column {
     background: white;
+    // width: 100px;
     &.today {
       .day-header {
         background: #007cba;
@@ -109,7 +115,7 @@
         height: 45px; // must match .time-column .time-slot
         border-bottom: 1px solid #eee;
         position: relative;
-        padding: 0; // ensure equal total height
+        padding: 2px; // ensure equal total height
         cursor: pointer;
         &.excluded {
           background: #f5f5f5; // slight gray for unavailable (excluded) time slots
@@ -193,9 +199,9 @@
 }
 
 @media (max-width: 1200px) {
-  .calendar-view .calendar-grid {
-    grid-template-columns: 80px repeat(7, 1fr);
-  }
+  // .calendar-view .calendar-grid {
+  // grid-template-columns: 80px repeat(7, 100px);
+  // }
 }
 
 @media (max-width: 768px) {
@@ -204,8 +210,8 @@
     gap: 15px;
     align-items: stretch;
   }
-  .calendar-view .calendar-grid {
-    grid-template-columns: 60px repeat(7, 1fr);
-    font-size: 10px;
-  }
+  // .calendar-view .calendar-grid {
+  //   grid-template-columns: 60px repeat(7, 60px);
+  //   font-size: 10px;
+  // }
 }

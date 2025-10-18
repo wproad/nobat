@@ -208,7 +208,7 @@ const CalendarGrid = () => {
     <div
       className="calendar-grid"
       style={{
-        gridTemplateColumns: `100px repeat(${normalizedDays.length}, 1fr)`,
+        gridTemplateColumns: `100px repeat(${normalizedDays.length}, 120px)`,
       }}
     >
       <TimeColumn schedule={schedule} />
