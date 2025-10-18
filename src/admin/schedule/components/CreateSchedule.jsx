@@ -20,8 +20,10 @@ function CreateSchedule() {
   const [isActive, setIsActive] = useState(true);
   const [startDay, setStartDay] = useState(today);
   const [endDay, setEndDay] = useState("");
-  const [meetingDuration, setMeetingDuration] = useState(60);
-  const [buffer, setBuffer] = useState(0);
+  const [meetingDuration, setMeetingDuration] = useState(30);
+  // const [buffer, setBuffer] = useState(0);
+  const buffer = 0;
+
   const [selectedAdmin, setSelectedAdmin] = useState("");
   const [weeklyHours, setWeeklyHours] = useState(defaultWeeklyHours);
 
@@ -90,12 +92,12 @@ function CreateSchedule() {
         onChange={(val) => setMeetingDuration(parseInt(val, 10))}
       />
 
-      <TextControl
+      {/* <TextControl
         label={__("Buffer Between Meetings (mins)", "appointment-booking")}
         type="number"
         value={buffer}
         onChange={(val) => setBuffer(parseInt(val, 10))}
-      />
+      /> */}
 
       <SelectControl
         label={__("Select Admin", "appointment-booking")}
