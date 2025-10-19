@@ -1,4 +1,4 @@
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import {
   TextControl,
   ToggleControl,
@@ -18,7 +18,7 @@ function CreateSchedule() {
 
   const [name, setName] = useState("");
   const [isActive, setIsActive] = useState(true);
-  const [startDay, setStartDay] = useState(today);
+  const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
   const [meetingDuration, setMeetingDuration] = useState(30);
   // const [buffer, setBuffer] = useState(0);
@@ -42,6 +42,61 @@ function CreateSchedule() {
     };
     saveSchedule(payload);
   };
+
+  useEffect(() => {
+    // Ensure the script is loaded and global object is available
+    if (window.jalaliDatepicker) {
+      // Initialize all date inputs (you can also target specific IDs)
+
+      jalaliDatepicker.startWatch({
+        minDate: "today", // Optional: block past dates
+        separatorChars: {
+          date: "/",
+        },
+      });
+      // Add native listener for start day
+      const startInput = document.getElementById("start-day");
+      const endInput = document.getElementById("end-day");
+
+      const handleStart = (e) => {
+        handleStartDayChange(e.target.value);
+      };
+
+      const handleEnd = (e) => {
+        handleEndDayChange(e.target.value);
+      };
+
+      startInput?.addEventListener("change", handleStart);
+      endInput?.addEventListener("change", handleEnd);
+
+      // Cleanup
+      return () => {
+        startInput?.removeEventListener("change", handleStart);
+        endInput?.removeEventListener("change", handleEnd);
+      };
+    }
+  }, []);
+
+  function handleStartDayChange(jalaliDateString) {
+    console.log("handleStartDayChange: ");
+    console.log(jalaliDateString);
+    const date = new Date(jalaliDateString); // JalaliDatePicker gives ISO-like date
+    const unix = Math.floor(date.getTime() / 1000); // seconds
+    console.log(unix);
+    // setStartDayUnix(unix);
+    // setStartDayJalali(jalaliDateString);
+  }
+
+  function handleEndDayChange(jalaliDateString) {
+    console.log("handleEndDayChange: ");
+    console.log(jalaliDateString);
+    const date = new Date(jalaliDateString);
+    const unix = Math.floor(date.getTime() / 1000);
+    console.log(unix);
+
+    // setEndDayUnix(unix);
+    // setEndDayJalali(jalaliDateString);
+  }
 
   return (
     <div style={{ maxWidth: "800px" }}>
@@ -70,20 +125,33 @@ function CreateSchedule() {
         checked={isActive}
         onChange={setIsActive}
       />
+      <div className="components-base-control">
+        <label htmlFor="start-day" className="components-base-control__label">
+          {__("Start Day", "appointment-booking")}
+        </label>
+        <input
+          id="start-day"
+          className="components-base-control__input"
+          type="text"
+          data-jdp
+          value={startDay}
+          onChange={(e) => handleStartDayChange(e.target.value)}
+        />
+      </div>
 
-      <TextControl
-        label={__("Start Day", "appointment-booking")}
-        type="date"
-        value={startDay}
-        onChange={setStartDay}
-      />
-
-      <TextControl
-        label={__("End Day", "appointment-booking")}
-        type="date"
-        value={endDay}
-        onChange={setEndDay}
-      />
+      <div className="components-base-control">
+        <label htmlFor="end-day" className="components-base-control__label">
+          {__("End Day", "appointment-booking")}
+        </label>
+        <input
+          id="end-day"
+          className="components-base-control__input"
+          type="text"
+          data-jdp
+          value={endDay}
+          onChange={(e) => handleEndDayChange(e.target.value)}
+        />
+      </div>
 
       <TextControl
         label={__("Meeting Duration (mins)", "appointment-booking")}
@@ -91,6 +159,20 @@ function CreateSchedule() {
         value={meetingDuration}
         onChange={(val) => setMeetingDuration(parseInt(val, 10))}
       />
+
+      {/* <TextControl
+        label={__("Start Day", "appointment-booking")}
+        type="text"
+        value={startDay}
+        onChange={setStartDay}
+      />
+
+      <TextControl
+        label={__("End Day", "appointment-booking")}
+        type="text"
+        value={endDay}
+        onChange={setEndDay}
+      /> */}
 
       {/* <TextControl
         label={__("Buffer Between Meetings (mins)", "appointment-booking")}
