@@ -11,8 +11,8 @@ function appointment_booking_create_schedule( $request ) {
 
     $name             = sanitize_text_field( $data['name'] );
     $is_active        = ! empty( $data['isActive'] ) ? 1 : 0; // Use 1 or 0 for database consistency
-    $start_day        = sanitize_text_field( $data['startDay'] );
-    $end_day          = sanitize_text_field( $data['endDay'] );
+    $start_day_jalali        = sanitize_text_field( $data['startDay'] );
+    $end_day_jalali          = sanitize_text_field( $data['endDay'] );
     $meeting_duration = intval( $data['meetingDuration'] );
     $buffer           = intval( $data['buffer'] );
     $admin_id         = intval( $data['selectedAdmin'] );
@@ -27,7 +27,7 @@ function appointment_booking_create_schedule( $request ) {
     $table_name = $wpdb->prefix . 'schedules';
 
     // 2️⃣ Validate required fields
-    if ( empty( $name ) || empty( $start_day ) || empty( $end_day ) || empty( $weekly_hours_raw ) ) {
+    if ( empty( $name ) || empty( $start_day_jalali ) || empty( $end_day_jalali ) || empty( $weekly_hours_raw ) ) {
         return new WP_Error(
             'invalid_data',
             __( 'Missing required schedule data (name, start day, end day, or weekly hours)', 'appointment-booking' ),
@@ -82,22 +82,42 @@ function appointment_booking_create_schedule( $request ) {
     // 4️⃣ Convert computed slots to JSON for database storage
     $weekly_hours = wp_json_encode( $weekly_slots );
 
-	error_log( $weekly_hours );
+    // Convert jalalid date to georgian date
+    $start_day_georgian = convertJalaliToGregorian( $start_day_jalali );
+    $end_day_georgian = convertJalaliToGregorian( $end_day_jalali );
 
     // 4.5️⃣ Generate timeslots for all days in the schedule period
     $timeslots = [];
-    $current_date = new DateTime($start_day);
-    $end_date_obj = new DateTime($end_day);
+    $current_date = new DateTime($start_day_georgian);
+    $end_date_obj = new DateTime($end_day_georgian);
     
     while ($current_date <= $end_date_obj) {
-        // Get 3-letter day abbreviation (lowercase) to match weekly_slots keys
-        $day_of_week = strtolower($current_date->format('D')); // mon, tue, wed, etc.
-        $formatted_date = $current_date->format('l, F j'); // e.g., "Monday, October 13"
+        // Get the Georgian date
+        $gregorian_date = $current_date->format('Y-m-d');
         
+        // Get day of week (abbreviated lowercase) to match weekly_slots keys (sat, sun, mon, tue, wed, thu, fri)
+        $day_of_week = strtolower($current_date->format('D')); // Get abbreviated day name (Mon, Tue, etc.) and lowercase it
+        
+        // Convert Gregorian to Jalali date and get details using wp-parsidate
+        $jalali_date = '';
+        $jalali_weekday = '';
+        $jalali_day_number = '';
+        $jalali_month_name = '';
+        
+        if (function_exists('parsidate')) {
+            $jalali_date = parsidate('Y/m/d', $gregorian_date);
+            $jalali_weekday = parsidate('l', $gregorian_date);
+            $jalali_day_number = parsidate('j', $gregorian_date);
+            $jalali_month_name = parsidate('F', $gregorian_date);
+        }
+
         $day_entry = [
-            'date' => $current_date->format('Y-m-d'),
-            'formatted_date' => $formatted_date,
-            'slots' => []
+            'date'          => $gregorian_date,
+            'date_jalali'   => $jalali_date,
+            'weekday'       => $jalali_weekday,
+            'day_number'    => $jalali_day_number,
+            'month_name'    => $jalali_month_name,
+            'slots'         => []
         ];
         
         // If this day has slots in weekly_slots, add them
@@ -109,12 +129,10 @@ function appointment_booking_create_schedule( $request ) {
         $current_date->modify('+1 day');
     }
     
-    $timeslots_json = wp_json_encode($timeslots);
+    $timeslots_json = wp_json_encode($timeslots, JSON_UNESCAPED_UNICODE);
     error_log('Generated timeslots: ' . $timeslots_json);
 
-    // Convert jalalid date to georgian date
-    $start_day_georgian = convertJalaliToGregorian( $start_day );
-    $end_day_georgian = convertJalaliToGregorian( $end_day );
+
 
     // 5️⃣ Insert schedule into database (no update logic)
     // Each new schedule is a separate entry
@@ -125,9 +143,9 @@ function appointment_booking_create_schedule( $request ) {
             'admin_id'         => $admin_id,
             'is_active'        => $is_active,
             'start_day'        => $start_day_georgian,
-            'start_day_jalali' => $start_day,
+            'start_day_jalali' => $start_day_jalali,
             'end_day'          => $end_day_georgian,
-            'end_day_jalali'   => $end_day,
+            'end_day_jalali'   => $end_day_jalali,
             'meeting_duration' => $meeting_duration,
             'buffer'           => $buffer,
             'weekly_hours'     => $weekly_hours,
@@ -332,148 +350,160 @@ function appointment_booking_get_schedule_by_id( $request ) {
 /**
  * Update schedule
  */
-function appointment_booking_update_schedule( $request ) {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'schedules';
-    $schedule_id = intval( $request->get_param( 'id' ) );
+// function appointment_booking_update_schedule( $request ) {
+//     global $wpdb;
+//     $table_name = $wpdb->prefix . 'schedules';
+//     $schedule_id = intval( $request->get_param( 'id' ) );
 
-    // Check if schedule exists
-    $existing = $wpdb->get_row( $wpdb->prepare(
-        "SELECT * FROM $table_name WHERE id = %d",
-        $schedule_id
-    ), ARRAY_A );
+//     // Check if schedule exists
+//     $existing = $wpdb->get_row( $wpdb->prepare(
+//         "SELECT * FROM $table_name WHERE id = %d",
+//         $schedule_id
+//     ), ARRAY_A );
 
-    if ( ! $existing ) {
-        return new WP_Error( 'schedule_not_found', __( 'Schedule not found', 'appointment-booking' ), [ 'status' => 404 ] );
-    }
+//     if ( ! $existing ) {
+//         return new WP_Error( 'schedule_not_found', __( 'Schedule not found', 'appointment-booking' ), [ 'status' => 404 ] );
+//     }
 
-    // Get and sanitize data from request
-    $data = $request->get_json_params();
+//     // Get and sanitize data from request
+//     $data = $request->get_json_params();
     
-    error_log('Schedule update request data: ' . print_r($data, true));
+//     error_log('Schedule update request data: ' . print_r($data, true));
 
-    $name             = sanitize_text_field( $data['name'] );
-    $is_active        = ! empty( $data['isActive'] ) ? 1 : 0;
-    $start_day        = sanitize_text_field( $data['startDay'] );
-    $end_day          = sanitize_text_field( $data['endDay'] );
-    $meeting_duration = intval( $data['meetingDuration'] );
-    $buffer           = intval( $data['buffer'] );
-    $admin_id         = intval( $data['selectedAdmin'] );
-    $weekly_hours_raw = isset( $data['weeklyHours'] ) ? $data['weeklyHours'] : [];
+//     $name             = sanitize_text_field( $data['name'] );
+//     $is_active        = ! empty( $data['isActive'] ) ? 1 : 0;
+//     $start_day_jalali = sanitize_text_field( $data['startDay'] );
+//     $end_day_jalali   = sanitize_text_field( $data['endDay'] );
+//     $meeting_duration = intval( $data['meetingDuration'] );
+//     $buffer           = intval( $data['buffer'] );
+//     $admin_id         = intval( $data['selectedAdmin'] );
+//     $weekly_hours_raw = isset( $data['weeklyHours'] ) ? $data['weeklyHours'] : [];
 
-    // Validate required fields
-    if ( empty( $name ) || empty( $start_day ) || empty( $end_day ) || empty( $weekly_hours_raw ) ) {
-        return new WP_Error(
-            'invalid_data',
-            __( 'Missing required schedule data (name, start day, end day, or weekly hours)', 'appointment-booking' ),
-            [ 'status' => 400 ]
-        );
-    }
+//     // Validate required fields
+//     if ( empty( $name ) || empty( $start_day_jalali ) || empty( $end_day_jalali ) || empty( $weekly_hours_raw ) ) {
+//         return new WP_Error(
+//             'invalid_data',
+//             __( 'Missing required schedule data (name, start day, end day, or weekly hours)', 'appointment-booking' ),
+//             [ 'status' => 400 ]
+//         );
+//     }
 
-    // Generate weekly slots (same logic as create)
-    $weekly_slots = [];
+//     // Generate weekly slots (same logic as create)
+//     $weekly_slots = [];
 
-    foreach ( $weekly_hours_raw as $day => $periods ) {
-        if ( ! is_array( $periods ) || empty( $periods ) ) {
-            continue;
-        }
+//     foreach ( $weekly_hours_raw as $day => $periods ) {
+//         if ( ! is_array( $periods ) || empty( $periods ) ) {
+//             continue;
+//         }
 
-        $day_slots = [];
+//         $day_slots = [];
 
-        foreach ( $periods as $period ) {
-            if ( is_string( $period ) ) {
-                $parts = explode( '-', $period );
-                $period = [
-                    'start' => trim( $parts[0] ?? '' ),
-                    'end'   => trim( $parts[1] ?? '' ),
-                ];
-            }
+//         foreach ( $periods as $period ) {
+//             if ( is_string( $period ) ) {
+//                 $parts = explode( '-', $period );
+//                 $period = [
+//                     'start' => trim( $parts[0] ?? '' ),
+//                     'end'   => trim( $parts[1] ?? '' ),
+//                 ];
+//             }
 
-            if ( empty( $period['start'] ) || empty( $period['end'] ) ) {
-                continue;
-            }
+//             if ( empty( $period['start'] ) || empty( $period['end'] ) ) {
+//                 continue;
+//             }
 
-            $start_time = strtotime( $period['start'] );
-            $end_time   = strtotime( $period['end'] );
+//             $start_time = strtotime( $period['start'] );
+//             $end_time   = strtotime( $period['end'] );
 
-            while ( $start_time + ( $meeting_duration * 60 ) <= $end_time ) {
-                $slot_end = $start_time + ( $meeting_duration * 60 );
+//             while ( $start_time + ( $meeting_duration * 60 ) <= $end_time ) {
+//                 $slot_end = $start_time + ( $meeting_duration * 60 );
 
-                $day_slots[] = [
-                    'start'  => date( 'H:i', $start_time ),
-                    'end'    => date( 'H:i', $slot_end ),
-                    'status' => 'available',
-                ];
+//                 $day_slots[] = [
+//                     'start'  => date( 'H:i', $start_time ),
+//                     'end'    => date( 'H:i', $slot_end ),
+//                     'status' => 'available',
+//                 ];
 
-                $start_time = $slot_end + ( $buffer * 60 );
-            }
-        }
+//                 $start_time = $slot_end + ( $buffer * 60 );
+//             }
+//         }
 
-        $weekly_slots[ $day ] = $day_slots;
-    }
+//         $weekly_slots[ $day ] = $day_slots;
+//     }
 
-    $weekly_hours = wp_json_encode( $weekly_slots );
+//     $weekly_hours = wp_json_encode( $weekly_slots );
 
-    // Generate timeslots for all days in the schedule period
-    $timeslots = [];
-    $current_date = new DateTime($start_day);
-    $end_date_obj = new DateTime($end_day);
+//     // Convert jalali date to gregorian date
+//     $start_day_georgian = convertJalaliToGregorian( $start_day_jalali );
+//     $end_day_georgian = convertJalaliToGregorian( $end_day_jalali );
+
+//     // Generate timeslots for all days in the schedule period
+//     $timeslots = [];
+//     $current_date = new DateTime($start_day_georgian);
+//     $end_date_obj = new DateTime($end_day_georgian);
     
-    while ($current_date <= $end_date_obj) {
-        $day_of_week = strtolower($current_date->format('D'));
-        $formatted_date = $current_date->format('l, F j');
+//     while ($current_date <= $end_date_obj) {
+//         $day_of_week = strtolower($current_date->format('D'));
+//         $gregorian_date = $current_date->format('Y-m-d');
         
-        $day_entry = [
-            'date' => $current_date->format('Y-m-d'),
-            'formatted_date' => $formatted_date,
-            'slots' => []
-        ];
+//         // Get Jalali date details
+//         $jalali_details = convertGregorianToJalaliDetails($gregorian_date);
         
-        if (isset($weekly_slots[$day_of_week]) && is_array($weekly_slots[$day_of_week])) {
-            $day_entry['slots'] = $weekly_slots[$day_of_week];
-        }
+//         $day_entry = [
+//             'date'        => $gregorian_date,
+//             'date_jalali' => $jalali_details['date_jalali'],
+//             'day_of_week' => $jalali_details['day_of_week'],
+//             'day'         => $jalali_details['day'],
+//             'month'       => $jalali_details['month'],
+//             'slots'       => []
+//         ];
         
-        $timeslots[] = $day_entry;
-        $current_date->modify('+1 day');
-    }
+//         if (isset($weekly_slots[$day_of_week]) && is_array($weekly_slots[$day_of_week])) {
+//             $day_entry['slots'] = $weekly_slots[$day_of_week];
+//         }
+        
+//         $timeslots[] = $day_entry;
+//         $current_date->modify('+1 day');
+//     }
     
-    $timeslots_json = wp_json_encode($timeslots);
+//     $timeslots_json = wp_json_encode($timeslots, JSON_UNESCAPED_UNICODE);
 
-    // Update schedule in database
-    $updated = $wpdb->update(
-        $table_name,
-        [
-            'name'             => $name,
-            'admin_id'         => $admin_id,
-            'is_active'        => $is_active,
-            'start_day'        => $start_day,
-            'end_day'          => $end_day,
-            'meeting_duration' => $meeting_duration,
-            'buffer'           => $buffer,
-            'weekly_hours'     => $weekly_hours,
-            'timeslots'        => $timeslots_json,
-        ],
-        [ 'id' => $schedule_id ],
-        [ '%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s', '%s' ],
-        [ '%d' ]
-    );
+//     // Update schedule in database
+//     $updated = $wpdb->update(
+//         $table_name,
+//         [
+//             'name'             => $name,
+//             'admin_id'         => $admin_id,
+//             'is_active'        => $is_active,
+//             'start_day'        => $start_day_georgian,
+//             'start_day_jalali' => $start_day_jalali,
+//             'end_day'          => $end_day_georgian,
+//             'end_day_jalali'   => $end_day_jalali,
+//             'meeting_duration' => $meeting_duration,
+//             'buffer'           => $buffer,
+//             'weekly_hours'     => $weekly_hours,
+//             'timeslots'        => $timeslots_json,
+//         ],
+//         [ 'id' => $schedule_id ],
+//         [ '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s' ],
+//         [ '%d' ]
+//     );
 
-    if ( false === $updated ) {
-        error_log('Database update failed: ' . $wpdb->last_error);
-        return new WP_Error(
-            'db_error',
-            __( 'Failed to update schedule: ' . $wpdb->last_error, 'appointment-booking' ),
-            [ 'status' => 500 ]
-        );
-    }
+//     if ( false === $updated ) {
+//         error_log('Database update failed: ' . $wpdb->last_error);
+//         return new WP_Error(
+//             'db_error',
+//             __( 'Failed to update schedule: ' . $wpdb->last_error, 'appointment-booking' ),
+//             [ 'status' => 500 ]
+//         );
+//     }
 
-    return rest_ensure_response(
-        [
-            'success' => true,
-            'message' => __( 'Schedule updated successfully', 'appointment-booking' ),
-        ]
-    );
-}
+//     return rest_ensure_response(
+//         [
+//             'success' => true,
+//             'message' => __( 'Schedule updated successfully', 'appointment-booking' ),
+//         ]
+//     );
+// }
 
 
 /**

@@ -1,17 +1,16 @@
-const DayButton = ({ date, isSelected, isToday, onClick }) => {
+const DayButton = ({ day, isSelected, isToday, onClick }) => {
   return (
     <button
       type="button"
       className={`day-button ${isSelected ? "selected" : ""} ${
         isToday ? "today" : ""
       }`}
-      onClick={() => onClick(date)}
+      onClick={() => onClick(day.date)}
     >
-      {date}
-      {/* TODO: fix this */}
-      {/* <div className="day-name">{dayNameShort || dayName}</div>
-      <div className="day-number">{dayNumber}</div>
-      <div className="month-name">{monthName}</div> */}
+      {/* {day?.date_jalali} */}
+      <div className="day-name">{day?.weekday}</div>
+      <div className="day-number">{day?.day_number}</div>
+      <div className="month-name">{day?.month_name}</div>
     </button>
   );
 };

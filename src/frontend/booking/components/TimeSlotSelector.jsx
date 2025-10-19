@@ -74,7 +74,7 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
             return (
               <DayButton
                 key={dayData.date}
-                date={dayData.date}
+                day={dayData}
                 isSelected={isSelected}
                 isToday={isTodayDate}
                 onClick={handleDateClick}

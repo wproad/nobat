@@ -33,7 +33,6 @@ const BookingForm = () => {
     error: scheduleError,
     refetch,
   } = useActiveSchedule();
-  console.log("schedule", schedule);
 
   const handleSlotSelection = (selectionData) => {
     if (selectionData) {

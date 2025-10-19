@@ -158,4 +158,3 @@ function convertJalaliToGregorian( $jalaliDate ) {
 
        return false;
 }
-
