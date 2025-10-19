@@ -1,7 +1,5 @@
 <?php
 
-
-
 function appointment_booking_create_schedule( $request ) {
     global $wpdb;
 
@@ -114,6 +112,10 @@ function appointment_booking_create_schedule( $request ) {
     $timeslots_json = wp_json_encode($timeslots);
     error_log('Generated timeslots: ' . $timeslots_json);
 
+    // Convert jalalid date to georgian date
+    $start_day_georgian = convertJalaliToGregorian( $start_day );
+    $end_day_georgian = convertJalaliToGregorian( $end_day );
+
     // 5️⃣ Insert schedule into database (no update logic)
     // Each new schedule is a separate entry
     $inserted = $wpdb->insert(
@@ -122,14 +124,16 @@ function appointment_booking_create_schedule( $request ) {
             'name'             => $name,
             'admin_id'         => $admin_id,
             'is_active'        => $is_active,
-            'start_day'        => $start_day,
-            'end_day'          => $end_day,
+            'start_day'        => $start_day_georgian,
+            'start_day_jalali' => $start_day,
+            'end_day'          => $end_day_georgian,
+            'end_day_jalali'   => $end_day,
             'meeting_duration' => $meeting_duration,
             'buffer'           => $buffer,
             'weekly_hours'     => $weekly_hours,
             'timeslots'        => $timeslots_json,
         ],
-        [ '%s', '%d', '%d', '%s', '%s', '%d', '%d', '%s', '%s' ]
+        [ '%s', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s' ]
     );
 
     // 6️⃣ Handle potential DB errors

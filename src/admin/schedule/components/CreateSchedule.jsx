@@ -46,24 +46,27 @@ function CreateSchedule() {
   useEffect(() => {
     // Ensure the script is loaded and global object is available
     if (window.jalaliDatepicker) {
-      // Initialize all date inputs (you can also target specific IDs)
-
+      // Initialize all date inputs
       jalaliDatepicker.startWatch({
-        minDate: "today", // Optional: block past dates
-        separatorChars: {
-          date: "/",
-        },
+        minDate: "today",
+        autoReadOnlyInput: true,
+        format: "YYYY/MM/DD",
+        showCloseBtn: true,
+        showTodayBtn: true,
+        // showEmptyBtn: true,
+        persianDigits: false,
       });
+
       // Add native listener for start day
       const startInput = document.getElementById("start-day");
       const endInput = document.getElementById("end-day");
 
       const handleStart = (e) => {
-        handleStartDayChange(e.target.value);
+        setStartDay(e.target.value);
       };
 
       const handleEnd = (e) => {
-        handleEndDayChange(e.target.value);
+        setEndDay(e.target.value);
       };
 
       startInput?.addEventListener("change", handleStart);
@@ -76,27 +79,6 @@ function CreateSchedule() {
       };
     }
   }, []);
-
-  function handleStartDayChange(jalaliDateString) {
-    console.log("handleStartDayChange: ");
-    console.log(jalaliDateString);
-    const date = new Date(jalaliDateString); // JalaliDatePicker gives ISO-like date
-    const unix = Math.floor(date.getTime() / 1000); // seconds
-    console.log(unix);
-    // setStartDayUnix(unix);
-    // setStartDayJalali(jalaliDateString);
-  }
-
-  function handleEndDayChange(jalaliDateString) {
-    console.log("handleEndDayChange: ");
-    console.log(jalaliDateString);
-    const date = new Date(jalaliDateString);
-    const unix = Math.floor(date.getTime() / 1000);
-    console.log(unix);
-
-    // setEndDayUnix(unix);
-    // setEndDayJalali(jalaliDateString);
-  }
 
   return (
     <div style={{ maxWidth: "800px" }}>
@@ -125,6 +107,7 @@ function CreateSchedule() {
         checked={isActive}
         onChange={setIsActive}
       />
+
       <div className="components-base-control">
         <label htmlFor="start-day" className="components-base-control__label">
           {__("Start Day", "appointment-booking")}
@@ -135,7 +118,7 @@ function CreateSchedule() {
           type="text"
           data-jdp
           value={startDay}
-          onChange={(e) => handleStartDayChange(e.target.value)}
+          // onChange={(e) => handleStartDayChange(e.target.value)}
         />
       </div>
 
@@ -149,7 +132,7 @@ function CreateSchedule() {
           type="text"
           data-jdp
           value={endDay}
-          onChange={(e) => handleEndDayChange(e.target.value)}
+          // onChange={(e) => handleEndDayChange(e.target.value)}
         />
       </div>
 

@@ -138,3 +138,24 @@ function appointment_booking_sanitize_time_hhmm( $time ) {
 	}
 	return '09:00';
 }
+
+/**
+ * Convert Jalali date to Gregorian date using wp-parsidate plugin if available
+ * 
+ * @param string $jalaliDate Date in format YYYY/MM/DD
+ * @return string|false Gregorian date in Y-m-d format or false on error
+ */
+function convertJalaliToGregorian( $jalaliDate ) {
+ // Check if wp-parsidate plugin is installed and active
+ if ( function_exists( 'gregdate' )  ) {
+  try {
+   // Use wp-parsidate plugin functions
+    return gregdate( 'Y-m-d' , $jalaliDate);
+  } catch ( \Exception $e ) {
+   return false;
+  }
+ }
+
+       return false;
+}
+
