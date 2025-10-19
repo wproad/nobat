@@ -496,7 +496,7 @@ function schedule_list_page_callback() {
 				'start_day'        => __( 'Start Date', 'appointment-booking' ),
 				'end_day'          => __( 'End Date', 'appointment-booking' ),
 				'meeting_duration' => __( 'Duration (min)', 'appointment-booking' ),
-				'buffer'           => __( 'Buffer (min)', 'appointment-booking' ),
+				// 'buffer'           => __( 'Buffer (min)', 'appointment-booking' ),
 				'is_active'        => __( 'Status', 'appointment-booking' ),
 				'created_at'       => __( 'Created At', 'appointment-booking' ),
 			];
@@ -537,7 +537,7 @@ function schedule_list_page_callback() {
 				case 'start_day':
 				case 'end_day':
 				case 'meeting_duration':
-				case 'buffer':
+				// case 'buffer':
 				case 'created_at':
 					return esc_html( $item[ $column_name ] );
 				default:

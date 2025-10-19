@@ -27,10 +27,11 @@ export const useActiveSchedule = (scheduleId) => {
         headers: {
           "Content-Type": "application/json",
           // Provided by wp_localize_script in admin enqueue
-          // "X-WP-Nonce":
-          //   typeof wpApiSettings !== "undefined"
-          //     ? wpApiSettings.nonce
-          //     : undefined,
+          ...(typeof window !== "undefined" &&
+            window.location.pathname.includes("/wp-admin/") &&
+            typeof wpApiSettings !== "undefined" && {
+              "X-WP-Nonce": wpApiSettings.nonce,
+            }),
         },
       });
 
