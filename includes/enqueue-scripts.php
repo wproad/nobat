@@ -29,6 +29,23 @@ function appointment_booking_admin_enqueue_scripts( $admin_page ) {
     if ( strpos( $admin_page, 'appointment-booking-scheduling' ) !== false ) {
         $script_name = 'schedule';
         $style_name = 'schedule';
+
+		 // Enqueue Jalali Datepicker assets only for this page
+		 wp_enqueue_style(
+			'jalalidatepicker-style',
+			APPOINTMENT_BOOKING_PLUGIN_URL . 'dist/jalalidatepicker.min.css',
+			array(),
+			'1.0.0'
+		);
+	
+		wp_enqueue_script(
+			'jalalidatepicker-script',
+			APPOINTMENT_BOOKING_PLUGIN_URL . 'dist/jalalidatepicker.min.js',
+			array(),
+			'1.0.0',
+			true
+		);
+
     }
 	$asset_file = APPOINTMENT_BOOKING_PLUGIN_DIR . "build/{$script_name}.asset.php";
 
