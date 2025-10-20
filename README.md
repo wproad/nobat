@@ -4,12 +4,11 @@ A WordPress plugin that allows clients to book appointments through a simple for
 
 ## Features
 
-- **Frontend Booking Form**: Simple form for clients to book appointments without registration
-- **Admin Dashboard**: View, edit, and manage all appointments
-- **Time Slot Management**: Hardcoded time slots with availability checking
-- **Status Management**: Track appointment status (pending, confirmed, completed, cancelled)
+- **Schedule Management (Admin)**: Create, list, view, and delete schedules, define weekly hours, duration, and buffers; update individual slot availability per day
+- **Active Schedule (Frontend)**: Visitors can view future available time slots from the active schedule
+- **Appointment Booking API**: Public endpoint to create appointments against available slots
 - **Responsive Design**: Works on desktop and mobile devices
-- **Admin Calendar View**: Weekly calendar with day columns and visual blocks per appointment
+- **Admin Calendar View**: Weekly calendar for schedules with day columns and visual time blocks
 
 ## Installation
 
@@ -52,98 +51,42 @@ npm run start
 npm run build
 ```
 
-### File Structure
-
-```
-appointment-booking/
-├── index.php                 # Main plugin file
-├── package.json              # Node dependencies
-├── webpack.config.js         # Webpack configuration
-├── src/
-│   ├── admin/                # Admin list page app
-│   │   ├── index.js          # mounts into #appointment-booking-admin
-│   │   ├── admin.scss
-│   │   └── components/
-│   │       ├── index.js
-│   │       ├── admin-appointments-list.jsx
-│   │       └── appointment-row.jsx
-│   │   └── calendar/         # Admin calendar view
-│   │       ├── index.js      # mounts into #appointment-booking-calendar
-│   │       ├── calendar.scss
-│   │       └── components/
-│   │           ├── index.js
-│   │           ├── calendar-view.jsx
-│   │           ├── day-column.jsx
-│   │           └── time-block.jsx
-│   └── frontend/             # Frontend booking app
-│       ├── index.js          # mounts into #appointment-booking-form
-│       ├── frontend.scss
-│       └── components/
-│           ├── index.js
-│           ├── booking-form.jsx
-│           └── time-slot-selector.jsx
-└── build/                   # Compiled assets (generated)
-```
-
 ## API Endpoints
 
-- `GET /wp-json/appointment-booking/v1/appointments` - Get all appointments (admin only)
-- `POST /wp-json/appointment-booking/v1/appointments` - Create new appointment
-- `PUT /wp-json/appointment-booking/v1/appointments/{id}` - Update appointment (admin only)
-- `DELETE /wp-json/appointment-booking/v1/appointments/{id}` - Delete appointment (admin only)
-- `GET /wp-json/appointment-booking/v1/available-slots?date={date}` - Get available time slots
-
-## Time Slots
-
-Currently hardcoded time slots:
-
-- 9:00-10:00
-- 10:00-11:00
-- 11:00-12:00
-- 14:00-15:00
-- 15:00-16:00
-- 16:00-17:00
+- `GET /wp-json/appointment-booking/v1/appointments` — List appointments (admin)
+- `POST /wp-json/appointment-booking/v1/appointments` — Create appointment (public)
+- `PUT /wp-json/appointment-booking/v1/appointments/{id}` — Update appointment status (admin)
+- `DELETE /wp-json/appointment-booking/v1/appointments/{id}` — Delete appointment (admin)
+- `GET /wp-json/appointment-booking/v1/available-slots` — Get available time slots (public)
+- `GET /wp-json/appointment-booking/v1/time-slots-template` — Get slot template based on settings (admin)
+- `POST /wp-json/appointment-booking/v1/schedule` — Create schedule (admin)
+- `GET /wp-json/appointment-booking/v1/schedule/active` — Get active schedule (public)
+- `GET /wp-json/appointment-booking/v1/schedule/available` — Get available future slots from active schedule (public)
+- `GET /wp-json/appointment-booking/v1/schedules` — List all schedules (admin)
+- `GET /wp-json/appointment-booking/v1/schedule/{id}` — Get schedule by ID (admin)
+- `PUT /wp-json/appointment-booking/v1/schedule/slot` — Update a single slot status for a given date (admin)
 
 ## Database
 
-The plugin creates a table `wp_appointments` with the following structure:
+The plugin creates two tables on activation:
 
-- `id` - Primary key
-- `client_name` - Client's name
-- `client_phone` - Client's phone number
-- `appointment_date` - Date of appointment
-- `time_slot` - Time slot (e.g., "9:00-10:00")
-- `status` - Appointment status (pending, confirmed, completed, cancelled)
-- `created_at` - Timestamp when appointment was created
+- `wp_appointments` — Stores appointment records and their statuses
+- `wp_schedules` — Stores schedules, weekly hours, generated per-day timeslots, and settings
 
 ## Customization
-
-### Adding New Time Slots
-
-Edit the `appointment_booking_get_available_slots` function in `index.php` to modify the available time slots.
 
 ### Styling
 
 Edit the SCSS files in the `src/` directory:
 
-- `src/admin/admin.scss` - Admin interface styles
-- `src/admin/calendar/calendar.scss` - Admin calendar styles
-- `src/frontend/frontend.scss` - Frontend booking form styles
+- `src/admin/admin.scss` — Admin interface styles (appointments table, modal, etc.)
+- `src/admin/cal/cal.scss` — Admin calendar styles (weekly grid, headers, slots)
+- `src/admin/schedule/schedule.scss` — Admin schedule builder styles
+- `src/frontend/booking/frontend.scss` — Frontend booking/available slots styles
 
 ## Admin Asset Loading
 
 Assets are enqueued only on this plugin's admin pages. The calendar bundle is loaded for the Calendar submenu. REST nonce (`wpApiSettings.nonce`) is localized for authenticated requests in admin.
-
-## Frontend Notes
-
-- Phone field is configured for browser autofill/history via `name="tel"`, `autoComplete="tel"`, `inputMode="tel"`.
-
-### Adding New Fields
-
-1. Update the database table structure
-2. Modify the REST API endpoints
-3. Update the React components
-4. Rebuild the assets with `npm run build`
 
 ## Requirements
 
