@@ -103,12 +103,14 @@ function appointment_booking_create_schedule( $request ) {
         $jalali_weekday = '';
         $jalali_day_number = '';
         $jalali_month_name = '';
+        $jalali_year = '';
         
         if (function_exists('parsidate')) {
             $jalali_date = convertPersianDigitsToEnglish( parsidate('Y/m/d', $gregorian_date) );
             $jalali_weekday = parsidate('l', $gregorian_date);
             $jalali_day_number = convertPersianDigitsToEnglish( parsidate('j', $gregorian_date) );
             $jalali_month_name = parsidate('F', $gregorian_date);
+            $jalali_year = convertPersianDigitsToEnglish( parsidate('Y', $gregorian_date) );
         }
 
         $day_entry = [
@@ -117,6 +119,7 @@ function appointment_booking_create_schedule( $request ) {
             'weekday'       => $jalali_weekday,
             'day_number'    => $jalali_day_number,
             'month_name'    => $jalali_month_name,
+            'year'          => $jalali_year,
             'slots'         => []
         ];
         
