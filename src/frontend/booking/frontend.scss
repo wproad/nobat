@@ -2,6 +2,7 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  font-family: inherit; // inherit theme font
 
   .booking-form {
     .form-row {
@@ -12,14 +13,16 @@
         margin-bottom: 8px;
         font-weight: 600;
         color: #1e1e1e;
+        font-size: 14px;
       }
 
       .components-text-control__input {
         width: 100%;
         padding: 8px 12px;
         border: 1px solid #8c8f94;
-        border-radius: 4px;
+        border-radius: 4px; // less rounded
         font-size: 14px;
+        height: 40px; // consistent field height
 
         &:focus {
           border-color: #2271b1;
@@ -35,6 +38,7 @@
       margin-bottom: 8px;
       font-weight: 600;
       color: #1e1e1e;
+      font-size: 14px;
     }
 
     .loading-slots {
@@ -50,6 +54,286 @@
       margin-top: 30px;
       text-align: center;
     }
+  }
+}
+
+// Modern look enhancements for BookingForm (scoped and non-intrusive)
+.appointment-booking-form {
+  // Card styling (Gutenberg Card component)
+  .components-card {
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(
+      180deg,
+      #fff 0%,
+      rgba(255, 255, 255, 0.96) 100%
+    );
+
+    // &:hover {
+    //   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    //   transform: translateY(-1px);
+    //   transition:
+    //     box-shadow 0.2s ease,
+    //     transform 0.2s ease;
+    // }
+  }
+
+  // Card header with subtle accent band
+  .components-card__header {
+    position: relative;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    background: color-mix(
+      in srgb,
+      var(--wp-components-color-accent, #2271b1) 7%,
+      #ffffff
+    );
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        var(--wp-components-color-accent, #2271b1) 0%,
+        color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 70%,
+            #00a0d2
+          )
+          50%,
+        var(--wp-components-color-accent, #2271b1) 100%
+      );
+    }
+
+    h3 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--wp-components-color-text, #1e1e1e);
+    }
+  }
+
+  // Inputs focus ring using Gutenberg accent
+  .components-text-control__input:focus {
+    border-color: var(--wp-components-color-accent, #2271b1);
+    box-shadow: 0 0 0 1px var(--wp-components-color-accent, #2271b1);
+  }
+
+  // Form actions: modern primary button styling
+  .form-actions {
+    margin-top: 32px;
+    text-align: center;
+    padding: 0 8px;
+
+    .components-button.is-primary {
+      // Base button styling
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        135deg,
+        var(--wp-components-color-accent, #2271b1) 0%,
+        color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 85%,
+            #00a0d2
+          )
+          100%
+      );
+      border: none;
+      border-radius: 5px;
+      color: var(--wp-components-color-foreground-inverted, #ffffff);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 32px;
+      min-height: 48px;
+      min-width: 200px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow:
+        0 4px 12px
+          color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 25%,
+            transparent
+          ),
+        0 2px 4px
+          color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 15%,
+            transparent
+          );
+
+      // Subtle shine effect
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      // Focus state
+      &:focus:not(:disabled) {
+        background: linear-gradient(
+          135deg,
+          var(--wp-components-color-accent, #2271b1) 0%,
+          color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 85%,
+              #00a0d2
+            )
+            100%
+        );
+        box-shadow:
+          0 0 0 3px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 20%,
+              transparent
+            ),
+          0 6px 16px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 35%,
+              transparent
+            );
+        outline: none;
+      }
+
+      // Hover state
+      &:hover:not(:disabled) {
+        background: linear-gradient(
+          135deg,
+          var(--wp-components-color-accent-darker-10, #135e96) 0%,
+          color-mix(
+              in srgb,
+              var(--wp-components-color-accent-darker-10, #135e96) 85%,
+              #0085b3
+            )
+            100%
+        );
+        transform: translateY(-2px);
+        box-shadow:
+          0 8px 24px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 40%,
+              transparent
+            ),
+          0 4px 8px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 25%,
+              transparent
+            );
+
+        &::before {
+          left: 100%;
+        }
+      }
+
+      // Active state
+      &:active:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow:
+          0 4px 12px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 30%,
+              transparent
+            ),
+          0 2px 4px
+            color-mix(
+              in srgb,
+              var(--wp-components-color-accent, #2271b1) 20%,
+              transparent
+            );
+      }
+
+      // Disabled state
+      &[disabled] {
+        background: linear-gradient(135deg, #8c8f94 0%, #a7aaad 100%);
+        color: #ffffff;
+        opacity: 0.6;
+        transform: none;
+        box-shadow: none;
+        cursor: not-allowed;
+
+        &::before {
+          display: none;
+        }
+      }
+
+      // Loading state styling
+      .components-spinner {
+        margin-right: 8px;
+        width: 16px;
+        height: 16px;
+      }
+
+      // Text content styling
+      > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+    }
+
+    // Secondary button styling (for retry button)
+    .components-button.is-secondary {
+      background: #ffffff;
+      border: 2px solid var(--wp-components-color-accent, #2271b1);
+      color: var(--wp-components-color-accent, #2271b1);
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 12px 24px;
+      min-height: 44px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover:not(:disabled) {
+        background: var(--wp-components-color-accent, #2271b1);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px
+          color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 25%,
+            transparent
+          );
+      }
+
+      &:focus:not(:disabled) {
+        box-shadow: 0 0 0 3px
+          color-mix(
+            in srgb,
+            var(--wp-components-color-accent, #2271b1) 20%,
+            transparent
+          );
+        outline: none;
+      }
+    }
+  }
+
+  // Loading row aesthetics
+  .loading-slots {
+    background: #ffffff;
+    border: 1px dashed rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
   }
 }
 
@@ -79,7 +363,7 @@
       flex-direction: column;
       align-items: center;
       padding: 12px 8px;
-      border: 2px solid #e1e5e9;
+      border: 1px solid #e1e5e9;
       border-radius: 8px;
       background: white;
       color: #1e1e1e;
@@ -90,7 +374,7 @@
       transition: all 0.2s ease;
       min-height: 70px;
 
-      &:hover:not(:disabled) {
+      &:hover:not(:disabled):not(.selected) {
         border-color: #2271b1;
         background: #f0f6fc;
         transform: translateY(-1px);
@@ -125,7 +409,7 @@
       }
 
       .day-name {
-        font-size: 11px;
+        font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -139,7 +423,7 @@
       }
 
       .month-name {
-        font-size: 10px;
+        font-size: 14px;
         opacity: 0.8;
         text-transform: uppercase;
         letter-spacing: 0.3px;
@@ -171,7 +455,7 @@
     .time-slot-button {
       display: inline-block;
       padding: 12px 16px;
-      border: 2px solid #8c8f94;
+      border: 1px solid #8c8f94;
       border-radius: 6px;
       background: white;
       color: #1e1e1e;
@@ -275,6 +559,51 @@
   }
 }
 
+.appointment-selector {
+  font-family: inherit;
+
+  // Fixed width day buttons for uniform layout
+  .week-days-grid {
+    .day-button {
+      width: 85px; // fixed width
+      flex: 0 0 auto;
+      border-radius: 5px; // slightly less rounded
+
+      // Color system from Gutenberg variables
+      border-color: color-mix(
+        in srgb,
+        var(--wp-components-color-accent, #2271b1) 20%,
+        #e1e5e9
+      );
+
+      &.selected {
+        background: var(--wp-components-color-accent, #2271b1);
+        border-color: var(--wp-components-color-accent, #2271b1);
+        color: var(--wp-components-color-foreground-inverted, #ffffff);
+      }
+
+      // &:hover:not(:disabled):not(.selected) {
+      //   border-color: var(--wp-components-color-accent, #2271b1);
+      //   background: color-mix(
+      //     in srgb,
+      //     var(--wp-components-color-accent, #2271b1) 10%,
+      //     #ffffff
+      //   );
+      // }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .appointment-selector {
+    .week-days-grid {
+      .day-button {
+        width: 88px; // slightly narrower on mobile
+      }
+    }
+  }
+}
+
 // Responsive design
 @media (max-width: 768px) {
   .appointment-booking-form {
@@ -301,7 +630,7 @@
           min-height: 60px;
 
           .day-name {
-            font-size: 10px;
+            font-size: 14px;
           }
 
           .day-number {
@@ -309,7 +638,7 @@
           }
 
           .month-name {
-            font-size: 9px;
+            font-size: 14px;
           }
         }
       }
@@ -343,6 +672,30 @@
           padding: 10px 12px;
           font-size: 13px;
         }
+      }
+    }
+
+    // Mobile button styling
+    .form-actions {
+      margin-top: 24px;
+      padding: 0 4px;
+
+      .components-button.is-primary {
+        text-align: center;
+        min-width: 180px;
+        padding: 12px 24px;
+        font-size: 15px;
+        min-height: 44px;
+
+        &:hover:not(:disabled) {
+          transform: translateY(-1px);
+        }
+      }
+
+      .components-button.is-secondary {
+        padding: 10px 20px;
+        min-height: 40px;
+        font-size: 14px;
       }
     }
   }

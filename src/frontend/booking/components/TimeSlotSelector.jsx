@@ -86,9 +86,9 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
 
       {selectedDayData && visibleSlots.length > 0 && (
         <div className="time-slots-container">
-          <h4 className="time-slots-title">
-            {__("Available Time Slots", "appointment-booking")}
-          </h4>
+          <span className="date-selector-label">
+            {__("Available Hours", "appointment-booking")}
+          </span>
           <div className="time-slots-grid">
             {visibleSlots.map((slot, index) => {
               const isSlotSelected =

@@ -122,9 +122,9 @@ const BookingForm = () => {
               </div>
             ) : (
               <div className="form-row">
-                <label className="date-selector-label">
+                <span className="date-selector-label">
                   {__("Select a Date", "appointment-booking")}
-                </label>
+                </span>
                 <TimeSlotSelector
                   schedule={schedule}
                   onSlotSelect={handleSlotSelection}
