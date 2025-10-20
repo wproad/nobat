@@ -83,6 +83,7 @@ export const useBookingForm = () => {
       // Store the booked appointment data for the ticket
       const appointmentData = {
         ...formData,
+        appointment_date_jalali: formData.appointment_date, // The form date is already in Jalali format
         id: data.id || Date.now(),
       };
       // console.log("Setting booked appointment:", appointmentData);

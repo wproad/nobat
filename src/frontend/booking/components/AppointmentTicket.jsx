@@ -1,6 +1,5 @@
 import { __ } from "@wordpress/i18n";
 import { Card, CardBody, CardHeader } from "@wordpress/components";
-import { displayDate } from "../../../lib/helpers";
 
 const AppointmentTicket = ({ appointmentData }) => {
   if (!appointmentData) {
