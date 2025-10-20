@@ -34,7 +34,16 @@ function CreateSchedule() {
       selectedAdmin,
       weeklyHours,
     };
-    saveSchedule(payload);
+    saveSchedule(payload)
+      .then(() => {
+        // TODO: send success message as well
+        // Redirect to all schedules page after successful creation
+        window.location.href =
+          "/wp-admin/admin.php?page=appointment-booking-all-schedules&message=1";
+      })
+      .catch(() => {
+        // Error handling is already done in the saveSchedule function
+      });
   };
 
   useEffect(() => {
