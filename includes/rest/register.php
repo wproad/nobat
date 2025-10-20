@@ -71,6 +71,13 @@ function appointment_booking_register_rest_routes() {
         ]
     ]);
 
+
+	register_rest_route( 'appointment-booking/v1', '/schedule/available', [
+        'methods'  => 'GET',
+        'callback' => 'appointment_booking_get_available_schedule',
+        'permission_callback' => '__return_true',
+    ] );
+
 	register_rest_route( 'appointment-booking/v1', '/schedule/active', [
         'methods'  => 'GET',
         'callback' => 'appointment_booking_get_active_schedule',

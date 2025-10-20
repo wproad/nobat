@@ -10,7 +10,7 @@ import {
 } from "@wordpress/components";
 import { useBookingForm } from "../hooks";
 import TimeSlotSelector from "./TimeSlotSelector";
-import { useActiveSchedule } from "../../../hooks";
+import { useAvailableSchedule } from "../hooks";
 import { AppointmentTicket } from "./AppointmentTicket";
 
 const BookingForm = () => {
@@ -32,7 +32,7 @@ const BookingForm = () => {
     loading: loadingSchedule,
     error: scheduleError,
     refetch,
-  } = useActiveSchedule();
+  } = useAvailableSchedule();
 
   const handleSlotSelection = (selectionData) => {
     if (selectionData) {

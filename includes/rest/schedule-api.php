@@ -196,6 +196,73 @@ function appointment_booking_get_active_schedule( $request ) {
 
     return rest_ensure_response( $schedule );
 }
+
+function appointment_booking_get_available_schedule( $request ) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'schedules';
+
+    $schedule = $wpdb->get_row( "SELECT * FROM $table_name WHERE is_active = 1 ORDER BY id DESC LIMIT 1", ARRAY_A );
+
+    if ( ! $schedule ) {
+        return new WP_Error( 'no_schedule', __( 'No available schedule found', 'appointment-booking' ), [ 'status' => 404 ] );
+    }
+
+    // Prepare response with only timeslots and meeting_duration
+    $response = [
+        'meeting_duration' => $schedule['meeting_duration'],
+        'timeslots' => []
+    ];
+    
+    // Decode timeslots if it exists
+    if ( isset( $schedule['timeslots'] ) && ! empty( $schedule['timeslots'] ) ) {
+        $timeslots = json_decode( $schedule['timeslots'], true );
+        
+        // Filter out past time slots
+        $current_time = current_time( 'Y-m-d H:i:s' );
+        $filtered_timeslots = [];
+        
+        foreach ( $timeslots as $day ) {
+            if ( ! isset( $day['date'] ) || ! isset( $day['slots'] ) || ! is_array( $day['slots'] ) ) {
+                continue;
+            }
+            
+            $day_date = $day['date']; // Format: Y-m-d
+            
+            // Filter slots for this day
+            $future_slots = [];
+            foreach ( $day['slots'] as $slot ) {
+                if ( ! isset( $slot['start'] ) || ! isset( $slot['status'] ) ) {
+                    continue;
+                }
+                
+                // Only include available slots
+                if ( $slot['status'] !== 'available' ) {
+                    continue;
+                }
+                
+                // Create datetime string for this slot
+                $slot_datetime = $day_date . ' ' . $slot['start'] . ':00';
+                
+                // Check if slot is in the future
+                if ( $slot_datetime > $current_time ) {
+                    $future_slots[] = $slot;
+                }
+            }
+            
+            // Only include the day if it has future slots
+            if ( ! empty( $future_slots ) ) {
+                $day['slots'] = $future_slots;
+                $filtered_timeslots[] = $day;
+            }
+        }
+        
+        $response['timeslots'] = $filtered_timeslots;
+    }
+
+    return rest_ensure_response( $response );
+}
+
+
 /**
  * Update a single schedule slot status (available/unavailable)
  * Expects JSON: { schedule_id, date (Y-m-d), time_slot ("HH:MM-HH:MM"), status }
