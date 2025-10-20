@@ -1,4 +1,4 @@
-import { useState, useEffect } from "@wordpress/element";
+import { useState } from "@wordpress/element";
 import {
   TextControl,
   ToggleControl,
@@ -9,6 +9,7 @@ import {
 import { __ } from "@wordpress/i18n";
 import { defaultWeeklyHours, weekdays } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
+import { JalaliDatePickerInput } from "./JalaliDatePicker";
 import { useSchedule } from "../../../hooks/useSchedule";
 
 function CreateSchedule() {
@@ -46,43 +47,6 @@ function CreateSchedule() {
       });
   };
 
-  useEffect(() => {
-    // Ensure the script is loaded and global object is available
-    if (window.jalaliDatepicker) {
-      // Initialize all date inputs
-      jalaliDatepicker.startWatch({
-        minDate: "today",
-        autoReadOnlyInput: true,
-        format: "YYYY/MM/DD",
-        showCloseBtn: true,
-        showTodayBtn: true,
-        // showEmptyBtn: true,
-        persianDigits: false,
-      });
-
-      // Add native listener for start day
-      const startInput = document.getElementById("start-day");
-      const endInput = document.getElementById("end-day");
-
-      const handleStart = (e) => {
-        setStartDay(e.target.value);
-      };
-
-      const handleEnd = (e) => {
-        setEndDay(e.target.value);
-      };
-
-      startInput?.addEventListener("change", handleStart);
-      endInput?.addEventListener("change", handleEnd);
-
-      // Cleanup
-      return () => {
-        startInput?.removeEventListener("change", handleStart);
-        endInput?.removeEventListener("change", handleEnd);
-      };
-    }
-  }, []);
-
   return (
     <div style={{ maxWidth: "800px" }}>
       {notice && (
@@ -111,33 +75,19 @@ function CreateSchedule() {
         onChange={setIsActive}
       />
 
-      <div className="components-base-control">
-        <label htmlFor="start-day" className="components-base-control__label">
-          {__("Start Day", "appointment-booking")}
-        </label>
-        <input
-          id="start-day"
-          className="components-base-control__input"
-          type="text"
-          data-jdp
-          value={startDay}
-          // onChange={(e) => handleStartDayChange(e.target.value)}
-        />
-      </div>
+      <JalaliDatePickerInput
+        id="start-day"
+        label={__("Start Day", "appointment-booking")}
+        value={startDay}
+        onChange={setStartDay}
+      />
 
-      <div className="components-base-control">
-        <label htmlFor="end-day" className="components-base-control__label">
-          {__("End Day", "appointment-booking")}
-        </label>
-        <input
-          id="end-day"
-          className="components-base-control__input"
-          type="text"
-          data-jdp
-          value={endDay}
-          // onChange={(e) => handleEndDayChange(e.target.value)}
-        />
-      </div>
+      <JalaliDatePickerInput
+        id="end-day"
+        label={__("End Day", "appointment-booking")}
+        value={endDay}
+        onChange={setEndDay}
+      />
 
       <TextControl
         label={__("Meeting Duration (mins)", "appointment-booking")}
