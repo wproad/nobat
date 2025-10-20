@@ -1,3 +1,90 @@
+// CSS Variables - Vibrant Color Palette
+:root {
+  // Primary Colors
+  --appointment-primary: #6366f1; // Indigo
+  --appointment-primary-light: #818cf8;
+  --appointment-primary-dark: #4f46e5;
+  --appointment-primary-darker: #3730a3;
+
+  // Secondary Colors
+  --appointment-secondary: #ec4899; // Pink
+  --appointment-secondary-light: #f472b6;
+  --appointment-secondary-dark: #db2777;
+
+  // Accent Colors
+  --appointment-accent: #10b981; // Emerald
+  --appointment-accent-light: #34d399;
+  --appointment-accent-dark: #059669;
+
+  // Warning & Status Colors
+  --appointment-warning: #f59e0b; // Amber
+  --appointment-error: #ef4444; // Red
+  --appointment-success: #22c55e; // Green
+  --appointment-info: #3b82f6; // Blue
+
+  // Neutral Colors
+  --appointment-white: #ffffff;
+  --appointment-gray-50: #f9fafb;
+  --appointment-gray-100: #f3f4f6;
+  --appointment-gray-200: #e5e7eb;
+  --appointment-gray-300: #d1d5db;
+  --appointment-gray-400: #9ca3af;
+  --appointment-gray-500: #6b7280;
+  --appointment-gray-600: #4b5563;
+  --appointment-gray-700: #374151;
+  --appointment-gray-800: #1f2937;
+  --appointment-gray-900: #111827;
+
+  // Text Colors
+  --appointment-text-primary: #111827;
+  --appointment-text-secondary: #6b7280;
+  --appointment-text-muted: #9ca3af;
+  --appointment-text-inverse: #ffffff;
+
+  // Background Colors
+  --appointment-bg-primary: #ffffff;
+  --appointment-bg-secondary: #f9fafb;
+  --appointment-bg-accent: #f0f9ff;
+  --appointment-bg-success: #f0fdf4;
+  --appointment-bg-warning: #fffbeb;
+  --appointment-bg-error: #fef2f2;
+
+  // Border Colors
+  --appointment-border-light: #e5e7eb;
+  --appointment-border-medium: #d1d5db;
+  --appointment-border-dark: #9ca3af;
+
+  // Shadow Colors
+  --appointment-shadow-sm: rgba(0, 0, 0, 0.05);
+  --appointment-shadow-md: rgba(0, 0, 0, 0.1);
+  --appointment-shadow-lg: rgba(0, 0, 0, 0.15);
+  --appointment-shadow-primary: rgba(99, 102, 241, 0.25);
+  --appointment-shadow-secondary: rgba(236, 72, 153, 0.25);
+
+  // Gradient Colors
+  --appointment-gradient-primary: linear-gradient(
+    135deg,
+    var(--appointment-primary) 0%,
+    var(--appointment-primary-light) 100%
+  );
+  --appointment-gradient-secondary: linear-gradient(
+    135deg,
+    var(--appointment-secondary) 0%,
+    var(--appointment-secondary-light) 100%
+  );
+  --appointment-gradient-accent: linear-gradient(
+    135deg,
+    var(--appointment-accent) 0%,
+    var(--appointment-accent-light) 100%
+  );
+  --appointment-gradient-rainbow: linear-gradient(
+    90deg,
+    var(--appointment-primary) 0%,
+    var(--appointment-secondary) 50%,
+    var(--appointment-accent) 100%
+  );
+}
+
 .appointment-booking-form {
   max-width: 600px;
   margin: 0 auto;
@@ -11,22 +98,22 @@
       .components-base-control__label {
         display: block;
         margin-bottom: 8px;
-        font-weight: 600;
-        color: #1e1e1e;
+        font-weight: 500;
+        color: var(--appointment-text-primary);
         font-size: 14px;
       }
 
       .components-text-control__input {
         width: 100%;
         padding: 8px 12px;
-        border: 1px solid #8c8f94;
+        border: 1px solid var(--appointment-border-dark);
         border-radius: 4px; // less rounded
         font-size: 14px;
         height: 40px; // consistent field height
 
         &:focus {
-          border-color: #2271b1;
-          box-shadow: 0 0 0 1px #2271b1;
+          border-color: var(--appointment-primary);
+          box-shadow: 0 0 0 1px var(--appointment-primary);
           outline: none;
         }
       }
@@ -35,9 +122,9 @@
     .time-slot-label,
     .date-selector-label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #1e1e1e;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--appointment-text-primary);
       font-size: 14px;
     }
 
@@ -47,12 +134,14 @@
       gap: 10px;
       padding: 20px;
       text-align: center;
-      color: #666;
+      color: var(--appointment-text-secondary);
     }
 
     .form-actions {
       margin-top: 30px;
       text-align: center;
+      display: flex;
+      justify-content: center;
     }
   }
 }
@@ -62,11 +151,11 @@
   // Card styling (Gutenberg Card component)
   .components-card {
     border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--appointment-border-light);
+    box-shadow: 0 8px 24px var(--appointment-shadow-md);
     background: linear-gradient(
       180deg,
-      #fff 0%,
+      var(--appointment-bg-primary) 0%,
       rgba(255, 255, 255, 0.96) 100%
     );
 
@@ -86,10 +175,10 @@
     padding-bottom: 18px;
     background: color-mix(
       in srgb,
-      var(--wp-components-color-accent, #2271b1) 7%,
-      #ffffff
+      var(--appointment-primary) 7%,
+      var(--appointment-bg-primary)
     );
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid var(--appointment-border-light);
 
     &::before {
       content: "";
@@ -97,30 +186,20 @@
       inset-inline: 0;
       top: 0;
       height: 3px;
-      background: linear-gradient(
-        90deg,
-        var(--wp-components-color-accent, #2271b1) 0%,
-        color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 70%,
-            #00a0d2
-          )
-          50%,
-        var(--wp-components-color-accent, #2271b1) 100%
-      );
+      background: var(--appointment-gradient-rainbow);
     }
 
     h3 {
       margin: 0;
       font-weight: 700;
-      color: var(--wp-components-color-text, #1e1e1e);
+      color: var(--appointment-text-primary);
     }
   }
 
-  // Inputs focus ring using Gutenberg accent
+  // Inputs focus ring using vibrant accent
   .components-text-control__input:focus {
-    border-color: var(--wp-components-color-accent, #2271b1);
-    box-shadow: 0 0 0 1px var(--wp-components-color-accent, #2271b1);
+    border-color: var(--appointment-primary);
+    box-shadow: 0 0 0 1px var(--appointment-primary);
   }
 
   // Form actions: modern primary button styling
@@ -134,19 +213,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(
-        135deg,
-        var(--wp-components-color-accent, #2271b1) 0%,
-        color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 85%,
-            #00a0d2
-          )
-          100%
-      );
+      background: var(--appointment-gradient-primary);
       border: none;
       border-radius: 5px;
-      color: var(--wp-components-color-foreground-inverted, #ffffff);
+      color: var(--appointment-text-inverse);
       font-weight: 600;
       font-size: 16px;
       padding: 14px 32px;
@@ -156,18 +226,8 @@
       overflow: hidden;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow:
-        0 4px 12px
-          color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 25%,
-            transparent
-          ),
-        0 2px 4px
-          color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 15%,
-            transparent
-          );
+        0 4px 12px var(--appointment-shadow-primary),
+        0 2px 4px var(--appointment-shadow-md);
 
       // Subtle shine effect
       &::before {
@@ -188,29 +248,10 @@
 
       // Focus state
       &:focus:not(:disabled) {
-        background: linear-gradient(
-          135deg,
-          var(--wp-components-color-accent, #2271b1) 0%,
-          color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 85%,
-              #00a0d2
-            )
-            100%
-        );
+        background: var(--appointment-gradient-primary);
         box-shadow:
-          0 0 0 3px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 20%,
-              transparent
-            ),
-          0 6px 16px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 35%,
-              transparent
-            );
+          0 0 0 3px var(--appointment-shadow-primary),
+          0 6px 16px var(--appointment-shadow-primary);
         outline: none;
       }
 
@@ -218,28 +259,13 @@
       &:hover:not(:disabled) {
         background: linear-gradient(
           135deg,
-          var(--wp-components-color-accent-darker-10, #135e96) 0%,
-          color-mix(
-              in srgb,
-              var(--wp-components-color-accent-darker-10, #135e96) 85%,
-              #0085b3
-            )
-            100%
+          var(--appointment-primary-dark) 0%,
+          var(--appointment-primary-darker) 100%
         );
         transform: translateY(-2px);
         box-shadow:
-          0 8px 24px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 40%,
-              transparent
-            ),
-          0 4px 8px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 25%,
-              transparent
-            );
+          0 8px 24px var(--appointment-shadow-primary),
+          0 4px 8px var(--appointment-shadow-md);
 
         &::before {
           left: 100%;
@@ -250,24 +276,18 @@
       &:active:not(:disabled) {
         transform: translateY(-1px);
         box-shadow:
-          0 4px 12px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 30%,
-              transparent
-            ),
-          0 2px 4px
-            color-mix(
-              in srgb,
-              var(--wp-components-color-accent, #2271b1) 20%,
-              transparent
-            );
+          0 4px 12px var(--appointment-shadow-primary),
+          0 2px 4px var(--appointment-shadow-md);
       }
 
       // Disabled state
       &[disabled] {
-        background: linear-gradient(135deg, #8c8f94 0%, #a7aaad 100%);
-        color: #ffffff;
+        background: linear-gradient(
+          135deg,
+          var(--appointment-gray-400) 0%,
+          var(--appointment-gray-500) 100%
+        );
+        color: var(--appointment-text-inverse);
         opacity: 0.6;
         transform: none;
         box-shadow: none;
@@ -296,9 +316,9 @@
 
     // Secondary button styling (for retry button)
     .components-button.is-secondary {
-      background: #ffffff;
-      border: 2px solid var(--wp-components-color-accent, #2271b1);
-      color: var(--wp-components-color-accent, #2271b1);
+      background: var(--appointment-bg-primary);
+      border: 2px solid var(--appointment-primary);
+      color: var(--appointment-primary);
       border-radius: 8px;
       font-weight: 600;
       padding: 12px 24px;
@@ -306,24 +326,14 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
       &:hover:not(:disabled) {
-        background: var(--wp-components-color-accent, #2271b1);
-        color: #ffffff;
+        background: var(--appointment-primary);
+        color: var(--appointment-text-inverse);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px
-          color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 25%,
-            transparent
-          );
+        box-shadow: 0 4px 12px var(--appointment-shadow-primary);
       }
 
       &:focus:not(:disabled) {
-        box-shadow: 0 0 0 3px
-          color-mix(
-            in srgb,
-            var(--wp-components-color-accent, #2271b1) 20%,
-            transparent
-          );
+        box-shadow: 0 0 0 3px var(--appointment-shadow-primary);
         outline: none;
       }
     }
@@ -363,10 +373,10 @@
       flex-direction: column;
       align-items: center;
       padding: 12px 8px;
-      border: 1px solid #e1e5e9;
+      border: 1px solid var(--appointment-border-light);
       border-radius: 8px;
-      background: white;
-      color: #1e1e1e;
+      background: var(--appointment-bg-primary);
+      color: var(--appointment-text-primary);
       font-size: 12px;
       font-weight: 500;
       text-align: center;
@@ -375,32 +385,32 @@
       min-height: 70px;
 
       &:hover:not(:disabled):not(.selected) {
-        border-color: #2271b1;
-        background: #f0f6fc;
+        border-color: var(--appointment-primary);
+        background: var(--appointment-bg-accent);
         transform: translateY(-1px);
-        box-shadow: 0 2px 8px rgba(34, 113, 177, 0.15);
+        box-shadow: 0 2px 8px var(--appointment-shadow-primary);
       }
 
       &.selected {
-        border-color: #2271b1;
-        background: #2271b1;
-        color: white;
+        border-color: var(--appointment-primary);
+        background: var(--appointment-primary);
+        color: var(--appointment-text-inverse);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(34, 113, 177, 0.25);
+        box-shadow: 0 4px 12px var(--appointment-shadow-primary);
       }
 
       &.today:not(.selected) {
-        border-color: #00a0d2;
-        background: #f0f6fc;
-        color: #00a0d2;
+        border-color: var(--appointment-info);
+        background: var(--appointment-bg-accent);
+        color: var(--appointment-info);
         font-weight: 600;
       }
 
       &.past {
         opacity: 0.4;
         cursor: not-allowed;
-        background: #f8f9fa;
-        color: #8c8f94;
+        background: var(--appointment-bg-secondary);
+        color: var(--appointment-text-muted);
       }
 
       &:disabled {
@@ -436,15 +446,15 @@
 .time-slots-container {
   margin-top: 24px;
   padding: 20px;
-  background: #f8f9fa;
+  background: var(--appointment-bg-secondary);
   border-radius: 8px;
-  border: 1px solid #e1e5e9;
+  border: 1px solid var(--appointment-border-light);
 
   .time-slots-title {
     margin: 0 0 16px 0;
     font-size: 16px;
     font-weight: 600;
-    color: #1e1e1e;
+    color: var(--appointment-text-primary);
   }
 
   .time-slots-grid {
@@ -455,10 +465,10 @@
     .time-slot-button {
       display: inline-block;
       padding: 12px 16px;
-      border: 1px solid #8c8f94;
+      border: 1px solid var(--appointment-border-dark);
       border-radius: 6px;
-      background: white;
-      color: #1e1e1e;
+      background: var(--appointment-bg-primary);
+      color: var(--appointment-text-primary);
       font-size: 14px;
       font-weight: 500;
       text-align: center;
@@ -468,15 +478,15 @@
 
       // Available state (default)
       &.available {
-        border-color: #2271b1;
-        background: white;
-        color: #2271b1;
+        border-color: var(--appointment-primary);
+        background: var(--appointment-bg-primary);
+        color: var(--appointment-primary);
 
         &:hover {
-          background: #2271b1;
-          color: white;
+          background: var(--appointment-primary);
+          color: var(--appointment-text-inverse);
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(34, 113, 177, 0.25);
+          box-shadow: 0 4px 12px var(--appointment-shadow-primary);
         }
 
         &:active {
@@ -485,26 +495,26 @@
 
         // Selected state for available slots
         &.selected {
-          background: #2271b1;
-          color: white;
-          border-color: #135e96;
+          background: var(--appointment-primary);
+          color: var(--appointment-text-inverse);
+          border-color: var(--appointment-primary-dark);
           font-weight: 600;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(34, 113, 177, 0.4);
+          box-shadow: 0 4px 12px var(--appointment-shadow-primary);
 
           &:hover {
-            background: #135e96;
-            border-color: #0f4c78;
-            box-shadow: 0 6px 16px rgba(34, 113, 177, 0.5);
+            background: var(--appointment-primary-dark);
+            border-color: var(--appointment-primary-darker);
+            box-shadow: 0 6px 16px var(--appointment-shadow-primary);
           }
         }
       }
 
       // Reserved state (span element)
       &.reserved {
-        border-color: #dc3545;
-        background: #fef2f2;
-        color: #dc3545;
+        border-color: var(--appointment-error);
+        background: var(--appointment-bg-error);
+        color: var(--appointment-error);
         cursor: not-allowed;
         opacity: 0.7;
         position: relative;
@@ -517,16 +527,16 @@
           left: -10%;
           right: -10%;
           height: 2px;
-          background: #dc3545;
+          background: var(--appointment-error);
           transform: translateY(-50%) rotate(-15deg);
         }
       }
 
       // Unavailable state
       &.unavailable {
-        border-color: #8c8f94;
-        background: #f8f9fa;
-        color: #8c8f94;
+        border-color: var(--appointment-border-dark);
+        background: var(--appointment-bg-secondary);
+        color: var(--appointment-text-muted);
         cursor: not-allowed;
         opacity: 0.5;
       }
@@ -569,17 +579,17 @@
       flex: 0 0 auto;
       border-radius: 5px; // slightly less rounded
 
-      // Color system from Gutenberg variables
+      // Color system using vibrant variables
       border-color: color-mix(
         in srgb,
-        var(--wp-components-color-accent, #2271b1) 20%,
-        #e1e5e9
+        var(--appointment-primary) 20%,
+        var(--appointment-border-light)
       );
 
       &.selected {
-        background: var(--wp-components-color-accent, #2271b1);
-        border-color: var(--wp-components-color-accent, #2271b1);
-        color: var(--wp-components-color-foreground-inverted, #ffffff);
+        background: var(--appointment-primary);
+        border-color: var(--appointment-primary);
+        color: var(--appointment-text-inverse);
       }
 
       // &:hover:not(:disabled):not(.selected) {
@@ -713,10 +723,14 @@
   margin-top: 30px;
 
   .ticket-card {
-    border: 2px solid #2271b1;
+    border: 2px solid var(--appointment-primary);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.15);
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 4px 12px var(--appointment-shadow-primary);
+    background: linear-gradient(
+      135deg,
+      var(--appointment-bg-primary) 0%,
+      var(--appointment-bg-secondary) 100%
+    );
     position: relative;
     overflow: hidden;
 
@@ -727,13 +741,13 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #2271b1 0%, #00a0d2 50%, #2271b1 100%);
+      background: var(--appointment-gradient-rainbow);
     }
   }
 
   .ticket-header {
-    background: #f0f6fc;
-    border-bottom: 1px solid #d1d5db;
+    background: var(--appointment-bg-accent);
+    border-bottom: 1px solid var(--appointment-border-medium);
     padding: 20px 24px;
 
     .ticket-title {
@@ -743,7 +757,7 @@
 
       h3 {
         margin: 0;
-        color: #1e1e1e;
+        color: var(--appointment-text-primary);
         font-size: 20px;
         font-weight: 700;
       }
@@ -757,9 +771,9 @@
         letter-spacing: 0.5px;
 
         &.success {
-          background: #d4edda;
-          color: #155724;
-          border: 1px solid #c3e6cb;
+          background: var(--appointment-bg-success);
+          color: var(--appointment-success);
+          border: 1px solid var(--appointment-accent);
         }
       }
     }
@@ -782,7 +796,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 0;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--appointment-border-light);
 
         &:last-child {
           border-bottom: none;
@@ -790,23 +804,23 @@
 
         label {
           font-weight: 600;
-          color: #374151;
+          color: var(--appointment-text-secondary);
           font-size: 14px;
           margin: 0;
         }
 
         .ticket-value {
           font-weight: 500;
-          color: #1e1e1e;
+          color: var(--appointment-text-primary);
           font-size: 14px;
 
           &.date-value {
-            color: #2271b1;
+            color: var(--appointment-primary);
             font-weight: 600;
           }
 
           &.time-value {
-            color: #2271b1;
+            color: var(--appointment-primary);
             font-weight: 600;
             font-size: 16px;
           }
