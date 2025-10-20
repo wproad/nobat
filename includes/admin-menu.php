@@ -30,14 +30,15 @@ function appointment_booking_admin_page() {
         'appointment_list_page_callback'
     );
 
-    add_submenu_page(
-        'appointment-booking',
-        __( 'Add New', 'appointment-booking' ),
-        __( 'Add New', 'appointment-booking' ),
-        'manage_options',
-        'appointment_add_new',
-        'appointment_add_new_page_callback'
-    );
+	// Needs update
+    // add_submenu_page(
+    //     'appointment-booking',
+    //     __( 'Add New', 'appointment-booking' ),
+    //     __( 'Add New', 'appointment-booking' ),
+    //     'manage_options',
+    //     'appointment_add_new',
+    //     'appointment_add_new_page_callback'
+    // );
 
 	// Add calendar subpage
 	add_submenu_page(

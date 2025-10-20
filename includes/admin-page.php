@@ -31,6 +31,7 @@ function appointment_booking_handle_appointment_deletions() {
 	}
 
 	// Handle bulk delete from top dropdown
+	/*
 	if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'delete' && isset( $_REQUEST['appointment'] ) ) {
 		check_admin_referer( 'bulk-appointments' );
 		
@@ -44,8 +45,10 @@ function appointment_booking_handle_appointment_deletions() {
 			exit;
 		}
 	}
+	*/
 
 	// Handle bulk delete from bottom dropdown
+	/*
 	if ( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] === 'delete' && isset( $_REQUEST['appointment'] ) ) {
 		check_admin_referer( 'bulk-appointments' );
 		
@@ -59,6 +62,7 @@ function appointment_booking_handle_appointment_deletions() {
 			exit;
 		}
 	}
+	*/
 }
 add_action( 'admin_init', 'appointment_booking_handle_appointment_deletions' );
 
@@ -86,6 +90,7 @@ function appointment_booking_handle_schedule_deletions() {
 	}
 
 	// Handle bulk delete from top dropdown
+	/*
 	if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
 		check_admin_referer( 'bulk-schedules' );
 		
@@ -99,8 +104,10 @@ function appointment_booking_handle_schedule_deletions() {
 			exit;
 		}
 	}
+	*/
 
 	// Handle bulk delete from bottom dropdown
+	/*
 	if ( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
 		check_admin_referer( 'bulk-schedules' );
 		
@@ -114,6 +121,7 @@ function appointment_booking_handle_schedule_deletions() {
 			exit;
 		}
 	}
+	*/
 }
 add_action( 'admin_init', 'appointment_booking_handle_schedule_deletions' );
 
@@ -140,7 +148,7 @@ function appointment_list_page_callback() {
 
 		public function get_columns() {
 			return [
-				'cb'               => '<input type="checkbox" />',
+				// 'cb'               => '<input type="checkbox" />',
 				'id'               => __( 'ID', 'appointment-booking' ),
 				'client_name'      => __( 'Client Name', 'appointment-booking' ),
 				'client_phone'     => __( 'Client Phone', 'appointment-booking' ),
@@ -151,12 +159,14 @@ function appointment_list_page_callback() {
 			];
 		}
 
+		/*
 		protected function column_cb( $item ) {
 			return sprintf(
 				'<input type="checkbox" name="appointment[]" value="%s" />',
 				esc_attr( $item['id'] )
 			);
 		}
+		*/
 
 		protected function column_client_name( $item ) {
 			$edit_link = admin_url( 'admin.php?page=appointment_add_new&action=edit&id=' . intval( $item['id'] ) );
@@ -192,14 +202,18 @@ function appointment_list_page_callback() {
 			}
 		}
 
+		/*
 		protected function get_bulk_actions() {
 			return [ 'delete' => __( 'Delete', 'appointment-booking' ) ];
 		}
+		*/
 
+		/*
 		public function process_bulk_action() {
 			// Bulk actions are now handled in the main callback function
 			// This method is kept for compatibility but does nothing
 		}
+		*/
 
 		public function extra_tablenav( $which ) {
 			if ( 'top' === $which ) {
@@ -490,7 +504,7 @@ function schedule_list_page_callback() {
 
 		public function get_columns() {
 			return [
-				'cb'               => '<input type="checkbox" />',
+				// 'cb'               => '<input type="checkbox" />',
 				'id'               => __( 'ID', 'appointment-booking' ),
 				'name'             => __( 'Schedule Name', 'appointment-booking' ),
 				'start_day'        => __( 'Start Date', 'appointment-booking' ),
@@ -502,12 +516,14 @@ function schedule_list_page_callback() {
 			];
 		}
 
+		/*
 		protected function column_cb( $item ) {
 			return sprintf(
 				'<input type="checkbox" name="schedule[]" value="%s" />',
 				esc_attr( $item['id'] )
 			);
 		}
+		*/
 
 		protected function column_name( $item ) {
 			$actions = [
@@ -545,14 +561,18 @@ function schedule_list_page_callback() {
 			}
 		}
 
+		/*
 		protected function get_bulk_actions() {
 			return [ 'delete' => __( 'Delete', 'appointment-booking' ) ];
 		}
+		*/
 
+		/*
 		public function process_bulk_action() {
 			// Bulk actions are now handled in the main callback function
 			// This method is kept for compatibility but does nothing
 		}
+		*/
 
 		public function extra_tablenav( $which ) {
 			if ( 'top' === $which ) {
