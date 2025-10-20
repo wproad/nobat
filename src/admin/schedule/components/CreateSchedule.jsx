@@ -12,22 +12,16 @@ import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { useSchedule } from "../../../hooks/useSchedule";
 
 function CreateSchedule() {
-  // TODO: remove in prod
-  // Get today's date in YYYY-MM-DD format
-  const today = new Date().toISOString().split("T")[0];
-
   const [name, setName] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
   const [meetingDuration, setMeetingDuration] = useState(30);
-  // const [buffer, setBuffer] = useState(0);
-  const buffer = 0;
-
   const [selectedAdmin, setSelectedAdmin] = useState("");
   const [weeklyHours, setWeeklyHours] = useState(defaultWeeklyHours);
 
   const { adminUsers, notice, setNotice, saveSchedule } = useSchedule();
+  const buffer = 0;
 
   const handleSubmit = () => {
     const payload = {
