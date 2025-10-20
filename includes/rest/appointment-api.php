@@ -131,7 +131,7 @@ function appointment_booking_create_appointment( $request ) {
 			'status' => 'pending',
 			'schedule_id' => $schedule_id,
 		),
-		array( '%s', '%s', '%s', '%s', '%s', '%d' )
+		array( '%s', '%s', '%s', '%s', '%s', '%s', '%d' )
 	);
 	
 	if ( $result === false ) {
