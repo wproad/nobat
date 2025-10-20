@@ -9,7 +9,7 @@ import {
 import { __ } from "@wordpress/i18n";
 import { defaultWeeklyHours, weekdays } from "../constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
-import { useSchedule } from "../hooks/useSchedule";
+import { useSchedule } from "../../../hooks/useSchedule";
 
 function CreateSchedule() {
   // TODO: remove in prod

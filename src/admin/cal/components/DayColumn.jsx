@@ -9,12 +9,12 @@ const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
   return (
     <div className={`day-column ${isToday ? "today" : ""}`}>
       <div>
-        {day?.date}
+        
         <div className="day-header">
           <div className="day-name">{day?.weekday}</div>
           <div>
             <span className="day-number">{day?.day_number}</span>
-            <span className="month-name">{day?.month_name}</span>
+            <span className="month-name">{day?.month_name} - {day?.date}</span>
           </div>
         </div>
       </div>
