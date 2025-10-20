@@ -210,7 +210,7 @@ const CalendarGrid = () => {
     !Array.isArray(schedule.timeslots) ||
     schedule.timeslots.length === 0
   ) {
-    return <ScheduleNotFound />
+    return <ScheduleNotFound />;
   }
 
   const normalizedDays = normalizeDays();
