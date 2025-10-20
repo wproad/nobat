@@ -7,7 +7,7 @@ import {
   Notice,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { defaultWeeklyHours, weekdays } from "../constants";
+import { defaultWeeklyHours, weekdays } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { useSchedule } from "../../../hooks/useSchedule";
 
