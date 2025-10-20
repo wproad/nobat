@@ -30,15 +30,17 @@ function appointment_booking_get_appointments( $request ) {
  */
 function appointment_booking_create_appointment( $request ) {
 	global $wpdb;
+	error_log('Appointment API called with params: ' . print_r($request->get_params(), true));
 	
 	$appointments_table = $wpdb->prefix . 'appointments';
 	$schedules_table = $wpdb->prefix . 'schedules';
 	
 	$client_name = sanitize_text_field( $request->get_param( 'client_name' ) );
 	$client_phone = sanitize_text_field( $request->get_param( 'client_phone' ) );
+	
 	$appointment_date = sanitize_text_field( $request->get_param( 'appointment_date' ) );
 	$time_slot = sanitize_text_field( $request->get_param( 'time_slot' ) );
-	
+
 	// Validate required fields
 	if ( empty( $client_name ) || empty( $client_phone ) || empty( $appointment_date ) || empty( $time_slot ) ) {
 		return new WP_Error( 'missing_fields', 'All fields are required', array( 'status' => 400 ) );
@@ -120,6 +122,7 @@ function appointment_booking_create_appointment( $request ) {
 			'client_name' => $client_name,
 			'client_phone' => $client_phone,
 			'appointment_date' => $appointment_date,
+			'appointment_date_jalali' => $appointment_date,
 			'time_slot' => $time_slot,
 			'status' => 'pending',
 			'schedule_id' => $schedule_id,

@@ -36,13 +36,14 @@ export const useActiveSchedule = (scheduleId) => {
       });
 
       if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error(
-            "No active schedule found. Please contact the administrator."
-          );
-        }
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to fetch active schedule");
+        // if (response.status === 404) {
+          // throw new Error(
+          //   "No active schedule found. Please contact the administrator."
+          // );
+          // setSchedule(null)
+        // }
+        // const errorData = await response.json().catch(() => ({}));
+        // throw new Error(errorData.message || "Failed to fetch active schedule");
       }
 
       const data = await response.json();

@@ -6,6 +6,7 @@ import {
   useAppointments,
   useAppointmentManagement,
 } from "../../../hooks";
+import ScheduleNotFound from "./ScheduleNotFound";
 
 const CalendarGrid = () => {
   const {
@@ -200,6 +201,16 @@ const CalendarGrid = () => {
         </p>
       </div>
     );
+  }
+
+  // Handle case when no schedule is found or schedule has no timeslots
+  if (
+    !schedule ||
+    !schedule.id ||
+    !Array.isArray(schedule.timeslots) ||
+    schedule.timeslots.length === 0
+  ) {
+    return <ScheduleNotFound />
   }
 
   const normalizedDays = normalizeDays();
