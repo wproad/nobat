@@ -7,6 +7,8 @@ const AppointmentTicket = ({ appointmentData }) => {
     return null;
   }
 
+  console.log(appointmentData)
+
   return (
     <div className="appointment-ticket">
       <Card className="ticket-card">
@@ -48,7 +50,7 @@ const AppointmentTicket = ({ appointmentData }) => {
               <div className="ticket-field">
                 <label>{__("Date", "appointment-booking")}</label>
                 <span className="ticket-value date-value">
-                  {displayDate(appointmentData.appointment_date)}
+                  {appointmentData.appointment_date_jalali}
                 </span>
               </div>
 

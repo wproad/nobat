@@ -5,9 +5,9 @@ const DayButton = ({ day, isSelected, isToday, onClick }) => {
       className={`day-button ${isSelected ? "selected" : ""} ${
         isToday ? "today" : ""
       }`}
-      onClick={() => onClick(day.date)}
+      onClick={() => onClick(day.date_jalali)}
     >
-      {/* {day?.date_jalali} */}
+      {/* {console.log(day?.date_jalali)} */}
       <div className="day-name">{day?.weekday}</div>
       <div className="day-number">{day?.day_number}</div>
       <div className="month-name">{day?.month_name}</div>

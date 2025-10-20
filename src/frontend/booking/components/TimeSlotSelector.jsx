@@ -39,19 +39,19 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
     );
   }
 
-  const isToday = (dateString) => {
-    const today = new Date();
-    const checkDate = new Date(dateString);
-    return (
-      today.getDate() === checkDate.getDate() &&
-      today.getMonth() === checkDate.getMonth() &&
-      today.getFullYear() === checkDate.getFullYear()
-    );
-  };
+  // const isToday = (dateString) => {
+  //   const today = new Date();
+  //   const checkDate = new Date(dateString);
+  //   return (
+  //     today.getDate() === checkDate.getDate() &&
+  //     today.getMonth() === checkDate.getMonth() &&
+  //     today.getFullYear() === checkDate.getFullYear()
+  //   );
+  // };
 
   // Get the selected day's data
   const selectedDayData = selectedDate
-    ? schedule.timeslots.find((day) => day.date === selectedDate)
+    ? schedule.timeslots.find((day) => day.date_jalali === selectedDate)
     : null;
 
   // Filter out slots marked as unavailable for the selected day
@@ -68,15 +68,15 @@ const TimeSlotSelector = ({ schedule, onSlotSelect }) => {
           {schedule.timeslots.map((dayData) => {
             if (dayData.slots.length === 0) return;
 
-            const isSelected = selectedDate === dayData.date;
-            const isTodayDate = isToday(dayData.date);
+            const isSelected = selectedDate === dayData.date_jalali;
+            // const isTodayDate = isToday(dayData.date);
 
             return (
               <DayButton
-                key={dayData.date}
+                key={dayData.date_jalali}
                 day={dayData}
                 isSelected={isSelected}
-                isToday={isTodayDate}
+                isToday={false}
                 onClick={handleDateClick}
               />
             );

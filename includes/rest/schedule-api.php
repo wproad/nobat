@@ -11,8 +11,8 @@ function appointment_booking_create_schedule( $request ) {
 
     $name             = sanitize_text_field( $data['name'] );
     $is_active        = ! empty( $data['isActive'] ) ? 1 : 0; // Use 1 or 0 for database consistency
-    $start_day_jalali        = sanitize_text_field( $data['startDay'] );
-    $end_day_jalali          = sanitize_text_field( $data['endDay'] );
+    $start_day_jalali        = convertPersianDigitsToEnglish( sanitize_text_field( $data['startDay'] ) );
+    $end_day_jalali          = convertPersianDigitsToEnglish( sanitize_text_field( $data['endDay'] ) );
     $meeting_duration = intval( $data['meetingDuration'] );
     $buffer           = intval( $data['buffer'] );
     $admin_id         = intval( $data['selectedAdmin'] );
@@ -105,9 +105,9 @@ function appointment_booking_create_schedule( $request ) {
         $jalali_month_name = '';
         
         if (function_exists('parsidate')) {
-            $jalali_date = parsidate('Y/m/d', $gregorian_date);
+            $jalali_date = convertPersianDigitsToEnglish( parsidate('Y/m/d', $gregorian_date) );
             $jalali_weekday = parsidate('l', $gregorian_date);
-            $jalali_day_number = parsidate('j', $gregorian_date);
+            $jalali_day_number = convertPersianDigitsToEnglish( parsidate('j', $gregorian_date) );
             $jalali_month_name = parsidate('F', $gregorian_date);
         }
 

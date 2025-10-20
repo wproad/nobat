@@ -158,3 +158,16 @@ function convertJalaliToGregorian( $jalaliDate ) {
 
        return false;
 }
+
+/**
+ * Convert Persian/Farsi digits to English digits
+ * 
+ * @param string $string String containing Persian digits
+ * @return string String with English digits
+ */
+function convertPersianDigitsToEnglish( $string ) {
+    $persian_digits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    $english_digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    
+    return str_replace($persian_digits, $english_digits, $string);
+}

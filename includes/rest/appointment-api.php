@@ -38,8 +38,12 @@ function appointment_booking_create_appointment( $request ) {
 	$client_name = sanitize_text_field( $request->get_param( 'client_name' ) );
 	$client_phone = sanitize_text_field( $request->get_param( 'client_phone' ) );
 	
-	$appointment_date = sanitize_text_field( $request->get_param( 'appointment_date' ) );
+	$appointment_date_jalali = convertPersianDigitsToEnglish( sanitize_text_field( $request->get_param( 'appointment_date' ) ) );
 	$time_slot = sanitize_text_field( $request->get_param( 'time_slot' ) );
+
+	$appointment_date = convertJalaliToGregorian($appointment_date_jalali);
+
+	error_log($appointment_date);
 
 	// Validate required fields
 	if ( empty( $client_name ) || empty( $client_phone ) || empty( $appointment_date ) || empty( $time_slot ) ) {
@@ -122,7 +126,7 @@ function appointment_booking_create_appointment( $request ) {
 			'client_name' => $client_name,
 			'client_phone' => $client_phone,
 			'appointment_date' => $appointment_date,
-			'appointment_date_jalali' => $appointment_date,
+			'appointment_date_jalali' => $appointment_date_jalali,
 			'time_slot' => $time_slot,
 			'status' => 'pending',
 			'schedule_id' => $schedule_id,
