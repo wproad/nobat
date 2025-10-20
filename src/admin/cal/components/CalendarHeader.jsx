@@ -3,13 +3,7 @@ import { useSchedule } from "../../../hooks";
 
 const CalendarHeader = () => {
   const { schedule } = useSchedule();
-  if (
-    !schedule ||
-    !schedule.id ||
-    !Array.isArray(schedule.timeslots) ||
-    schedule.timeslots.length === 0
-  )
-    return null;
+  if (!schedule || !schedule.id) return null;
 
   return (
     <h2>

@@ -8,7 +8,6 @@ const CalendarView = () => {
       <div className="calendar-header">
         <CalendarHeader />
       </div>
-
       <CalendarGrid />
     </div>
   );
