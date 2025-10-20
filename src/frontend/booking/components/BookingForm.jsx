@@ -58,7 +58,6 @@ const BookingForm = () => {
     );
   }
 
-  // Otherwise show the booking form
   return (
     <div className="appointment-booking-form">
       <Card>
