@@ -536,7 +536,7 @@ function schedule_list_page_callback() {
 				'show' => sprintf(
 					'<a href="%s">%s</a>',
 					esc_url( admin_url( 'admin.php?page=appointment-booking-cal&schedule_id=' . intval( $item['id'] ) ) ),
-					__( 'Show Detail', 'appointment-booking' )
+					__( 'Show Calendar View', 'appointment-booking' )
 				),
 			];
 
