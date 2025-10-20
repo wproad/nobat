@@ -42,7 +42,7 @@ const CalendarGrid = () => {
     { handleStatusUpdate, handleDelete }
   );
 
-  const normalizedDays = useNormalizedDays(
+  const { normalizedDays, timeRows } = useNormalizedDays(
     schedule,
     appointments,
     meetingDuration
@@ -66,7 +66,7 @@ const CalendarGrid = () => {
         gridTemplateColumns: `100px repeat(${normalizedDays.length}, 120px)`,
       }}
     >
-      <TimeColumn schedule={schedule} />
+      <TimeColumn timeRows={timeRows} />
       {normalizedDays.map((day) => (
         <DayColumn
           key={day.date}

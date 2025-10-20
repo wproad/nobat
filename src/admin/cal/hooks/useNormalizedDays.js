@@ -11,7 +11,7 @@ export const useNormalizedDays = (schedule, appointments, meetingDuration) => {
     ])
   );
 
-  return days.map((day) => {
+  const normalizedDays = days.map((day) => {
     const slotByKey = new Map(
       (Array.isArray(day?.slots) ? day.slots : []).map((slot) => [
         `${slot.start}-${slot.end}`,
@@ -34,4 +34,6 @@ export const useNormalizedDays = (schedule, appointments, meetingDuration) => {
 
     return { ...day, slots: normalizedSlots };
   });
+
+  return { normalizedDays, timeRows };
 };
