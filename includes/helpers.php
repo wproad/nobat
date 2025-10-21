@@ -171,3 +171,31 @@ function convertPersianDigitsToEnglish( $string ) {
     
     return str_replace($persian_digits, $english_digits, $string);
 }
+
+/**
+ * Shortcode handler for the React frontend app
+ * 
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function appointment_booking_frontend_shortcode( $atts ) {
+    // Parse shortcode attributes
+    $atts = shortcode_atts( array(
+        'id' => 'appointment-booking-frontend-' . uniqid(),
+        'class' => 'appointment-booking-frontend'
+    ), $atts, 'appointment_booking_frontend' );
+
+    // Generate unique container ID
+    $container_id = sanitize_html_class( $atts['id'] );
+    $container_class = sanitize_html_class( $atts['class'] );
+
+    // Return the container div
+    return sprintf(
+        '<div id="%s" class="%s" data-shortcode="appointment_booking_frontend"></div>',
+        esc_attr( $container_id ),
+        esc_attr( $container_class )
+    );
+}
+
+// Register the shortcode
+add_shortcode( 'appointment_booking_frontend', 'appointment_booking_frontend_shortcode' );
