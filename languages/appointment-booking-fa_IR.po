@@ -120,30 +120,6 @@ msgid "Book Appointment"
 msgstr "رزرو نوبت"
 
 #: build/cal.js:1
-#: src/lib/appointmentUtils.js:36
-#: src/lib/appointmentUtils.js:49
-msgid "Pending"
-msgstr "در انتظار"
-
-#: build/cal.js:1
-#: src/lib/appointmentUtils.js:38
-#: src/lib/appointmentUtils.js:50
-msgid "Confirmed"
-msgstr "تأیید شده"
-
-#: build/cal.js:1
-#: src/lib/appointmentUtils.js:40
-#: src/lib/appointmentUtils.js:51
-msgid "Completed"
-msgstr "تکمیل شده"
-
-#: build/cal.js:1
-#: src/lib/appointmentUtils.js:42
-#: src/lib/appointmentUtils.js:52
-msgid "Cancelled"
-msgstr "لغو شده"
-
-#: build/cal.js:1
 #: src/admin/cal/components/CalendarHeader.jsx:13
 msgid "(Active)"
 msgstr "(فعال)"
@@ -187,11 +163,6 @@ msgstr "وضعیت:"
 #: src/admin/cal/components/AppointmentDetailModal.jsx:101
 msgid "Edit Status"
 msgstr "ویرایش وضعیت"
-
-#: build/cal.js:1
-#: src/lib/appointmentUtils.js:67
-msgid "Hello {name}, this is regarding your appointment on {date} at {time}."
-msgstr "سلام {name}، این پیام درباره نوبت شما در تاریخ {date} ساعت {time} است."
 
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:104
@@ -298,41 +269,6 @@ msgid "Error loading Calendar:"
 msgstr "خطا در بارگذاری تقویم:"
 
 #: build/schedule.js:1
-#: src/lib/constants.js:14
-msgid "Saturday"
-msgstr "شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:15
-msgid "Sunday"
-msgstr "یکشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:16
-msgid "Monday"
-msgstr "دوشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:17
-msgid "Tuesday"
-msgstr "سه‌شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:18
-msgid "Wednesday"
-msgstr "چهارشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:19
-msgid "Thursday"
-msgstr "پنج‌شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:20
-msgid "Friday"
-msgstr "جمعه"
-
-#: build/schedule.js:1
 #: src/admin/schedule/components/WorkingHoursForDay.jsx:24
 msgid "e.g. 9:00-12:00"
 msgstr "مثلاً ۹:۰۰-۱۲:۰۰"
@@ -351,21 +287,6 @@ msgstr "افزودن ساعت کاری"
 #: src/admin/schedule/components/WeeklyHoursEditor.jsx:30
 msgid "Weekly Hours"
 msgstr "ساعات کاری هفتگی"
-
-#: build/schedule.js:1
-#: src/hooks/useSchedule.js:17
-msgid "Error fetching users."
-msgstr "خطا در دریافت کاربران."
-
-#: build/schedule.js:1
-#: src/hooks/useSchedule.js:32
-msgid "Settings saved successfully!"
-msgstr "تنظیمات با موفقیت ذخیره شد!"
-
-#: build/schedule.js:1
-#: src/hooks/useSchedule.js:38
-msgid "Error saving settings."
-msgstr "خطا در ذخیره تنظیمات."
 
 #: build/schedule.js:1
 #: src/admin/schedule/components/CreateSchedule.jsx:63
