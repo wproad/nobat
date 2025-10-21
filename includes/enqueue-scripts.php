@@ -139,3 +139,72 @@ function appointment_booking_frontend_enqueue_scripts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'appointment_booking_frontend_enqueue_scripts' );
+
+/**
+ * Enqueues React frontend app scripts when shortcode is used
+ */
+function appointment_booking_react_frontend_enqueue_scripts() {
+	// Only enqueue if we're on a page/post that contains our shortcode
+	global $post;
+	if ( ! $post || ! has_shortcode( $post->post_content, 'appointment_booking_frontend' ) ) {
+		return;
+	}
+
+	// Load manifest.json to get the correct file names
+	$manifest_path = APPOINTMENT_BOOKING_PLUGIN_DIR . 'build/manifest.json';
+	if ( ! file_exists( $manifest_path ) ) {
+		return;
+	}
+
+	$manifest = json_decode( file_get_contents( $manifest_path ), true );
+	if ( ! $manifest || ! isset( $manifest['src/main.jsx'] ) ) {
+		return;
+	}
+
+	$frontend_entry = $manifest['src/main.jsx'];
+	$frontend_js = APPOINTMENT_BOOKING_PLUGIN_URL . 'build/' . $frontend_entry['file'];
+
+	// Enqueue React app script
+	wp_enqueue_script(
+		'appointment-booking-react-frontend',
+		$frontend_js,
+		array(), // No dependencies for now, Vite handles bundling
+		APPOINTMENT_BOOKING_VERSION,
+		array(
+			'in_footer' => true,
+		)
+	);
+
+	// Enqueue CSS files if they exist
+	if ( isset( $frontend_entry['css'] ) && is_array( $frontend_entry['css'] ) ) {
+		foreach ( $frontend_entry['css'] as $css_file ) {
+			wp_enqueue_style(
+				'appointment-booking-react-frontend-style-' . sanitize_title( basename( $css_file, '.css' ) ),
+				APPOINTMENT_BOOKING_PLUGIN_URL . 'build/' . $css_file,
+				array(),
+				APPOINTMENT_BOOKING_VERSION
+			);
+		}
+	}
+
+	// Also enqueue any other assets (like SVG files)
+	if ( isset( $frontend_entry['assets'] ) && is_array( $frontend_entry['assets'] ) ) {
+		foreach ( $frontend_entry['assets'] as $asset_file ) {
+			// You can handle different asset types here if needed
+		}
+	}
+
+	// Add initialization script
+	wp_add_inline_script( 'appointment-booking-react-frontend', '
+		document.addEventListener("DOMContentLoaded", function() {
+			// Initialize React app for all shortcode containers
+			const containers = document.querySelectorAll("[data-shortcode=\'appointment_booking_frontend\']");
+			containers.forEach(function(container) {
+				if (window.AppointmentBookingApp && window.AppointmentBookingApp.init) {
+					window.AppointmentBookingApp.init(container.id);
+				}
+			});
+		});
+	' );
+}
+add_action( 'wp_enqueue_scripts', 'appointment_booking_react_frontend_enqueue_scripts' );
