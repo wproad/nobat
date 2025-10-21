@@ -517,26 +517,26 @@ msgstr "نوبت‌ها"
 #~ msgid "%d schedule(s) deleted."
 #~ msgstr "%d زمانبندی حذف شد."
 
-#~ msgid "SMS Notifications"
-#~ msgstr "اعلان‌های پیامکی"
+msgid "SMS Notifications"
+msgstr "اعلان‌های پیامکی"
 
-#~ msgid "Notify Admin"
-#~ msgstr "اطلاع به مدیر"
+msgid "Notify Admin"
+msgstr "اطلاع به مدیر"
 
-#~ msgid "Notify Client"
-#~ msgstr "اطلاع به مشتری"
+msgid "Notify Client"
+msgstr "اطلاع به مشتری"
 
-#~ msgid "Reminder (minutes before)"
-#~ msgstr "یادآوری (دقیقه قبل از نوبت)"
+msgid "Reminder (minutes before)"
+msgstr "یادآوری (دقیقه قبل از نوبت)"
 
-#~ msgid "None"
-#~ msgstr "هیچ‌کدام"
+msgid "None"
+msgstr "هیچ‌کدام"
 
-#~ msgid "Send notifications to client"
-#~ msgstr "ارسال اعلان برای مشتری"
+msgid "Send notifications to client"
+msgstr "ارسال اعلان برای مشتری"
 
-#~ msgid "Appointment Booking Settings"
-#~ msgstr "تنظیمات نوبت دهی"
+msgid "Appointment Booking Settings"
+msgstr "تنظیمات نوبت دهی"
 
 #~ msgid "Loading booking form..."
 #~ msgstr "در حال بارگذاری فرم رزرو..."
