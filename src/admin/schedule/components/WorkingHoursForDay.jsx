@@ -5,10 +5,14 @@ import {
   TextControl,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
+import { weekdayLabels } from "../../../lib/constants";
 
 export function WorkingHoursForDay({ day, hours, onAdd, onRemove, onUpdate }) {
   return (
-    <PanelBody title={day.toUpperCase()} initialOpen={true}>
+    <PanelBody
+      title={__(weekdayLabels[day].label, "appointment-booking")}
+      initialOpen={true}
+    >
       {hours.map((slot, index) => (
         <PanelRow
           key={index}

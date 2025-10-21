@@ -7,7 +7,7 @@ import {
   Notice,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import { defaultWeeklyHours, weekdays } from "../../../lib/constants";
+import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { JalaliDatePickerInput } from "./JalaliDatePicker";
 import { useSchedule } from "../../../hooks/useSchedule";
@@ -125,7 +125,7 @@ function CreateSchedule() {
       />
 
       <WeeklyHoursEditor
-        weekdays={weekdays}
+        weekdays={Object.keys(weekdayLabels)}
         weeklyHours={weeklyHours}
         setWeeklyHours={setWeeklyHours}
       />
