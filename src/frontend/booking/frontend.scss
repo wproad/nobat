@@ -575,7 +575,7 @@
   // Fixed width day buttons for uniform layout
   .week-days-grid {
     .day-button {
-      width: 85px; // fixed width
+      width: 71px; // fixed width
       flex: 0 0 auto;
       border-radius: 5px; // slightly less rounded
 
@@ -608,7 +608,7 @@
   .appointment-selector {
     .week-days-grid {
       .day-button {
-        width: 88px; // slightly narrower on mobile
+        width: 70px; // slightly narrower on mobile
       }
     }
   }

@@ -217,13 +217,20 @@ function appointment_booking_get_available_schedule( $request ) {
     if ( isset( $schedule['timeslots'] ) && ! empty( $schedule['timeslots'] ) ) {
         $timeslots = json_decode( $schedule['timeslots'], true );
         
-        // Filter out past time slots
+        // Filter out past time slots and limit to first 7 days
         $current_time = current_time( 'Y-m-d H:i:s' );
         $filtered_timeslots = [];
+        $days_count = 0;
+        $max_days = 7;
         
         foreach ( $timeslots as $day ) {
             if ( ! isset( $day['date'] ) || ! isset( $day['slots'] ) || ! is_array( $day['slots'] ) ) {
                 continue;
+            }
+            
+            // Stop after 7 days
+            if ( $days_count >= $max_days ) {
+                break;
             }
             
             $day_date = $day['date']; // Format: Y-m-d
@@ -253,6 +260,7 @@ function appointment_booking_get_available_schedule( $request ) {
             if ( ! empty( $future_slots ) ) {
                 $day['slots'] = $future_slots;
                 $filtered_timeslots[] = $day;
+                $days_count++;
             }
         }
         
