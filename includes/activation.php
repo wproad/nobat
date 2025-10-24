@@ -1,64 +1,59 @@
 <?php
 /**
- * Handles plugin activation and database table creation
+ * Plugin activation and database management
+ *
+ * @package Nobat
  */
 
-if ( ! defined('ABSPATH') ) {
+use Nobat\Core\DatabaseManager;
+
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Create appointments table on plugin activation
+ * Activation callback
  */
-function appointment_booking_activate() {
-	global $wpdb;
-	
-	// 1. appointments table
-	$table_name = $wpdb->prefix . 'appointments';
-	
-	$charset_collate = $wpdb->get_charset_collate();
-	
-	$sql = "CREATE TABLE $table_name (
-		id mediumint(9) NOT NULL AUTO_INCREMENT,
-		client_name varchar(100) NOT NULL,
-		client_phone varchar(20) NOT NULL,
-		appointment_date date NOT NULL,
-		time_slot varchar(20) NOT NULL,
-		status varchar(20) DEFAULT 'pending',
-		schedule_id mediumint(9) NOT NULL,
-		created_at datetime DEFAULT CURRENT_TIMESTAMP,
-		PRIMARY KEY (id),
-		KEY schedule_id (schedule_id)
-	) $charset_collate;";
-	
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	dbDelta( $sql );
+function nobat_activate() {
+	nobat_update_database();
+}
 
-	// 2. schedules table
-	$table_name = $wpdb->prefix . 'schedules';
-    $charset_collate = $wpdb->get_charset_collate();
+/**
+ * Check and update database on plugin load
+ */
+function nobat_check_database() {
+	try {
+		$db_manager = new DatabaseManager();
+		
+		$current_version = $db_manager->get_current_version();
+		$needs_update = $db_manager->needs_update();
+		
+		error_log( sprintf(
+			'Nobat DB Check: Current=%s, Required=%s, NeedsUpdate=%s',
+			$current_version,
+			DatabaseManager::DB_VERSION,
+			$needs_update ? 'YES' : 'NO'
+		) );
+		
+		if ( $needs_update ) {
+			error_log( 'Nobat: Running database schema update...' );
+			$result = $db_manager->update_database();
+			error_log( 'Nobat: Database updated to version ' . DatabaseManager::DB_VERSION );
+			
+			// Verify tables were created
+			$tables = $db_manager->check_tables();
+			error_log( 'Nobat: Table status - ' . print_r( $tables, true ) );
+		}
+	} catch ( Exception $e ) {
+		error_log( 'Nobat: Database check error - ' . $e->getMessage() );
+	}
+}
+add_action( 'plugins_loaded', 'nobat_check_database' );
 
-    $sql = "CREATE TABLE $table_name (
-        id mediumint(9) NOT NULL AUTO_INCREMENT,
-        name varchar(255) NOT NULL,
-        admin_id bigint(20) NOT NULL,
-        is_active tinyint(1) DEFAULT 1,
-        start_day date NOT NULL,
-        start_day_jalali date NOT NULL,
-        end_day date NOT NULL,
-        end_day_jalali date NOT NULL,
-        meeting_duration int NOT NULL DEFAULT 30,
-        buffer int NOT NULL DEFAULT 0,
-        weekly_hours longtext NOT NULL,
-        timeslots longtext,
-        created_at datetime DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY  (id),
-        KEY admin_id (admin_id)
-    ) $charset_collate;";
-
-    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-    dbDelta( $sql );
-	
-	// Add version option
-	add_option( 'appointment_booking_version', '1.0.0' );
+/**
+ * Update database schema
+ */
+function nobat_update_database() {
+	$db_manager = new DatabaseManager();
+	$db_manager->update_database();
 }

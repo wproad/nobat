@@ -5,7 +5,7 @@ import { CalendarView } from "./components";
 import { ScheduleProvider } from "../../hooks";
 
 domReady(() => {
-  const root = createRoot(document.getElementById("appointment-booking-cal"));
+  const root = createRoot(document.getElementById("nobat-cal"));
 
   // Read schedule_id from the current admin page URL if present
   const params = new URL(window.location.href).searchParams;

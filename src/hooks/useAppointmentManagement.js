@@ -7,7 +7,7 @@ export const useAppointmentManagement = () => {
     try {
       setError(null);
       const response = await fetch(
-        `/wp-json/appointment-booking/v1/appointments/${id}`,
+        `/wp-json/nobat/v2/appointments/${id}`,
         {
           method: "PUT",
           headers: {
@@ -34,7 +34,7 @@ export const useAppointmentManagement = () => {
     try {
       setError(null);
       const response = await fetch(
-        `/wp-json/appointment-booking/v1/appointments/${id}`,
+        `/wp-json/nobat/v2/appointments/${id}`,
         {
           method: "DELETE",
           headers: {

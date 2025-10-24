@@ -33,23 +33,23 @@ export const getStatusBorderColor = (status) => {
 export const getStatusLabel = (status) => {
   switch (status) {
     case "pending":
-      return __("Pending", "appointment-booking");
+      return __("Pending", "nobat");
     case "confirmed":
-      return __("Confirmed", "appointment-booking");
+      return __("Confirmed", "nobat");
     case "completed":
-      return __("Completed", "appointment-booking");
+      return __("Completed", "nobat");
     case "cancelled":
-      return __("Cancelled", "appointment-booking");
+      return __("Cancelled", "nobat");
     default:
       return status;
   }
 };
 
 export const statusOptions = [
-  { label: __("Pending", "appointment-booking"), value: "pending" },
-  { label: __("Confirmed", "appointment-booking"), value: "confirmed" },
-  { label: __("Completed", "appointment-booking"), value: "completed" },
-  { label: __("Cancelled", "appointment-booking"), value: "cancelled" },
+  { label: __("Pending", "nobat"), value: "pending" },
+  { label: __("Confirmed", "nobat"), value: "confirmed" },
+  { label: __("Completed", "nobat"), value: "completed" },
+  { label: __("Cancelled", "nobat"), value: "cancelled" },
 ];
 
 export const formatDate = (dateString) => {
@@ -66,7 +66,7 @@ export const generateWhatsAppLink = (phone, message) => {
 export const getDefaultWhatsAppMessage = (appointment) => {
   return __(
     "Hello {name}, this is regarding your appointment on {date} at {time}.",
-    "appointment-booking"
+    "nobat"
   )
     .replace("{name}", appointment.client_name)
     .replace("{date}", formatDate(appointment.appointment_date))

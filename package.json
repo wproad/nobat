@@ -1,7 +1,7 @@
 {
-  "name": "appointment-booking",
-  "version": "1.0.0",
-  "description": "A simple appointment booking system for WordPress",
+  "name": "nobat",
+  "version": "2.0.0",
+  "description": "A modern appointment booking system for WordPress",
   "main": "index.js",
   "scripts": {
     "build": "wp-scripts build",
@@ -24,6 +24,7 @@
   },
   "keywords": [
     "wordpress",
+    "nobat",
     "appointment",
     "booking",
     "react"

@@ -55,7 +55,7 @@ const CalendarGrid = () => {
   if (appointmentsError || scheduleError)
     return (
       <CalendarError>
-        {__("Error loading Calendar:", "appointment-booking")}
+        {__("Error loading Calendar:", "nobat")}
       </CalendarError>
     );
 

@@ -1,0 +1,1394 @@
+# Copyright (C) 2025 Your Name
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Nobat 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/appointment-booking\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-10-24T11:00:22+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: nobat\n"
+
+#. Plugin Name of the plugin
+#: nobat.php
+#: includes/admin-menu.php:16
+#: includes/admin-menu.php:17
+msgid "Nobat"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: nobat.php
+msgid "https://github.com/your-username/nobat"
+msgstr ""
+
+#. Description of the plugin
+#: nobat.php
+msgid "A modern appointment booking system with admin management."
+msgstr ""
+
+#. Author of the plugin
+#: nobat.php
+msgid "Your Name"
+msgstr ""
+
+#. Author URI of the plugin
+#: nobat.php
+msgid "https://yourwebsite.com/"
+msgstr ""
+
+#: includes/admin-menu.php:28
+#: includes/admin-menu.php:29
+msgid "Calendar"
+msgstr ""
+
+#: includes/admin-menu.php:37
+#: includes/admin-menu.php:38
+#: includes/admin-page.php:393
+msgid "All Appointments"
+msgstr ""
+
+#: includes/admin-menu.php:47
+#: includes/admin-menu.php:48
+msgid "Settings"
+msgstr ""
+
+#: includes/admin-menu.php:57
+#: includes/admin-page.php:735
+msgid "All Schedules"
+msgstr ""
+
+#: includes/admin-menu.php:58
+#: includes/admin-page.php:585
+#: includes/Admin/ScheduleListTable.php:32
+msgid "Schedules"
+msgstr ""
+
+#: includes/admin-menu.php:67
+#: includes/admin-menu.php:68
+msgid "Add Schedule"
+msgstr ""
+
+#: includes/admin-page.php:33
+msgid "Deleted from admin list"
+msgstr ""
+
+#: includes/admin-page.php:153
+#: includes/Admin/AppointmentsListTable.php:38
+msgid "Appointment"
+msgstr ""
+
+#: includes/admin-page.php:154
+#: includes/Admin/AppointmentsListTable.php:39
+msgid "Appointments"
+msgstr ""
+
+#: includes/admin-page.php:162
+#: includes/admin-page.php:593
+#: includes/Admin/AppointmentsListTable.php:51
+#: includes/Admin/ScheduleListTable.php:44
+msgid "ID"
+msgstr ""
+
+#: includes/admin-page.php:163
+#: includes/admin-page.php:498
+#: includes/Admin/AppointmentsListTable.php:52
+msgid "Client Name"
+msgstr ""
+
+#: includes/admin-page.php:164
+#: includes/admin-page.php:504
+#: includes/Admin/AppointmentsListTable.php:53
+msgid "Client Phone"
+msgstr ""
+
+#: includes/admin-page.php:165
+#: includes/Admin/AppointmentsListTable.php:54
+#: src/frontend/booking/components/AppointmentTicket.jsx:46
+msgid "Date"
+msgstr ""
+
+#: includes/admin-page.php:166
+#: includes/admin-page.php:516
+#: includes/Admin/AppointmentsListTable.php:55
+msgid "Time Slot"
+msgstr ""
+
+#: includes/admin-page.php:167
+#: includes/admin-page.php:522
+#: includes/admin-page.php:599
+#: includes/Admin/AppointmentsListTable.php:56
+#: includes/Admin/ScheduleListTable.php:49
+msgid "Status"
+msgstr ""
+
+#: includes/admin-page.php:168
+msgid "Assigned Admin"
+msgstr ""
+
+#: includes/admin-page.php:169
+msgid "Cancellation Reason"
+msgstr ""
+
+#: includes/admin-page.php:170
+#: includes/admin-page.php:600
+#: includes/Admin/AppointmentsListTable.php:57
+#: includes/Admin/ScheduleListTable.php:50
+msgid "Created At"
+msgstr ""
+
+#: includes/admin-page.php:188
+#: includes/Admin/AppointmentsListTable.php:72
+msgid "Are you sure you want to delete this appointment?"
+msgstr ""
+
+#: includes/admin-page.php:189
+#: includes/admin-page.php:619
+#: includes/Admin/AppointmentsListTable.php:73
+#: includes/Admin/ScheduleListTable.php:66
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:482
+msgid "Delete"
+msgstr ""
+
+#: includes/admin-page.php:248
+#: includes/admin-page.php:670
+#: includes/Admin/AppointmentsListTable.php:142
+#: includes/Admin/ScheduleListTable.php:137
+msgid "All Statuses"
+msgstr ""
+
+#: includes/admin-page.php:270
+msgid "All Admins"
+msgstr ""
+
+#: includes/admin-page.php:286
+#: includes/Admin/AppointmentsListTable.php:158
+msgid "Select date"
+msgstr ""
+
+#: includes/admin-page.php:289
+msgid "Filter"
+msgstr ""
+
+#: includes/admin-page.php:297
+msgid "Clear"
+msgstr ""
+
+#: includes/admin-page.php:398
+#, php-format
+msgid "%d appointments deleted."
+msgstr ""
+
+#: includes/admin-page.php:436
+#: includes/Controllers/AppointmentController.php:192
+#: includes/Controllers/AppointmentController.php:314
+#: includes/Controllers/AppointmentController.php:406
+#: includes/Middleware/AuthMiddleware.php:104
+#: includes/Services/AppointmentService.php:186
+#: includes/Services/AppointmentService.php:233
+#: includes/Services/AppointmentService.php:268
+#: includes/Services/AppointmentService.php:306
+#: includes/Services/AppointmentService.php:359
+msgid "Appointment not found."
+msgstr ""
+
+#: includes/admin-page.php:464
+msgid "Appointment updated successfully!"
+msgstr ""
+
+#: includes/admin-page.php:477
+msgid "Appointment added successfully!"
+msgstr ""
+
+#: includes/admin-page.php:492
+msgid "Edit Appointment"
+msgstr ""
+
+#: includes/admin-page.php:492
+msgid "Add New Appointment"
+msgstr ""
+
+#: includes/admin-page.php:510
+msgid "Appointment Date"
+msgstr ""
+
+#: includes/admin-page.php:542
+msgid "Update Appointment"
+msgstr ""
+
+#: includes/admin-page.php:542
+msgid "Save Appointment"
+msgstr ""
+
+#: includes/admin-page.php:555
+msgid "Loading cal..."
+msgstr ""
+
+#: includes/admin-page.php:567
+msgid "Loading scheduling..."
+msgstr ""
+
+#: includes/admin-page.php:584
+#: includes/Admin/ScheduleListTable.php:31
+msgid "Schedule"
+msgstr ""
+
+#: includes/admin-page.php:594
+#: includes/Admin/ScheduleListTable.php:45
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:98
+msgid "Schedule Name"
+msgstr ""
+
+#: includes/admin-page.php:595
+#: includes/Admin/ScheduleListTable.php:46
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:140
+msgid "Start Date"
+msgstr ""
+
+#: includes/admin-page.php:596
+#: includes/Admin/ScheduleListTable.php:47
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:149
+msgid "End Date"
+msgstr ""
+
+#: includes/admin-page.php:597
+#: includes/Admin/ScheduleListTable.php:48
+msgid "Duration (min)"
+msgstr ""
+
+#: includes/admin-page.php:618
+#: includes/Admin/ScheduleListTable.php:65
+msgid "Are you sure you want to delete this schedule?"
+msgstr ""
+
+#: includes/admin-page.php:624
+#: includes/Admin/ScheduleListTable.php:71
+msgid "Show Calendar View"
+msgstr ""
+
+#: includes/admin-page.php:671
+#: includes/admin-page.php:723
+#: includes/Admin/ScheduleListTable.php:94
+#: includes/Admin/ScheduleListTable.php:138
+msgid "Active"
+msgstr ""
+
+#: includes/admin-page.php:672
+#: includes/admin-page.php:728
+#: includes/Admin/ScheduleListTable.php:99
+#: includes/Admin/ScheduleListTable.php:139
+msgid "Inactive"
+msgstr ""
+
+#: includes/admin-page.php:736
+msgid "Add New"
+msgstr ""
+
+#: includes/admin-page.php:741
+#, php-format
+msgid "%d schedule(s) deleted."
+msgstr ""
+
+#: includes/admin-settings.php:14
+msgid "Messages"
+msgstr ""
+
+#: includes/admin-settings.php:21
+msgid "SMS Notifications"
+msgstr ""
+
+#: includes/admin-settings.php:108
+msgid "Success Message After Booking"
+msgstr ""
+
+#: includes/admin-settings.php:116
+msgid "Notify Admin"
+msgstr ""
+
+#: includes/admin-settings.php:124
+msgid "Notify Client"
+msgstr ""
+
+#: includes/admin-settings.php:132
+msgid "Reminder (minutes before)"
+msgstr ""
+
+#: includes/admin-settings.php:173
+msgid "This message will be displayed to users after successfully booking an appointment. If empty, users will be redirected to their appointments list."
+msgstr ""
+
+#: includes/admin-settings.php:195
+msgid "None"
+msgstr ""
+
+#: includes/admin-settings.php:212
+msgid "Send notifications to client"
+msgstr ""
+
+#: includes/admin-settings.php:256
+msgid "Appointment Booking Settings"
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:81
+msgid "slot_id and schedule_id are required."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:101
+msgid "Appointment booked successfully!"
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:202
+msgid "You do not have permission to view this appointment."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:241
+msgid "Cancellation request submitted. An admin will review your request."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:266
+#: includes/Controllers/AppointmentController.php:329
+msgid "Appointment confirmed successfully."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:291
+#: includes/Controllers/AppointmentController.php:335
+msgid "Appointment marked as completed."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:325
+msgid "Appointment restored successfully."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:339
+#: includes/Services/AppointmentService.php:335
+msgid "Cancelled by admin"
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:340
+#: includes/Controllers/AppointmentController.php:384
+msgid "Appointment cancelled successfully."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:346
+msgid "Invalid status provided."
+msgstr ""
+
+#: includes/Controllers/AppointmentController.php:421
+msgid "Report updated successfully."
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:82
+msgid "Missing required fields: name, startDate, endDate, or weeklyHours"
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:91
+msgid "Invalid date format. Expected YYYY-MM-DD (Gregorian)"
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:145
+msgid "Schedule created successfully."
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:183
+#: includes/Services/SlotService.php:63
+#: includes/Services/SlotService.php:99
+msgid "No active schedule found."
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:211
+#: includes/Services/ScheduleService.php:254
+#: includes/Services/ScheduleService.php:276
+msgid "Schedule not found."
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:243
+msgid "Schedule activated successfully."
+msgstr ""
+
+#: includes/Controllers/ScheduleController.php:267
+msgid "Schedule deleted successfully."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:101
+msgid "Date parameter is required."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:181
+msgid "Slot blocked successfully."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:205
+msgid "Slot unblocked successfully."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:243
+msgid "Time slot must include both start and end time (e.g., 09:00-10:00)."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:278
+msgid "Failed to create slot."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:286
+msgid "Slot created successfully."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:299
+msgid "Failed to update slot status."
+msgstr ""
+
+#: includes/Controllers/SlotController.php:307
+msgid "Slot status updated successfully."
+msgstr ""
+
+#: includes/Core/ShortcodeHandler.php:96
+msgid "You must be logged in to book an appointment."
+msgstr ""
+
+#: includes/Core/ShortcodeHandler.php:98
+msgid "Loading..."
+msgstr ""
+
+#: includes/Core/ShortcodeHandler.php:99
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: includes/Middleware/AuthMiddleware.php:35
+#: includes/Services/AuthService.php:165
+msgid "You must be logged in to book appointments. Please log in and try again."
+msgstr ""
+
+#: includes/Middleware/AuthMiddleware.php:53
+#: includes/Services/AuthService.php:140
+msgid "You must be logged in to perform this action."
+msgstr ""
+
+#: includes/Middleware/AuthMiddleware.php:61
+#: includes/Services/AuthService.php:153
+#: includes/Services/AuthService.php:178
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: includes/Middleware/AuthMiddleware.php:79
+msgid "You must be logged in to access appointments."
+msgstr ""
+
+#: includes/Middleware/AuthMiddleware.php:113
+msgid "You do not have permission to access this appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:112
+#, php-format
+msgid "You have reached the maximum of %d active appointments. Please cancel or complete an existing appointment before booking a new one."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:123
+msgid "This time slot is no longer available."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:128
+msgid "You have already booked this time slot."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:133
+msgid "Failed to reserve the time slot."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:146
+msgid "Failed to create appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:154
+msgid "Appointment created"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:191
+msgid "You cannot cancel this appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:196
+msgid "This appointment cannot be cancelled."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:203
+msgid "Failed to request cancellation."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:216
+#, php-format
+msgid "Cancellation requested: %s"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:216
+msgid "Cancellation requested"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:237
+msgid "Only pending appointments can be confirmed."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:243
+msgid "Failed to confirm appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:251
+msgid "Appointment confirmed by admin"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:272
+msgid "This appointment cannot be marked as completed."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:278
+msgid "Failed to complete appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:286
+msgid "Appointment completed by admin"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:313
+msgid "Failed to cancel appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:335
+#, php-format
+msgid "Cancelled by admin: %s"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:364
+msgid "Only cancelled or completed appointments can be restored."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:371
+msgid "Failed to restore appointment."
+msgstr ""
+
+#: includes/Services/AppointmentService.php:384
+msgid "Appointment restored to confirmed by admin"
+msgstr ""
+
+#: includes/Services/AppointmentService.php:406
+msgid "Failed to update report."
+msgstr ""
+
+#: includes/Services/ScheduleService.php:91
+msgid "Failed to create schedule."
+msgstr ""
+
+#: includes/Services/ScheduleService.php:99
+msgid "Failed to save working hours."
+msgstr ""
+
+#: includes/Services/ScheduleService.php:115
+msgid "Failed to generate time slots."
+msgstr ""
+
+#: includes/Services/ScheduleService.php:260
+msgid "Failed to activate schedule."
+msgstr ""
+
+#: includes/Services/ScheduleService.php:285
+msgid "Failed to delete schedule."
+msgstr ""
+
+#: includes/Services/SlotService.php:129
+#: includes/Services/SlotService.php:155
+msgid "Slot not found."
+msgstr ""
+
+#: includes/Services/SlotService.php:133
+msgid "Cannot block a booked slot."
+msgstr ""
+
+#: includes/Services/SlotService.php:139
+msgid "Failed to block slot."
+msgstr ""
+
+#: includes/Services/SlotService.php:159
+msgid "Slot is not blocked."
+msgstr ""
+
+#: includes/Services/SlotService.php:165
+msgid "Failed to unblock slot."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:258
+#: src/frontend/booking/components/TimeSlotButton.jsx:29
+#: src/frontend/booking/components/TimeSlotButton.jsx:45
+msgid "to"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/TimeSlotSelector.jsx:43
+msgid "No available dates"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/TimeSlotSelector.jsx:90
+msgid "Available Hours"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:77
+#: src/frontend/booking/components/BookingForm.jsx:119
+msgid "Book an Appointment"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:128
+msgid "See My Appointments"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:152
+msgid "Loading available slots..."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:165
+msgid "Retry"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:173
+msgid "Select a Time Slot"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:183
+msgid "Note (Optional)"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:186
+msgid "Add any additional information or special requests"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:208
+msgid "Booking..."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:211
+msgid "Book Appointment"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:82
+msgid "You must be logged in to book appointments."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:97
+#: src/frontend/booking/components/MyAppointments.jsx:190
+msgid "Log In"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:105
+msgid "Register"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:149
+#: src/lib/appointmentUtils.js:36
+#: src/lib/appointmentUtils.js:49
+msgid "Pending"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:150
+#: src/lib/appointmentUtils.js:38
+#: src/lib/appointmentUtils.js:50
+msgid "Confirmed"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:151
+#: src/lib/appointmentUtils.js:40
+#: src/lib/appointmentUtils.js:51
+msgid "Completed"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:152
+#: src/lib/appointmentUtils.js:42
+#: src/lib/appointmentUtils.js:52
+msgid "Cancelled"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:153
+msgid "Cancellation Requested"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:170
+#: src/frontend/booking/components/MyAppointments.jsx:204
+msgid "My Appointments"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:213
+msgid "Book New Appointment"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:233
+msgid "Loading appointments..."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:241
+msgid "You don't have any appointments yet. Click the button above to book your first appointment."
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:255
+#: src/frontend/booking/components/MyAppointments.jsx:276
+msgid "Note:"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:284
+msgid "Assigned to:"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: build/schedule.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:433
+#: src/admin/cal/components/AppointmentDetailModal.jsx:479
+#: src/admin/schedule/components/CreateSchedule.jsx:214
+#: src/frontend/booking/components/MyAppointments.jsx:298
+#: src/frontend/booking/components/MyAppointments.jsx:381
+msgid "Cancel"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:314
+msgid "Request Cancellation"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:323
+msgid "Are you sure you want to request cancellation for this appointment?"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:225
+#: src/frontend/booking/components/MyAppointments.jsx:332
+msgid "Date:"
+msgstr ""
+
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:231
+#: src/frontend/booking/components/MyAppointments.jsx:337
+msgid "Time:"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:344
+msgid "Reason for cancellation (optional)"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:347
+msgid "Please provide a reason for cancellation"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:119
+msgid "Cancellation request submitted successfully!"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:365
+msgid "Submitting..."
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:368
+msgid "Submit Request"
+msgstr ""
+
+#: build/booking.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:175
+msgid "You must be logged in to view your appointments."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarHeader.jsx:13
+msgid "(Active)"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarHeader.jsx:14
+msgid "(Inactive)"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/TimeColumn.jsx:18
+#: src/frontend/booking/components/AppointmentTicket.jsx:54
+msgid "Time"
+msgstr ""
+
+#: build/cal.js:1
+#: src/lib/appointmentUtils.js:67
+msgid "Hello {name}, this is regarding your appointment on {date} at {time}."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:100
+msgid "Confirm Appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:101
+msgid "Approve and confirm this appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:108
+msgid "Mark as Completed"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:109
+msgid "Mark this appointment as successfully completed"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:116
+msgid "Cancel Appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:117
+msgid "Cancel this appointment and free the time slot"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:125
+msgid "Restore Appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:126
+msgid "Restore this appointment to confirmed status"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:137
+msgid "Send WhatsApp Message"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:138
+msgid "Open WhatsApp to message the client"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:146
+msgid "Delete Permanently"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:147
+msgid "Permanently delete this appointment (cannot be undone)"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:196
+msgid "Appointment Details"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:204
+msgid "Client Name:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:221
+msgid "Phone:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:237
+msgid "Status:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:249
+msgid "Assigned Admin:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:261
+msgid "Cancellation Reason:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:281
+#: src/admin/cal/components/Slot.jsx:138
+msgid "Available Actions"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:366
+msgid "Session Report"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:377
+msgid "Edit"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:401
+msgid "Add notes, observations, or session summary..."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:75
+msgid "Report saved successfully!"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:86
+msgid "Failed to save report"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:422
+msgid "Saving..."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:422
+msgid "Save Report"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:449
+msgid "No report added yet"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:460
+msgid "Delete Appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:464
+msgid "Are you sure you want to delete this appointment? This action cannot be undone."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:20
+#: src/admin/cal/components/CalendarView.jsx:70
+#: src/admin/cal/components/Slot.jsx:13
+msgid "Booked"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:27
+#: src/admin/cal/components/CalendarView.jsx:79
+#: src/admin/cal/components/Slot.jsx:18
+msgid "Blocked"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:34
+#: src/admin/cal/components/CalendarView.jsx:88
+#: src/admin/cal/components/Slot.jsx:23
+msgid "Unavailable"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:12
+#: src/admin/cal/components/CalendarView.jsx:61
+#: src/admin/cal/components/Slot.jsx:29
+msgid "Available"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:58
+msgid "Make Available"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:59
+msgid "Open this slot for booking"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:65
+msgid "Block Slot"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:66
+msgid "Block this slot (lunch, meeting, etc)"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:72
+msgid "Make Unavailable"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:73
+msgid "Mark as outside working hours"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:108
+msgid "Manage Time Slot"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:119
+msgid "Time Slot:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:125
+msgid "Current Status:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:205
+msgid "Close"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:7
+msgid "No Schedule Found"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:9
+msgid "You need to create a schedule before you can view the calendar."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:21
+msgid "Create Your First Schedule Here"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarLoading.jsx:6
+msgid "Loading calendar..."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarGrid.jsx:58
+msgid "Error loading Calendar:"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:15
+msgid "Open time slots that users can book"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:16
+msgid "These slots are within your working hours and ready for booking. Users can select and book these times."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:17
+msgid "Example: Monday 9:00 AM - 10:00 AM is available for booking"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:22
+msgid "Time slot has an active appointment"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:23
+msgid "A user has booked this time slot. Click on a booked slot to view appointment details, contact information, and manage the appointment."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:24
+msgid "Example: Monday 10:00 AM - 11:00 AM is booked by John Doe"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:29
+msgid "Manually blocked by admin"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:30
+msgid "These slots are within working hours but you've manually disabled them. Users cannot book blocked slots. Use this for lunch breaks, meetings, or temporary closures."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:31
+msgid "Example: Block 12:00 PM - 1:00 PM for lunch break"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:36
+msgid "Outside working hours"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:37
+msgid "These time slots are not part of your defined schedule. They appear as placeholders in the calendar but cannot be booked or modified."
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:38
+msgid "Example: If schedule is 9 AM - 5 PM, then 8 AM is unavailable"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:58
+#: src/admin/cal/components/CalendarView.jsx:67
+#: src/admin/cal/components/CalendarView.jsx:76
+#: src/admin/cal/components/CalendarView.jsx:85
+msgid "Click for details"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:120
+msgid "Description"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:125
+msgid "Details"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:130
+msgid "Example"
+msgstr ""
+
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:139
+msgid "Got it"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:14
+msgid "Saturday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:15
+msgid "Sunday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:16
+msgid "Monday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:17
+msgid "Tuesday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:18
+msgid "Wednesday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:19
+msgid "Thursday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/lib/constants.js:20
+msgid "Friday"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:38
+msgid "slot"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:38
+msgid "slots"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:55
+msgid "Start"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:69
+msgid "End"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:84
+msgid "Remove time slot"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:100
+msgid "Add Time Slot"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/WeeklyHoursEditor.jsx:30
+msgid "Weekly Hours"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/hooks/useSchedule.js:17
+msgid "Error fetching users."
+msgstr ""
+
+#: build/schedule.js:1
+#: src/hooks/useSchedule.js:32
+msgid "Settings saved successfully!"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/hooks/useSchedule.js:38
+msgid "Error saving settings."
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:65
+msgid "Create New Schedule"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:68
+msgid "Set up your availability schedule with working hours and time slots"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:87
+msgid "Basic Information"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:90
+msgid "Give your schedule a name and set its status"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:101
+msgid "e.g., Summer 2024 Schedule"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:102
+msgid "A descriptive name to identify this schedule"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:110
+msgid "Activate Schedule"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:114
+msgid "This schedule is active and visible to users"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:115
+msgid "This schedule is inactive and hidden from users"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:128
+msgid "Schedule Period"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:131
+msgid "Define the date range when this schedule is valid"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:163
+msgid "Appointment Settings"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:166
+msgid "Configure the duration of each appointment slot"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:174
+msgid "Appointment Duration (minutes)"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:180
+msgid "How long each appointment will last"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:192
+msgid "Weekly Working Hours"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:195
+msgid "Define your available hours for each day of the week"
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:35
+msgid "Invalid date format. Please check your dates."
+msgstr ""
+
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:222
+msgid "Create Schedule"
+msgstr ""
+
+#: src/frontend/booking/components/AppointmentTicket.jsx:25
+msgid "Pending Confirmation"
+msgstr ""
+
+#: src/frontend/booking/components/AppointmentTicket.jsx:31
+msgid "Your appointment request was sent successfully!"
+msgstr ""
+
+#: src/frontend/booking/components/AppointmentTicket.jsx:34
+msgid "You will be notified once an admin confirms your appointment."
+msgstr ""
+
+#: src/frontend/booking/components/AppointmentTicket.jsx:64
+msgid "Your Note"
+msgstr ""
+
+#: src/frontend/booking/components/AppointmentTicket.jsx:102
+msgid "Booking Reference"
+msgstr ""

@@ -10,8 +10,8 @@ const CalendarHeader = () => {
       {schedule?.name}{" "}
       {schedule
         ? Number(schedule.is_active)
-          ? __("(Active)", "appointment-booking")
-          : __("(Inactive)", "appointment-booking")
+          ? __("(Active)", "nobat")
+          : __("(Inactive)", "nobat")
         : null}
     </h2>
   );

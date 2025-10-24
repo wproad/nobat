@@ -1,71 +1,89 @@
 import { useState, useEffect, useCallback } from "@wordpress/element";
 
 /**
- * Custom hook for fetching and managing active schedule data
+ * Custom hook for fetching schedule with available slots (v2 API)
+ * @param {string|number} scheduleId - Optional schedule ID. If not provided, fetches active schedule
  * @returns {Object} - { schedule, loading, error, refetch }
  */
-export const useAvailableSchedule = (scheduleId) => {
+export const useAvailableSchedule = (scheduleId = null) => {
   const [schedule, setSchedule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchActiveSchedule = useCallback(async () => {
+  const fetchSchedule = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const path = scheduleId
-        ? `/wp-json/appointment-booking/v1/schedule/${encodeURIComponent(
-            scheduleId
-          )}`
-        : `/wp-json/appointment-booking/v1/schedule/available`;
+      // Frontend booking always uses active schedule (scheduleId ignored for security)
+      // Only admin can view specific schedules via /schedules/{id}
+      const endpoint = '/wp-json/nobat/v2/schedules/active';
 
-      console.log("path", path);
+      console.log('Nobat: Fetching active schedule from', endpoint);
 
-      const response = await fetch(path, {
+      const response = await fetch(endpoint, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        //   // Provided by wp_localize_script in admin enqueue
-        //   ...(typeof window !== "undefined" &&
-        //     window.location.pathname.includes("/wp-admin/") &&
-        //     typeof wpApiSettings !== "undefined" && {
-        //       "X-WP-Nonce": wpApiSettings.nonce,
-        //     }),
         },
       });
 
       if (!response.ok) {
-        // if (response.status === 404) {
-          // throw new Error(
-          //   "No active schedule found. Please contact the administrator."
-          // );
-          // setSchedule(null)
-        // }
-        // const errorData = await response.json().catch(() => ({}));
-        // throw new Error(errorData.message || "Failed to fetch active schedule");
+        if (response.status === 404) {
+          throw new Error(
+            "No active schedule found. Please contact the administrator."
+          );
+        }
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to fetch schedule");
       }
 
       const data = await response.json();
-      setSchedule(data);
+      console.log('Nobat: Schedule data received', data);
+      
+      // v2 API returns { success: true, schedule: {...} }
+      if (data.success && data.schedule) {
+        // Transform timeslots to days for component compatibility
+        const timeslots = data.schedule.timeslots || [];
+        const days = timeslots.map(day => ({
+          ...day,
+          slots: (day.slots || []).map(slot => ({
+            ...slot,
+            start_time: slot.start || slot.start_time, // Handle both formats
+            end_time: slot.end || slot.end_time
+          }))
+        }));
+        
+        const schedule = {
+          ...data.schedule,
+          days: days
+        };
+        delete schedule.timeslots; // Remove old property
+        
+        console.log('Nobat: Transformed schedule', schedule);
+        setSchedule(schedule);
+      } else {
+        throw new Error("Invalid response format");
+      }
     } catch (err) {
-      console.error("Error fetching active schedule:", err);
+      console.error("Error fetching schedule:", err);
       const errorMessage = err.message || "Failed to load schedule";
       setError(errorMessage);
       setSchedule(null);
     } finally {
       setLoading(false);
     }
-  }, [scheduleId]);
+  }, []); // No dependencies - always fetches active schedule
 
   useEffect(() => {
-    fetchActiveSchedule();
-  }, [fetchActiveSchedule]);
+    fetchSchedule();
+  }, [fetchSchedule]);
 
   return {
     schedule,
     loading,
     error,
-    refetch: fetchActiveSchedule,
+    refetch: fetchSchedule,
   };
 };

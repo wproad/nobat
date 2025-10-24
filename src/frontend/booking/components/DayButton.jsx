@@ -1,3 +1,7 @@
+/**
+ * DayButton component - v2 API compatible
+ * Expects day object with jalali_date, weekday, day_number, month_name
+ */
 const DayButton = ({ day, isSelected, isToday, onClick }) => {
   return (
     <button
@@ -5,9 +9,8 @@ const DayButton = ({ day, isSelected, isToday, onClick }) => {
       className={`day-button ${isSelected ? "selected" : ""} ${
         isToday ? "today" : ""
       }`}
-      onClick={() => onClick(day.date_jalali)}
+      onClick={() => onClick(day.jalali_date)}
     >
-      {/* {console.log(day?.date_jalali)} */}
       <div className="day-name">{day?.weekday}</div>
       <div className="day-number">{day?.day_number}</div>
       <div className="month-name">{day?.month_name}</div>

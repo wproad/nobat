@@ -15,10 +15,10 @@ export const useActiveSchedule = (scheduleId) => {
       setError(null);
 
       const path = scheduleId
-        ? `/wp-json/appointment-booking/v1/schedule/${encodeURIComponent(
+        ? `/wp-json/nobat/v2/schedules/${encodeURIComponent(
             scheduleId
           )}`
-        : `/wp-json/appointment-booking/v1/schedule/active`;
+        : `/wp-json/nobat/v2/schedules/active`;
 
       console.log("path", path);
 
@@ -36,18 +36,16 @@ export const useActiveSchedule = (scheduleId) => {
       });
 
       if (!response.ok) {
-        // if (response.status === 404) {
-          // throw new Error(
-          //   "No active schedule found. Please contact the administrator."
-          // );
-          // setSchedule(null)
-        // }
-        // const errorData = await response.json().catch(() => ({}));
-        // throw new Error(errorData.message || "Failed to fetch active schedule");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to fetch schedule");
       }
 
       const data = await response.json();
-      setSchedule(data);
+      console.log("API Response:", data);
+      
+      // Extract schedule from response (API returns { success: true, schedule: {...} })
+      const scheduleData = data.schedule || data;
+      setSchedule(scheduleData);
     } catch (err) {
       console.error("Error fetching active schedule:", err);
       const errorMessage = err.message || "Failed to load schedule";

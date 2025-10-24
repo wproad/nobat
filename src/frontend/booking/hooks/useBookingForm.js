@@ -1,20 +1,22 @@
 import { useState, useCallback, useMemo } from "@wordpress/element";
 
 /**
- * Custom hook for managing booking form state and validation
+ * Custom hook for managing booking form state and validation (v2 API)
  * @returns {Object} - Form state and handlers
  */
 export const useBookingForm = () => {
   const [formData, setFormData] = useState({
-    client_name: "",
-    client_phone: "",
-    appointment_date: "",
-    time_slot: "",
+    slot_id: "",
+    schedule_id: "",
+    note: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState("success");
   const [bookedAppointment, setBookedAppointment] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    window.nobatBooking && window.nobatBooking.isLoggedIn ? true : false
+  );
 
   const handleInputChange = useCallback(
     (field, value) => {
@@ -31,28 +33,22 @@ export const useBookingForm = () => {
   );
 
   const validateForm = useCallback(() => {
-    // Basic validation
-    if (
-      !formData.client_name ||
-      !formData.client_phone ||
-      !formData.appointment_date ||
-      !formData.time_slot
-    ) {
-      setMessage("Please fill in all fields");
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      setMessage("You must be logged in to book appointments");
       setMessageType("error");
       return false;
     }
 
-    // Phone number validation (Iranian format: 09xxxxxxxxx)
-    // const phoneRegex = /^09\d{9}$/;
-    // if (!phoneRegex.test(formData.client_phone.replace(/\s/g, ""))) {
-    //   setMessage("Please enter a valid phone number");
-    //   setMessageType("error");
-    //   return false;
-    // }
+    // Basic validation
+    if (!formData.slot_id || !formData.schedule_id) {
+      setMessage("Please select a time slot");
+      setMessageType("error");
+      return false;
+    }
 
     return true;
-  }, [formData]);
+  }, [formData, isLoggedIn]);
 
   const submitBooking = useCallback(async () => {
     if (!validateForm()) {
@@ -61,40 +57,59 @@ export const useBookingForm = () => {
 
     try {
       setLoading(true);
+      // Build request body
+      const requestBody = {
+        slot_id: parseInt(formData.slot_id),
+        schedule_id: parseInt(formData.schedule_id),
+      };
+
+      // Only include note if it has a value (empty string causes validation error)
+      if (formData.note && formData.note.trim() !== '') {
+        requestBody.note = formData.note.trim();
+      }
+
       const response = await fetch(
-        "/wp-json/appointment-booking/v1/appointments",
+        "/wp-json/nobat/v2/appointments",
         {
           method: "POST",
+          credentials: "include", // Important for authentication
           headers: {
             "Content-Type": "application/json",
+            "X-WP-Nonce": window.nobatBooking?.nonce || "", // WordPress authentication
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(requestBody),
         }
       );
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to book appointment");
+        // Handle specific error codes
+        if (data.code === "not_logged_in") {
+          setMessage("You must be logged in to book appointments. Redirecting to login...");
+          setMessageType("error");
+          setTimeout(() => {
+            window.location.href = "/wp-login.php?redirect_to=" + encodeURIComponent(window.location.href);
+          }, 2000);
+          return false;
+        } else if (data.code === "max_appointments_reached") {
+          setMessage(data.message || "You have reached the maximum of 3 active appointments");
+          setMessageType("error");
+          return false;
+        }
+        throw new Error(data.message || "Failed to book appointment");
       }
 
-      const data = await response.json();
-      // console.log("API response data:", data);
-
-      // Store the booked appointment data for the ticket
-      const appointmentData = {
-        ...formData,
-        appointment_date_jalali: formData.appointment_date, // The form date is already in Jalali format
-        id: data.id || Date.now(),
-      };
-      // console.log("Setting booked appointment:", appointmentData);
-      setBookedAppointment(appointmentData);
+      // Success!
+      setBookedAppointment(data.appointment);
+      setMessage(data.message || "Appointment booked successfully!");
+      setMessageType("success");
 
       // Reset form
       setFormData({
-        client_name: "",
-        client_phone: "",
-        appointment_date: "",
-        time_slot: "",
+        slot_id: "",
+        schedule_id: "",
+        note: "",
       });
 
       return true;
@@ -116,10 +131,9 @@ export const useBookingForm = () => {
 
   const resetForm = useCallback(() => {
     setFormData({
-      client_name: "",
-      client_phone: "",
-      appointment_date: "",
-      time_slot: "",
+      slot_id: "",
+      schedule_id: "",
+      note: "",
     });
     setBookedAppointment(null);
     setMessage(null);
@@ -133,16 +147,14 @@ export const useBookingForm = () => {
   // Reactive form validation that updates when formData changes
   const isFormValid = useMemo(() => {
     return !!(
-      formData.client_name &&
-      formData.client_phone &&
-      formData.appointment_date &&
-      formData.time_slot
+      isLoggedIn &&
+      formData.slot_id &&
+      formData.schedule_id
     );
   }, [
-    formData.client_name,
-    formData.client_phone,
-    formData.appointment_date,
-    formData.time_slot,
+    isLoggedIn,
+    formData.slot_id,
+    formData.schedule_id,
   ]);
 
   return {
@@ -151,6 +163,7 @@ export const useBookingForm = () => {
     message,
     messageType,
     bookedAppointment,
+    isLoggedIn,
     handleInputChange,
     submitBooking,
     clearMessage,

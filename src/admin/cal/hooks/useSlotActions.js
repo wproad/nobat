@@ -7,7 +7,7 @@ export const useSlotActions = (
   const updateSlotStatus = async (date, timeSlot, status) => {
     try {
       const response = await fetch(
-        `/wp-json/appointment-booking/v1/schedule/slot`,
+        `/wp-json/nobat/v2/schedules/slot`,
         {
           method: "PUT",
           headers: {
@@ -38,10 +38,15 @@ export const useSlotActions = (
   };
 
   const handleDeleteWithRefresh = async (id) => {
+    console.log("🗑️ Deleting appointment:", id);
     const ok = await handleDelete(id);
     if (ok) {
-      refetchAppointments();
-      refetchSchedule();
+      console.log("✅ Appointment deleted successfully, refreshing data...");
+      await refetchAppointments();
+      await refetchSchedule();
+      console.log("🔄 Data refreshed - slot should now be available");
+    } else {
+      console.error("❌ Failed to delete appointment");
     }
     return ok;
   };

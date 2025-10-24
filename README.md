@@ -1,100 +1,342 @@
-# Appointment Booking Plugin
+# Nobat (نوبت) - WordPress Appointment Booking Plugin
 
-A WordPress plugin that allows clients to book appointments through a simple form, with an admin interface to manage all bookings.
+**Version:** 2.0.0  
+**Requires WordPress:** 6.1+  
+**Requires PHP:** 7.4+  
+**License:** GPL-2.0-or-later  
+**Text Domain:** nobat
 
-## Features
+A modern, feature-rich appointment booking system for WordPress with admin management, Persian calendar support, and a clean architecture.
 
-- **Schedule Management (Admin)**: Create, list, view, and delete schedules, define weekly hours, duration, and buffers; update individual slot availability per day
-- **Active Schedule (Frontend)**: Visitors can view future available time slots from the active schedule
-- **Appointment Booking API**: Public endpoint to create appointments against available slots
-- **Responsive Design**: Works on desktop and mobile devices
-- **Admin Calendar View**: Weekly calendar for schedules with day columns and visual time blocks
+## ✨ Features
 
-## Installation
+### Core Functionality
+- 🗓️ **Schedule Management**: Create and manage multiple schedules with custom working hours
+- 📅 **Persian Calendar Support**: Full Jalali (Shamsi) calendar integration
+- 👥 **User-Based Appointments**: Appointments tied to WordPress user accounts
+- 🔄 **Cancellation Workflow**: Users can request cancellations, admins approve/deny
+- 📊 **Admin Calendar View**: Visual weekly calendar with drag-and-drop slot management
+- 🎯 **Appointment Limits**: Configurable max active appointments per user (default: 3)
+- ✅ **Status Tracking**: Pending, confirmed, completed, cancelled states with history
+- 🔐 **Role-Based Access**: Secure API with admin/user permission checks
 
-1. Upload the plugin folder to `/wp-content/plugins/`
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Install dependencies and build assets:
+### Technical Features
+- 🏗️ **Clean Architecture**: Repository pattern, service layer, dependency injection
+- 🔌 **REST API v2**: Modern, versioned API with full authentication
+- 📦 **PSR-4 Autoloading**: Composer-based class autoloading
+- 🎨 **React Admin UI**: Modern, responsive admin interface
+- 🌍 **Translation Ready**: Full i18n support with `.pot` file
+- 🗄️ **Normalized Database**: Proper relational schema (no JSON storage)
+
+## 📦 Installation
+
+### Quick Install
+
+1. Upload the plugin folder to `/wp-content/plugins/nobat/`
+2. Install dependencies and build assets:
    ```bash
-   cd /wp-content/plugins/appointment-booking/
+   cd /wp-content/plugins/nobat/
+   composer install
    npm install
    npm run build
    ```
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. The database will be created/updated automatically
 
-## Usage
-
-### For Clients
-
-Add the booking form to any page or post using the shortcode:
-
-```
-[appointment_booking title="Book Your Appointment"]
-```
-
-### For Admins
-
-1. Go to **Appointments** in the WordPress admin menu
-2. View all appointments in a table format
-3. Edit appointment status or delete appointments
-4. Use the refresh button to reload the list
-5. Open the **Appointments → Calendar** submenu for a weekly calendar view with navigation
-
-## Development
-
-### Building Assets
+### Manual Installation
 
 ```bash
-# Development mode with watch
+# Clone or download the plugin
+cd /wp-content/plugins/
+git clone https://github.com/your-username/nobat.git
+
+# Install dependencies
+cd nobat
+composer install --no-dev
+npm install
+npm run build
+```
+
+## 🚀 Quick Start
+
+### For Users (Booking Appointments)
+
+Users must be logged in to book appointments. Add the booking form to any page or post using the shortcode:
+
+```
+[nobat_frontend]
+```
+
+**Note:** Guests will see a login prompt. Users are limited to 3 active appointments by default.
+
+### For Admins (Managing Appointments)
+
+1. Navigate to **Nobat** in the WordPress admin menu
+2. **Add Schedule**: Create a new schedule with working hours
+3. **Calendar View**: Manage appointments visually on the calendar
+4. **Cancellations**: Review and process cancellation requests
+5. **Settings**: Configure global plugin settings
+
+## 📚 Documentation
+
+### Admin Menu Structure
+
+- **Nobat**
+  - All Appointments
+  - Calendar View (`nobat-cal`)
+  - Add Schedule (`nobat-scheduling`)
+  - All Schedules (`nobat-schedules`)
+  - Cancellations (`nobat-cancellations`)
+  - Settings (`nobat-settings`)
+
+### Database Schema
+
+The plugin creates 5 normalized tables:
+
+- `wp_nobat_schedules` — Schedule metadata
+- `wp_nobat_working_hours` — Working hours per schedule and day
+- `wp_nobat_slots` — Individual time slots (auto-generated)
+- `wp_nobat_appointments` — User appointments
+- `wp_nobat_history` — Appointment status change history
+
+For detailed schema documentation, see [docs/DATABASE-SCHEMA.md](docs/DATABASE-SCHEMA.md)
+
+### REST API v2
+
+All endpoints use the namespace `nobat/v2`:
+
+#### Appointments
+- `GET /wp-json/nobat/v2/appointments` — List appointments (admin/user)
+- `POST /wp-json/nobat/v2/appointments` — Create appointment (authenticated users)
+- `GET /wp-json/nobat/v2/appointments/{id}` — Get single appointment
+- `PUT /wp-json/nobat/v2/appointments/{id}` — Update appointment (admin)
+- `DELETE /wp-json/nobat/v2/appointments/{id}` — Delete appointment (admin)
+- `POST /wp-json/nobat/v2/appointments/{id}/cancel` — Request/approve cancellation
+- `POST /wp-json/nobat/v2/appointments/{id}/confirm` — Deny cancellation request
+- `POST /wp-json/nobat/v2/appointments/{id}/complete` — Mark as completed (admin)
+
+#### Schedules
+- `GET /wp-json/nobat/v2/schedules` — List all schedules (admin)
+- `POST /wp-json/nobat/v2/schedules` — Create schedule (admin)
+- `GET /wp-json/nobat/v2/schedules/{id}` — Get schedule by ID
+- `PUT /wp-json/nobat/v2/schedules/{id}` — Update schedule (admin)
+- `DELETE /wp-json/nobat/v2/schedules/{id}` — Delete schedule (admin)
+- `GET /wp-json/nobat/v2/schedules/active` — Get active schedule (public)
+
+#### Slots
+- `GET /wp-json/nobat/v2/slots` — List slots (with filters)
+- `GET /wp-json/nobat/v2/slots/{id}` — Get single slot
+- `PUT /wp-json/nobat/v2/slots/{id}` — Update slot status (admin)
+- `POST /wp-json/nobat/v2/slots/{id}/block` — Block a slot (admin)
+- `POST /wp-json/nobat/v2/slots/{id}/unblock` — Unblock a slot (admin)
+
+For complete API documentation, see [docs/API-v2-ENDPOINTS.md](docs/API-v2-ENDPOINTS.md)
+
+## 🛠️ Development
+
+### Prerequisites
+
+- Node.js 16+ (for building React components)
+- Composer 2.0+ (for PHP autoloading)
+- PHP 7.4+ with MySQL/MariaDB
+
+### Development Workflow
+
+```bash
+# Install dependencies
+composer install
+npm install
+
+# Development mode (watch for changes)
 npm run start
 
 # Production build
 npm run build
+
+# Regenerate autoloader
+composer dump-autoload
 ```
 
-## API Endpoints
+### Project Structure
 
-- `GET /wp-json/appointment-booking/v1/appointments` — List appointments (admin)
-- `POST /wp-json/appointment-booking/v1/appointments` — Create appointment (public)
-- `PUT /wp-json/appointment-booking/v1/appointments/{id}` — Update appointment status (admin)
-- `DELETE /wp-json/appointment-booking/v1/appointments/{id}` — Delete appointment (admin)
-- `GET /wp-json/appointment-booking/v1/available-slots` — Get available time slots (public)
-- `GET /wp-json/appointment-booking/v1/time-slots-template` — Get slot template based on settings (admin)
-- `POST /wp-json/appointment-booking/v1/schedule` — Create schedule (admin)
-- `GET /wp-json/appointment-booking/v1/schedule/active` — Get active schedule (public)
-- `GET /wp-json/appointment-booking/v1/schedule/available` — Get available future slots from active schedule (public)
-- `GET /wp-json/appointment-booking/v1/schedules` — List all schedules (admin)
-- `GET /wp-json/appointment-booking/v1/schedule/{id}` — Get schedule by ID (admin)
-- `PUT /wp-json/appointment-booking/v1/schedule/slot` — Update a single slot status for a given date (admin)
+```
+nobat/
+├── nobat.php                 # Main plugin file
+├── includes/
+│   ├── Core/                 # Core classes (Container, DatabaseManager)
+│   ├── Repositories/         # Data access layer
+│   ├── Services/             # Business logic layer
+│   ├── Controllers/          # REST API controllers
+│   ├── Middleware/           # API middleware (auth)
+│   ├── Utilities/            # Helper classes
+│   ├── Admin/                # Admin UI classes
+│   ├── bootstrap.php         # DI container setup
+│   └── rest/
+│       ├── routes.php        # v2 API route registration
+│       ├── schedule-api.php  # Legacy v1 compatibility (schedules)
+│       └── appointment-api.php # Legacy v1 compatibility (appointments)
+├── src/
+│   ├── admin/                # React admin components
+│   │   ├── cal/              # Calendar view
+│   │   ├── schedule/         # Schedule builder
+│   │   └── cancellations/    # Cancellation requests
+│   └── frontend/             # (Reserved for future frontend UI)
+├── docs/                     # Comprehensive documentation
+└── build/                    # Compiled assets
+```
 
-## Database
+### Architecture
 
-The plugin creates two tables on activation:
+Nobat follows **Clean Architecture** principles:
 
-- `wp_appointments` — Stores appointment records and their statuses
-- `wp_schedules` — Stores schedules, weekly hours, generated per-day timeslots, and settings
+1. **Repository Pattern**: Data access abstraction
+2. **Service Layer**: Business logic encapsulation
+3. **Dependency Injection**: Loose coupling via container
+4. **Controller Layer**: REST API endpoints
+5. **Middleware**: Authentication and authorization
 
-## Customization
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for details.
+
+## 🎨 Customization
 
 ### Styling
 
-Edit the SCSS files in the `src/` directory:
+Edit SCSS files in `src/`:
 
-- `src/admin/admin.scss` — Admin interface styles (appointments table, modal, etc.)
-- `src/admin/cal/cal.scss` — Admin calendar styles (weekly grid, headers, slots)
-- `src/admin/schedule/schedule.scss` — Admin schedule builder styles
-- `src/frontend/booking/frontend.scss` — Frontend booking/available slots styles
+- `src/admin/admin.scss` — Base admin styles
+- `src/admin/cal/cal.scss` — Calendar view
+- `src/admin/schedule/schedule.scss` — Schedule builder
+- `src/admin/cancellations/cancellations.scss` — Cancellation requests
 
-## Admin Asset Loading
+After editing, run `npm run build` to compile.
 
-Assets are enqueued only on this plugin's admin pages. The calendar bundle is loaded for the Calendar submenu. REST nonce (`wpApiSettings.nonce`) is localized for authenticated requests in admin.
+### Filters & Hooks
 
-## Requirements
+```php
+// Modify max appointments per user
+add_filter( 'nobat_max_appointments_per_user', function( $max ) {
+    return 5; // Allow 5 instead of default 3
+} );
 
-- WordPress 6.1+
-- PHP 7.4+
-- Node.js (for development)
-- MySQL/MariaDB
+// Custom appointment notification
+add_action( 'nobat_appointment_created', function( $appointment_id ) {
+    // Send custom notification
+} );
+```
 
-## License
+### Translation
 
-GPL-2.0-or-later
+Generate POT file for translation:
+
+```bash
+wp i18n make-pot . languages/nobat.pot
+```
+
+Place `.po` and `.mo` files in the `languages/` directory.
+
+## 🧪 Testing
+
+### Manual Testing Checklist
+
+- [ ] Create a new schedule
+- [ ] Generate slots correctly
+- [ ] Book appointment as logged-in user
+- [ ] Request cancellation
+- [ ] Admin approves/denies cancellation
+- [ ] Calendar view displays correctly
+- [ ] Appointment limits enforced
+- [ ] Persian dates display correctly
+
+### Automated Testing
+
+```bash
+# Run PHPUnit tests (when available)
+composer test
+
+# Run Jest tests (when available)
+npm test
+```
+
+## 📖 Documentation
+
+Comprehensive documentation is available in the `docs/` folder:
+
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [Database Schema](docs/DATABASE-SCHEMA.md)
+- [API v2 Endpoints](docs/API-v2-ENDPOINTS.md)
+- [Developer Guide](docs/DEVELOPER-GUIDE.md)
+- [Upgrade Guide](docs/UPGRADE-GUIDE.md)
+- [Refactoring Progress](docs/REFACTORING-COMPLETE-SUMMARY.md)
+
+## 🔄 Upgrading from v1.x
+
+If you're upgrading from the old "Appointment Booking" plugin:
+
+1. **Backup your database**
+2. Deactivate the old plugin
+3. Install dependencies: `composer install && npm install && npm run build`
+4. Activate Nobat
+5. Database will migrate automatically
+
+See [docs/UPGRADE-GUIDE.md](docs/UPGRADE-GUIDE.md) for detailed migration instructions.
+
+## 🐛 Known Issues
+
+- Frontend booking UI is reserved for future release (v2.1)
+- Old v1 API endpoints are deprecated but maintained for backward compatibility
+- Persian calendar widget requires custom JavaScript library
+
+## 🗺️ Roadmap
+
+### v2.1 (Planned)
+- [ ] Complete frontend React booking interface
+- [ ] Email notifications
+- [ ] SMS integration
+- [ ] Payment gateway integration
+- [ ] Multiple service types
+
+### v2.2 (Future)
+- [ ] Recurring appointments
+- [ ] Google Calendar sync
+- [ ] Multi-admin assignment
+- [ ] Custom fields for appointments
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Follow WordPress coding standards
+4. Write clean, documented code
+5. Submit a pull request
+
+## 📄 License
+
+This plugin is licensed under GPL-2.0-or-later.
+
+```
+Nobat - WordPress Appointment Booking Plugin
+Copyright (C) 2024 Your Name
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+```
+
+## 👨‍💻 Author
+
+**Your Name**  
+Website: https://yourwebsite.com  
+GitHub: https://github.com/your-username
+
+## 🙏 Acknowledgments
+
+- WordPress community
+- React and WordPress Components teams
+- Persian calendar contributors
+
+---
+
+**Made with ❤️ for the WordPress community**

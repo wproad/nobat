@@ -1,5 +1,5 @@
-.appointment-booking-admin {
-  .appointment-booking-header {
+.nobat-admin {
+  .nobat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -142,7 +142,7 @@
 
 // Responsive design
 @media (max-width: 768px) {
-  .appointment-booking-admin {
+  .nobat-admin {
     .appointments-table {
       .appointments-header,
       .appointment-row {

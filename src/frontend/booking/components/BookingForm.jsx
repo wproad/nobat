@@ -2,6 +2,7 @@ import { __ } from "@wordpress/i18n";
 import {
   Button,
   TextControl,
+  TextareaControl,
   Notice,
   Card,
   CardBody,
@@ -13,47 +14,99 @@ import TimeSlotSelector from "./TimeSlotSelector";
 import { useAvailableSchedule } from "../hooks";
 import { AppointmentTicket } from "./AppointmentTicket";
 
-const BookingForm = () => {
+const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
   const {
     formData,
     loading,
     message,
     messageType,
     bookedAppointment,
+    isLoggedIn,
     handleInputChange,
     submitBooking,
     clearMessage,
     getMinDate,
     isFormValid,
-  } = useBookingForm();
+  } = useBookingForm(scheduleId);
 
   const {
     schedule,
     loading: loadingSchedule,
     error: scheduleError,
     refetch,
-  } = useAvailableSchedule();
+  } = useAvailableSchedule(scheduleId);
 
   const handleSlotSelection = (selectionData) => {
     if (selectionData) {
-      handleInputChange("appointment_date", selectionData.date);
-      handleInputChange("time_slot", selectionData.timeSlot);
+      handleInputChange("slot_id", selectionData.slotId);
+      handleInputChange("schedule_id", selectionData.scheduleId);
     } else {
-      handleInputChange("appointment_date", "");
-      handleInputChange("time_slot", "");
+      handleInputChange("slot_id", "");
+      handleInputChange("schedule_id", "");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await submitBooking();
+    const success = await submitBooking();
+    
+    // If booking was successful and onSuccess callback is provided, call it
+    if (success && onSuccess) {
+      // Check if there's a custom success message
+      const successMessage = window.nobatBooking?.successMessage || "";
+      
+      if (successMessage) {
+        // Show custom message, don't redirect
+        // The success message will be shown by the form itself
+        // Don't call onSuccess to prevent redirect
+      } else {
+        // No custom message, redirect after showing the default success message
+        setTimeout(() => {
+          onSuccess();
+        }, 1500);
+      }
+    }
   };
 
-  // If appointment is booked successfully, show only the ticket
-  if (bookedAppointment) {
+  // Check if user is logged in
+  if (!isLoggedIn) {
     return (
       <div className="appointment-booking-form">
-        <AppointmentTicket appointmentData={bookedAppointment} />
+        <Card>
+          <CardHeader>
+            <h3>{__("Book an Appointment", "nobat")}</h3>
+          </CardHeader>
+          <CardBody>
+            <Notice status="warning" isDismissible={false}>
+              <p>
+                {__(
+                  "You must be logged in to book appointments.",
+                  "nobat"
+                )}
+              </p>
+            </Notice>
+            <div className="form-actions" style={{ marginTop: "16px" }}>
+              <Button
+                variant="primary"
+                href={
+                  "/wp-login.php?redirect_to=" +
+                  encodeURIComponent(window.location.href)
+                }
+                __next40pxDefaultSize
+              >
+                {__("Log In", "nobat")}
+              </Button>
+              <Button
+                variant="secondary"
+                href="/wp-login.php?action=register"
+                __next40pxDefaultSize
+                style={{ marginLeft: "8px" }}
+              >
+                {__("Register", "nobat")}
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
       </div>
     );
   }
@@ -62,47 +115,41 @@ const BookingForm = () => {
     <div className="appointment-booking-form">
       <Card>
         <CardHeader>
-          <h3>{__("Book an Appointment", "appointment-booking")}</h3>
+          <div className="card-header-content">
+            <h3>{__("Book an Appointment", "nobat")}</h3>
+            <div className="header-actions">
+              {onBack && (
+                <Button
+                  variant="secondary"
+                  onClick={onBack}
+                  className="back-button"
+                  size="compact"
+                >
+                  ← {__("See My Appointments", "nobat")}
+                </Button>
+              )}
+            </div>
+          </div>
         </CardHeader>
         <CardBody>
-          {message && (
+          {message && messageType === "success" && window.nobatBooking?.successMessage ? (
+            <div className="custom-success-message">
+              <div 
+                dangerouslySetInnerHTML={{ __html: window.nobatBooking.successMessage }}
+              />
+            </div>
+          ) : message ? (
             <Notice status={messageType} isDismissible onRemove={clearMessage}>
               {message}
             </Notice>
-          )}
+          ) : null}
 
           <form onSubmit={handleSubmit} className="booking-form">
-            <div className="form-row">
-              <TextControl
-                label={__("Your Name", "appointment-booking")}
-                value={formData.client_name}
-                onChange={(value) => handleInputChange("client_name", value)}
-                required
-                placeholder={__("Enter your full name", "appointment-booking")}
-              />
-            </div>
-
-            <div className="form-row">
-              <TextControl
-                label={__("Phone Number", "appointment-booking")}
-                value={formData.client_phone}
-                onChange={(value) => handleInputChange("client_phone", value)}
-                required
-                placeholder="09xxxxxxxxx"
-                type="tel"
-                name="tel"
-                id="appointment-booking-phone"
-                autoComplete="tel"
-                inputMode="tel"
-                autoCorrect="off"
-                autoCapitalize="off"
-              />
-            </div>
 
             {loadingSchedule ? (
               <div className="loading-slots">
                 <Spinner />
-                <span>{__("Loading schedule...", "appointment-booking")}</span>
+                <span>{__("Loading available slots...", "nobat")}</span>
               </div>
             ) : scheduleError ? (
               <div className="form-row">
@@ -115,20 +162,35 @@ const BookingForm = () => {
                     variant="secondary"
                     __next40pxDefaultSize
                   >
-                    {__("Retry", "appointment-booking")}
+                    {__("Retry", "nobat")}
                   </Button>
                 </div>
               </div>
             ) : (
-              <div className="form-row">
-                <span className="date-selector-label">
-                  {__("Select a Date", "appointment-booking")}
-                </span>
-                <TimeSlotSelector
-                  schedule={schedule}
-                  onSlotSelect={handleSlotSelection}
-                />
-              </div>
+              <>
+                <div className="form-row">
+                  <span className="date-selector-label">
+                    {__("Select a Time Slot", "nobat")}
+                  </span>
+                  <TimeSlotSelector
+                    schedule={schedule}
+                    onSlotSelect={handleSlotSelection}
+                  />
+                </div>
+
+                <div className="form-row">
+                  <TextareaControl
+                    label={__("Note (Optional)", "nobat")}
+                    value={formData.note}
+                    onChange={(value) => handleInputChange("note", value)}
+                    placeholder={__(
+                      "Add any additional information or special requests",
+                      "nobat"
+                    )}
+                    rows={3}
+                  />
+                </div>
+              </>
             )}
 
             <div className="form-actions">
@@ -143,10 +205,10 @@ const BookingForm = () => {
                 {loading ? (
                   <>
                     <Spinner />
-                    {__("Booking...", "appointment-booking")}
+                    {__("Booking...", "nobat")}
                   </>
                 ) : (
-                  __("Book Appointment", "appointment-booking")
+                  __("Book Appointment", "nobat")
                 )}
               </Button>
             </div>

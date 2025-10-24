@@ -1,9 +1,18 @@
 import { __ } from "@wordpress/i18n";
 
+/**
+ * AppointmentTicket component - v2 API compatible
+ * Shows confirmation after successful booking
+ */
 const AppointmentTicket = ({ appointmentData }) => {
   if (!appointmentData) {
     return null;
   }
+
+  // Format time slot display
+  const timeSlot = appointmentData.start_time && appointmentData.end_time
+    ? `${appointmentData.start_time} - ${appointmentData.end_time}`
+    : "";
 
   return (
     <div className="appointment-ticket">
@@ -11,30 +20,18 @@ const AppointmentTicket = ({ appointmentData }) => {
         {/* Ticket Header */}
         <div className="ticket-header">
           <div className="ticket-header-top">
-            {/* <div className="ticket-logo">
-              <div className="ticket-logo-icon">📅</div>
-              <span className="ticket-logo-text">
-                {__("Appointment", "appointment-booking")}
-              </span>
-            </div>
             <div className="ticket-status">
               <span className="status-badge pending">
-                {__("Pending", "appointment-booking")}
+                {__("Pending Confirmation", "nobat")}
               </span>
-            </div> */}
+            </div>
           </div>
           <div className="ticket-title">
             <h2>
-              {__(
-                "{name} Your appointment request was sent successfully",
-                "appointment-booking"
-              ).replace("{name}", appointmentData.client_name)}
+              {__("Your appointment request was sent successfully!", "nobat")}
             </h2>
             <p className="ticket-subtitle">
-              {__(
-                "Youll recieve confirmation SMS to phone number {phone}",
-                "appointment-booking"
-              ).replace("{phone}", appointmentData.client_phone)}
+              {__("You will be notified once an admin confirms your appointment.", "nobat")}
             </p>
           </div>
         </div>
@@ -46,19 +43,30 @@ const AppointmentTicket = ({ appointmentData }) => {
             <div className="info-row">
               <div className="info-item">
                 <div className="info-label">
-                  {__("Date", "appointment-booking")}
+                  {__("Date", "nobat")}
                 </div>
                 <div className="info-value">
-                  {appointmentData.appointment_date_jalali}
+                  {appointmentData.slot_date_jalali || appointmentData.slot_date}
                 </div>
               </div>
               <div className="info-item">
                 <div className="info-label">
-                  {__("Time", "appointment-booking")}
+                  {__("Time", "nobat")}
                 </div>
-                <div className="info-value">{appointmentData.time_slot}</div>
+                <div className="info-value">{timeSlot}</div>
               </div>
             </div>
+            
+            {appointmentData.note && (
+              <div className="info-row">
+                <div className="info-item" style={{ width: "100%" }}>
+                  <div className="info-label">
+                    {__("Your Note", "nobat")}
+                  </div>
+                  <div className="info-value">{appointmentData.note}</div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Appointment Details */}
@@ -68,7 +76,7 @@ const AppointmentTicket = ({ appointmentData }) => {
                 <div className="date-icon">📅</div>
                 <div className="date-info">
                   <div className="date-label">
-                    {__("Date", "appointment-booking")}
+                    {__("Date", "nobat")}
                   </div>
                   <div className="date-value">
                     {formatJalaliDate(appointmentData.appointment_date_jalali)}
@@ -79,7 +87,7 @@ const AppointmentTicket = ({ appointmentData }) => {
                 <div className="time-icon">🕐</div>
                 <div className="time-info">
                   <div className="time-label">
-                    {__("Time", "appointment-booking")}
+                    {__("Time", "nobat")}
                   </div>
                   <div className="time-value">{appointmentData.time_slot}</div>
                 </div>
@@ -91,7 +99,7 @@ const AppointmentTicket = ({ appointmentData }) => {
           <div className="ticket-footer">
             <div className="ticket-id-section">
               <div className="ticket-id-label">
-                {__("Booking Reference", "appointment-booking")}
+                {__("Booking Reference", "nobat")}
               </div>
               <div className="ticket-id-value">
                 #{appointmentData.id || "TBD"}
@@ -102,7 +110,7 @@ const AppointmentTicket = ({ appointmentData }) => {
               <div className="note-text">
                 {__(
                   "You'll receive an SMS confirmation after admin approval",
-                  "appointment-booking"
+                  "nobat"
                 )}
               </div>
             </div> */}

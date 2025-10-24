@@ -14,14 +14,14 @@ export function useSchedule() {
       .catch(() =>
         setNotice({
           status: "error",
-          message: __("Error fetching users.", "appointment-booking"),
+          message: __("Error fetching users.", "nobat"),
         })
       );
   }, []);
 
   const saveSchedule = (payload) => {
     return apiFetch({
-      path: "appointment-booking/v1/schedule",
+      path: "nobat/v2/schedules",
       method: "POST",
       data: payload,
     })
@@ -29,13 +29,13 @@ export function useSchedule() {
         // console.log("Schedule save response:", response);
         setNotice({
           status: "success",
-          message: __("Settings saved successfully!", "appointment-booking"),
+          message: __("Settings saved successfully!", "nobat"),
         });
         return response;
       })
       .catch((error) => {
         console.error("Schedule save error:", error);
-        let errorMessage = __("Error saving settings.", "appointment-booking");
+        let errorMessage = __("Error saving settings.", "nobat");
 
         if (error && error.message) {
           errorMessage = error.message;

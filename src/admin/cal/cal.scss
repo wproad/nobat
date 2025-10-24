@@ -41,6 +41,182 @@
     }
   }
 
+  .calendar-legend {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    margin-bottom: 16px;
+
+    .legend-items {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      position: relative;
+
+      &.clickable {
+        cursor: pointer;
+        
+        &:hover {
+          background: rgba(0, 124, 186, 0.08);
+          
+          .legend-info-icon {
+            opacity: 1;
+            color: #007cba;
+          }
+        }
+      }
+
+      .legend-color {
+        width: 18px;
+        height: 18px;
+        border-radius: 3px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        flex-shrink: 0;
+        
+        // Apply same colors as slots
+        &.slot-available {
+          background: transparent;
+          border: 2px solid #4caf50;
+        }
+        
+        &.slot-booked {
+          background: #4caf50;
+        }
+        
+        &.slot-blocked {
+          background: #f44336;
+        }
+        
+        &.slot-unavailable {
+          background: #eeeeee;
+        }
+      }
+
+      .legend-label {
+        color: #495057;
+        font-weight: 500;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+
+      .legend-info-icon {
+        font-size: 14px;
+        color: #6c757d;
+        opacity: 0.6;
+        transition: all 0.2s;
+        margin-left: 2px;
+      }
+    }
+  }
+
+  // Status Info Modal
+  .components-modal__screen-overlay {
+    &:has(.status-info-modal) {
+      z-index: 100001;
+    }
+  }
+
+  .status-info-modal {
+    .components-modal__content {
+      min-width: 450px;
+      max-width: 550px;
+      padding: 0;
+    }
+
+    .components-modal__header {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 20px 24px;
+      
+      .components-modal__header-heading {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1e293b;
+      }
+    }
+
+    .status-modal-content {
+      padding: 24px;
+
+      .status-color-preview {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        background: #f8fafc;
+        border-radius: 8px;
+        margin-bottom: 24px;
+        border: 1px solid #e2e8f0;
+
+        .status-name {
+          font-size: 18px;
+          font-weight: 600;
+          color: #334155;
+        }
+      }
+
+      .status-section {
+        margin-bottom: 20px;
+
+        h4 {
+          font-size: 13px;
+          font-weight: 600;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin: 0 0 10px 0;
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #475569;
+          margin: 0;
+        }
+
+        &.example {
+          background: #f0f9ff;
+          padding: 16px;
+          border-radius: 6px;
+          border-left: 3px solid #0284c7;
+
+          h4 {
+            color: #0369a1;
+          }
+
+          p {
+            font-style: italic;
+            color: #0c4a6e;
+          }
+        }
+      }
+
+      .modal-actions {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          min-width: 100px;
+        }
+      }
+    }
+  }
+
   .calendar-grid {
     display: grid;
     grid-template-columns: 100px repeat(7, 100px);
@@ -67,16 +243,66 @@
       justify-content: center;
     }
     .time-slot {
-      padding: 20px 10px;
+      padding: 8px 10px;
       text-align: center;
-      font-size: 12px;
-      color: #666;
       border-bottom: 1px solid #eee;
       height: 45px; // must match .day-column .time-slot-container
       display: flex;
       align-items: center;
       justify-content: center;
       background: #f8f9fa;
+      transition: background-color 0.15s ease;
+
+      &.on-the-hour {
+        background: #e3e6ea;
+        border-bottom: 2px solid #cbd5e0;
+
+        .time-slot-content {
+          .time-start {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+          }
+
+          .time-separator {
+            color: #64748b;
+          }
+
+          .time-end {
+            font-weight: 600;
+            color: #475569;
+          }
+        }
+      }
+
+      .time-slot-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        line-height: 1;
+
+        .time-start {
+          font-size: 14px;
+          font-weight: 600;
+          color: #1e293b;
+          letter-spacing: 0.3px;
+        }
+
+        .time-separator {
+          font-size: 8px;
+          color: #94a3b8;
+          font-weight: 400;
+          margin: 0 2px;
+        }
+
+        .time-end {
+          font-size: 11px;
+          font-weight: 500;
+          color: #64748b;
+          letter-spacing: 0.2px;
+        }
+      }
     }
   }
 
@@ -117,6 +343,8 @@
         position: relative;
         padding: 2px; // ensure equal total height
         cursor: pointer;
+        transition: background-color 0.15s ease;
+        
         &.excluded {
           background: #f5f5f5; // slight gray for unavailable (excluded) time slots
         }
@@ -131,6 +359,16 @@
         &.past-partial .empty-slot {
           color: #888;
         }
+        
+        // Hour boundary styling
+        &.on-the-hour {
+          background: rgba(0, 0, 0, 0.02);
+          border-bottom: 2px solid #cbd5e0;
+          
+          &.excluded {
+            background: #eaecee;
+          }
+        }
         .time-slot-content {
           height: 100%;
           .empty-slot {
@@ -141,6 +379,47 @@
             color: #999;
             font-size: 11px;
             font-style: italic;
+            transition: all 0.2s ease;
+            
+            // Slot status styles
+            &.slot-available {
+              background: transparent;
+              color: #4caf50;
+              font-weight: 500;
+              &:hover {
+                background: #e8f5e9;
+              }
+            }
+            
+            &.slot-booked {
+              background: #4caf50;
+              color: white;
+              font-weight: 600;
+              font-style: normal;
+              &:hover {
+                background: #45a049;
+              }
+            }
+            
+            &.slot-blocked {
+              background: #f44336;
+              color: white;
+              font-weight: 600;
+              font-style: normal;
+              &:hover {
+                background: #da190b;
+              }
+            }
+            
+            &.slot-unavailable {
+              background: #eeeeee;
+              color: #b6b6b6;
+              font-weight: 500;
+              font-style: normal;
+              &:hover {
+                background: #757575;
+              }
+            }
           }
         }
       }
@@ -287,6 +566,195 @@
       font-size: 16px;
       width: 100%;
       max-width: 300px;
+    }
+  }
+}
+
+// Appointment Detail Modal Styles
+.appointment-detail-modal {
+  .components-modal__content {
+    min-width: 500px;
+    max-width: 600px;
+  }
+
+  .appointment-detail-content {
+    .appointment-info {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 8px 0;
+        border-bottom: 1px solid #e5e7eb;
+        gap: 12px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &.note-row {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        strong {
+          font-size: 13px;
+          font-weight: 600;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          min-width: 100px;
+          flex-shrink: 0;
+        }
+
+        span {
+          font-size: 15px;
+          color: #1e293b;
+          font-weight: 500;
+          flex: 1;
+          text-align: right;
+        }
+
+        .client-name-link {
+          color: #3b82f6;
+          text-decoration: none;
+          font-weight: 600;
+          transition: all 0.2s ease;
+          border-bottom: 2px solid transparent;
+
+          &:hover {
+            color: #2563eb;
+            border-bottom-color: #3b82f6;
+          }
+        }
+
+        .phone-number {
+          font-family: monospace;
+          direction: ltr;
+          text-align: right;
+          font-size: 16px;
+          letter-spacing: 0.5px;
+        }
+
+        .date-value {
+          font-weight: 600;
+          color: #0f172a;
+          direction: ltr;
+          text-align: right;
+        }
+
+        .admin-name {
+          font-weight: 600;
+          color: #6366f1;
+          background: #eef2ff;
+          padding: 4px 10px;
+          border-radius: 6px;
+          display: inline-block;
+        }
+
+        .time-slot {
+          font-weight: 600;
+          color: #0f172a;
+          font-family: monospace;
+          direction: ltr;
+          text-align: right;
+          font-size: 16px;
+        }
+
+        .status-badge {
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          display: inline-block;
+        }
+
+        .note-content {
+          font-style: italic;
+          color: #475569;
+          background: #f1f5f9;
+          padding: 8px 10px;
+          border-radius: 6px;
+          border-left: 3px solid #94a3b8;
+          text-align: left;
+          direction: rtl;
+          line-height: 1.5;
+        }
+
+        .cancellation-reason {
+          font-style: italic;
+          color: #991b1b;
+          background: #fef2f2;
+          padding: 8px 10px;
+          border-radius: 6px;
+          border-left: 3px solid #ef4444;
+          text-align: left;
+          direction: rtl;
+          line-height: 1.5;
+          font-weight: 500;
+        }
+      }
+    }
+
+    // WhatsApp button styling
+    .whatsapp-action {
+      background: #25D366 !important;
+      border-color: #25D366 !important;
+      color: white !important;
+
+      &:hover:not(:disabled) {
+        background: #1da851 !important;
+        border-color: #1da851 !important;
+      }
+
+      .button-icon {
+        filter: grayscale(0);
+      }
+    }
+  }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .appointment-detail-modal {
+    .components-modal__content {
+      min-width: auto;
+      width: 95vw;
+      max-width: 95vw;
+    }
+
+    .appointment-detail-content {
+      .appointment-info {
+        padding: 16px;
+
+        .info-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+
+          strong {
+            min-width: auto;
+          }
+
+          span {
+            text-align: left;
+          }
+
+          .phone-number,
+          .date-value,
+          .time-slot {
+            text-align: left;
+          }
+        }
+      }
     }
   }
 }

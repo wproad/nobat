@@ -1,0 +1,19 @@
+{
+    "name": "nobat/nobat",
+    "description": "A modern appointment booking system for WordPress with admin management and Persian calendar support",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nobat\\": "includes/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
+

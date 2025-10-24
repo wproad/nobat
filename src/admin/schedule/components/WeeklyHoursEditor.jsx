@@ -5,7 +5,7 @@ export function WeeklyHoursEditor({ weekdays, weeklyHours, setWeeklyHours }) {
   const addWorkingHour = (day) => {
     setWeeklyHours((prev) => ({
       ...prev,
-      [day]: [...prev[day], "00:00-00:00"],
+      [day]: [...prev[day], "09:00-12:00"],
     }));
   };
 
@@ -27,7 +27,7 @@ export function WeeklyHoursEditor({ weekdays, weeklyHours, setWeeklyHours }) {
 
   return (
     <>
-      <h3>{__("Weekly Hours", "appointment-booking")}</h3>
+      <h3>{__("Weekly Hours", "nobat")}</h3>
       {weekdays.map((day) => (
         <WorkingHoursForDay
           key={day}

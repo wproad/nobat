@@ -5,7 +5,7 @@ import { CreateSchedule } from "./components";
 
 domReady(() => {
   const root = createRoot(
-    document.getElementById("appointment-booking-scheduling")
+    document.getElementById("nobat-scheduling")
   );
 
   root.render(<CreateSchedule />);

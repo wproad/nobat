@@ -23,16 +23,19 @@ const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
       <div className="time-slots">
         {(day.slots || []).map((slot, index) => {
           const isUnavailable = slot.status === "unavailable";
-          const isReserved = slot.status === "reserved" && slot.appointment;
+          const hasAppointment = slot.status === "booked" && slot.appointment;
+          // Check if this slot starts on the hour (e.g., 09:00, 10:00, etc.)
+          const isOnTheHour = slot.start?.endsWith(':00');
+          
           return (
             <div
               key={index}
               className={`time-slot-container${
                 isUnavailable ? " excluded" : ""
-              }`}
+              }${isOnTheHour ? " on-the-hour" : ""}`}
             >
               <div className="time-slot-content">
-                {isReserved ? (
+                {hasAppointment ? (
                   <AppointmentSlot
                     appointment={slot.appointment}
                     onStatusUpdate={onStatusUpdate}

@@ -9,7 +9,10 @@ import {
 const AppointmentSlot = ({ appointment, onStatusUpdate, onDelete }) => {
   const [showDetailModal, setShowDetailModal] = useState(false);
 
+  console.log("🎯 AppointmentSlot received appointment:", appointment);
+
   const handleTimeBlockClick = () => {
+    console.log("👆 Clicked appointment slot, opening modal with data:", appointment);
     setShowDetailModal(true);
   };
 
@@ -25,8 +28,8 @@ const AppointmentSlot = ({ appointment, onStatusUpdate, onDelete }) => {
         onClick={handleTimeBlockClick}
       >
         <div className="time-block-content">
-          <div className="client-name">{appointment.client_name}</div>
-          <div className="client-phone">{appointment.client_phone}</div>
+          <div className="client-name">{appointment.user_name}</div>
+          <div className="client-phone">{appointment.user_phone}</div>
         </div>
       </div>
       <AppointmentDetailModal
