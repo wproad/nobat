@@ -704,20 +704,330 @@
       }
     }
 
-    // WhatsApp button styling
-    .whatsapp-action {
-      background: #25D366 !important;
-      border-color: #25D366 !important;
-      color: white !important;
+    // Action buttons section
+    .appointment-actions {
+      margin-block-start: 20px;
+      padding-block-start: 20px;
+      border-block-start: 1px solid #e5e7eb;
+
+      .actions-title {
+        margin-block-end: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+        letter-spacing: 0.025em;
+      }
+
+      .actions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .action-button {
+        width: 100%;
+        justify-content: flex-start;
+        height: auto;
+        padding: 12px 16px;
+        text-align: start;
+        white-space: normal;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        .action-content {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          gap: 12px;
+        }
+
+        .action-icon {
+          font-size: 18px;
+          min-width: 24px;
+          text-align: center;
+          flex-shrink: 0;
+        }
+
+        .action-text {
+          flex: 1;
+          text-align: start;
+        }
+
+        .action-label {
+          font-weight: 600;
+          font-size: 14px;
+          display: block;
+          margin-block-end: 2px;
+        }
+
+        .action-description {
+          font-size: 12px;
+          opacity: 0.75;
+          line-height: 1.4;
+          font-weight: 400;
+        }
+
+        // Button variants with clean styles
+        &.nobat-button--primary {
+          &:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(34, 113, 177, 0.2);
+          }
+        }
+
+        &.nobat-button--secondary {
+          &:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(34, 113, 177, 0.15);
+          }
+
+          &.nobat-button--destructive {
+            color: #dc2626;
+            border-color: #fca5a5;
+            
+            &:hover:not(:disabled) {
+              background: #fef2f2;
+              border-color: #dc2626;
+              box-shadow: 0 2px 4px rgba(220, 38, 38, 0.15);
+            }
+          }
+        }
+
+        &.nobat-button--link {
+          border: 1px solid transparent;
+          padding: 10px 14px;
+          text-decoration: none;
+          
+          &.nobat-button--destructive {
+            color: #dc2626;
+            background: #fff !important;
+            
+            &:hover:not(:disabled) {
+              background: #fef2f2;
+              border-color: #fee2e2;
+            }
+          }
+        }
+
+        // WhatsApp button specific styling
+        &.whatsapp-action {
+          background: #25D366;
+          border-color: #25D366;
+          color: white;
+
+          &:hover:not(:disabled) {
+            background: #1da851;
+            border-color: #1da851;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(37, 211, 102, 0.3);
+          }
+        }
+      }
+    }
+
+    // Session Report section
+    .appointment-report {
+      margin-block-start: 24px;
+      padding-block-start: 24px;
+      border-block-start: 1px solid #e5e7eb;
+
+      .report-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-block-end: 12px;
+
+        .report-title {
+          font-size: 14px;
+          font-weight: 600;
+          color: #374151;
+          letter-spacing: 0.025em;
+          margin: 0;
+        }
+
+        .edit-button {
+          font-size: 13px;
+          padding: 6px 12px;
+        }
+      }
+
+      .report-message {
+        padding: 10px 14px;
+        margin-block-end: 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        
+        &.success {
+          background: #d1fae5;
+          color: #065f46;
+          border: 1px solid #6ee7b7;
+        }
+        
+        &.error {
+          background: #fee2e2;
+          color: #991b1b;
+          border: 1px solid #fca5a5;
+        }
+      }
+
+      .report-actions {
+        display: flex;
+        gap: 8px;
+        margin-block-start: 12px;
+        
+        button {
+          flex: 1;
+        }
+        
+        .cancel-button {
+          flex: 0 0 auto;
+          min-width: 100px;
+        }
+      }
+
+      .report-display {
+        padding: 14px;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #374151;
+        white-space: pre-wrap;
+
+        .empty-state {
+          color: #9ca3af;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+// Slot Status Modal
+.slot-status-modal {
+  .slot-info-box {
+    margin-block-end: 20px;
+    padding: 14px;
+    background-color: #f3f4f6;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+
+    .slot-info-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-block-end: 6px;
+    }
+
+    .slot-info-time {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111827;
+      font-family: monospace;
+      direction: ltr;
+    }
+
+    .slot-info-status {
+      font-size: 13px;
+      color: #6b7280;
+      margin-block-start: 8px;
+
+      strong {
+        color: #111827;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .slot-actions-section {
+    margin-block-end: 16px;
+
+    .actions-title {
+      margin-block-end: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      letter-spacing: 0.025em;
+    }
+
+    .actions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slot-action-button {
+      width: 100%;
+      justify-content: flex-start;
+      height: auto;
+      padding: 12px 16px;
+      text-align: start;
+      white-space: normal;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+
+      .action-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 12px;
+      }
+
+      .action-icon {
+        font-size: 18px;
+        min-width: 24px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .action-text {
+        flex: 1;
+        text-align: start;
+      }
+
+      .action-label {
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+        margin-block-end: 2px;
+      }
+
+      .action-description {
+        font-size: 12px;
+        opacity: 0.75;
+        line-height: 1.4;
+        font-weight: 400;
+      }
 
       &:hover:not(:disabled) {
-        background: #1da851 !important;
-        border-color: #1da851 !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(34, 113, 177, 0.15);
       }
+    }
+  }
 
-      .button-icon {
-        filter: grayscale(0);
-      }
+  .slot-modal-footer {
+    margin-block-start: 16px;
+    padding-block-start: 16px;
+    border-block-start: 1px solid #e5e7eb;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// Delete Confirmation Modal
+.appointment-detail-modal,
+.delete-confirmation-modal {
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-block-start: 20px;
+    justify-content: flex-end;
+    
+    button {
+      min-width: 100px;
     }
   }
 }

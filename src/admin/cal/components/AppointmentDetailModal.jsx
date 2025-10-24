@@ -264,75 +264,36 @@ const AppointmentDetailModal = ({
 
             {/* All Action Buttons */}
             {allActions.length > 0 && (
-              <div className="appointment-actions" style={{
-                marginTop: 16,
-                paddingTop: 16,
-                borderTop: '2px solid #e5e7eb'
-              }}>
-                <h4 style={{ 
-                  marginBottom: 12, 
-                  fontSize: 13, 
-                  fontWeight: 600,
-                  color: '#374151',
-                  letterSpacing: '0.025em'
-                }}>
+              <div className="appointment-actions">
+                <h4 className="actions-title">
                   {__('Available Actions', 'nobat')}
                 </h4>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 8
-                }}>
+                <div className="actions-list">
                   {allActions.map((action, index) => (
                     <Button
                       key={action.status || action.type || index}
                       variant={action.variant}
                       isDestructive={action.isDestructive}
-                      className={action.className}
+                      className={`action-button ${action.className || ''}`}
                       onClick={action.type === 'status' 
                         ? () => handleStatusChange(action.status)
                         : action.onClick
                       }
-                      style={{
-                        width: '100%',
-                        justifyContent: 'flex-start',
-                        height: 'auto',
-                        padding: '10px 14px',
-                        textAlign: 'left',
-                        whiteSpace: 'normal'
-                      }}
                     >
-                      <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'center',
-                        width: '100%'
-                      }}>
+                      <div className="action-content">
                         {action.icon && (
-                          <span style={{ 
-                            fontSize: '16px',
-                            marginRight: 10,
-                            minWidth: '20px',
-                            textAlign: 'center'
-                          }}>
+                          <span className="action-icon">
                             {action.icon}
                           </span>
                         )}
-                        <div style={{ flex: 1, marginLeft: action.icon ? 0 : 0 }}>
-                          <div style={{ 
-                            fontWeight: 600,
-                            fontSize: '13px',
-                            marginBottom: action.description ? '2px' : 0
-                          }}>
+                        <div className="action-text">
+                          <span className="action-label">
                             {action.label}
-                          </div>
+                          </span>
                           {action.description && (
-                            <div style={{ 
-                              fontSize: '11px',
-                              opacity: 0.75,
-                              lineHeight: 1.3
-                            }}>
+                            <span className="action-description">
                               {action.description}
-                            </div>
+                            </span>
                           )}
                         </div>
                       </div>
@@ -343,34 +304,16 @@ const AppointmentDetailModal = ({
             )}
 
             {/* Session Report Section */}
-            <div className="appointment-report" style={{
-              marginTop: 24,
-              paddingTop: 20,
-              borderTop: '2px solid #e5e7eb'
-            }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: 12
-              }}>
-                <h4 style={{ 
-                  fontSize: 14, 
-                  fontWeight: 600,
-                  color: '#374151',
-                  letterSpacing: '0.025em',
-                  margin: 0
-                }}>
+            <div className="appointment-report">
+              <div className="report-header">
+                <h4 className="report-title">
                   {__('Session Report', 'nobat')}
                 </h4>
                 {!isEditingReport && report && (
                   <Button
                     variant="link"
                     onClick={() => setIsEditingReport(true)}
-                    style={{ 
-                      fontSize: 13,
-                      padding: '4px 8px'
-                    }}
+                    className="edit-button"
                   >
                     {__('Edit', 'nobat')}
                   </Button>
@@ -378,15 +321,7 @@ const AppointmentDetailModal = ({
               </div>
               
               {reportMessage && (
-                <div style={{
-                  padding: '10px 12px',
-                  marginBottom: 12,
-                  borderRadius: 6,
-                  fontSize: 13,
-                  backgroundColor: reportMessage.type === 'success' ? '#d1fae5' : '#fee2e2',
-                  color: reportMessage.type === 'success' ? '#065f46' : '#991b1b',
-                  border: `1px solid ${reportMessage.type === 'success' ? '#6ee7b7' : '#fca5a5'}`,
-                }}>
+                <div className={`report-message ${reportMessage.type}`}>
                   {reportMessage.text}
                 </div>
               )}
@@ -398,24 +333,14 @@ const AppointmentDetailModal = ({
                     onChange={setReport}
                     placeholder={__('Add notes, observations, or session summary...', 'nobat')}
                     rows={2}
-                    style={{
-                      width: '100%',
-                      fontSize: 14,
-                      lineHeight: 1.5
-                    }}
                   />
                   
-                  <div style={{
-                    display: 'flex',
-                    gap: 8,
-                    marginTop: 12
-                  }}>
+                  <div className="report-actions">
                     <Button
                       variant="primary"
                       onClick={handleSaveReport}
                       isBusy={isSavingReport}
                       disabled={isSavingReport}
-                      style={{ flex: 1 }}
                     >
                       {isSavingReport ? __('Saving...', 'nobat') : __('Save Report', 'nobat')}
                     </Button>
@@ -427,6 +352,7 @@ const AppointmentDetailModal = ({
                           setIsEditingReport(false);
                         }}
                         disabled={isSavingReport}
+                        className="cancel-button"
                       >
                         {__('Cancel', 'nobat')}
                       </Button>
@@ -434,17 +360,8 @@ const AppointmentDetailModal = ({
                   </div>
                 </>
               ) : (
-                <div style={{
-                  padding: '12px',
-                  backgroundColor: '#f9fafb',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: 6,
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  color: '#374151',
-                  whiteSpace: 'pre-wrap'
-                }}>
-                  {report || <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>{__('No report added yet', 'nobat')}</span>}
+                <div className="report-display">
+                  {report || <span className="empty-state">{__('No report added yet', 'nobat')}</span>}
                 </div>
               )}
             </div>
@@ -457,6 +374,7 @@ const AppointmentDetailModal = ({
         <Modal
           title={__("Delete Appointment", "nobat")}
           onRequestClose={() => setShowDeleteModal(false)}
+          className="delete-confirmation-modal"
         >
           <p>
             {__(
@@ -464,12 +382,7 @@ const AppointmentDetailModal = ({
               "nobat"
             )}
           </p>
-          <div className="modal-actions" style={{
-                display: "flex",
-                gap: 8,
-                marginTop: 16,
-                justifyContent: "flex-end",
-              }}>
+          <div className="modal-actions">
             <Button
               variant="secondary"
               onClick={() => setShowDeleteModal(false)}

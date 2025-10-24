@@ -1,6 +1,6 @@
 {
   "name": "nobat",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A modern appointment booking system for WordPress",
   "main": "index.js",
   "scripts": {

@@ -107,83 +107,45 @@ const Slot = ({ slot, date, onChangeStatus }) => {
         isOpen={isOpen}
         title={__("Manage Time Slot", "nobat")}
         onRequestClose={close}
+        className="slot-status-modal-wrapper"
       >
           <div className="slot-status-modal">
-            <div style={{ 
-              marginBottom: 20,
-              padding: 12,
-              backgroundColor: '#f3f4f6',
-              borderRadius: 6
-            }}>
-              <div style={{ fontSize: 13, color: '#6b7280', marginBottom: 4 }}>
+            <div className="slot-info-box">
+              <div className="slot-info-label">
                 {__("Time Slot:", "nobat")}
               </div>
-              <div style={{ fontSize: 16, fontWeight: 600, color: '#111827' }}>
+              <div className="slot-info-time">
                 {slot.start} - {slot.end}
               </div>
-              <div style={{ fontSize: 13, color: '#6b7280', marginTop: 4 }}>
+              <div className="slot-info-status">
                 {__("Current Status:", "nobat")} <strong>{slotInfo.label}</strong>
               </div>
             </div>
 
             {slotActions.length > 0 && (
-              <div>
-                <h4 style={{ 
-                  marginBottom: 12, 
-                  fontSize: 14, 
-                  fontWeight: 600,
-                  color: '#374151',
-                  letterSpacing: '0.025em'
-                }}>
+              <div className="slot-actions-section">
+                <h4 className="actions-title">
                   {__('Available Actions', 'nobat')}
                 </h4>
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 8
-                }}>
+                <div className="actions-list">
                   {slotActions.map((action) => (
                     <Button
                       key={action.status}
                       variant={action.variant}
                       onClick={() => handleStatusChange(action.status)}
-                      style={{
-                        width: '100%',
-                        justifyContent: 'flex-start',
-                        height: 'auto',
-                        padding: '12px 16px',
-                        textAlign: 'left',
-                        whiteSpace: 'normal'
-                      }}
+                      className="slot-action-button"
                     >
-                      <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'center',
-                        width: '100%'
-                      }}>
-                        <span style={{ 
-                          fontSize: '18px',
-                          marginRight: 12,
-                          minWidth: '24px',
-                          textAlign: 'center'
-                        }}>
+                      <div className="action-content">
+                        <span className="action-icon">
                           {action.icon}
                         </span>
-                        <div style={{ flex: 1 }}>
-                          <div style={{ 
-                            fontWeight: 600,
-                            fontSize: '14px',
-                            marginBottom: '2px'
-                          }}>
+                        <div className="action-text">
+                          <span className="action-label">
                             {action.label}
-                          </div>
-                          <div style={{ 
-                            fontSize: '12px',
-                            opacity: 0.8,
-                            lineHeight: 1.4
-                          }}>
+                          </span>
+                          <span className="action-description">
                             {action.description}
-                          </div>
+                          </span>
                         </div>
                       </div>
                     </Button>
@@ -192,15 +154,10 @@ const Slot = ({ slot, date, onChangeStatus }) => {
               </div>
             )}
 
-            <div style={{
-              marginTop: 16,
-              paddingTop: 16,
-              borderTop: '1px solid #e5e7eb'
-            }}>
+            <div className="slot-modal-footer">
               <Button 
                 variant="tertiary" 
                 onClick={close}
-                style={{ width: '100%' }}
               >
                 {__("Close", "nobat")}
               </Button>

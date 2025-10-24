@@ -3,7 +3,7 @@
  * Plugin Name: Nobat
  * Plugin URI: https://github.com/wproad/nobat
  * Description: A modern appointment booking system with admin management.
- * Version: 2.1.0
+ * Version: 2.1.1
  * Requires at least: 6.1
  * Requires PHP: 8.0
  * Author: WPROAD
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-const NOBAT_VERSION = '2.1.0';
+const NOBAT_VERSION = '2.1.1';
 define( 'NOBAT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'NOBAT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
