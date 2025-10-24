@@ -1,12 +1,11 @@
-import { useState } from "@wordpress/element";
+import { useState } from "react";
 import {
   TextControl,
   ToggleControl,
   Button,
-  SelectControl,
   Notice,
-} from "@wordpress/components";
-import { __ } from "@wordpress/i18n";
+} from "../../../components/ui";
+import { __ } from "../../../utils/i18n";
 import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { JalaliDatePickerInput } from "./JalaliDatePicker";
@@ -21,7 +20,7 @@ function CreateSchedule() {
   const [meetingDuration, setMeetingDuration] = useState(30);
   const [weeklyHours, setWeeklyHours] = useState(defaultWeeklyHours);
 
-  const { adminUsers, notice, setNotice, saveSchedule } = useSchedule();
+  const { notice, setNotice, saveSchedule } = useSchedule();
   const buffer = 0;
 
   const handleSubmit = () => {

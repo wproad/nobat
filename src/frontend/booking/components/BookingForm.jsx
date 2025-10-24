@@ -1,14 +1,13 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from "../../../utils/i18n";
 import {
   Button,
-  TextControl,
   TextareaControl,
   Notice,
   Card,
   CardBody,
   CardHeader,
   Spinner,
-} from "@wordpress/components";
+} from "../../../components/ui";
 import { useBookingForm } from "../hooks";
 import TimeSlotSelector from "./TimeSlotSelector";
 import { useAvailableSchedule } from "../hooks";
@@ -92,14 +91,12 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
                   "/wp-login.php?redirect_to=" +
                   encodeURIComponent(window.location.href)
                 }
-                __next40pxDefaultSize
               >
                 {__("Log In", "nobat")}
               </Button>
               <Button
                 variant="secondary"
                 href="/wp-login.php?action=register"
-                __next40pxDefaultSize
                 style={{ marginLeft: "8px" }}
               >
                 {__("Register", "nobat")}
@@ -160,7 +157,6 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
                   <Button
                     onClick={refetch}
                     variant="secondary"
-                    __next40pxDefaultSize
                   >
                     {__("Retry", "nobat")}
                   </Button>
@@ -200,7 +196,6 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
                 disabled={
                   loading || loadingSchedule || !!scheduleError || !isFormValid
                 }
-                __next40pxDefaultSize
               >
                 {loading ? (
                   <>

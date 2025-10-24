@@ -1,6 +1,6 @@
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
-import { Modal, Button } from "@wordpress/components";
+import { __ } from "../../../utils/i18n";
+import { useState } from "react";
+import { Modal, Button } from "../../../components/ui";
 
 const Slot = ({ slot, date, onChangeStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,11 +103,11 @@ const Slot = ({ slot, date, onChangeStatus }) => {
       >
         {slotInfo.label}
       </div>
-      {isOpen && (
-        <Modal
-          title={__("Manage Time Slot", "nobat")}
-          onRequestClose={close}
-        >
+      <Modal
+        isOpen={isOpen}
+        title={__("Manage Time Slot", "nobat")}
+        onRequestClose={close}
+      >
           <div className="slot-status-modal">
             <div style={{ 
               marginBottom: 20,
@@ -207,7 +207,6 @@ const Slot = ({ slot, date, onChangeStatus }) => {
             </div>
           </div>
         </Modal>
-      )}
     </>
   );
 };

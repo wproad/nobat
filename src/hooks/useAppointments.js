@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "@wordpress/element";
+import { useState, useEffect, useCallback } from "react";
 
 export const useAppointments = (scheduleId) => {
   const [appointments, setAppointments] = useState([]);

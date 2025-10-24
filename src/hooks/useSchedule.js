@@ -1,23 +1,9 @@
-import { useState, useEffect } from "@wordpress/element";
-import apiFetch from "@wordpress/api-fetch";
-import { __ } from "@wordpress/i18n";
+import { useState } from "react";
+import apiFetch from "../utils/api-fetch";
+import { __ } from "../utils/i18n";
 
 export function useSchedule() {
-  const [adminUsers, setAdminUsers] = useState([]);
   const [notice, setNotice] = useState(null);
-
-  useEffect(() => {
-    apiFetch({ path: "/wp/v2/users?roles=administrator" })
-      .then((users) => {
-        setAdminUsers(users.map((u) => ({ label: u.name, value: u.id })));
-      })
-      .catch(() =>
-        setNotice({
-          status: "error",
-          message: __("Error fetching users.", "nobat"),
-        })
-      );
-  }, []);
 
   const saveSchedule = (payload) => {
     return apiFetch({
@@ -51,5 +37,5 @@ export function useSchedule() {
       });
   };
 
-  return { adminUsers, notice, setNotice, saveSchedule };
+  return { notice, setNotice, saveSchedule };
 }

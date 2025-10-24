@@ -1,6 +1,6 @@
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
-import { Modal, Button } from "@wordpress/components";
+import { __ } from "../../../utils/i18n";
+import { useState } from "react";
+import { Modal, Button } from "../../../components/ui";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarGrid } from "./CalendarGrid";
 
@@ -92,12 +92,13 @@ const CalendarView = () => {
       </div>
 
       {/* Status Info Modal */}
-      {activeStatus && (
-        <Modal
-          title={statusInfo[activeStatus].title}
-          onRequestClose={() => setActiveStatus(null)}
-          className="status-info-modal"
-        >
+      <Modal
+        isOpen={!!activeStatus}
+        title={activeStatus ? statusInfo[activeStatus].title : ""}
+        onRequestClose={() => setActiveStatus(null)}
+        className="status-info-modal"
+      >
+        {activeStatus && (
           <div className="status-modal-content">
             <div className="status-color-preview">
               <span 
@@ -140,8 +141,8 @@ const CalendarView = () => {
               </Button>
             </div>
           </div>
-        </Modal>
-      )}
+        )}
+      </Modal>
       
       <CalendarGrid />
     </div>

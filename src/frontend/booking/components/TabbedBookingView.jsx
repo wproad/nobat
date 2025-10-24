@@ -1,6 +1,6 @@
-import { useState } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
-import { Button } from "@wordpress/components";
+import { useState } from "react";
+import { __ } from "../../../utils/i18n";
+import { Button } from "../../../components/ui";
 import { BookingForm } from "./BookingForm";
 import { MyAppointments } from "./MyAppointments";
 

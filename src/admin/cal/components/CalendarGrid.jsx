@@ -1,6 +1,6 @@
 import { TimeColumn } from "./TimeColumn";
 import { DayColumn } from "./DayColumn";
-import { __ } from "@wordpress/i18n";
+import { __ } from "../../../utils/i18n";
 import {
   useSchedule,
   useAppointments,

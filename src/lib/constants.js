@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from "../utils/i18n";
 
 export const defaultWeeklyHours = {
   sat: ["09:00-12:00"],

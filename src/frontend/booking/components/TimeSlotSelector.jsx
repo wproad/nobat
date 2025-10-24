@@ -1,5 +1,5 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from "react";
+import { __ } from "../../../utils/i18n";
 import DayButton from "./DayButton";
 import TimeSlotButton from "./TimeSlotButton";
 

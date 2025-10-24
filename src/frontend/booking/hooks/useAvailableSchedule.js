@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "@wordpress/element";
+import { useState, useEffect, useCallback } from "react";
 
 /**
  * Custom hook for fetching schedule with available slots (v2 API)

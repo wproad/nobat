@@ -1,6 +1,7 @@
 import "./schedule.scss";
-import domReady from "@wordpress/dom-ready";
-import { createRoot } from "@wordpress/element";
+import "../../components/ui/ui-components.scss";
+import domReady from "../../utils/dom-ready";
+import { createRoot } from "react-dom/client";
 import { CreateSchedule } from "./components";
 
 domReady(() => {

@@ -1,13 +1,11 @@
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
+import { __ } from "../../../utils/i18n";
+import { useState } from "react";
 import {
   Button,
-  SelectControl,
   Modal,
-  TextControl,
   TextareaControl,
-} from "@wordpress/components";
-import apiFetch from "@wordpress/api-fetch";
+} from "../../../components/ui";
+import apiFetch from "../../../utils/api-fetch";
 import {
   getStatusColor,
   getStatusLabel,

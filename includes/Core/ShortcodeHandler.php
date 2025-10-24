@@ -39,8 +39,9 @@ class ShortcodeHandler {
 			'schedule_id' => '',
 		), $atts );
 
-		// Enqueue frontend scripts
-		$this->enqueue_booking_scripts();
+		// Add additional localization data for this shortcode instance
+		// Note: The script is already enqueued by enqueue-scripts.php
+		$this->localize_booking_data();
 
 		// Generate unique container ID
 		$container_id = 'nobat-booking-' . uniqid();
@@ -57,34 +58,20 @@ class ShortcodeHandler {
 	}
 
 	/**
-	 * Enqueue booking form scripts and styles
+	 * Add localization data for booking form
+	 * The script itself is enqueued by enqueue-scripts.php
 	 */
-	private function enqueue_booking_scripts() {
-		// Enqueue booking styles
-		wp_enqueue_style(
-			'nobat-booking',
-			NOBAT_PLUGIN_URL . 'build/booking.css',
-			array(),
-			NOBAT_VERSION
-		);
+	private function localize_booking_data() {
+		// Only localize if not already done
+		static $localized = false;
+		if ( $localized ) {
+			return;
+		}
+		$localized = true;
 
-		// Enqueue booking script
-		$asset_file = NOBAT_PLUGIN_DIR . 'build/booking.asset.php';
-		$asset = file_exists( $asset_file )
-			? include $asset_file
-			: array( 'dependencies' => array(), 'version' => NOBAT_VERSION );
-
-		wp_enqueue_script(
-			'nobat-booking',
-			NOBAT_PLUGIN_URL . 'build/booking.js',
-			$asset['dependencies'],
-			$asset['version'],
-			true
-		);
-
-		// Localize script with API data
+		// Add additional booking-specific data
 		wp_localize_script(
-			'nobat-booking',
+			'nobat-frontend-script', // Use the same handle as in enqueue-scripts.php
 			'nobatBooking',
 			array(
 				'apiUrl' => rest_url( 'nobat/v2' ),

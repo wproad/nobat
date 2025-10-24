@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from "../../../utils/i18n";
 import { AppointmentSlot } from "./AppointmentSlot";
 import { Slot } from "./Slot";
 

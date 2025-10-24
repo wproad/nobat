@@ -30,7 +30,7 @@ function nobat_handle_appointment_deletions() {
 		// This ensures the slot status is updated to "available"
 		$appointment_service = nobat_service( 'appointment_service' );
 		$admin_id = get_current_user_id();
-		$result = $appointment_service->cancel_appointment( $id, $admin_id, __( 'Deleted from admin list', 'nobat' ) );
+		$result = $appointment_service->cancel_appointment( $id, $admin_id, __( 'Deleted by admin', 'nobat' ) );
 		
 		if ( is_wp_error( $result ) ) {
 			wp_redirect( add_query_arg( 'error', urlencode( $result->get_error_message() ), remove_query_arg( [ 'action', 'id', '_wpnonce' ] ) ) );

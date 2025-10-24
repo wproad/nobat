@@ -1,5 +1,5 @@
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
+import { __ } from "../../../utils/i18n";
+import { useState } from "react";
 import { AppointmentDetailModal } from "./AppointmentDetailModal";
 import {
   getStatusColor,

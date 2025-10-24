@@ -1,5 +1,5 @@
-import { useState, useEffect } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from "react";
+import { __ } from "../../../utils/i18n";
 import {
   Button,
   Card,
@@ -9,7 +9,7 @@ import {
   Spinner,
   Modal,
   TextareaControl,
-} from "@wordpress/components";
+} from "../../../components/ui";
 
 /**
  * MyAppointments component - Shows user's appointments

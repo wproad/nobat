@@ -2,9 +2,9 @@ import {
   PanelBody,
   PanelRow,
   Button,
-} from "@wordpress/components";
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
+} from "../../../components/ui";
+import { __ } from "../../../utils/i18n";
+import { useState } from "react";
 import { weekdayLabels } from "../../../lib/constants";
 
 export function WorkingHoursForDay({ day, hours, onAdd, onRemove, onUpdate }) {
