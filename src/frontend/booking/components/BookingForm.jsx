@@ -108,6 +108,41 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
     );
   }
 
+  // If appointment was successfully booked, show the ticket instead of form
+  if (bookedAppointment) {
+    return (
+      <div className="appointment-booking-form">
+        <Card>
+          <CardHeader>
+            <div className="card-header-content">
+              <h3>{__("Appointment Booked!", "nobat")}</h3>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <AppointmentTicket appointmentData={bookedAppointment} />
+            
+            <div className="form-actions" style={{ marginTop: '24px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+              {onBack && (
+                <Button
+                  variant="primary"
+                  onClick={onBack}
+                >
+                  {__("See My Appointments", "nobat")}
+                </Button>
+              )}
+              <Button
+                variant="secondary"
+                onClick={() => window.location.reload()}
+              >
+                {__("Book Another Appointment", "nobat")}
+              </Button>
+            </div>
+          </CardBody>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="appointment-booking-form">
       <Card>
@@ -129,17 +164,11 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
           </div>
         </CardHeader>
         <CardBody>
-          {message && messageType === "success" && window.nobatBooking?.successMessage ? (
-            <div className="custom-success-message">
-              <div 
-                dangerouslySetInnerHTML={{ __html: window.nobatBooking.successMessage }}
-              />
-            </div>
-          ) : message ? (
+          {message && messageType !== "success" && (
             <Notice status={messageType} isDismissible onRemove={clearMessage}>
               {message}
             </Notice>
-          ) : null}
+          )}
 
           <form onSubmit={handleSubmit} className="booking-form">
 
