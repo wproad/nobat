@@ -10,6 +10,13 @@ if ( ! defined('ABSPATH') ) {
 function nobat_register_settings() {
 	
 	add_settings_section(
+		'nobat_booking_section',
+		__( 'Booking Settings', 'nobat' ),
+		'__return_false',
+		'nobat_settings'
+	);
+
+	add_settings_section(
 		'nobat_messages_section',
 		__( 'Messages', 'nobat' ),
 		'__return_false',
@@ -22,6 +29,15 @@ function nobat_register_settings() {
 		'__return_false',
 		'nobat_settings'
 	);
+
+	register_setting( 'nobat_settings', 'nobat_max_appointments', array(
+		'type' => 'integer',
+		'default' => 3,
+		'sanitize_callback' => function( $value ) {
+			$value = absint( $value );
+			return $value > 0 ? $value : 3;
+		},
+	) );
 
 	register_setting( 'nobat_settings', 'nobat_success_message', array(
 		'type' => 'string',
@@ -104,6 +120,14 @@ function nobat_register_settings() {
 	// ) );
 
 	add_settings_field(
+		'nobat_max_appointments',
+		__( 'Max Active Appointments per User', 'nobat' ),
+		'nobat_field_max_appointments',
+		'nobat_settings',
+		'nobat_booking_section'
+	);
+
+	add_settings_field(
 		'nobat_success_message',
 		__( 'Success Message After Booking', 'nobat' ),
 		'nobat_field_success_message',
@@ -166,6 +190,15 @@ function nobat_register_settings() {
 	// );
 }
 add_action( 'admin_init', 'nobat_register_settings' );
+
+function nobat_field_max_appointments() {
+	$val = (int) get_option( 'nobat_max_appointments', 3 );
+	printf(
+		'<input type="number" name="nobat_max_appointments" value="%d" min="1" max="20" step="1" style="width:100px;" />',
+		$val
+	);
+	echo '<p class="description">' . esc_html__( 'Maximum number of active (pending/confirmed) appointments a user can have at the same time. Default: 3', 'nobat' ) . '</p>';
+}
 
 function nobat_field_success_message() {
 	$content = get_option( 'nobat_success_message', '' );

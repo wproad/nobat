@@ -14,6 +14,12 @@ const AppointmentTicket = ({ appointmentData }) => {
     ? `${appointmentData.start_time} - ${appointmentData.end_time}`
     : "";
 
+  // Get custom success message from window object
+  const customSuccessMessage = window.nobatBooking?.successMessage || "";
+  
+  // Use Jalali date if available, otherwise fallback to gregorian
+  const displayDate = appointmentData.slot_date_jalali || appointmentData.slot_date;
+
   return (
     <div className="appointment-ticket">
       <div className="ticket-card">
@@ -26,14 +32,23 @@ const AppointmentTicket = ({ appointmentData }) => {
               </span>
             </div>
           </div>
-          <div className="ticket-title">
-            <h2>
-              {__("Your appointment request was sent successfully!", "nobat")}
-            </h2>
-            <p className="ticket-subtitle">
-              {__("You will be notified once an admin confirms your appointment.", "nobat")}
-            </p>
-          </div>
+          
+          {customSuccessMessage ? (
+            <div className="ticket-title custom-message">
+              <div 
+                dangerouslySetInnerHTML={{ __html: customSuccessMessage }}
+              />
+            </div>
+          ) : (
+            <div className="ticket-title">
+              <h2>
+                {__("Your appointment request was sent successfully!", "nobat")}
+              </h2>
+              <p className="ticket-subtitle">
+                {__("You will be notified once an admin confirms your appointment.", "nobat")}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Ticket Body */}
@@ -46,7 +61,7 @@ const AppointmentTicket = ({ appointmentData }) => {
                   {__("Date", "nobat")}
                 </div>
                 <div className="info-value">
-                  {appointmentData.slot_date_jalali || appointmentData.slot_date}
+                  {displayDate}
                 </div>
               </div>
               <div className="info-item">

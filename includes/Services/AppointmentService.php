@@ -25,11 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AppointmentService {
 	
 	/**
-	 * Maximum active appointments per user
-	 */
-	const MAX_ACTIVE_APPOINTMENTS = 3;
-	
-	/**
 	 * Appointment repository
 	 * 
 	 * @var AppointmentRepository
@@ -73,6 +68,15 @@ class AppointmentService {
 	}
 	
 	/**
+	 * Get maximum active appointments per user from settings
+	 * 
+	 * @return int
+	 */
+	private function get_max_appointments() {
+		return (int) get_option( 'nobat_max_appointments', 3 );
+	}
+	
+	/**
 	 * Check if user can book more appointments
 	 * 
 	 * @param int $user_id
@@ -80,7 +84,8 @@ class AppointmentService {
 	 */
 	public function can_user_book_appointment( $user_id ) {
 		$active_count = $this->appointment_repo->count_active_by_user( $user_id );
-		return $active_count < self::MAX_ACTIVE_APPOINTMENTS;
+		$max_appointments = $this->get_max_appointments();
+		return $active_count < $max_appointments;
 	}
 	
 	/**
@@ -106,11 +111,12 @@ class AppointmentService {
 		try {
 			// Check if user can book more appointments
 			if ( ! $this->can_user_book_appointment( $user_id ) ) {
+				$max_appointments = $this->get_max_appointments();
 				return new \WP_Error(
 					'max_appointments_reached',
 					sprintf(
 						__( 'You have reached the maximum of %d active appointments. Please cancel or complete an existing appointment before booking a new one.', 'nobat' ),
-						self::MAX_ACTIVE_APPOINTMENTS
+						$max_appointments
 					),
 					array( 'status' => 400 )
 				);
