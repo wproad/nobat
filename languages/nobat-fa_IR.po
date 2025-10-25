@@ -1,222 +1,267 @@
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Appointment Booking 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/appointment-booking\n"
-"POT-Creation-Date: 2025-10-21T06:06:22+00:00\n"
-"PO-Revision-Date: 2025-10-15 11:00+0330\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Persian <LL@li.org>\n"
-"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-10-21T06:06:22+00:00\n"
+"PO-Revision-Date: 2025-10-15 11:00+0330\n"
+"Language: fa_IR\n"
 "X-Domain: nobat\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/TimeSlotSelector.jsx:43
 msgid "No available dates"
 msgstr "تاریخ در دسترس نیست"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/TimeSlotSelector.jsx:90
 msgid "Available Hours"
 msgstr "بازه‌های زمانی موجود"
 
-#: includes/admin-page.php:165 includes/Admin/AppointmentsListTable.php:54
-#: src/frontend/booking/components/AppointmentTicket.jsx:46
+#: includes/admin-page.php:165
+#: includes/Admin/AppointmentsListTable.php:54
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:61
 msgid "Date"
 msgstr "تاریخ"
 
-#: build/cal.js:1 src/admin/cal/components/TimeColumn.jsx:18
-#: src/frontend/booking/components/AppointmentTicket.jsx:54
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/TimeColumn.jsx:18
+#: src/frontend/booking/components/AppointmentTicket.jsx:69
 msgid "Time"
 msgstr "زمان"
 
-#: src/frontend/booking/components/AppointmentTicket.jsx:102
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:117
 msgid "Booking Reference"
 msgstr "شناسه نوبت"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:76
-#: src/frontend/booking/components/BookingForm.jsx:116
+#: src/frontend/booking/components/BookingForm.jsx:151
 msgid "Book an Appointment"
 msgstr "رزرو نوبت"
 
-#: src/frontend/booking/components/BookingForm.jsx:161
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:190
 msgid "Retry"
 msgstr "تلاش مجدد"
 
-#: src/frontend/booking/components/BookingForm.jsx:203
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:232
 msgid "Booking..."
 msgstr "در حال رزرو..."
 
-#: src/frontend/booking/components/BookingForm.jsx:206
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:235
 msgid "Book Appointment"
 msgstr "رزرو نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarHeader.jsx:13
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarHeader.jsx:13
 msgid "(Active)"
 msgstr "(فعال)"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarHeader.jsx:14
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarHeader.jsx:14
 msgid "(Inactive)"
 msgstr "(غیرفعال)"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:194
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:194
 msgid "Appointment Details"
 msgstr "جزئیات نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:202
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:202
 msgid "Client Name:"
 msgstr "نام مشتری:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:219
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:219
 msgid "Phone:"
 msgstr "تلفن:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:223
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:223
 #: src/frontend/booking/components/MyAppointments.jsx:332
 msgid "Date:"
 msgstr "تاریخ:"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:119
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:115
 msgid "Time Slot:"
 msgstr "بازه زمانی:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:235
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:235
 msgid "Status:"
 msgstr "وضعیت:"
 
-#: includes/admin-page.php:189 includes/admin-page.php:619
+#: includes/admin-page.php:189
+#: includes/admin-page.php:619
 #: includes/Admin/AppointmentsListTable.php:73
-#: includes/Admin/ScheduleListTable.php:66 build/cal.js:1
-#: src/admin/cal/components/AppointmentDetailModal.jsx:480
+#: includes/Admin/ScheduleListTable.php:66
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:393
 msgid "Delete"
 msgstr "حذف"
 
-#: includes/admin-page.php:163 includes/admin-page.php:498
+#: includes/admin-page.php:163
+#: includes/admin-page.php:498
 #: includes/Admin/AppointmentsListTable.php:52
 msgid "Client Name"
 msgstr "نام مشتری"
 
-#: includes/admin-page.php:166 includes/admin-page.php:516
+#: includes/admin-page.php:166
+#: includes/admin-page.php:516
 #: includes/Admin/AppointmentsListTable.php:55
 msgid "Time Slot"
 msgstr "بازه زمانی"
 
-#: includes/admin-page.php:167 includes/admin-page.php:522
-#: includes/admin-page.php:599 includes/Admin/AppointmentsListTable.php:56
+#: includes/admin-page.php:167
+#: includes/admin-page.php:522
+#: includes/admin-page.php:599
+#: includes/Admin/AppointmentsListTable.php:56
 #: includes/Admin/ScheduleListTable.php:49
 msgid "Status"
 msgstr "وضعیت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:458
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:375
 msgid "Delete Appointment"
 msgstr "حذف نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:462
-msgid ""
-"Are you sure you want to delete this appointment? This action cannot be "
-"undone."
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:380
+msgid "Are you sure you want to delete this appointment? This action cannot be undone."
 msgstr "آیا از حذف این نوبت اطمینان دارید؟ این عمل قابل بازگشت نیست."
 
-#: build/cal.js:1 build/schedule.js:1
-#: src/admin/cal/components/AppointmentDetailModal.jsx:431
-#: src/admin/cal/components/AppointmentDetailModal.jsx:477
+#: build/booking.js:1
+#: build/cal.js:1
+#: build/schedule.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:357
+#: src/admin/cal/components/AppointmentDetailModal.jsx:390
 #: src/admin/schedule/components/CreateSchedule.jsx:213
 #: src/frontend/booking/components/MyAppointments.jsx:298
 #: src/frontend/booking/components/MyAppointments.jsx:381
 msgid "Cancel"
 msgstr "انصراف"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:229
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:229
 #: src/frontend/booking/components/MyAppointments.jsx:337
 msgid "Time:"
 msgstr "زمان:"
 
-#: build/cal.js:1 src/admin/cal/components/ScheduleNotFound.jsx:7
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:7
 msgid "No Schedule Found"
 msgstr "هیچ زمانبندی یافت نشد"
 
-#: build/cal.js:1 src/admin/cal/components/ScheduleNotFound.jsx:9
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:9
 msgid "You need to create a schedule before you can view the calendar."
 msgstr "ابتدا باید یک زمانبندی ایجاد کنید تا بتوانید تقویم را مشاهده کنید."
 
-#: build/cal.js:1 src/admin/cal/components/ScheduleNotFound.jsx:21
+#: build/cal.js:1
+#: src/admin/cal/components/ScheduleNotFound.jsx:21
 msgid "Create Your First Schedule Here"
 msgstr "اینجا اولین زمانبندی خود را ایجاد کنید"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarLoading.jsx:6
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarLoading.jsx:6
 msgid "Loading calendar..."
 msgstr "در حال بارگذاری تقویم..."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarGrid.jsx:58
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarGrid.jsx:58
 msgid "Error loading Calendar:"
 msgstr "خطا در بارگذاری تقویم:"
 
-#: build/schedule.js:1 src/admin/schedule/components/WeeklyHoursEditor.jsx:30
+#: build/schedule.js:1
+#: src/admin/schedule/components/WeeklyHoursEditor.jsx:30
 msgid "Weekly Hours"
 msgstr "ساعات کاری هفتگی"
 
-#: includes/admin-page.php:594 includes/Admin/ScheduleListTable.php:45
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:97
+#: includes/admin-page.php:594
+#: includes/Admin/ScheduleListTable.php:45
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:97
 msgid "Schedule Name"
 msgstr "نام زمانبندی"
 
-#: includes/admin-menu.php:37 includes/admin-menu.php:38
+#: includes/admin-menu.php:37
+#: includes/admin-menu.php:38
 #: includes/admin-page.php:393
 msgid "All Appointments"
 msgstr "همه نوبت‌ها"
 
-#: includes/admin-menu.php:47 includes/admin-menu.php:48
+#: includes/admin-menu.php:47
+#: includes/admin-menu.php:48
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: includes/admin-menu.php:67 includes/admin-menu.php:68
+#: includes/admin-menu.php:67
+#: includes/admin-menu.php:68
 msgid "Add Schedule"
 msgstr "افزودن زمانبندی"
 
-#: includes/admin-menu.php:57 includes/admin-page.php:735
+#: includes/admin-menu.php:57
+#: includes/admin-page.php:735
 msgid "All Schedules"
 msgstr "همه زمانبندی ها"
 
-#: includes/admin-page.php:153 includes/Admin/AppointmentsListTable.php:38
+#: includes/admin-page.php:153
+#: includes/Admin/AppointmentsListTable.php:38
 msgid "Appointment"
 msgstr "نوبت"
 
-#: includes/admin-page.php:154 includes/Admin/AppointmentsListTable.php:39
+#: includes/admin-page.php:154
+#: includes/Admin/AppointmentsListTable.php:39
 msgid "Appointments"
 msgstr "نوبت‌ها"
 
-#: includes/admin-settings.php:21
+#: includes/admin-settings.php:28
 msgid "SMS Notifications"
 msgstr "اعلان‌های پیامکی"
 
-#: includes/admin-settings.php:116
+#: includes/admin-settings.php:140
 msgid "Notify Admin"
 msgstr "اطلاع به مدیر"
 
-#: includes/admin-settings.php:124
+#: includes/admin-settings.php:148
 msgid "Notify Client"
 msgstr "اطلاع به مشتری"
 
-#: includes/admin-settings.php:132
+#: includes/admin-settings.php:156
 msgid "Reminder (minutes before)"
 msgstr "یادآوری (دقیقه قبل از نوبت)"
 
-#: includes/admin-settings.php:195
+#: includes/admin-settings.php:228
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: includes/admin-settings.php:212
+#: includes/admin-settings.php:245
 msgid "Send notifications to client"
 msgstr "ارسال اعلان برای مشتری"
 
-#: includes/admin-settings.php:256
+#: includes/admin-settings.php:289
 msgid "Appointment Booking Settings"
 msgstr "تنظیمات نوبت دهی"
 
 #. Plugin Name of the plugin
-#: nobat.php includes/admin-menu.php:16 includes/admin-menu.php:17
+#: nobat.php
+#: includes/admin-menu.php:16
+#: includes/admin-menu.php:17
 msgid "Nobat"
 msgstr "نوبت"
 
@@ -225,7 +270,8 @@ msgstr "نوبت"
 msgid "A modern appointment booking system with admin management."
 msgstr "یک سیستم رزرو وقت مدرن با مدیریت مدیران."
 
-#: includes/admin-menu.php:28 includes/admin-menu.php:29
+#: includes/admin-menu.php:28
+#: includes/admin-menu.php:29
 msgid "Calendar"
 msgstr "تقویم"
 
@@ -284,7 +330,7 @@ msgid "Appointment restored successfully."
 msgstr "وقت با موفقیت بازیابی شد."
 
 #: includes/Controllers/AppointmentController.php:339
-#: includes/Services/AppointmentService.php:335
+#: includes/Services/AppointmentService.php:341
 msgid "Cancelled by admin"
 msgstr "لغو شده توسط مدیر"
 
@@ -307,15 +353,15 @@ msgstr "فیلدهای ضروری گم شده‌اند: name, startDate, endDate
 
 #: includes/Controllers/ScheduleController.php:91
 msgid "Invalid date format. Expected YYYY-MM-DD (Gregorian)"
-msgstr ""
-"قالب تاریخ نامعتبر است. انتظار می‌رود به صورت YYYY-MM-DD (میلادی) باشد."
+msgstr "قالب تاریخ نامعتبر است. انتظار می‌رود به صورت YYYY-MM-DD (میلادی) باشد."
 
 #: includes/Controllers/ScheduleController.php:145
 msgid "Schedule created successfully."
 msgstr "برنامه با موفقیت ایجاد شد."
 
 #: includes/Controllers/ScheduleController.php:183
-#: includes/Services/SlotService.php:63 includes/Services/SlotService.php:99
+#: includes/Services/SlotService.php:63
+#: includes/Services/SlotService.php:99
 msgid "No active schedule found."
 msgstr "برنامه فعال یافت نشد."
 
@@ -379,8 +425,7 @@ msgstr "خطایی رخ داد. لطفاً دوباره تلاش کنید."
 
 #: includes/Middleware/AuthMiddleware.php:35
 #: includes/Services/AuthService.php:165
-msgid ""
-"You must be logged in to book appointments. Please log in and try again."
+msgid "You must be logged in to book appointments. Please log in and try again."
 msgstr "برای رزرو نوبتها باید وارد شوید. لطفاً وارد شوید و دوباره تلاش کنید."
 
 #: includes/Middleware/AuthMiddleware.php:53
@@ -389,7 +434,8 @@ msgid "You must be logged in to perform this action."
 msgstr "برای انجام این عمل باید وارد شوید."
 
 #: includes/Middleware/AuthMiddleware.php:61
-#: includes/Services/AuthService.php:153 includes/Services/AuthService.php:178
+#: includes/Services/AuthService.php:153
+#: includes/Services/AuthService.php:178
 msgid "You do not have permission to perform this action."
 msgstr "شما اجازه انجام این عمل را ندارید."
 
@@ -401,102 +447,98 @@ msgstr "برای دسترسی به نوبتها باید وارد شوید."
 msgid "You do not have permission to access this appointment."
 msgstr "شما اجازه دسترسی به این نوبت را ندارید."
 
-#: includes/Services/AppointmentService.php:112
+#: includes/Services/AppointmentService.php:118
 #, php-format
-msgid ""
-"You have reached the maximum of %d active appointments. Please cancel or "
-"complete an existing appointment before booking a new one."
-msgstr ""
-"شما به حداکثر %d نوبت فعال رسیده‌اید. لطفاً قبل از رزرو یک نوبت جدید، یک "
-"نوبت موجود را لغو یا تکمیل کنید."
+msgid "You have reached the maximum of %d active appointments. Please cancel or complete an existing appointment before booking a new one."
+msgstr "شما به حداکثر %d نوبت فعال رسیده‌اید. لطفاً قبل از رزرو یک نوبت جدید، یک نوبت موجود را لغو یا تکمیل کنید."
 
-#: includes/Services/AppointmentService.php:123
+#: includes/Services/AppointmentService.php:129
 msgid "This time slot is no longer available."
 msgstr "این بازه زمانی دیگر در دسترس نیست."
 
-#: includes/Services/AppointmentService.php:128
+#: includes/Services/AppointmentService.php:134
 msgid "You have already booked this time slot."
 msgstr "شما قبلاً این بازه زمانی را رزرو کرده‌اید."
 
-#: includes/Services/AppointmentService.php:133
+#: includes/Services/AppointmentService.php:139
 msgid "Failed to reserve the time slot."
 msgstr "رزرو بازه زمانی ناموفق بود."
 
-#: includes/Services/AppointmentService.php:146
+#: includes/Services/AppointmentService.php:152
 msgid "Failed to create appointment."
 msgstr "ایجاد نوبت ناموفق بود."
 
-#: includes/Services/AppointmentService.php:154
+#: includes/Services/AppointmentService.php:160
 msgid "Appointment created"
 msgstr "نوبت ایجاد شد"
 
-#: includes/Services/AppointmentService.php:191
+#: includes/Services/AppointmentService.php:197
 msgid "You cannot cancel this appointment."
 msgstr "شما نمی‌توانید این نوبت را لغو کنید."
 
-#: includes/Services/AppointmentService.php:196
+#: includes/Services/AppointmentService.php:202
 msgid "This appointment cannot be cancelled."
 msgstr "این نوبت قابل لغو نیست."
 
-#: includes/Services/AppointmentService.php:203
+#: includes/Services/AppointmentService.php:209
 msgid "Failed to request cancellation."
 msgstr "درخواست لغو ناموفق بود."
 
-#: includes/Services/AppointmentService.php:216
+#: includes/Services/AppointmentService.php:222
 #, php-format
 msgid "Cancellation requested: %s"
 msgstr "لغو درخواست شد: %s"
 
-#: includes/Services/AppointmentService.php:216
+#: includes/Services/AppointmentService.php:222
 msgid "Cancellation requested"
 msgstr "لغو درخواست شد"
 
-#: includes/Services/AppointmentService.php:237
+#: includes/Services/AppointmentService.php:243
 msgid "Only pending appointments can be confirmed."
 msgstr "فقط نوبتهای در انتظار می‌توانند تأیید شوند."
 
-#: includes/Services/AppointmentService.php:243
+#: includes/Services/AppointmentService.php:249
 msgid "Failed to confirm appointment."
 msgstr "تأیید نوبت ناموفق بود."
 
-#: includes/Services/AppointmentService.php:251
+#: includes/Services/AppointmentService.php:257
 msgid "Appointment confirmed by admin"
 msgstr "نوبت توسط مدیر تأیید شد"
 
-#: includes/Services/AppointmentService.php:272
+#: includes/Services/AppointmentService.php:278
 msgid "This appointment cannot be marked as completed."
 msgstr "این نوبت نمی‌تواند به عنوان تکمیل شده علامت‌گذاری شود."
 
-#: includes/Services/AppointmentService.php:278
+#: includes/Services/AppointmentService.php:284
 msgid "Failed to complete appointment."
 msgstr "امکان تکمیل نوبت ملاقات وجود نداشت."
 
-#: includes/Services/AppointmentService.php:286
+#: includes/Services/AppointmentService.php:292
 msgid "Appointment completed by admin"
 msgstr "نوبت ملاقات توسط مدیر تکمیل شد"
 
-#: includes/Services/AppointmentService.php:313
+#: includes/Services/AppointmentService.php:319
 msgid "Failed to cancel appointment."
 msgstr "لغو نوبت ملاقات ناموفق بود."
 
-#: includes/Services/AppointmentService.php:335
+#: includes/Services/AppointmentService.php:341
 #, php-format
 msgid "Cancelled by admin: %s"
 msgstr "لغو شده توسط مدیر: %s"
 
-#: includes/Services/AppointmentService.php:364
+#: includes/Services/AppointmentService.php:370
 msgid "Only cancelled or completed appointments can be restored."
 msgstr "فقط نوبتهای لغو شده یا تکمیل شده می‌توانند بازیابی شوند."
 
-#: includes/Services/AppointmentService.php:371
+#: includes/Services/AppointmentService.php:377
 msgid "Failed to restore appointment."
 msgstr "بازیابی نوبت ملاقات ناموفق بود."
 
-#: includes/Services/AppointmentService.php:384
+#: includes/Services/AppointmentService.php:390
 msgid "Appointment restored to confirmed by admin"
 msgstr "نوبت ملاقات توسط مدیر به وضعیت تأیید شده بازگردانده شد"
 
-#: includes/Services/AppointmentService.php:406
+#: includes/Services/AppointmentService.php:412
 msgid "Failed to update report."
 msgstr "به‌روزرسانی گزارش ناموفق بود."
 
@@ -520,7 +562,8 @@ msgstr "فعال‌سازی برنامه زمان‌بندی ناموفق بود
 msgid "Failed to delete schedule."
 msgstr "حذف برنامه زمان‌بندی ناموفق بود."
 
-#: includes/Services/SlotService.php:129 includes/Services/SlotService.php:155
+#: includes/Services/SlotService.php:129
+#: includes/Services/SlotService.php:155
 msgid "Slot not found."
 msgstr "بازه زمانی یافت نشد."
 
@@ -540,365 +583,433 @@ msgstr "بازه زمانی مسدود نشده است."
 msgid "Failed to unblock slot."
 msgstr "رفع مسدودیت بازه زمانی ناموفق بود."
 
-#: src/frontend/booking/components/AppointmentTicket.jsx:25
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:31
 msgid "Pending Confirmation"
 msgstr "در انتظار تأیید"
 
-#: src/frontend/booking/components/AppointmentTicket.jsx:31
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:45
 msgid "Your appointment request was sent successfully!"
 msgstr "درخواست نوبت ملاقات شما با موفقیت ارسال شد!"
 
-#: src/frontend/booking/components/AppointmentTicket.jsx:34
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:48
 msgid "You will be notified once an admin confirms your appointment."
 msgstr "به محض تأیید نوبت توسط مدیر، به شما اطلاع داده خواهد شد."
 
-#: src/frontend/booking/components/AppointmentTicket.jsx:64
+#: build/booking.js:1
+#: src/frontend/booking/components/AppointmentTicket.jsx:79
 msgid "Your Note"
 msgstr "یادداشت شما"
 
-#: src/frontend/booking/components/BookingForm.jsx:149
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:178
 msgid "Loading available slots..."
 msgstr "در حال بارگذاری زمان‌های موجود..."
 
-#: src/frontend/booking/components/BookingForm.jsx:169
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:198
 msgid "Select a Time Slot"
 msgstr "یک بازه زمانی را انتخاب کنید"
 
-#: src/frontend/booking/components/BookingForm.jsx:179
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:208
 msgid "Note (Optional)"
 msgstr "یادداشت (اختیاری)"
 
-#: src/frontend/booking/components/BookingForm.jsx:182
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:211
 msgid "Add any additional information or special requests"
 msgstr "هر اطلاعات یا درخواست خاص دیگری را اضافه کنید"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:81
 msgid "You must be logged in to book appointments."
 msgstr "برای رزرو نوبتها باید وارد شوید."
 
+#: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:95
 #: src/frontend/booking/components/MyAppointments.jsx:190
 msgid "Log In"
 msgstr "ورود"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:102
 msgid "Register"
 msgstr "ثبت‌نام"
 
-#: build/cal.js:1 src/frontend/booking/components/MyAppointments.jsx:149
-#: src/lib/appointmentUtils.js:36 src/lib/appointmentUtils.js:49
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:149
+#: src/lib/appointmentUtils.js:36
+#: src/lib/appointmentUtils.js:49
 msgid "Pending"
 msgstr "در انتظار"
 
-#: build/cal.js:1 src/frontend/booking/components/MyAppointments.jsx:150
-#: src/lib/appointmentUtils.js:38 src/lib/appointmentUtils.js:50
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:150
+#: src/lib/appointmentUtils.js:38
+#: src/lib/appointmentUtils.js:50
 msgid "Confirmed"
 msgstr "تأیید شده"
 
-#: build/cal.js:1 src/frontend/booking/components/MyAppointments.jsx:151
-#: src/lib/appointmentUtils.js:40 src/lib/appointmentUtils.js:51
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:151
+#: src/lib/appointmentUtils.js:40
+#: src/lib/appointmentUtils.js:51
 msgid "Completed"
 msgstr "تمام شده"
 
-#: build/cal.js:1 src/frontend/booking/components/MyAppointments.jsx:152
-#: src/lib/appointmentUtils.js:42 src/lib/appointmentUtils.js:52
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/frontend/booking/components/MyAppointments.jsx:152
+#: src/lib/appointmentUtils.js:42
+#: src/lib/appointmentUtils.js:52
 msgid "Cancelled"
 msgstr "لغو شده"
 
-#: build/cal.js:1 src/lib/appointmentUtils.js:67
+#: build/cal.js:1
+#: src/lib/appointmentUtils.js:67
 msgid "Hello {name}, this is regarding your appointment on {date} at {time}."
-msgstr ""
-"سلام {name}، این پیام دربارهٔ نوبت شما در تاریخ {date} ساعت {time} است."
+msgstr "سلام {name}، این پیام دربارهٔ نوبت شما در تاریخ {date} ساعت {time} است."
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:98
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:98
 msgid "Confirm Appointment"
 msgstr "تأیید نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:99
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:99
 msgid "Approve and confirm this appointment"
 msgstr "تأیید و تصویب این نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:106
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:106
 msgid "Mark as Completed"
 msgstr "علامت‌گذاری به عنوان تکمیل شده"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:107
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:107
 msgid "Mark this appointment as successfully completed"
 msgstr "این نوبت را به‌عنوان تکمیل موفق علامت‌گذاری کنید"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:114
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:114
 msgid "Cancel Appointment"
 msgstr "لغو نوبت"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:115
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:115
 msgid "Cancel this appointment and free the time slot"
 msgstr "این نوبت را لغو کنید و بازه زمانی را آزاد کنید"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:123
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:123
 msgid "Restore Appointment"
 msgstr "بازگرداندن نوبت ملاقات"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:124
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:124
 msgid "Restore this appointment to confirmed status"
 msgstr "این نوبت ملاقات را به وضعیت تأیید شده بازگردانید"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:135
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:135
 msgid "Send WhatsApp Message"
 msgstr "ارسال پیام واتساپ"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:136
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:136
 msgid "Open WhatsApp to message the client"
 msgstr "واتساپ را باز کنید تا به مشتری پیام بدهید"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:144
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:144
 msgid "Delete Permanently"
 msgstr "حذف دائمی"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:145
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:145
 msgid "Permanently delete this appointment (cannot be undone)"
 msgstr "این نوبت ملاقات را به صورت دائمی حذف کنید (قابل بازگشت نیست)"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:247
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:247
 msgid "Assigned Admin:"
 msgstr "مدیر اختصاص داده شده:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:253
+#: build/booking.js:1
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:253
 #: src/frontend/booking/components/MyAppointments.jsx:276
 msgid "Note:"
 msgstr "یادداشت:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:259
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:259
 msgid "Cancellation Reason:"
 msgstr "دلیل لغو:"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:279
-#: src/admin/cal/components/Slot.jsx:138
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:269
+#: src/admin/cal/components/Slot.jsx:128
 msgid "Available Actions"
 msgstr "اقدامات موجود"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:364
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:310
 msgid "Session Report"
 msgstr "گزارش جلسه"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:399
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:334
 msgid "Add notes, observations, or session summary..."
 msgstr "یادداشت‌ها، مشاهدات یا خلاصه جلسه را اضافه کنید..."
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:73
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:73
 msgid "Report saved successfully!"
 msgstr "گزارش با موفقیت ذخیره شد!"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:84
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:84
 msgid "Failed to save report"
 msgstr "ذخیره گزارش ناموفق بود"
 
-#: src/admin/cal/components/AppointmentDetailModal.jsx:420
+#: src/admin/cal/components/AppointmentDetailModal.jsx:345
 msgid "Saving..."
 msgstr "در حال ذخیره‌سازی..."
 
-#: src/admin/cal/components/AppointmentDetailModal.jsx:420
+#: src/admin/cal/components/AppointmentDetailModal.jsx:345
 msgid "Save Report"
 msgstr "ذخیره گزارش"
 
-#: build/cal.js:1 src/admin/cal/components/AppointmentDetailModal.jsx:447
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:364
 msgid "No report added yet"
 msgstr "هنوز گزارشی اضافه نشده است"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:20
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:20
 #: src/admin/cal/components/CalendarView.jsx:70
 #: src/admin/cal/components/Slot.jsx:13
 msgid "Booked"
 msgstr "رزرو شده"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:27
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:27
 #: src/admin/cal/components/CalendarView.jsx:79
 #: src/admin/cal/components/Slot.jsx:18
 msgid "Blocked"
 msgstr "مسدود شده"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:34
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:34
 #: src/admin/cal/components/CalendarView.jsx:88
 #: src/admin/cal/components/Slot.jsx:23
 msgid "Unavailable"
 msgstr "در دسترس نیست"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:12
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:12
 #: src/admin/cal/components/CalendarView.jsx:61
 #: src/admin/cal/components/Slot.jsx:29
 msgid "Available"
 msgstr "در دسترس"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:58
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:58
 msgid "Make Available"
 msgstr "در دسترس کردن"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:59
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:59
 msgid "Open this slot for booking"
 msgstr "باز کردن این بازه برای رزرو"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:65
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:65
 msgid "Block Slot"
 msgstr "مسدود کردن بازه"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:66
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:66
 msgid "Block this slot (lunch, meeting, etc)"
 msgstr "این بازه را مسدود کنید (ناهار، جلسه و غیره)"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:72
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:72
 msgid "Make Unavailable"
 msgstr "ناموجود کردن"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:73
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:73
 msgid "Mark as outside working hours"
 msgstr "علامت‌گذاری به‌عنوان خارج از ساعات کاری"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:108
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:108
 msgid "Manage Time Slot"
 msgstr "مدیریت بازه زمانی"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:125
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:121
 msgid "Current Status:"
 msgstr "وضعیت فعلی:"
 
-#: build/cal.js:1 src/admin/cal/components/Slot.jsx:205
+#: build/cal.js:1
+#: src/admin/cal/components/Slot.jsx:162
 msgid "Close"
 msgstr "بسته"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:15
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:15
 msgid "Open time slots that users can book"
 msgstr "باز کردن بازه‌های زمانی که کاربران می‌توانند رزرو کنند"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:16
-msgid ""
-"These slots are within your working hours and ready for booking. Users can "
-"select and book these times."
-msgstr ""
-"این بازه‌ها در ساعات کاری شما هستند و آماده رزرو می‌باشند. کاربران می‌توانند"
-" این زمان‌ها را انتخاب و رزرو کنند."
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:16
+msgid "These slots are within your working hours and ready for booking. Users can select and book these times."
+msgstr "این بازه‌ها در ساعات کاری شما هستند و آماده رزرو می‌باشند. کاربران می‌توانند این زمان‌ها را انتخاب و رزرو کنند."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:17
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:17
 msgid "Example: Monday 9:00 AM - 10:00 AM is available for booking"
 msgstr "مثال: دوشنبه 9:00 صبح - 10:00 صبح برای رزرو در دسترس است"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:22
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:22
 msgid "Time slot has an active appointment"
 msgstr "بازه زمانی دارای یک نوبت فعال است"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:23
-msgid ""
-"A user has booked this time slot. Click on a booked slot to view appointment"
-" details, contact information, and manage the appointment."
-msgstr ""
-"یک کاربر این بازه زمانی را رزرو کرده است. برای مشاهده جزئیات نوبت، اطلاعات "
-"تماس و مدیریت نوبت، روی بازه رزرو شده کلیک کنید."
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:23
+msgid "A user has booked this time slot. Click on a booked slot to view appointment details, contact information, and manage the appointment."
+msgstr "یک کاربر این بازه زمانی را رزرو کرده است. برای مشاهده جزئیات نوبت، اطلاعات تماس و مدیریت نوبت، روی بازه رزرو شده کلیک کنید."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:24
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:24
 msgid "Example: Monday 10:00 AM - 11:00 AM is booked by John Doe"
 msgstr "مثال: دوشنبه 10:00 صبح - 11:00 صبح توسط جان دو رزرو شده است"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:29
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:29
 msgid "Manually blocked by admin"
 msgstr "به‌صورت دستی توسط مدیر مسدود شده"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:30
-msgid ""
-"These slots are within working hours but you've manually disabled them. "
-"Users cannot book blocked slots. Use this for lunch breaks, meetings, or "
-"temporary closures."
-msgstr ""
-"این بازه‌ها در ساعات کاری هستند اما شما به‌صورت دستی آن‌ها را غیرفعال "
-"کرده‌اید. کاربران نمی‌توانند بازه‌های مسدود شده را رزرو کنند. از این برای "
-"زمان ناهار، جلسات یا تعطیلات موقت استفاده کنید."
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:30
+msgid "These slots are within working hours but you've manually disabled them. Users cannot book blocked slots. Use this for lunch breaks, meetings, or temporary closures."
+msgstr "این بازه‌ها در ساعات کاری هستند اما شما به‌صورت دستی آن‌ها را غیرفعال کرده‌اید. کاربران نمی‌توانند بازه‌های مسدود شده را رزرو کنند. از این برای زمان ناهار، جلسات یا تعطیلات موقت استفاده کنید."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:31
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:31
 msgid "Example: Block 12:00 PM - 1:00 PM for lunch break"
 msgstr "مثال: مسدود کردن 12:00 ظهر - 1:00 بعدازظهر برای زمان ناهار"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:36
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:36
 msgid "Outside working hours"
 msgstr "خارج از ساعات کاری"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:37
-msgid ""
-"These time slots are not part of your defined schedule. They appear as "
-"placeholders in the calendar but cannot be booked or modified."
-msgstr ""
-"این بازه‌های زمانی بخشی از برنامه تعریف‌شده شما نیستند. آنها به‌عنوان "
-"جای‌نگهدار در تقویم نمایش داده می‌شوند اما قابل رزرو یا ویرایش نیستند."
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:37
+msgid "These time slots are not part of your defined schedule. They appear as placeholders in the calendar but cannot be booked or modified."
+msgstr "این بازه‌های زمانی بخشی از برنامه تعریف‌شده شما نیستند. آنها به‌عنوان جای‌نگهدار در تقویم نمایش داده می‌شوند اما قابل رزرو یا ویرایش نیستند."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:38
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:38
 msgid "Example: If schedule is 9 AM - 5 PM, then 8 AM is unavailable"
-msgstr ""
-"مثال: اگر برنامه از ساعت ۹ صبح تا ۵ بعدازظهر باشد، ساعت ۸ صبح در دسترس نیست."
+msgstr "مثال: اگر برنامه از ساعت ۹ صبح تا ۵ بعدازظهر باشد، ساعت ۸ صبح در دسترس نیست."
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:58
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:58
 #: src/admin/cal/components/CalendarView.jsx:67
 #: src/admin/cal/components/CalendarView.jsx:76
 #: src/admin/cal/components/CalendarView.jsx:85
 msgid "Click for details"
 msgstr "برای جزئیات کلیک کنید"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:121
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:121
 msgid "Description"
 msgstr "توضیح"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:126
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:126
 msgid "Details"
 msgstr "جزئیات"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:131
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:131
 msgid "Example"
 msgstr "مثال"
 
-#: build/cal.js:1 src/admin/cal/components/CalendarView.jsx:140
+#: build/cal.js:1
+#: src/admin/cal/components/CalendarView.jsx:140
 msgid "Got it"
 msgstr "متوجه شدم"
 
-#: build/schedule.js:1 src/lib/constants.js:14
+#: build/schedule.js:1
+#: src/lib/constants.js:14
 msgid "Saturday"
 msgstr "شنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:15
+#: build/schedule.js:1
+#: src/lib/constants.js:15
 msgid "Sunday"
 msgstr "یکشنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:16
+#: build/schedule.js:1
+#: src/lib/constants.js:16
 msgid "Monday"
 msgstr "دوشنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:17
+#: build/schedule.js:1
+#: src/lib/constants.js:17
 msgid "Tuesday"
 msgstr "سه‌شنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:18
+#: build/schedule.js:1
+#: src/lib/constants.js:18
 msgid "Wednesday"
 msgstr "چهارشنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:19
+#: build/schedule.js:1
+#: src/lib/constants.js:19
 msgid "Thursday"
 msgstr "پنج‌شنبه"
 
-#: build/schedule.js:1 src/lib/constants.js:20
+#: build/schedule.js:1
+#: src/lib/constants.js:20
 msgid "Friday"
 msgstr "جمعه"
 
-#: build/schedule.js:1 src/admin/schedule/components/WorkingHoursForDay.jsx:38
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:38
 msgid "slot"
 msgstr "بازه زمانی"
 
-#: build/schedule.js:1 src/admin/schedule/components/WorkingHoursForDay.jsx:38
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:38
 msgid "slots"
 msgstr "بازه‌های زمانی"
 
-#: build/schedule.js:1 src/admin/schedule/components/WorkingHoursForDay.jsx:55
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:55
 msgid "Start"
 msgstr "شروع"
 
-#: build/schedule.js:1 src/admin/schedule/components/WorkingHoursForDay.jsx:69
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:69
 msgid "End"
 msgstr "پایان"
 
-#: build/schedule.js:1 src/admin/schedule/components/WorkingHoursForDay.jsx:84
+#: build/schedule.js:1
+#: src/admin/schedule/components/WorkingHoursForDay.jsx:84
 msgid "Remove time slot"
 msgstr "حذف بازه زمانی"
 
@@ -907,40 +1018,48 @@ msgstr "حذف بازه زمانی"
 msgid "Add Time Slot"
 msgstr "افزودن بازه زمانی"
 
-#: build/schedule.js:1 src/hooks/useSchedule.js:18
+#: build/schedule.js:1
+#: src/hooks/useSchedule.js:18
 msgid "Settings saved successfully!"
 msgstr "تنظیمات با موفقیت ذخیره شد!"
 
-#: build/schedule.js:1 src/hooks/useSchedule.js:24
+#: build/schedule.js:1
+#: src/hooks/useSchedule.js:24
 msgid "Error saving settings."
 msgstr "خطا در ذخیره تنظیمات."
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:64
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:64
 msgid "Create New Schedule"
 msgstr "ایجاد برنامه جدید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:67
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:67
 msgid "Set up your availability schedule with working hours and time slots"
-msgstr ""
-"برنامه زمان‌بندی در دسترسیتان را با ساعات کاری و بازه‌های زمانی تنظیم کنید"
+msgstr "برنامه زمان‌بندی در دسترسیتان را با ساعات کاری و بازه‌های زمانی تنظیم کنید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:86
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:86
 msgid "Basic Information"
 msgstr "اطلاعات پایه"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:89
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:89
 msgid "Give your schedule a name and set its status"
 msgstr "به برنامه خود یک نام بدهید و وضعیت آن را تنظیم کنید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:100
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:100
 msgid "e.g., Summer 2024 Schedule"
 msgstr "مثال: برنامه تابستان 2024"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:101
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:101
 msgid "A descriptive name to identify this schedule"
 msgstr "یک نام توصیفی برای شناسایی این برنامه"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:109
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:109
 msgid "Activate Schedule"
 msgstr "فعال‌سازی برنامه"
 
@@ -952,132 +1071,151 @@ msgstr "این برنامه فعال است و برای کاربران قابل 
 msgid "This schedule is inactive and hidden from users"
 msgstr "این برنامه غیرفعال است و برای کاربران مخفی است"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:127
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:127
 msgid "Schedule Period"
 msgstr "دوره برنامه"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:130
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:130
 msgid "Define the date range when this schedule is valid"
 msgstr "بازه زمانی که این برنامه معتبر است را تعریف کنید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:162
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:162
 msgid "Appointment Settings"
 msgstr "تنظیمات نوبت ملاقات"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:165
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:165
 msgid "Configure the duration of each appointment slot"
 msgstr "مدت زمان هر بازهٔ نوبت ملاقات را پیکربندی کنید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:173
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:173
 msgid "Appointment Duration (minutes)"
 msgstr "مدت زمان نوبت ملاقات (دقیقه)"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:179
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:179
 msgid "How long each appointment will last"
 msgstr "هر نوبت ملاقات چقدر طول می‌کشد"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:191
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:191
 msgid "Weekly Working Hours"
 msgstr "ساعات کاری هفتگی"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:194
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:194
 msgid "Define your available hours for each day of the week"
 msgstr "ساعات در دسترس خود را برای هر روز از هفته تعریف کنید"
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:34
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:34
 msgid "Invalid date format. Please check your dates."
 msgstr "قالب تاریخ نامعتبر است. لطفاً تاریخ‌های خود را بررسی کنید."
 
-#: build/schedule.js:1 src/admin/schedule/components/CreateSchedule.jsx:221
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:221
 msgid "Create Schedule"
 msgstr "ایجاد برنامه"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:119
 msgid "Cancellation request submitted successfully!"
 msgstr "درخواست لغو با موفقیت ارسال شد!"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:153
 msgid "Cancellation Requested"
 msgstr "درخواست لغو شده"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:170
 #: src/frontend/booking/components/MyAppointments.jsx:204
 msgid "My Appointments"
 msgstr "نوبت های من"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:175
 msgid "You must be logged in to view your appointments."
 msgstr "برای مشاهده نوبتهای خود باید وارد شوید."
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:233
 msgid "Loading appointments..."
 msgstr "در حال بارگذاری نوبتها..."
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:284
 msgid "Assigned to:"
 msgstr "اختصاص داده شده به:"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:314
 msgid "Request Cancellation"
 msgstr "درخواست لغو"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:323
 msgid "Are you sure you want to request cancellation for this appointment?"
 msgstr "آیا مطمئن هستید که می‌خواهید برای این نوبت درخواست لغو بدهید؟"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:344
 msgid "Reason for cancellation (optional)"
 msgstr "دلیل لغو (اختیاری)"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:347
 msgid "Please provide a reason for cancellation"
 msgstr "لطفاً دلیل لغو را ارائه دهید"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:365
 msgid "Submitting..."
 msgstr "در حال ارسال..."
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:368
 msgid "Submit Request"
 msgstr "ارسال درخواست"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:213
 msgid "Book New Appointment"
 msgstr "رزرو وقت جدید"
 
-#: src/frontend/booking/components/BookingForm.jsx:125
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:130
+#: src/frontend/booking/components/BookingForm.jsx:160
 msgid "See My Appointments"
 msgstr "مشاهدهٔ وقت‌های من"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:258
 #: src/frontend/booking/components/TimeSlotButton.jsx:29
 #: src/frontend/booking/components/TimeSlotButton.jsx:45
 msgid "to"
 msgstr "تا"
 
+#: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:241
-msgid ""
-"You don't have any appointments yet. Click the button above to book your "
-"first appointment."
-msgstr ""
-"شما هنوز هیچ وقت‌نظری ندارید. برای رزرو اولین وقت‌نظرتان، روی دکمه بالا کلیک"
-" کنید."
+msgid "You don't have any appointments yet. Click the button above to book your first appointment."
+msgstr "شما هنوز هیچ وقت‌نظری ندارید. برای رزرو اولین وقت‌نظرتان، روی دکمه بالا کلیک کنید."
 
-#: includes/admin-settings.php:14
+#: includes/admin-settings.php:21
 msgid "Messages"
 msgstr "پیام‌ها"
 
-#: includes/admin-settings.php:108
+#: includes/admin-settings.php:132
 msgid "Success Message After Booking"
 msgstr "پیام موفقیت پس از رزرو"
 
-#: includes/admin-settings.php:173
-msgid ""
-"This message will be displayed to users after successfully booking an "
-"appointment. If empty, users will be redirected to their appointments list."
-msgstr ""
-"این پیام پس از رزرو موفقیت‌آمیز یک وقت‌نظری به کاربران نمایش داده می‌شود. "
-"اگر خالی بماند، کاربران به فهرست وقت‌نظراتشان هدایت می‌شوند."
+#: includes/admin-settings.php:206
+msgid "This message will be displayed to users after successfully booking an appointment. If empty, users will be redirected to their appointments list."
+msgstr "این پیام پس از رزرو موفقیت‌آمیز یک وقت‌نظری به کاربران نمایش داده می‌شود. اگر خالی بماند، کاربران به فهرست وقت‌نظراتشان هدایت می‌شوند."
 
 #. Plugin URI of the plugin
 #: nobat.php
@@ -1098,88 +1236,179 @@ msgstr "https://wproad.ir/nobat"
 msgid "Deleted by admin"
 msgstr "توسط مدیر حذف شد"
 
+#: includes/admin-settings.php:14
+msgid "Booking Settings"
+msgstr "تنظیمات رزرو"
+
+#: includes/admin-settings.php:124
+msgid "Max Active Appointments per User"
+msgstr "حداکثر قرارهای فعال برای هر کاربر"
+
+#: includes/admin-settings.php:200
+msgid "Maximum number of active (pending/confirmed) appointments a user can have at the same time. Default: 3"
+msgstr "حداکثر تعداد قرارهای فعال (در انتظار/تایید شده) که یک کاربر می‌تواند همزمان داشته باشد. پیش‌فرض: ۳"
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:118
+msgid "Appointment Booked!"
+msgstr "قرار رزرو شد!"
+
+#: build/booking.js:1
+#: src/frontend/booking/components/BookingForm.jsx:137
+msgid "Book Another Appointment"
+msgstr "رزرو یک قرار دیگر"
+
+#: includes/admin-page.php:162
+#: includes/admin-page.php:593
+#: includes/Admin/AppointmentsListTable.php:51
+#: includes/Admin/ScheduleListTable.php:44
 #~ msgid "ID"
 #~ msgstr "شناسه"
 
+#: includes/admin-page.php:164
+#: includes/admin-page.php:504
+#: includes/Admin/AppointmentsListTable.php:53
 #~ msgid "Client Phone"
 #~ msgstr "تلفن مشتری"
 
+#: includes/admin-page.php:170
+#: includes/admin-page.php:600
+#: includes/Admin/AppointmentsListTable.php:57
+#: includes/Admin/ScheduleListTable.php:50
 #~ msgid "Created At"
 #~ msgstr "تاریخ ایجاد"
 
+#: build/cal.js:1
+#: src/admin/cal/components/AppointmentDetailModal.jsx:318
 #~ msgid "Edit"
 #~ msgstr "ویرایش"
 
+#: includes/admin-page.php:188
+#: includes/Admin/AppointmentsListTable.php:72
 #~ msgid "Are you sure you want to delete this appointment?"
 #~ msgstr "آیا مطمئن هستید که می‌خواهید این نوبت را حذف کنید؟"
 
+#: includes/admin-page.php:248
+#: includes/admin-page.php:670
+#: includes/Admin/AppointmentsListTable.php:142
+#: includes/Admin/ScheduleListTable.php:137
 #~ msgid "All Statuses"
 #~ msgstr "همه وضعیت‌ها"
 
+#: includes/admin-page.php:286
+#: includes/Admin/AppointmentsListTable.php:158
 #~ msgid "Select date"
 #~ msgstr "انتخاب تاریخ"
 
+#: includes/admin-page.php:736
 #~ msgid "Add New"
 #~ msgstr "افزودن جدید"
 
+#: includes/admin-page.php:398
 #, php-format
 #~ msgid "%d appointments deleted."
 #~ msgstr "%d نوبت حذف شد."
 
+#: includes/admin-page.php:436
+#: includes/Controllers/AppointmentController.php:192
+#: includes/Controllers/AppointmentController.php:314
+#: includes/Controllers/AppointmentController.php:406
+#: includes/Middleware/AuthMiddleware.php:104
+#: includes/Services/AppointmentService.php:192
+#: includes/Services/AppointmentService.php:239
+#: includes/Services/AppointmentService.php:274
+#: includes/Services/AppointmentService.php:312
+#: includes/Services/AppointmentService.php:365
 #~ msgid "Appointment not found."
 #~ msgstr "نوبت یافت نشد."
 
+#: includes/admin-page.php:464
 #~ msgid "Appointment updated successfully!"
 #~ msgstr "نوبت با موفقیت به‌روزرسانی شد!"
 
+#: includes/admin-page.php:492
 #~ msgid "Edit Appointment"
 #~ msgstr "ویرایش نوبت"
 
+#: includes/admin-page.php:492
 #~ msgid "Add New Appointment"
 #~ msgstr "افزودن نوبت جدید"
 
+#: includes/admin-page.php:510
 #~ msgid "Appointment Date"
 #~ msgstr "تاریخ نوبت"
 
+#: includes/admin-page.php:542
 #~ msgid "Update Appointment"
 #~ msgstr "به‌روزرسانی نوبت"
 
+#: includes/admin-page.php:542
 #~ msgid "Save Appointment"
 #~ msgstr "ذخیره نوبت"
 
+#: includes/admin-page.php:555
 #~ msgid "Loading cal..."
 #~ msgstr "در حال بارگذاری تقویم..."
 
+#: includes/admin-page.php:567
 #~ msgid "Loading scheduling..."
 #~ msgstr "در حال بارگذاری زمانبندی..."
 
+#: includes/admin-page.php:584
+#: includes/Admin/ScheduleListTable.php:31
 #~ msgid "Schedule"
 #~ msgstr "زمانبندی"
 
+#: includes/admin-menu.php:58
+#: includes/admin-page.php:585
+#: includes/Admin/ScheduleListTable.php:32
 #~ msgid "Schedules"
 #~ msgstr "زمانبندی ها"
 
+#: includes/admin-page.php:595
+#: includes/Admin/ScheduleListTable.php:46
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:139
 #~ msgid "Start Date"
 #~ msgstr "تاریخ شروع"
 
+#: includes/admin-page.php:596
+#: includes/Admin/ScheduleListTable.php:47
+#: build/schedule.js:1
+#: src/admin/schedule/components/CreateSchedule.jsx:148
 #~ msgid "End Date"
 #~ msgstr "تاریخ پایان"
 
+#: includes/admin-page.php:597
+#: includes/Admin/ScheduleListTable.php:48
 #~ msgid "Duration (min)"
 #~ msgstr "مدت زمان (دقیقه)"
 
+#: includes/admin-page.php:618
+#: includes/Admin/ScheduleListTable.php:65
 #~ msgid "Are you sure you want to delete this schedule?"
 #~ msgstr "آیا مطمئن هستید که می‌خواهید این زمانبندی را حذف کنید؟"
 
+#: includes/admin-page.php:624
+#: includes/Admin/ScheduleListTable.php:71
 #~ msgid "Show Calendar View"
 #~ msgstr "نمایش جزئیات"
 
+#: includes/admin-page.php:671
+#: includes/admin-page.php:723
+#: includes/Admin/ScheduleListTable.php:94
+#: includes/Admin/ScheduleListTable.php:138
 #~ msgid "Active"
 #~ msgstr "فعال"
 
+#: includes/admin-page.php:672
+#: includes/admin-page.php:728
+#: includes/Admin/ScheduleListTable.php:99
+#: includes/Admin/ScheduleListTable.php:139
 #~ msgid "Inactive"
 #~ msgstr "غیرفعال"
 
+#: includes/admin-page.php:741
 #, php-format
 #~ msgid "%d schedule(s) deleted."
 #~ msgstr "%d زمانبندی حذف شد."
