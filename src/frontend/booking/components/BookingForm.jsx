@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { __ } from "../../../utils/i18n";
 import {
   Button,
@@ -35,25 +36,28 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
     refetch,
   } = useAvailableSchedule(scheduleId);
 
-  const handleSlotSelection = (selectionData) => {
-    if (selectionData) {
-      handleInputChange("slot_id", selectionData.slotId);
-      handleInputChange("schedule_id", selectionData.scheduleId);
-    } else {
-      handleInputChange("slot_id", "");
-      handleInputChange("schedule_id", "");
-    }
-  };
+  const handleSlotSelection = useCallback(
+    (selectionData) => {
+      if (selectionData) {
+        handleInputChange("slot_id", selectionData.slotId);
+        handleInputChange("schedule_id", selectionData.scheduleId);
+      } else {
+        handleInputChange("slot_id", "");
+        handleInputChange("schedule_id", "");
+      }
+    },
+    [handleInputChange]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await submitBooking();
-    
+
     // If booking was successful and onSuccess callback is provided, call it
     if (success && onSuccess) {
       // Check if there's a custom success message
       const successMessage = window.nobatBooking?.successMessage || "";
-      
+
       if (successMessage) {
         // Show custom message, don't redirect
         // The success message will be shown by the form itself
@@ -78,10 +82,7 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
           <CardBody>
             <Notice status="warning" isDismissible={false}>
               <p>
-                {__(
-                  "You must be logged in to book appointments.",
-                  "nobat"
-                )}
+                {__("You must be logged in to book appointments.", "nobat")}
               </p>
             </Notice>
             <div className="form-actions" style={{ marginTop: "16px" }}>
@@ -120,13 +121,18 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
           </CardHeader>
           <CardBody>
             <AppointmentTicket appointmentData={bookedAppointment} />
-            
-            <div className="form-actions" style={{ marginTop: '24px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+
+            <div
+              className="form-actions"
+              style={{
+                marginTop: "24px",
+                display: "flex",
+                gap: "8px",
+                justifyContent: "center",
+              }}
+            >
               {onBack && (
-                <Button
-                  variant="primary"
-                  onClick={onBack}
-                >
+                <Button variant="primary" onClick={onBack}>
                   {__("See My Appointments", "nobat")}
                 </Button>
               )}
@@ -171,7 +177,6 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
           )}
 
           <form onSubmit={handleSubmit} className="booking-form">
-
             {loadingSchedule ? (
               <div className="loading-slots">
                 <Spinner />
@@ -183,10 +188,7 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
                   {scheduleError}
                 </Notice>
                 <div className="form-actions">
-                  <Button
-                    onClick={refetch}
-                    variant="secondary"
-                  >
+                  <Button onClick={refetch} variant="secondary">
                     {__("Retry", "nobat")}
                   </Button>
                 </div>
