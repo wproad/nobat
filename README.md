@@ -63,8 +63,8 @@ npm run build
 
 Users must be logged in to book appointments. Add the booking form to any page or post using the shortcode:
 
-```
-[nobat_frontend]
+```فر
+[nobat_booking]
 ```
 
 **Note:** Guests will see a login prompt. Users are limited to 3 active appointments by default.

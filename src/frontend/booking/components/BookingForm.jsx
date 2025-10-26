@@ -60,9 +60,9 @@ const BookingForm = ({ scheduleId, onSuccess, onBack }) => {
         // Don't call onSuccess to prevent redirect
       } else {
         // No custom message, redirect after showing the default success message
-        setTimeout(() => {
-          onSuccess();
-        }, 1500);
+        // setTimeout(() => {
+        //   onSuccess();
+        // }, 5000);
       }
     }
   };
