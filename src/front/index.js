@@ -2,33 +2,12 @@ import "./front.scss";
 import "../components/ui/ui-components.scss";
 import domReady from "../utils/dom-ready";
 import { createRoot } from "react-dom/client";
+import MyAppointments from "./components/myAppointments";
 
 domReady(() => {
-  // Find all booking form containers (multiple shortcodes can exist on one page)
-  //   const containers = document.querySelectorAll('.nobat-booking-container');
-
-  //   if (containers.length === 0) {
-  //     console.warn('Nobat: No booking form containers found on page');
-  //     return;
-  //   }
-
-  //   // Initialize each booking form
-  //   containers.forEach((container) => {
-  //     const appContainer = container.querySelector('.nobat-booking-app');
-
-  //     if (!appContainer) {
-  //       console.warn('Nobat: Booking app container not found', container);
-  //       return;
-  //     }
-
-  //     // Get schedule ID from data attribute
-  //     const scheduleId = container.dataset.scheduleId || '';
-
-  //     console.log('Nobat: Initializing booking form', { scheduleId });
-  console.log("Nobat: Initializing booking form");
-
+  // TODO: later attach it to shortcode's id
+  
   // Create React root and render
   const root = createRoot(document.getElementById("nobat-new"));
-  root.render(<div>Hello World</div>);
-  //   });
+  root.render(<MyAppointments />);
 });
