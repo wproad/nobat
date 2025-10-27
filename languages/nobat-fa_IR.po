@@ -672,11 +672,6 @@ msgid "Cancelled"
 msgstr "لغو شده"
 
 #: build/cal.js:1
-#: src/lib/appointmentUtils.js:67
-msgid "Hello {name}, this is regarding your appointment on {date} at {time}."
-msgstr "سلام {name}، این پیام دربارهٔ نوبت شما در تاریخ {date} ساعت {time} است."
-
-#: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:98
 msgid "Confirm Appointment"
 msgstr "تأیید نوبت"
@@ -954,41 +949,6 @@ msgid "Got it"
 msgstr "متوجه شدم"
 
 #: build/schedule.js:1
-#: src/lib/constants.js:14
-msgid "Saturday"
-msgstr "شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:15
-msgid "Sunday"
-msgstr "یکشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:16
-msgid "Monday"
-msgstr "دوشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:17
-msgid "Tuesday"
-msgstr "سه‌شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:18
-msgid "Wednesday"
-msgstr "چهارشنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:19
-msgid "Thursday"
-msgstr "پنج‌شنبه"
-
-#: build/schedule.js:1
-#: src/lib/constants.js:20
-msgid "Friday"
-msgstr "جمعه"
-
-#: build/schedule.js:1
 #: src/admin/schedule/components/WorkingHoursForDay.jsx:38
 msgid "slot"
 msgstr "بازه زمانی"
@@ -1017,16 +977,6 @@ msgstr "حذف بازه زمانی"
 #: src/admin/schedule/components/WorkingHoursForDay.jsx:100
 msgid "Add Time Slot"
 msgstr "افزودن بازه زمانی"
-
-#: build/schedule.js:1
-#: src/hooks/useSchedule.js:18
-msgid "Settings saved successfully!"
-msgstr "تنظیمات با موفقیت ذخیره شد!"
-
-#: build/schedule.js:1
-#: src/hooks/useSchedule.js:24
-msgid "Error saving settings."
-msgstr "خطا در ذخیره تنظیمات."
 
 #: build/schedule.js:1
 #: src/admin/schedule/components/CreateSchedule.jsx:64
@@ -1185,13 +1135,13 @@ msgstr "ارسال درخواست"
 #: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:213
 msgid "Book New Appointment"
-msgstr "رزرو وقت جدید"
+msgstr "رزرو نوبت جدید"
 
 #: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:130
 #: src/frontend/booking/components/BookingForm.jsx:160
 msgid "See My Appointments"
-msgstr "مشاهدهٔ وقت‌های من"
+msgstr "مشاهدهٔ نوبت های من"
 
 #: build/booking.js:1
 #: src/frontend/booking/components/MyAppointments.jsx:258
@@ -1242,21 +1192,21 @@ msgstr "تنظیمات رزرو"
 
 #: includes/admin-settings.php:124
 msgid "Max Active Appointments per User"
-msgstr "حداکثر قرارهای فعال برای هر کاربر"
+msgstr "حداکثر نوبت های فعال برای هر کاربر"
 
 #: includes/admin-settings.php:200
 msgid "Maximum number of active (pending/confirmed) appointments a user can have at the same time. Default: 3"
-msgstr "حداکثر تعداد قرارهای فعال (در انتظار/تایید شده) که یک کاربر می‌تواند همزمان داشته باشد. پیش‌فرض: ۳"
+msgstr "حداکثر تعداد نوبت فعال (در انتظار/تایید شده) که یک کاربر می‌تواند همزمان داشته باشد. پیش‌فرض: ۳"
 
 #: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:118
 msgid "Appointment Booked!"
-msgstr "قرار رزرو شد!"
+msgstr "نوبت رزرو شد!"
 
 #: build/booking.js:1
 #: src/frontend/booking/components/BookingForm.jsx:137
 msgid "Book Another Appointment"
-msgstr "رزرو یک قرار دیگر"
+msgstr "رزرو یک نوبت دیگر"
 
 #: includes/admin-page.php:162
 #: includes/admin-page.php:593
