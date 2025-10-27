@@ -9,16 +9,26 @@ const AppointmentTicket = ({ appointmentData }) => {
     return null;
   }
 
-  // Format time slot display
-  const timeSlot = appointmentData.start_time && appointmentData.end_time
-    ? `${appointmentData.start_time} - ${appointmentData.end_time}`
-    : "";
+  // Format time slot display (hours:minutes only)
+  const formatTime = (timeString) => {
+    if (!timeString) return "";
+    // Remove seconds if present (HH:MM:SS -> HH:MM)
+    return timeString.substring(0, 5);
+  };
+
+  const timeSlot =
+    appointmentData.start_time && appointmentData.end_time
+      ? `${formatTime(appointmentData.start_time)} - ${formatTime(
+          appointmentData.end_time
+        )}`
+      : "";
 
   // Get custom success message from window object
   const customSuccessMessage = window.nobatBooking?.successMessage || "";
-  
+
   // Use Jalali date if available, otherwise fallback to gregorian
-  const displayDate = appointmentData.slot_date_jalali || appointmentData.slot_date;
+  const displayDate =
+    appointmentData.slot_date_jalali || appointmentData.slot_date;
 
   return (
     <div className="appointment-ticket">
@@ -32,12 +42,10 @@ const AppointmentTicket = ({ appointmentData }) => {
               </span>
             </div>
           </div>
-          
+
           {customSuccessMessage ? (
             <div className="ticket-title custom-message">
-              <div 
-                dangerouslySetInnerHTML={{ __html: customSuccessMessage }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: customSuccessMessage }} />
             </div>
           ) : (
             <div className="ticket-title">
@@ -45,7 +53,10 @@ const AppointmentTicket = ({ appointmentData }) => {
                 {__("Your appointment request was sent successfully!", "nobat")}
               </h2>
               <p className="ticket-subtitle">
-                {__("You will be notified once an admin confirms your appointment.", "nobat")}
+                {__(
+                  "You will be notified once an admin confirms your appointment.",
+                  "nobat"
+                )}
               </p>
             </div>
           )}
@@ -57,27 +68,19 @@ const AppointmentTicket = ({ appointmentData }) => {
           <div className="ticket-main-info">
             <div className="info-row">
               <div className="info-item">
-                <div className="info-label">
-                  {__("Date", "nobat")}
-                </div>
-                <div className="info-value">
-                  {displayDate}
-                </div>
+                <div className="info-label">{__("Date", "nobat")}</div>
+                <div className="info-value">{displayDate}</div>
               </div>
               <div className="info-item">
-                <div className="info-label">
-                  {__("Time", "nobat")}
-                </div>
+                <div className="info-label">{__("Time", "nobat")}</div>
                 <div className="info-value">{timeSlot}</div>
               </div>
             </div>
-            
+
             {appointmentData.note && (
               <div className="info-row">
                 <div className="info-item" style={{ width: "100%" }}>
-                  <div className="info-label">
-                    {__("Your Note", "nobat")}
-                  </div>
+                  <div className="info-label">{__("Your Note", "nobat")}</div>
                   <div className="info-value">{appointmentData.note}</div>
                 </div>
               </div>

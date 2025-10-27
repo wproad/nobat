@@ -301,6 +301,14 @@ class AppointmentRepository extends BaseRepository {
 			ARRAY_A
 		);
 		
+		if ( $result ) {
+			// Add Jalali date to appointment data
+			if ( ! empty( $result['slot_date'] ) ) {
+				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $result['slot_date'] );
+				$result['slot_date_jalali'] = $jalali_date ? $jalali_date : $result['slot_date'];
+			}
+		}
+		
 		return $result ?: null;
 	}
 	
