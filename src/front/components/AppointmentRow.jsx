@@ -16,22 +16,23 @@ const AppointmentRow = ({ appointment }) => {
   };
   return (
     <div className="appointment-item">
-      <div className="appointment-date">
-        <div className="date-jalali">{appointment.slot_date_jalali}</div>
-        <div className="time-range">
-          {formatTimeRange(appointment.start_time, appointment.end_time)}
+      <div className="appointment-info">
+        <div className="appointment-date-time">
+          <div className="date-jalali">{appointment.slot_date_jalali}</div>
+          <div className="time-range">
+            {formatTimeRange(appointment.start_time, appointment.end_time)}
+          </div>
         </div>
-      </div>
-
-      <div className="appointment-status">
-        <span
-          className="status-badge"
-          style={{
-            backgroundColor: getStatusColor(appointment.status),
-          }}
-        >
-          {getStatusText(appointment.status)}
-        </span>
+        <div className="appointment-status">
+          <span
+            className="status-badge"
+            style={{
+              backgroundColor: getStatusColor(appointment.status),
+            }}
+          >
+            {getStatusText(appointment.status)}
+          </span>
+        </div>
       </div>
 
       {appointment.note && (

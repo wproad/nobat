@@ -34828,23 +34828,26 @@ const AppointmentRow = ({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "appointment-item",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "appointment-date",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "date-jalali",
-        children: appointment.slot_date_jalali
+      className: "appointment-info",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "appointment-date-time",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "date-jalali",
+          children: appointment.slot_date_jalali
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "time-range",
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.formatTimeRange)(appointment.start_time, appointment.end_time)
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "time-range",
-        children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.formatTimeRange)(appointment.start_time, appointment.end_time)
+        className: "appointment-status",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "status-badge",
+          style: {
+            backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusColor)(appointment.status)
+          },
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusText)(appointment.status)
+        })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "appointment-status",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-        className: "status-badge",
-        style: {
-          backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusColor)(appointment.status)
-        },
-        children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusText)(appointment.status)
-      })
     }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "appointment-note",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
@@ -35065,10 +35068,6 @@ __webpack_require__.r(__webpack_exports__);
 const MyAppointments = () => {
   const appointments = _utils_data_js__WEBPACK_IMPORTED_MODULE_0__.myAppointments || [];
   const hasAppointments = appointments.length > 0;
-  const handleCancel = () => {
-    // TODO: Refresh appointments list when connected to real API
-    console.log("Appointment cancelled - refresh needed");
-  };
 
   // TODO: add loading and error state
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -35077,15 +35076,20 @@ const MyAppointments = () => {
       className: "appointments-header",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
         children: "\u0646\u0648\u0628\u062A\u200C\u0647\u0627\u06CC \u0645\u0646"
-      }), hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-        className: "appointments-count",
-        children: [appointments.length, " \u0646\u0648\u0628\u062A"]
-      }) : null]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "header-actions",
+        children: [hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+          className: "appointments-count",
+          children: [appointments.length, " \u0646\u0648\u0628\u062A"]
+        }) : null, _utils_data_js__WEBPACK_IMPORTED_MODULE_0__.isUserallowedMoreAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          className: "book-appointment-btn",
+          children: "\u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062A \u062C\u062F\u06CC\u062F"
+        })]
+      })]
     }), !hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "appointments-list",
       children: appointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        appointment: appointment,
-        onCancel: handleCancel
+        appointment: appointment
       }, appointment.id))
     })]
   });

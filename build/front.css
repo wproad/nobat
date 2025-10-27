@@ -81,13 +81,39 @@
   font-weight: 700;
   margin: 0;
 }
-.my-appointments .appointments-header .appointments-count {
+.my-appointments .appointments-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.my-appointments .appointments-header .header-actions .appointments-count {
   background: var(--color-primary-100);
   color: var(--color-primary-700);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-weight: 600;
   font-size: 0.9rem;
+  font-weight: 600;
+}
+.my-appointments .appointments-header .header-actions .book-appointment-btn {
+  background: var(--color-primary-600);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(61, 83, 219, 0.2);
+}
+.my-appointments .appointments-header .header-actions .book-appointment-btn:hover {
+  background: var(--color-primary-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(61, 83, 219, 0.3);
+}
+.my-appointments .appointments-header .header-actions .book-appointment-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(61, 83, 219, 0.2);
 }
 .my-appointments .empty-appointments-state {
   text-align: center;
@@ -185,29 +211,32 @@
   box-shadow: 0 4px 16px rgba(16, 25, 122, 0.15);
   transform: translateY(-2px);
 }
-.my-appointments .appointments-list .appointment-item .appointment-date {
+.my-appointments .appointments-list .appointment-item .appointment-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 1rem;
 }
-.my-appointments .appointments-list .appointment-item .appointment-date .date-jalali {
+.my-appointments .appointments-list .appointment-item .appointment-info .appointment-date-time {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.my-appointments .appointments-list .appointment-item .appointment-info .appointment-date-time .date-jalali {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-primary-900);
 }
-.my-appointments .appointments-list .appointment-item .appointment-date .time-range {
+.my-appointments .appointments-list .appointment-item .appointment-info .appointment-date-time .time-range {
   background: var(--color-info-100);
   color: var(--color-info-700);
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem;
+  align-self: flex-start;
 }
-.my-appointments .appointments-list .appointment-item .appointment-status {
-  margin-bottom: 1rem;
-}
-.my-appointments .appointments-list .appointment-item .appointment-status .status-badge {
+.my-appointments .appointments-list .appointment-item .appointment-info .appointment-status .status-badge {
   color: var(--color-primary-0);
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
@@ -254,29 +283,30 @@
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--color-primary-100);
+  text-align: left;
 }
 .my-appointments .appointments-list .appointment-item .appointment-actions .btn-cancel {
-  background: var(--color-error-500);
-  color: var(--color-primary-0);
+  background: none;
+  color: var(--color-error-600);
   border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  padding: 0.5rem 0;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+  text-decoration-color: transparent;
 }
 .my-appointments .appointments-list .appointment-item .appointment-actions .btn-cancel:hover:not(:disabled) {
-  background: var(--color-error-600);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 68, 35, 0.3);
+  color: var(--color-error-700);
+  text-decoration-color: var(--color-error-600);
 }
 .my-appointments .appointments-list .appointment-item .appointment-actions .btn-cancel:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 .my-appointments .appointments-list .appointment-item .appointment-actions .btn-cancel:active:not(:disabled) {
-  transform: translateY(0);
+  color: var(--color-error-800);
 }
 
 @media (max-width: 768px) {
@@ -291,13 +321,34 @@
   .my-appointments .appointments-header h1 {
     font-size: 1.5rem;
   }
+  .my-appointments .appointments-header .header-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .my-appointments .appointments-header .header-actions .book-appointment-btn {
+    width: 100%;
+    padding: 1rem;
+  }
   .my-appointments .appointment-item {
     padding: 1rem;
   }
-  .my-appointments .appointment-item .appointment-date {
+  .my-appointments .appointment-item .appointment-info {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     text-align: center;
+  }
+  .my-appointments .appointment-item .appointment-info .appointment-date-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .my-appointments .appointment-item .appointment-info .appointment-date-time .time-range {
+    align-self: center;
+  }
+  .my-appointments .appointment-item .appointment-info .appointment-status {
+    display: flex;
+    justify-content: center;
   }
   .my-appointments .appointment-item .appointment-meta {
     flex-direction: column;
