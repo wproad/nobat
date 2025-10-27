@@ -57,12 +57,16 @@ class SlotGenerator {
 					);
 
 					foreach ( $day_slots as $slot ) {
+						// Convert Gregorian date to Jalali
+						$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $gregorian_date );
+						
 						$slots[] = array(
-							'schedule_id' => $schedule_id,
-							'slot_date'   => $gregorian_date,
-							'start_time'  => $slot['start'],
-							'end_time'    => $slot['end'],
-							'status'      => 'available',
+							'schedule_id'      => $schedule_id,
+							'slot_date'        => $gregorian_date,
+							'slot_date_jalali' => $jalali_date,
+							'start_time'       => $slot['start'],
+							'end_time'         => $slot['end'],
+							'status'           => 'available',
 						);
 					}
 				}
@@ -148,11 +152,15 @@ class SlotGenerator {
 			);
 
 			foreach ( $period_slots as $slot ) {
+				// Convert Gregorian date to Jalali
+				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $date );
+				
 				$slots[] = array(
-					'slot_date'  => $date,
-					'start_time' => $slot['start'],
-					'end_time'   => $slot['end'],
-					'status'     => 'available',
+					'slot_date'        => $date,
+					'slot_date_jalali' => $jalali_date,
+					'start_time'       => $slot['start'],
+					'end_time'         => $slot['end'],
+					'status'           => 'available',
 				);
 			}
 		}
