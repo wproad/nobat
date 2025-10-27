@@ -81,7 +81,8 @@ const MyAppointments = ({ shouldLoad = true, onBookNew, onAppointmentsLoaded }) 
       setLoading(false);
     }
   };
-
+  console.log(appointments);
+  
   const handleRequestCancellation = (appointment) => {
     setSelectedAppointment(appointment);
     setCancellationReason("");

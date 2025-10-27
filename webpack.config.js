@@ -12,6 +12,7 @@ module.exports = {
     booking: "./src/frontend/booking/index.js",
     cal: "./src/admin/cal/index.js",
     schedule: "./src/admin/schedule/index.js",
+    front: "./src/front/index.js",
   },
   output: {
     ...defaultConfig.output,

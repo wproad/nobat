@@ -9,6 +9,8 @@ const AppointmentTicket = ({ appointmentData }) => {
     return null;
   }
 
+  console.log(appointmentData);
+
   // Format time slot display (hours:minutes only)
   const formatTime = (timeString) => {
     if (!timeString) return "";

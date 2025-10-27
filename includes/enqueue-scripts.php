@@ -131,3 +131,66 @@ function nobat_frontend_enqueue_scripts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'nobat_frontend_enqueue_scripts' );
+
+/**
+ * Enqueues front.js for pages that need it
+ * Checks if page has an element with id 'nobat-new'
+ */
+function nobat_front_enqueue_scripts() {
+	global $post;
+	
+	// Check if we need to enqueue front.js
+	$should_enqueue = false;
+	
+	// Check if we're on a page/post
+	if ( $post ) {
+		// Check if post content contains 'nobat-new' id or has a specific container
+		if ( strpos( $post->post_content, 'nobat-new' ) !== false || 
+			 has_shortcode( $post->post_content, 'nobat_front' ) ) {
+			$should_enqueue = true;
+		}
+	}
+	
+	// Also check if current page has the nobat-new element in body class or other indicators
+	if ( ! $should_enqueue && ( is_page() || is_single() || is_front_page() ) ) {
+		$should_enqueue = true; // Load on all pages for now, can be optimized later
+	}
+	
+	if ( ! $should_enqueue ) {
+		return;
+	}
+
+	// Use file modification time as version for cache busting
+	$js_file = NOBAT_PLUGIN_DIR . 'build/front.js';
+	$css_file = NOBAT_PLUGIN_DIR . 'build/front.css';
+	$version = file_exists( $js_file ) ? filemtime( $js_file ) : NOBAT_VERSION;
+
+	// Enqueue our standalone React bundle (no WordPress dependencies)
+	wp_enqueue_script(
+		'nobat-front-script',
+		NOBAT_PLUGIN_URL . 'build/front.js',
+		array(), // No dependencies - everything is bundled
+		$version,
+		array(
+			'in_footer' => true,
+		)
+	);
+
+	// Load JS translations for the front handle
+	wp_set_script_translations( 'nobat-front-script', 'nobat', NOBAT_PLUGIN_DIR . 'languages' );
+
+	// Localize script with REST API nonce and user data
+	wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
+		'root' => esc_url_raw( rest_url() ),
+		'nonce' => wp_create_nonce( 'wp_rest' ),
+	) );
+
+	// Enqueue styles
+	wp_enqueue_style(
+		'nobat-front-style',
+		NOBAT_PLUGIN_URL . 'build/front.css',
+		array(), // No dependencies - everything is bundled
+		$version,
+	);
+}
+add_action( 'wp_enqueue_scripts', 'nobat_front_enqueue_scripts' );
