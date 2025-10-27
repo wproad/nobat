@@ -289,8 +289,8 @@ class SlotRepository extends BaseRepository {
 			$date = $slot['slot_date'];
 			
 			if ( ! isset( $grouped[ $date ] ) ) {
-				// Convert Gregorian to Jalali for display
-				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $date );
+				// Use stored Jalali date if available, otherwise convert
+				$jalali_date = ! empty( $slot['slot_date_jalali'] ) ? $slot['slot_date_jalali'] : \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $date );
 				$jalali_parts = explode( '/', $jalali_date ); // Format: YYYY/MM/DD
 				
 				// Get Persian weekday name
@@ -309,7 +309,7 @@ class SlotRepository extends BaseRepository {
 				
 				$grouped[ $date ] = array(
 					'date' => $date, // Gregorian date
-					'jalali_date' => $jalali_date, // Converted on-the-fly
+					'jalali_date' => $jalali_date, // From database or converted
 					'weekday' => $weekday_persian[ $weekday_num ],
 					'day_number' => $jalali_parts[2],
 					'month_name' => $month_names[ $month_num ],

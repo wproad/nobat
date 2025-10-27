@@ -262,9 +262,12 @@ class SlotController {
 		if ( ! $slot ) {
 			// Slot doesn't exist - create it
 			// This allows converting unavailable slots to available/blocked
+			$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $date );
+			
 			$slot_id = $slot_repository->insert( array(
 				'schedule_id' => $schedule_id,
 				'slot_date' => $date,
+				'slot_date_jalali' => $jalali_date,
 				'start_time' => $start_time,
 				'end_time' => $end_time,
 				'status' => $status,
