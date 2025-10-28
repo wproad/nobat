@@ -1,9 +1,12 @@
 import { useState } from "react";
 import MyAppointments from "./MyAppointments.jsx";
 import BookingForm from "./BookingForm.jsx";
+import LoginRequired from "./LoginRequired.jsx";
+import { useAuth } from "../contexts/AuthContext";
 import { __ } from "../../utils/i18n";
 
 const Main = () => {
+  const { isLoggedIn, loginUrl, registerUrl } = useAuth();
   const [currentView, setCurrentView] = useState("appointments");
 
   const toggleView = () => {
@@ -15,6 +18,11 @@ const Main = () => {
       ? __("Book New Appointment", "nobat")
       : __("View My Appointments", "nobat");
   };
+
+  // Check if user is logged in
+  if (!isLoggedIn) {
+    return <LoginRequired loginUrl={loginUrl} registerUrl={registerUrl} />;
+  }
 
   return (
     <div className="main-container">

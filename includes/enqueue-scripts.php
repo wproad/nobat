@@ -8,6 +8,29 @@ if ( ! defined('ABSPATH') ) {
 }
 
 /**
+ * Get current user data for frontend
+ *
+ * @return array User data.
+ */
+function nobat_get_current_user_data() {
+	if ( ! is_user_logged_in() ) {
+		return array(
+			'id' => 0,
+			'name' => '',
+			'email' => '',
+		);
+	}
+
+	$current_user = wp_get_current_user();
+
+	return array(
+		'id' => $current_user->ID,
+		'name' => $current_user->display_name,
+		'email' => $current_user->user_email,
+	);
+}
+
+/**
  * Enqueues the necessary styles and script only on the admin page
  */
 function nobat_admin_enqueue_scripts( $admin_page ) {
@@ -183,6 +206,14 @@ function nobat_front_enqueue_scripts() {
 	wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
 		'root' => esc_url_raw( rest_url() ),
 		'nonce' => wp_create_nonce( 'wp_rest' ),
+	) );
+
+	// Add authentication data for front section
+	wp_localize_script( 'nobat-front-script', 'nobatFront', array(
+		'isLoggedIn' => is_user_logged_in(),
+		'currentUser' => nobat_get_current_user_data(),
+		'loginUrl' => wp_login_url( get_permalink() ),
+		'registerUrl' => wp_login_url( get_permalink() ) . '?action=register',
 	) );
 
 	// Enqueue styles

@@ -36926,6 +36926,70 @@ const EmptyAppointmentsState = () => {
 
 /***/ }),
 
+/***/ "./src/front/components/LoginRequired.jsx":
+/*!************************************************!*\
+  !*** ./src/front/components/LoginRequired.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+const LoginRequired = ({
+  loginUrl,
+  registerUrl
+}) => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "main-container",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "auth-prompt",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Card, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.CardHeader, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Access Required", "nobat")
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.CardBody, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+            status: "warning",
+            isDismissible: false,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("You must be logged in to view appointments.", "nobat")
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "form-actions",
+            style: {
+              marginTop: "16px"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+              variant: "primary",
+              href: loginUrl,
+              children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Log In", "nobat")
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+              variant: "secondary",
+              href: registerUrl,
+              style: {
+                marginLeft: "8px"
+              },
+              children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Register", "nobat")
+            })]
+          })]
+        })]
+      })
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginRequired);
+
+/***/ }),
+
 /***/ "./src/front/components/Main.jsx":
 /*!***************************************!*\
   !*** ./src/front/components/Main.jsx ***!
@@ -36941,33 +37005,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyAppointments.jsx */ "./src/front/components/MyAppointments.jsx");
 /* harmony import */ var _BookingForm_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookingForm.jsx */ "./src/front/components/BookingForm.jsx");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _LoginRequired_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginRequired.jsx */ "./src/front/components/LoginRequired.jsx");
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/AuthContext */ "./src/front/contexts/AuthContext.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 
 const Main = () => {
+  const {
+    isLoggedIn,
+    loginUrl,
+    registerUrl
+  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__.useAuth)();
   const [currentView, setCurrentView] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("appointments");
   const toggleView = () => {
     setCurrentView(currentView === "appointments" ? "booking" : "appointments");
   };
   const getButtonText = () => {
-    return currentView === "appointments" ? (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Book New Appointment", "nobat") : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("View My Appointments", "nobat");
+    return currentView === "appointments" ? (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Book New Appointment", "nobat") : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("View My Appointments", "nobat");
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+
+  // Check if user is logged in
+  if (!isLoggedIn) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_LoginRequired_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      loginUrl: loginUrl,
+      registerUrl: registerUrl
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "main-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "main-header",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
         className: "toggle-view-btn",
         onClick: toggleView,
         children: getButtonText()
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "main-content",
-      children: currentView === "appointments" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_BookingForm_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      children: currentView === "appointments" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_BookingForm_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {})
     })]
   });
 };
@@ -37200,6 +37281,71 @@ const TimeSlotSelector = ({
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TimeSlotSelector);
+
+/***/ }),
+
+/***/ "./src/front/contexts/AuthContext.js":
+/*!*******************************************!*\
+  !*** ./src/front/contexts/AuthContext.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthProvider: () => (/* binding */ AuthProvider),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   useAuth: () => (/* binding */ useAuth)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+/**
+ * Authentication Context for Front Section
+ * Provides user authentication state and utilities
+ */
+
+const AuthContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
+
+/**
+ * AuthProvider component
+ * Wraps the app and provides authentication context
+ */
+const AuthProvider = ({
+  children
+}) => {
+  // Get authentication data from WordPress localization
+  const authData = window.nobatFront || {};
+  const value = {
+    isLoggedIn: authData.isLoggedIn || false,
+    currentUser: authData.currentUser || {
+      id: 0,
+      name: "",
+      email: ""
+    },
+    loginUrl: authData.loginUrl || "/wp-login.php",
+    registerUrl: authData.registerUrl || "/wp-login.php?action=register"
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(AuthContext.Provider, {
+    value: value,
+    children: children
+  });
+};
+
+/**
+ * Custom hook to use authentication context
+ * @returns {Object} Authentication state and utilities
+ */
+const useAuth = () => {
+  const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthContext);
 
 /***/ }),
 
@@ -39112,7 +39258,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/dom-ready */ "./src/utils/dom-ready.js");
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./src/front/components/Main.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contexts/AuthContext */ "./src/front/contexts/AuthContext.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -39124,7 +39272,9 @@ __webpack_require__.r(__webpack_exports__);
 
   // Create React root and render
   const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(document.getElementById("nobat-new"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Main__WEBPACK_IMPORTED_MODULE_4__["default"], {}));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__.AuthProvider, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Main__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+  }));
 });
 })();
 
