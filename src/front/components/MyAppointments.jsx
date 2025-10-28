@@ -3,6 +3,7 @@ import { myAppointments } from "../utils/data.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
+import { __ } from "../../utils/i18n";
 
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
@@ -13,28 +14,34 @@ const MyAppointments = () => {
   const currentAppointments = categorizedAppointments[activeTab];
   const hasAppointments = currentAppointments.length > 0;
   const totalAppointments = appointments.length;
-
+  console.log(activeTab);
   const tabs = [
     {
       id: "upcoming",
-      label: "پیش رو",
+      label: __("Upcoming", "nobat"),
       count: categorizedAppointments.upcoming.length,
     },
     {
       id: "cancelled",
-      label: "لغو شده",
+      label: __("Cancelled", "nobat"),
       count: categorizedAppointments.cancelled.length,
     },
-    { id: "past", label: "گذشته", count: categorizedAppointments.past.length },
+    {
+      id: "past",
+      label: __("Past", "nobat"),
+      count: categorizedAppointments.past.length,
+    },
   ];
 
   return (
     <div className="my-appointments">
       <div className="appointments-header">
-        <h1>نوبت‌های من</h1>
+        <h1>{__("My Appointments", "nobat")}</h1>
         <div className="header-actions">
           {totalAppointments > 0 && (
-            <span className="appointments-count">{totalAppointments} نوبت</span>
+            <span className="appointments-count">
+              {totalAppointments} {__("appointments", "nobat")}
+            </span>
           )}
         </div>
       </div>

@@ -73,7 +73,6 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--color-primary-200);
 }
 .my-appointments .appointments-header h1 {
   color: var(--color-primary-900);
@@ -114,6 +113,65 @@
 .my-appointments .appointments-header .header-actions .book-appointment-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(61, 83, 219, 0.2);
+}
+.my-appointments .appointments-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: var(--color-primary-50);
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-200);
+}
+.my-appointments .appointments-tabs .tab-button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-secondary-600);
+}
+.my-appointments .appointments-tabs .tab-button:hover:not(.active) {
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  transform: translateY(-1px);
+}
+.my-appointments .appointments-tabs .tab-button.active {
+  background: var(--color-primary-600);
+  color: var(--color-primary-0);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(61, 83, 219, 0.3);
+  transform: translateY(-1px);
+}
+.my-appointments .appointments-tabs .tab-button.active .tab-label {
+  color: var(--color-primary-0);
+}
+.my-appointments .appointments-tabs .tab-button.active .tab-count {
+  background: var(--color-primary-0);
+  color: var(--color-primary-600);
+}
+.my-appointments .appointments-tabs .tab-button .tab-label {
+  font-size: 0.9rem;
+  font-weight: inherit;
+  color: inherit;
+}
+.my-appointments .appointments-tabs .tab-button .tab-count {
+  background: var(--color-secondary-200);
+  color: var(--color-secondary-600);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
 }
 .my-appointments .empty-appointments-state {
   text-align: center;
@@ -502,15 +560,15 @@
   font-weight: 600;
 }
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button.booked {
-  background: var(--color-error-100);
-  border-color: var(--color-error-300);
-  opacity: 0.6;
+  background: var(--color-secondary-100);
+  border-color: var(--color-secondary-300);
+  opacity: 0.7;
   cursor: not-allowed;
 }
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button.booked .slot-time-display .time-start,
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button.booked .slot-time-display .time-separator,
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button.booked .slot-time-display .time-end {
-  color: var(--color-error-600);
+  color: var(--color-secondary-500);
 }
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button .slot-time-display {
   display: flex;
@@ -608,6 +666,21 @@
   .my-appointments .appointments-header .header-actions .book-appointment-btn {
     width: 100%;
     padding: 1rem;
+  }
+  .my-appointments .appointments-tabs {
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+  .my-appointments .appointments-tabs .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .my-appointments .appointments-tabs .tab-button .tab-label {
+    font-size: 0.8rem;
+  }
+  .my-appointments .appointments-tabs .tab-button .tab-count {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
   }
   .my-appointments .appointment-item {
     padding: 1rem;

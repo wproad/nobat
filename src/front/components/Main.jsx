@@ -1,6 +1,7 @@
 import { useState } from "react";
-import MyAppointments from "./myAppointments.jsx";
+import MyAppointments from "./MyAppointments.jsx";
 import BookingForm from "./BookingForm.jsx";
+import { __ } from "../../utils/i18n";
 
 const Main = () => {
   const [currentView, setCurrentView] = useState("appointments");
@@ -11,8 +12,8 @@ const Main = () => {
 
   const getButtonText = () => {
     return currentView === "appointments"
-      ? "رزرو نوبت جدید"
-      : "مشاهده نوبت‌های من";
+      ? __("Book New Appointment", "nobat")
+      : __("View My Appointments", "nobat");
   };
 
   return (

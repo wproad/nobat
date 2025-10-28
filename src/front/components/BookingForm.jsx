@@ -8,6 +8,7 @@ import {
 } from "../../components/ui";
 import TimeSlotSelector from "./TimeSlotSelector";
 import { schedule } from "../utils/data";
+import { __ } from "../../utils/i18n";
 
 const BookingForm = () => {
   const [notes, setNotes] = useState("");
@@ -39,7 +40,7 @@ const BookingForm = () => {
     <div className="appointment-booking-form">
       <Card>
         <CardHeader>
-          <h3>Book an Appointment</h3>
+          <h3>{__("Book an Appointment", "nobat")}</h3>
         </CardHeader>
         <CardBody>
           <form className="booking-form" onSubmit={handleSubmit}>
@@ -55,18 +56,24 @@ const BookingForm = () => {
 
             <div className="form-row">
               <TextareaControl
-                label="Additional Notes"
+                label={__("Additional Notes", "nobat")}
                 value={notes}
                 onChange={(value) => setNotes(value)}
-                placeholder="Any special requests or additional information"
+                placeholder={__(
+                  "Any special requests or additional information",
+                  "nobat"
+                )}
                 rows={3}
-                help="Optional: Add any specific requirements or questions"
+                help={__(
+                  "Optional: Add any specific requirements or questions",
+                  "nobat"
+                )}
               />
             </div>
 
             <div className="form-actions">
               <Button type="submit" variant="primary" disabled={!isFormValid}>
-                Book Appointment
+                {__("Book Appointment", "nobat")}
               </Button>
             </div>
           </form>

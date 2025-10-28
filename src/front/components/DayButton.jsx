@@ -1,4 +1,7 @@
-const DayButton = ({ day, isSelected, isCurrentDay, onClick }) => {
+const DayButton = ({ day, isSelected, onClick }) => {
+  const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
+  const isCurrentDay = day?.date === today;
+
   const buttonClasses = [
     "day-button",
     isSelected ? "selected" : "",

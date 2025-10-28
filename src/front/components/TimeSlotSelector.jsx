@@ -1,4 +1,3 @@
-
 import { __ } from "../../utils/i18n";
 import DayButton from "./DayButton";
 import TimeSlotButton from "./TimeSlotButton";
@@ -10,22 +9,18 @@ const TimeSlotSelector = ({
   onDaySelect,
   onSlotSelect,
 }) => {
-  const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
-
   return (
     <div className="appointment-selector">
       <div className="week-days-selector">
         <div className="week-days-grid">
           {days.map((dayData) => {
             const isSelected = selectedDay?.jalali_date === dayData.jalali_date;
-            const isCurrentDay = dayData?.date === today;
 
             return (
               <DayButton
                 key={dayData.jalali_date}
                 day={dayData}
                 isSelected={isSelected}
-                isCurrentDay={isCurrentDay}
                 onClick={() => onDaySelect(dayData)}
               />
             );

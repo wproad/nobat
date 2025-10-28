@@ -1,3 +1,4 @@
+import { __ } from "../../utils/i18n";
 
 const EmptyAppointmentsState = () => {
   const handleBookAppointment = () => {
@@ -35,11 +36,15 @@ const EmptyAppointmentsState = () => {
           </svg>
         </div>
 
-        <h3 className="empty-state-title">هنوز نوبتی ندارید</h3>
+        <h3 className="empty-state-title">
+          {__("You don't have any appointments yet", "nobat")}
+        </h3>
 
         <p className="empty-state-description">
-          وقت آن رسیده که اولین نوبت خود را رزرو کنید! با ما در تماس باشید و از
-          خدمات باکیفیت ما بهره‌مند شوید.
+          {__(
+            "It's time to book your first appointment! Contact us and benefit from our quality services.",
+            "nobat"
+          )}
         </p>
 
         <button
@@ -60,7 +65,7 @@ const EmptyAppointmentsState = () => {
               />
             </svg>
           </span>
-          رزرو نوبت جدید
+          {__("Book New Appointment", "nobat")}
         </button>
 
         <div className="empty-state-features">
@@ -82,7 +87,7 @@ const EmptyAppointmentsState = () => {
                 />
               </svg>
             </div>
-            <span>رزرو آسان و سریع</span>
+            <span>{__("Easy and Fast Booking", "nobat")}</span>
           </div>
 
           <div className="feature-item">
@@ -124,7 +129,7 @@ const EmptyAppointmentsState = () => {
                 />
               </svg>
             </div>
-            <span>خدمات باکیفیت</span>
+            <span>{__("Quality Services", "nobat")}</span>
           </div>
 
           <div className="feature-item">
@@ -159,7 +164,7 @@ const EmptyAppointmentsState = () => {
                 />
               </svg>
             </div>
-            <span>پشتیبانی ۲۴ ساعته</span>
+            <span>{__("24/7 Support", "nobat")}</span>
           </div>
         </div>
       </div>

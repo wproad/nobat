@@ -4,6 +4,7 @@ import {
   formatTimeRange,
 } from "../utils/displayHelpers.js";
 import { canCancelAppointment } from "../utils/appointmentHelpers.js";
+import { __ } from "../../utils/i18n";
 
 const AppointmentRow = ({ appointment }) => {
   if (!appointment) return null;
@@ -37,20 +38,21 @@ const AppointmentRow = ({ appointment }) => {
 
       {appointment.note && (
         <div className="appointment-note">
-          <strong>یادداشت:</strong> {appointment.note}
+          <strong>{__("Note:", "nobat")}</strong> {appointment.note}
         </div>
       )}
 
       {appointment.cancellation_reason && (
         <div className="cancellation-reason">
-          <strong>علت لغو:</strong> {appointment.cancellation_reason}
+          <strong>{__("Cancellation Reason:", "nobat")}</strong>{" "}
+          {appointment.cancellation_reason}
         </div>
       )}
 
       {canCancel && (
         <div className="appointment-actions">
           <button className="btn-cancel" onClick={handleCancel}>
-            لغو نوبت
+            {__("Cancel Appointment", "nobat")}
           </button>
         </div>
       )}
