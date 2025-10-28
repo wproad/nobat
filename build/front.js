@@ -36757,36 +36757,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 const EmptyAppointmentsState = () => {
   const handleBookAppointment = () => {
     // TODO: Implement navigation to booking page or open booking modal
     console.log("Navigate to booking page");
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "empty-appointments-state",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "empty-state-content",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
         className: "empty-state-icon",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
           width: "80",
           height: "80",
           viewBox: "0 0 24 24",
           fill: "none",
           xmlns: "http://www.w3.org/2000/svg",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
             d: "M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z",
             stroke: "currentColor",
             strokeWidth: "1.5",
             strokeMiterlimit: "10",
             strokeLinecap: "round",
             strokeLinejoin: "round"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
             d: "M15.6947 13.7H15.7037M15.6947 16.7H15.7037M11.9955 13.7H12.0045M11.9955 16.7H12.0045M8.29431 13.7H8.30329M8.29431 16.7H8.30329",
             stroke: "currentColor",
             strokeWidth: "2",
@@ -36795,42 +36792,42 @@ const EmptyAppointmentsState = () => {
             strokeLinejoin: "round"
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
         className: "empty-state-title",
         children: "\u0647\u0646\u0648\u0632 \u0646\u0648\u0628\u062A\u06CC \u0646\u062F\u0627\u0631\u06CC\u062F"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
         className: "empty-state-description",
         children: "\u0648\u0642\u062A \u0622\u0646 \u0631\u0633\u06CC\u062F\u0647 \u06A9\u0647 \u0627\u0648\u0644\u06CC\u0646 \u0646\u0648\u0628\u062A \u062E\u0648\u062F \u0631\u0627 \u0631\u0632\u0631\u0648 \u06A9\u0646\u06CC\u062F! \u0628\u0627 \u0645\u0627 \u062F\u0631 \u062A\u0645\u0627\u0633 \u0628\u0627\u0634\u06CC\u062F \u0648 \u0627\u0632 \u062E\u062F\u0645\u0627\u062A \u0628\u0627\u06A9\u06CC\u0641\u06CC\u062A \u0645\u0627 \u0628\u0647\u0631\u0647\u200C\u0645\u0646\u062F \u0634\u0648\u06CC\u062F."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
         className: "book-appointment-btn",
         onClick: handleBookAppointment,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
           className: "btn-icon",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
             width: "20",
             height: "20",
             viewBox: "0 0 24 24",
             fill: "none",
             xmlns: "http://www.w3.org/2000/svg",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
               d: "M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V9.5C15 10.3 14.3 11 13.5 11S12 10.3 12 9.5V7.5L6 7V9C6 9.6 6.4 10 7 10H8V20C8 21.1 8.9 22 10 22H14C15.1 22 16 21.1 16 20V10H17C17.6 10 18 9.6 18 9Z",
               fill: "currentColor"
             })
           })
         }), "\u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062A \u062C\u062F\u06CC\u062F"]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: "empty-state-features",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "feature-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
             className: "feature-icon",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
               width: "16",
               height: "16",
               viewBox: "0 0 24 24",
               fill: "none",
               xmlns: "http://www.w3.org/2000/svg",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z",
                 stroke: "currentColor",
                 strokeWidth: "2",
@@ -36838,38 +36835,38 @@ const EmptyAppointmentsState = () => {
                 strokeLinejoin: "round"
               })
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
             children: "\u0631\u0632\u0631\u0648 \u0622\u0633\u0627\u0646 \u0648 \u0633\u0631\u06CC\u0639"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "feature-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
             className: "feature-icon",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
               width: "16",
               height: "16",
               viewBox: "0 0 24 24",
               fill: "none",
               xmlns: "http://www.w3.org/2000/svg",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z",
                 stroke: "currentColor",
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M8 14S9.5 16 12 16S16 14 16 14",
                 stroke: "currentColor",
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M9 9H9.01",
                 stroke: "currentColor",
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M15 9H15.01",
                 stroke: "currentColor",
                 strokeWidth: "2",
@@ -36877,32 +36874,32 @@ const EmptyAppointmentsState = () => {
                 strokeLinejoin: "round"
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
             children: "\u062E\u062F\u0645\u0627\u062A \u0628\u0627\u06A9\u06CC\u0641\u06CC\u062A"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
           className: "feature-item",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
             className: "feature-icon",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
               width: "16",
               height: "16",
               viewBox: "0 0 24 24",
               fill: "none",
               xmlns: "http://www.w3.org/2000/svg",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M12 2L2 7L12 12L22 7L12 2Z",
                 stroke: "currentColor",
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M2 17L12 22L22 17",
                 stroke: "currentColor",
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
                 d: "M2 12L12 17L22 12",
                 stroke: "currentColor",
                 strokeWidth: "2",
@@ -36910,7 +36907,7 @@ const EmptyAppointmentsState = () => {
                 strokeLinejoin: "round"
               })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
             children: "\u067E\u0634\u062A\u06CC\u0628\u0627\u0646\u06CC \u06F2\u06F4 \u0633\u0627\u0639\u062A\u0647"
           })]
         })]
@@ -37162,15 +37159,12 @@ const MyAppointments = () => {
       className: "appointments-header",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
         children: "\u0646\u0648\u0628\u062A\u200C\u0647\u0627\u06CC \u0645\u0646"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "header-actions",
-        children: [totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+        children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
           className: "appointments-count",
           children: [totalAppointments, " \u0646\u0648\u0628\u062A"]
-        }), _utils_data_js__WEBPACK_IMPORTED_MODULE_1__.isUserallowedMoreAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          className: "book-appointment-btn",
-          children: "\u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062A \u062C\u062F\u06CC\u062F"
-        })]
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "appointments-tabs",

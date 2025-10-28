@@ -1,11 +1,6 @@
 import { useState } from "react";
-import {
-  myAppointments,
-  isUserallowedMoreAppointments,
-} from "../utils/data.js";
-import {
-  categorizeAppointments,
-} from "../utils/appointmentHelpers.js";
+import { myAppointments } from "../utils/data.js";
+import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
 
@@ -40,9 +35,6 @@ const MyAppointments = () => {
         <div className="header-actions">
           {totalAppointments > 0 && (
             <span className="appointments-count">{totalAppointments} نوبت</span>
-          )}
-          {isUserallowedMoreAppointments && (
-            <button className="book-appointment-btn">رزرو نوبت جدید</button>
           )}
         </div>
       </div>
