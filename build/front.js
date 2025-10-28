@@ -37309,6 +37309,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isUserLoggedIn: () => (/* binding */ isUserLoggedIn),
 /* harmony export */   isUserallowedMoreAppointments: () => (/* binding */ isUserallowedMoreAppointments),
 /* harmony export */   myAppointments: () => (/* binding */ myAppointments),
+/* harmony export */   reservationMessage: () => (/* binding */ reservationMessage),
 /* harmony export */   schedule: () => (/* binding */ schedule)
 /* harmony export */ });
 const schedule = {
@@ -38792,6 +38793,7 @@ const myAppointments = [{
   end_time: "11:00:00",
   slot_date_jalali: "1404/08/21"
 }];
+const reservationMessage = "نوبتت پیش ما رزور شد.. بهت پیامک میدیم";
 const isUserLoggedIn = true;
 const isUserAllowedToBookAppointments = true;
 const isUserallowedMoreAppointments = true;

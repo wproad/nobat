@@ -1607,6 +1607,8 @@ export const myAppointments = [
   },
 ];
 
+
+export const reservationMessage = "نوبتت پیش ما رزور شد.. بهت پیامک میدیم"
 export const isUserLoggedIn = true;
 export const isUserAllowedToBookAppointments = true;
 export const isUserallowedMoreAppointments = true;
