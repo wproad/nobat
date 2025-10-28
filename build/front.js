@@ -35057,40 +35057,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_data_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/data.js */ "./src/front/utils/data.js");
-/* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/front/components/AppointmentRow.jsx");
-/* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/front/components/EmptyAppointmentsState.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/data.js */ "./src/front/utils/data.js");
+/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
+/* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/front/components/AppointmentRow.jsx");
+/* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/front/components/EmptyAppointmentsState.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 const MyAppointments = () => {
-  const appointments = _utils_data_js__WEBPACK_IMPORTED_MODULE_0__.myAppointments || [];
-  const hasAppointments = appointments.length > 0;
-
-  // TODO: add loading and error state
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  const [activeTab, setActiveTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("upcoming");
+  const appointments = _utils_data_js__WEBPACK_IMPORTED_MODULE_1__.myAppointments || [];
+  const categorizedAppointments = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.categorizeAppointments)(appointments);
+  const currentAppointments = categorizedAppointments[activeTab];
+  const hasAppointments = currentAppointments.length > 0;
+  const totalAppointments = appointments.length;
+  const tabs = [{
+    id: "upcoming",
+    label: "پیش رو",
+    count: categorizedAppointments.upcoming.length
+  }, {
+    id: "cancelled",
+    label: "لغو شده",
+    count: categorizedAppointments.cancelled.length
+  }, {
+    id: "past",
+    label: "گذشته",
+    count: categorizedAppointments.past.length
+  }];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "my-appointments",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "appointments-header",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
         children: "\u0646\u0648\u0628\u062A\u200C\u0647\u0627\u06CC \u0645\u0646"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "header-actions",
-        children: [hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+        children: [totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
           className: "appointments-count",
-          children: [appointments.length, " \u0646\u0648\u0628\u062A"]
-        }) : null, _utils_data_js__WEBPACK_IMPORTED_MODULE_0__.isUserallowedMoreAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+          children: [totalAppointments, " \u0646\u0648\u0628\u062A"]
+        }), _utils_data_js__WEBPACK_IMPORTED_MODULE_1__.isUserallowedMoreAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
           className: "book-appointment-btn",
           children: "\u0631\u0632\u0631\u0648 \u0646\u0648\u0628\u062A \u062C\u062F\u06CC\u062F"
         })]
       })]
-    }), !hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "appointments-list",
-      children: appointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        appointment: appointment
-      }, appointment.id))
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "appointments-tabs",
+      children: tabs.map(tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+        className: `tab-button ${activeTab === tab.id ? "active" : ""}`,
+        onClick: () => setActiveTab(tab.id),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "tab-label",
+          children: tab.label
+        }), tab.count > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "tab-count",
+          children: tab.count
+        })]
+      }, tab.id))
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "tab-content",
+      children: !hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        className: "appointments-list",
+        children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          appointment: appointment
+        }, appointment.id))
+      })
     })]
   });
 };
@@ -35118,8 +35154,23 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   canCancelAppointment: () => (/* binding */ canCancelAppointment)
+/* harmony export */   canCancelAppointment: () => (/* binding */ canCancelAppointment),
+/* harmony export */   categorizeAppointments: () => (/* binding */ categorizeAppointments),
+/* harmony export */   sortAppointmentsByDate: () => (/* binding */ sortAppointmentsByDate)
 /* harmony export */ });
+/**
+ * Sort appointments by date (oldest first)
+ * @param {Array} appointments - Array of appointment objects
+ * @returns {Array} Sorted appointments array
+ */
+const sortAppointmentsByDate = appointments => {
+  return appointments.sort((a, b) => {
+    const dateA = new Date(`${a.slot_date} ${a.start_time}`);
+    const dateB = new Date(`${b.slot_date} ${b.start_time}`);
+    return dateA - dateB; // Oldest first
+  });
+};
+
 /**
  * Check if appointment can be cancelled
  * @param {Object} appointment - Appointment object
@@ -35137,6 +35188,38 @@ const canCancelAppointment = appointment => {
   const appointmentDate = new Date(appointment.slot_date);
   const today = new Date();
   return appointmentDate >= today;
+};
+
+/**
+ * Categorize appointments based on status and date, with sorting applied
+ * @param {Array} appointments - Array of appointment objects
+ * @returns {Object} Object with categorized and sorted appointments
+ */
+const categorizeAppointments = appointments => {
+  const now = new Date();
+  const categorized = appointments.reduce((acc, appointment) => {
+    const appointmentDateTime = new Date(`${appointment.slot_date} ${appointment.start_time}`);
+    if (appointment.status === "completed" || appointmentDateTime < now) {
+      // All past appointments (completed or past date/time) go to past tab
+      acc.past.push(appointment);
+    } else if (appointment.status === "cancelled") {
+      // Only future cancelled appointments stay in cancelled tab
+      acc.cancelled.push(appointment);
+    } else {
+      acc.upcoming.push(appointment);
+    }
+    return acc;
+  }, {
+    upcoming: [],
+    cancelled: [],
+    past: []
+  });
+
+  // Apply sorting to each category
+  categorized.upcoming = sortAppointmentsByDate(categorized.upcoming);
+  categorized.cancelled = sortAppointmentsByDate(categorized.cancelled);
+  categorized.past = sortAppointmentsByDate(categorized.past);
+  return categorized;
 };
 
 /***/ }),
