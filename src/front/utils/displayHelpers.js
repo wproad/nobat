@@ -45,7 +45,7 @@ export const getStatusText = (status) => {
  * @param {string} time - Time string (HH:MM:SS)
  * @returns {string} Formatted time (HH:MM)
  */
-export const formatTime = (time) => {
+export const stripSeconds = (time) => {
   if (!time) return "";
   return time.substring(0, 5); // Remove seconds
 };
@@ -57,8 +57,8 @@ export const formatTime = (time) => {
  * @returns {string} Formatted time range
  */
 export const formatTimeRange = (startTime, endTime) => {
-  const formattedStart = formatTime(startTime);
-  const formattedEnd = formatTime(endTime);
+  const formattedStart = stripSeconds(startTime);
+  const formattedEnd = stripSeconds(endTime);
   return `${formattedStart} تا ${formattedEnd}`;
 };
 

@@ -365,8 +365,364 @@
   }
 }
 
+// Booking Form Styles
+.appointment-booking-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl;
+  text-align: right;
+
+  .booking-form {
+    .form-row {
+      margin-bottom: 1.5rem;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .form-actions {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-primary-200);
+
+      .components-button {
+        min-width: 120px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+
+        &.is-primary {
+          background: var(--color-primary-600);
+          color: var(--color-primary-0);
+          border: none;
+          box-shadow: 0 2px 4px rgba(61, 83, 219, 0.2);
+
+          &:hover:not(:disabled) {
+            background: var(--color-primary-700);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(61, 83, 219, 0.3);
+          }
+
+          &:disabled {
+            background: var(--color-primary-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 4px rgba(61, 83, 219, 0.1);
+          }
+        }
+
+        &.is-secondary {
+          background: var(--color-primary-0);
+          color: var(--color-primary-700);
+          border: 1px solid var(--color-primary-300);
+
+          &:hover:not(:disabled) {
+            background: var(--color-primary-100);
+            border-color: var(--color-primary-400);
+          }
+        }
+      }
+    }
+  }
+
+  // TimeSlotSelector integration
+  .appointment-selector {
+    .week-days-selector {
+      margin-bottom: 1.5rem;
+
+      .week-days-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+
+        .day-button {
+          background: var(--color-primary-0);
+          border: 1px solid var(--color-primary-200);
+          color: var(--color-primary-700);
+          border-radius: 8px;
+          padding: 0.75rem 0.5rem;
+          min-width: 80px;
+          transition: all 0.2s ease;
+          cursor: pointer;
+
+          &:hover:not(.selected):not(.current-day) {
+            background: var(--color-primary-100);
+            border-color: var(--color-primary-300);
+            transform: translateY(-1px);
+          }
+
+          &.current-day {
+            background: var(--color-info-100);
+            border-color: var(--color-info-300);
+            color: var(--color-info-800);
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: -2px;
+              left: -2px;
+              right: -2px;
+              bottom: -2px;
+              background: linear-gradient(
+                45deg,
+                var(--color-info-400),
+                var(--color-info-500)
+              );
+              border-radius: 10px;
+              z-index: -1;
+            }
+
+            &:hover:not(.selected) {
+              background: var(--color-info-200);
+              border-color: var(--color-info-400);
+            }
+          }
+
+          &.selected {
+            background: var(--color-primary-600);
+            color: var(--color-primary-0);
+            border-color: var(--color-primary-600);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(61, 83, 219, 0.3);
+
+            &.current-day {
+              background: var(--color-primary-600);
+              color: var(--color-primary-0);
+              border-color: var(--color-primary-600);
+
+              &::before {
+                background: linear-gradient(
+                  45deg,
+                  var(--color-primary-600),
+                  var(--color-primary-700)
+                );
+              }
+            }
+          }
+
+          .day-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: inherit;
+          }
+
+          .day-number {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0.25rem 0;
+            color: inherit;
+          }
+
+          .month-name {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    .time-slots-container {
+      background: var(--color-primary-50);
+      border: 1px solid var(--color-primary-200);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+
+      .date-selector-label {
+        display: block;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: var(--color-primary-900);
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .time-slots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
+
+        .time-slot-button {
+          background: var(--color-primary-0);
+          border: 1px solid var(--color-primary-200);
+          border-radius: 8px;
+          padding: 0.75rem;
+          transition: all 0.2s ease;
+          cursor: pointer;
+
+          &:hover:not(:disabled):not(.booked):not(.selected) {
+            background: var(--color-primary-100);
+            border-color: var(--color-primary-300);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(16, 25, 122, 0.1);
+          }
+
+          &.selected {
+            background: var(--color-primary-600);
+            border-color: var(--color-primary-600);
+            color: var(--color-primary-0);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(61, 83, 219, 0.3);
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: -2px;
+              left: -2px;
+              right: -2px;
+              bottom: -2px;
+              background: linear-gradient(
+                45deg,
+                var(--color-primary-600),
+                var(--color-primary-700)
+              );
+              border-radius: 10px;
+              z-index: -1;
+            }
+
+            .slot-time-display {
+              .time-start,
+              .time-separator,
+              .time-end {
+                color: var(--color-primary-0);
+                font-weight: 600;
+              }
+            }
+          }
+
+          &.booked {
+            background: var(--color-error-100);
+            border-color: var(--color-error-300);
+            opacity: 0.6;
+            cursor: not-allowed;
+
+            .slot-time-display {
+              .time-start,
+              .time-separator,
+              .time-end {
+                color: var(--color-error-600);
+              }
+            }
+          }
+
+          .slot-time-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+            text-align: center;
+
+            .time-start {
+              font-size: 0.875rem;
+              font-weight: 600;
+              color: var(--color-primary-900);
+            }
+
+            .time-separator {
+              font-size: 0.75rem;
+              font-weight: 400;
+              color: var(--color-secondary-400);
+            }
+
+            .time-end {
+              font-size: 0.75rem;
+              font-weight: 400;
+              color: var(--color-secondary-400);
+            }
+          }
+        }
+      }
+    }
+
+    .no-slots {
+      text-align: center;
+      padding: 2rem;
+      color: var(--color-secondary-400);
+      font-style: italic;
+    }
+  }
+
+  // Form controls styling
+  .components-base-control {
+    .components-base-control__label {
+      color: var(--color-primary-900);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .components-textarea-control__input {
+      background: var(--color-primary-0);
+      border: 1px solid var(--color-primary-200);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--color-primary-500);
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(84, 111, 255, 0.1);
+      }
+    }
+
+    .components-base-control__help {
+      color: var(--color-secondary-400);
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
 // Responsive Design
 @media (max-width: 768px) {
+  .appointment-booking-form {
+    padding: 1rem;
+
+    .booking-form {
+      .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .components-button {
+          width: 100%;
+        }
+      }
+    }
+
+    .appointment-selector {
+      .week-days-grid {
+        gap: 0.5rem;
+
+        .day-button {
+          min-width: 70px;
+          padding: 0.5rem 0.25rem;
+        }
+      }
+
+      .time-slots-container {
+        padding: 1rem;
+
+        .time-slots-grid {
+          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+
   .my-appointments {
     padding: 1rem;
 
