@@ -36992,8 +36992,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
 /* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/front/components/AppointmentRow.jsx");
 /* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/front/components/EmptyAppointmentsState.jsx");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ui/Card.jsx */ "./src/components/ui/Card.jsx");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -37006,53 +37008,52 @@ const MyAppointments = () => {
   const appointments = _utils_data_js__WEBPACK_IMPORTED_MODULE_1__.myAppointments || [];
   const categorizedAppointments = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.categorizeAppointments)(appointments);
   const currentAppointments = categorizedAppointments[activeTab];
-  const hasAppointments = currentAppointments.length > 0;
   const totalAppointments = appointments.length;
-  console.log(activeTab);
+  const hasAnyAppointments = totalAppointments > 0;
   const tabs = [{
     id: "upcoming",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Upcoming", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Upcoming", "nobat"),
     count: categorizedAppointments.upcoming.length
   }, {
     id: "cancelled",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Cancelled", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancelled", "nobat"),
     count: categorizedAppointments.cancelled.length
   }, {
     id: "past",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Past", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Past", "nobat"),
     count: categorizedAppointments.past.length
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.Card, {
     className: "my-appointments",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
       className: "appointments-header",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("My Appointments", "nobat")
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("My Appointments", "nobat")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "header-actions",
-        children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+        children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("span", {
           className: "appointments-count",
-          children: [totalAppointments, " ", (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("appointments", "nobat")]
+          children: [totalAppointments, " ", (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("appointments", "nobat")]
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), hasAnyAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "appointments-tabs",
-      children: tabs.map(tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+      children: tabs.map(tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
         className: `tab-button ${activeTab === tab.id ? "active" : ""}`,
         onClick: () => setActiveTab(tab.id),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
           className: "tab-label",
           children: tab.label
-        }), tab.count > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        }), tab.count > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
           className: "tab-count",
           children: tab.count
         })]
       }, tab.id))
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
       className: "tab-content",
-      children: !hasAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "appointments-list",
-        children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           appointment: appointment
         }, appointment.id))
       })

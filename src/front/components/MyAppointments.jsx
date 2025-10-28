@@ -3,6 +3,7 @@ import { myAppointments } from "../utils/data.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
+import { Card, CardHeader, CardBody } from "../../components/ui/Card.jsx";
 import { __ } from "../../utils/i18n";
 
 const MyAppointments = () => {
@@ -12,9 +13,9 @@ const MyAppointments = () => {
   const categorizedAppointments = categorizeAppointments(appointments);
 
   const currentAppointments = categorizedAppointments[activeTab];
-  const hasAppointments = currentAppointments.length > 0;
   const totalAppointments = appointments.length;
-  console.log(activeTab);
+  const hasAnyAppointments = totalAppointments > 0;
+
   const tabs = [
     {
       id: "upcoming",
@@ -34,8 +35,8 @@ const MyAppointments = () => {
   ];
 
   return (
-    <div className="my-appointments">
-      <div className="appointments-header">
+    <Card className="my-appointments">
+      <CardHeader className="appointments-header">
         <h1>{__("My Appointments", "nobat")}</h1>
         <div className="header-actions">
           {totalAppointments > 0 && (
@@ -44,25 +45,27 @@ const MyAppointments = () => {
             </span>
           )}
         </div>
-      </div>
+      </CardHeader>
 
       {/* Tab Navigation */}
-      <div className="appointments-tabs">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            <span className="tab-label">{tab.label}</span>
-            {tab.count > 0 && <span className="tab-count">{tab.count}</span>}
-          </button>
-        ))}
-      </div>
+      {hasAnyAppointments && (
+        <div className="appointments-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <span className="tab-label">{tab.label}</span>
+              {tab.count > 0 && <span className="tab-count">{tab.count}</span>}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Tab Content */}
-      <div className="tab-content">
-        {!hasAppointments ? (
+      <CardBody className="tab-content">
+        {!hasAnyAppointments ? (
           <EmptyAppointmentsState />
         ) : (
           <div className="appointments-list">
@@ -71,8 +74,8 @@ const MyAppointments = () => {
             ))}
           </div>
         )}
-      </div>
-    </div>
+      </CardBody>
+    </Card>
   );
 };
 
