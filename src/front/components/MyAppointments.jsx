@@ -1,3 +1,10 @@
+/**
+ * MyAppointments Component
+ *
+ * Displays user appointments with categorized tabs (upcoming, cancelled, past).
+ * Shows appointment count, handles tab navigation, and renders either the appointments list
+ * or an empty state when no appointments exist.
+ */
 import { useState } from "react";
 import { myAppointments } from "../utils/data.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";

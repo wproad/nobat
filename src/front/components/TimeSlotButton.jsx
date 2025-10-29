@@ -1,3 +1,12 @@
+/**
+ * TimeSlotButton Component
+ *
+ * Button component for selecting a time slot.
+ *
+ * @param {Object} slot - Time slot object containing id, start_time, end_time, status
+ * @param {boolean} isSelected - Whether this slot is currently selected
+ * @param {Function} onClick - Callback function when slot is clicked
+ */
 import { __ } from "../../utils/i18n";
 import { stripSeconds } from "../utils/displayHelpers";
 

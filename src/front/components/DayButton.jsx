@@ -1,3 +1,13 @@
+/**
+ * DayButton Component
+ *
+ * Button component for selecting a specific day.
+ * Highlights if selected or if it's the current day.
+ *
+ * @param {Object} day - Day object containing date, jalali_date, weekday, day_number, month_name
+ * @param {boolean} isSelected - Whether this day is currently selected
+ * @param {Function} onClick - Callback function when button is clicked
+ */
 const DayButton = ({ day, isSelected, onClick }) => {
   const today = new Date().toISOString().split("T")[0]; // Format as YYYY-MM-DD
   const isCurrentDay = day?.date === today;

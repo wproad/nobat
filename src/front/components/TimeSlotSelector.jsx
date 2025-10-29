@@ -1,3 +1,14 @@
+/**
+ * TimeSlotSelector Component
+ *
+ * Manages day and time slot selection for appointment booking.
+ *
+ * @param {Array} days - Array of day objects with available slots
+ * @param {Object} selectedDay - Currently selected day object
+ * @param {Object} selectedSlot - Currently selected time slot object
+ * @param {Function} onDaySelect - Callback when a day is selected
+ * @param {Function} onSlotSelect - Callback when a time slot is selected
+ */
 import { __ } from "../../utils/i18n";
 import DayButton from "./DayButton";
 import TimeSlotButton from "./TimeSlotButton";

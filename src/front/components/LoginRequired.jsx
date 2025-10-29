@@ -1,3 +1,12 @@
+/**
+ * LoginRequired Component
+ *
+ * Displays authentication prompt for unauthenticated users.
+ * Shows a warning notice and provides login and registration button links.
+ *
+ * @param {string} loginUrl - URL to the login page
+ * @param {string} registerUrl - URL to the registration page
+ */
 import { __ } from "../../utils/i18n";
 import {
   Button,

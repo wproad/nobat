@@ -1,3 +1,11 @@
+/**
+ * AppointmentRow Component
+ *
+ * Displays individual appointment item in the appointments list.
+ * Shows cancel button (if appointment can be cancelled).
+ *
+ * @param {Object} appointment - Appointment object containing appointment details
+ */
 import {
   getStatusColor,
   getStatusText,

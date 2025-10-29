@@ -1,3 +1,8 @@
+/**
+ * AppointmentTicket Component
+ *
+ * Displays appointment confirmation ticket after successful booking.
+ */
 import React from "react";
 import { appointmentTicket, reservationMessage } from "../utils/data";
 import {

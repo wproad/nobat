@@ -1,3 +1,10 @@
+/**
+ * Main Component
+ *
+ * Main container component that handles view switching between appointments list and booking form.
+ * Checks authentication status and renders either LoginRequired component for unauthenticated users,
+ * or the toggle view interface for authenticated users.
+ */
 import { useState } from "react";
 import MyAppointments from "./MyAppointments.jsx";
 import BookingForm from "./BookingForm.jsx";

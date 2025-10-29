@@ -1,3 +1,8 @@
+/**
+ * BookingForm Component
+ *
+ * Form component for booking new appointments.
+ */
 import { useState } from "react";
 import {
   Button,

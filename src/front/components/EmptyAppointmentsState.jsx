@@ -1,3 +1,8 @@
+/**
+ * EmptyAppointmentsState Component
+ *
+ * Displays empty state message when user has no appointments yet.
+ */
 import { __ } from "../../utils/i18n";
 
 const EmptyAppointmentsState = () => {
