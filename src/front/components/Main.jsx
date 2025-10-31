@@ -7,7 +7,7 @@
  */
 import { useState } from "react";
 import MyAppointments from "./MyAppointments.jsx";
-import BookingForm from "./BookingForm.jsx";
+import BookingView from "./BookingView.jsx";
 import LoginRequired from "./LoginRequired.jsx";
 import { useAuth } from "../contexts/AuthContext";
 import { __ } from "../../utils/i18n";
@@ -40,7 +40,7 @@ const Main = () => {
       </div>
 
       <div className="main-content">
-        {currentView === "appointments" ? <MyAppointments /> : <BookingForm />}
+        {currentView === "appointments" ? <MyAppointments /> : <BookingView />}
       </div>
     </div>
   );

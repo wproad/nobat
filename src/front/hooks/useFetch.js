@@ -105,6 +105,8 @@ export const useFetch = (url, options = {}) => {
 
   // Main effect
   useEffect(() => {
+    console.log("useFetch: ", url);
+
     const urlToFetch = typeof url === "function" ? url() : url;
     if (!urlToFetch) return;
 

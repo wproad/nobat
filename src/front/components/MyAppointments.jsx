@@ -14,6 +14,8 @@ import { Card, CardHeader, CardBody } from "../../components/ui/Card.jsx";
 import { Spinner, Notice } from "../../components/ui";
 import { __ } from "../../utils/i18n";
 
+// TODO: repalce Notic with useNotice hook
+
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
 
@@ -23,7 +25,7 @@ const MyAppointments = () => {
     loading,
     error,
   } = useGet("/nobat/v2/appointments");
-  
+
   const appointments = appointmentsData?.appointments || [];
   const categorizedAppointments = categorizeAppointments(appointments);
   const currentAppointments = categorizedAppointments[activeTab];
