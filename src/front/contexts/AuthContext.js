@@ -12,7 +12,7 @@ const AuthContext = createContext();
  */
 export const AuthProvider = ({ children }) => {
   // Get authentication data from WordPress localization
-  const authData = window.nobatFront || {};
+  const authData = window.wpApiSettings || {};
 
   const value = {
     isLoggedIn: authData.isLoggedIn || false,

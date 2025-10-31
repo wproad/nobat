@@ -6,19 +6,26 @@
  * or an empty state when no appointments exist.
  */
 import { useState } from "react";
-import { myAppointments } from "../utils/data.js";
+import { useGet } from "../hooks/useFetch.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
 import { Card, CardHeader, CardBody } from "../../components/ui/Card.jsx";
+import { Spinner, Notice } from "../../components/ui";
 import { __ } from "../../utils/i18n";
 
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
-  const appointments = myAppointments || [];
 
+  // Fetch appointments from API
+  const {
+    data: appointmentsData,
+    loading,
+    error,
+  } = useGet("/nobat/v2/appointments");
+  
+  const appointments = appointmentsData?.appointments || [];
   const categorizedAppointments = categorizeAppointments(appointments);
-
   const currentAppointments = categorizedAppointments[activeTab];
   const totalAppointments = appointments.length;
   const hasAnyAppointments = totalAppointments > 0;
@@ -72,7 +79,16 @@ const MyAppointments = () => {
 
       {/* Tab Content */}
       <CardBody className="tab-content">
-        {!hasAnyAppointments ? (
+        {loading ? (
+          <div className="loading-appointments">
+            <Spinner />
+            <span>{__("Loading appointments...", "nobat")}</span>
+          </div>
+        ) : error ? (
+          <Notice status="error" isDismissible={false}>
+            {error}
+          </Notice>
+        ) : !hasAnyAppointments ? (
           <EmptyAppointmentsState />
         ) : (
           <div className="appointments-list">

@@ -203,16 +203,18 @@ function nobat_front_enqueue_scripts() {
 	wp_set_script_translations( 'nobat-front-script', 'nobat', NOBAT_PLUGIN_DIR . 'languages' );
 
 	// Localize script with REST API nonce and user data
-	wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
-		'root' => esc_url_raw( rest_url() ),
-		'nonce' => wp_create_nonce( 'wp_rest' ),
-	) );
+	// wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
+	// 	'root' => esc_url_raw( rest_url() ),
+	// 	'nonce' => wp_create_nonce( 'wp_rest' ),
+	// ) );
 
 	// Add authentication data for front section
-	wp_localize_script( 'nobat-front-script', 'nobatFront', array(
+	wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
 		'isLoggedIn' => is_user_logged_in(),
 		'currentUser' => nobat_get_current_user_data(),
 		'loginUrl' => wp_login_url( get_permalink() ),
+		'root' => esc_url_raw( rest_url() ),
+		'nonce' => wp_create_nonce( 'wp_rest' ),
 		'registerUrl' => wp_login_url( get_permalink() ) . '?action=register',
 	) );
 

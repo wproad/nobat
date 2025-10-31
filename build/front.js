@@ -36557,6 +36557,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * AppointmentRow Component
+ *
+ * Displays individual appointment item in the appointments list.
+ * Shows cancel button (if appointment can be cancelled).
+ *
+ * @param {Object} appointment - Appointment object containing appointment details
+ */
 
 
 
@@ -36635,6 +36643,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/data */ "./src/front/utils/data.js");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * BookingForm Component
+ *
+ * Form component for booking new appointments.
+ */
 
 
 
@@ -36723,6 +36736,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
+/**
+ * DayButton Component
+ *
+ * Button component for selecting a specific day.
+ * Highlights if selected or if it's the current day.
+ *
+ * @param {Object} day - Day object containing date, jalali_date, weekday, day_number, month_name
+ * @param {boolean} isSelected - Whether this day is currently selected
+ * @param {Function} onClick - Callback function when button is clicked
+ */
 const DayButton = ({
   day,
   isSelected,
@@ -36764,6 +36787,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * EmptyAppointmentsState Component
+ *
+ * Displays empty state message when user has no appointments yet.
+ */
 
 
 const EmptyAppointmentsState = () => {
@@ -36940,6 +36968,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * LoginRequired Component
+ *
+ * Displays authentication prompt for unauthenticated users.
+ * Shows a warning notice and provides login and registration button links.
+ *
+ * @param {string} loginUrl - URL to the login page
+ * @param {string} registerUrl - URL to the registration page
+ */
 
 
 
@@ -37009,6 +37046,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/AuthContext */ "./src/front/contexts/AuthContext.js");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * Main Component
+ *
+ * Main container component that handles view switching between appointments list and booking form.
+ * Checks authentication status and renders either LoginRequired component for unauthenticated users,
+ * or the toggle view interface for authenticated users.
+ */
 
 
 
@@ -37069,13 +37113,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/data.js */ "./src/front/utils/data.js");
+/* harmony import */ var _hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hooks/useFetch.js */ "./src/front/hooks/useFetch.js");
 /* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
 /* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/front/components/AppointmentRow.jsx");
 /* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/front/components/EmptyAppointmentsState.jsx");
 /* harmony import */ var _components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ui/Card.jsx */ "./src/components/ui/Card.jsx");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * MyAppointments Component
+ *
+ * Displays user appointments with categorized tabs (upcoming, cancelled, past).
+ * Shows appointment count, handles tab navigation, and renders either the appointments list
+ * or an empty state when no appointments exist.
+ */
+
 
 
 
@@ -37086,55 +37139,71 @@ __webpack_require__.r(__webpack_exports__);
 
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("upcoming");
-  const appointments = _utils_data_js__WEBPACK_IMPORTED_MODULE_1__.myAppointments || [];
+
+  // Fetch appointments from API
+  const {
+    data: appointmentsData,
+    loading,
+    error
+  } = (0,_hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_1__.useGet)("/nobat/v2/appointments");
+  const appointments = appointmentsData?.appointments || [];
   const categorizedAppointments = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.categorizeAppointments)(appointments);
   const currentAppointments = categorizedAppointments[activeTab];
   const totalAppointments = appointments.length;
   const hasAnyAppointments = totalAppointments > 0;
   const tabs = [{
     id: "upcoming",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Upcoming", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Upcoming", "nobat"),
     count: categorizedAppointments.upcoming.length
   }, {
     id: "cancelled",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancelled", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Cancelled", "nobat"),
     count: categorizedAppointments.cancelled.length
   }, {
     id: "past",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Past", "nobat"),
+    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Past", "nobat"),
     count: categorizedAppointments.past.length
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.Card, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.Card, {
     className: "my-appointments",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
       className: "appointments-header",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("My Appointments", "nobat")
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("My Appointments", "nobat")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "header-actions",
-        children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("span", {
+        children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("span", {
           className: "appointments-count",
-          children: [totalAppointments, " ", (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("appointments", "nobat")]
+          children: [totalAppointments, " ", (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("appointments", "nobat")]
         })
       })]
-    }), hasAnyAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    }), hasAnyAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       className: "appointments-tabs",
-      children: tabs.map(tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
+      children: tabs.map(tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
         className: `tab-button ${activeTab === tab.id ? "active" : ""}`,
         onClick: () => setActiveTab(tab.id),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
           className: "tab-label",
           children: tab.label
-        }), tab.count > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+        }), tab.count > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
           className: "tab-count",
           children: tab.count
         })]
       }, tab.id))
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
       className: "tab-content",
-      children: !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "loading-appointments",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_6__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Loading appointments...", "nobat")
+        })]
+      }) : error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_6__.Notice, {
+        status: "error",
+        isDismissible: false,
+        children: error
+      }) : !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "appointments-list",
-        children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           appointment: appointment
         }, appointment.id))
       })
@@ -37159,6 +37228,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
 /* harmony import */ var _utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers */ "./src/front/utils/displayHelpers.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * TimeSlotButton Component
+ *
+ * Button component for selecting a time slot.
+ *
+ * @param {Object} slot - Time slot object containing id, start_time, end_time, status
+ * @param {boolean} isSelected - Whether this slot is currently selected
+ * @param {Function} onClick - Callback function when slot is clicked
+ */
 
 
 
@@ -37232,6 +37310,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DayButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayButton */ "./src/front/components/DayButton.jsx");
 /* harmony import */ var _TimeSlotButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotButton */ "./src/front/components/TimeSlotButton.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * TimeSlotSelector Component
+ *
+ * Manages day and time slot selection for appointment booking.
+ *
+ * @param {Array} days - Array of day objects with available slots
+ * @param {Object} selectedDay - Currently selected day object
+ * @param {Object} selectedSlot - Currently selected time slot object
+ * @param {Function} onDaySelect - Callback when a day is selected
+ * @param {Function} onSlotSelect - Callback when a time slot is selected
+ */
 
 
 
@@ -37317,7 +37406,7 @@ const AuthProvider = ({
   children
 }) => {
   // Get authentication data from WordPress localization
-  const authData = window.nobatFront || {};
+  const authData = window.wpApiSettings || {};
   const value = {
     isLoggedIn: authData.isLoggedIn || false,
     currentUser: authData.currentUser || {
@@ -37359,6 +37448,173 @@ const useAuth = () => {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "./src/front/hooks/useFetch.js":
+/*!*************************************!*\
+  !*** ./src/front/hooks/useFetch.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   useDelete: () => (/* binding */ useDelete),
+/* harmony export */   useFetch: () => (/* binding */ useFetch),
+/* harmony export */   useGet: () => (/* binding */ useGet),
+/* harmony export */   usePost: () => (/* binding */ usePost),
+/* harmony export */   usePut: () => (/* binding */ usePut)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/**
+ * Custom hook for making HTTP requests with loading states and error handling
+ * WordPress-compatible with nonce and proper error handling
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} options - Fetch options (method, headers, body, etc.)
+ * @returns {Object} - { data, loading, error, refetch }
+ */
+const useFetch = (url, options = {}) => {
+  const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+
+  // Get WordPress API settings from localized script
+  const getApiSettings = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
+    return window.wpApiSettings || {};
+  }, []);
+
+  // Create a stable executeRequest using useCallback
+  const executeRequest = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async (urlToFetch, requestOptions = {}) => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Get WordPress API settings
+      const apiSettings = getApiSettings();
+
+      // Normalize the root URL and path to avoid double slashes
+      let root = apiSettings.root || "/wp-json";
+      root = root.endsWith("/") ? root.slice(0, -1) : root; // Remove trailing slash
+      const normalizedPath = urlToFetch.startsWith("/") ? urlToFetch : `/${urlToFetch}`;
+      const normalizedUrl = `${root}${normalizedPath}`;
+
+      // Build fetch options with WordPress headers
+      const fetchOptions = {
+        ...options,
+        ...requestOptions,
+        headers: {
+          "Content-Type": "application/json",
+          "X-WP-Nonce": apiSettings.nonce || "",
+          ...options.headers,
+          ...requestOptions.headers
+        },
+        credentials: "same-origin"
+      };
+
+      // Handle body for POST/PUT/PATCH requests
+      if (fetchOptions.body && typeof fetchOptions.body === "object") {
+        fetchOptions.body = JSON.stringify(fetchOptions.body);
+      }
+      const response = await fetch(normalizedUrl, fetchOptions);
+      if (!response.ok) {
+        // Handle WordPress error responses
+        const errorData = await response.json().catch(() => ({}));
+        const error = new Error(errorData.message || `HTTP Error ${response.status}`);
+        error.code = errorData.code || response.status;
+        error.data = errorData.data || null;
+        throw error;
+      }
+
+      // Handle empty responses
+      const contentType = response.headers.get("content-type");
+      let responseData;
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        responseData = await response.text();
+      }
+      setData(responseData);
+      setError(null);
+      return responseData;
+    } catch (err) {
+      // Enhanced error handling for network errors
+      if (err.message === "Failed to fetch") {
+        err.message = "Network error. Please check your connection.";
+      }
+      const errorMessage = err.message || "An error occurred";
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, [getApiSettings, options]);
+
+  // Refetch function
+  const refetch = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((newOptions = {}) => {
+    const urlToFetch = typeof url === "function" ? url() : url;
+    return executeRequest(urlToFetch, newOptions);
+  }, [url, executeRequest]);
+
+  // Main effect
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const urlToFetch = typeof url === "function" ? url() : url;
+    if (!urlToFetch) return;
+    executeRequest(urlToFetch);
+  }, [url, executeRequest]);
+  return {
+    data,
+    loading,
+    error,
+    refetch
+  };
+};
+
+/**
+ * Hook for GET requests
+ */
+const useGet = url => {
+  const getOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    method: "GET"
+  }), []);
+  return useFetch(url, getOptions);
+};
+
+/**
+ * Hook for POST requests
+ */
+const usePost = (url, body) => {
+  const postOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    method: "POST",
+    body: body // Will be JSON stringified automatically
+  }), [body]);
+  return useFetch(url, postOptions);
+};
+
+/**
+ * Hook for PUT requests
+ */
+const usePut = (url, body) => {
+  const putOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    method: "PUT",
+    body: body // Will be JSON stringified automatically
+  }), [body]);
+  return useFetch(url, putOptions);
+};
+
+/**
+ * Hook for DELETE requests
+ */
+const useDelete = url => {
+  const deleteOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    method: "DELETE"
+  }), []);
+  return useFetch(url, deleteOptions);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useFetch);
 
 /***/ }),
 
