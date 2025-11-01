@@ -6,15 +6,17 @@ import { __ } from "../../utils/i18n.js";
 /**
  * useAppointmentCancellation Hook
  *
- * A custom hook that manages the appointment cancellation flow including:
- * - Modal state management
- * - Cancellation reason input
- * - API request handling
- * - Success/error notifications
+ * A comprehensive custom hook that manages the appointment cancellation flow including:
+ * - Modal open/close state management
+ * - Cancellation reason input state
+ * - API request handling via useFetch
+ * - Loading state during submission
+ * - Success/error notifications via useNotice
+ * - Automatic cleanup and callback triggering on success
  *
  * @param {number|string} appointmentId - The ID of the appointment to cancel
- * @param {Function} onSuccess - Optional callback function called after successful cancellation
- * @returns {Object} Object containing cancellation state and control functions
+ * @param {Function} onSuccess - Optional callback function called after successful cancellation (e.g., refresh list)
+ * @returns {Object} Object containing cancellation state and control functions (isCancelling, showModal, etc.)
  */
 export function useAppointmentCancellation(appointmentId, onSuccess) {
   const [isCancelling, setIsCancelling] = useState(false);

@@ -1,8 +1,10 @@
 /**
  * LoginRequired Component
  *
- * Displays authentication prompt for unauthenticated users.
- * Shows a warning notice and provides login and registration button links.
+ * Displays a authentication gate UI for unauthenticated users.
+ * Shows a warning notice explaining the requirement to be logged in.
+ * Provides login and registration button links with proper styling.
+ * Used as a fallback in Main component when user is not authenticated.
  *
  * @param {string} loginUrl - URL to the login page
  * @param {string} registerUrl - URL to the registration page

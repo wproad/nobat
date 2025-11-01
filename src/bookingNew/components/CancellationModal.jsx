@@ -2,7 +2,9 @@
  * CancellationModal Component
  *
  * A reusable modal component for requesting appointment cancellation.
- * Displays appointment details and collects optional cancellation reason.
+ * Displays appointment details (date/time) in formatted view, collects optional
+ * cancellation reason via textarea, and provides confirmation actions.
+ * Handles loading state with spinner and disabled inputs during submission.
  *
  * @param {Object} appointment - Appointment object containing appointment details
  * @param {boolean} isOpen - Whether the modal is open

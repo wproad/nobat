@@ -1,7 +1,9 @@
 /**
  * EmptyAppointmentsState Component
  *
- * Displays empty state message when user has no appointments yet.
+ * Displays a comprehensive empty state UI when user has no appointments yet.
+ * Features include motivational message, call-to-action button, and feature highlights.
+ * Designed to encourage first-time booking with visual elements.
  */
 import { __ } from "../../utils/i18n";
 

@@ -35963,10 +35963,12 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * AppointmentInfo Component
  *
- * Displays appointment information including date, time, and status.
- * This component handles the display logic separately from action logic.
+ * Display-only component for appointment information (date, time, status).
+ * Separates presentation logic from action logic for better component architecture.
+ * Uses utility functions for time formatting and status color/text mapping.
+ * Renders Jalali date and formatted time range with status badge.
  *
- * @param {Object} appointment - Appointment object containing appointment details
+ * @param {Object} appointment - Appointment object containing slot_date_jalali, start_time, end_time, status
  */
 
 
@@ -36022,11 +36024,14 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * AppointmentRow Component
  *
- * Displays individual appointment item in the appointments list.
- * Shows cancel button (if appointment can be cancelled).
+ * Displays individual appointment item in the appointments list with full details.
+ * Conditionally shows cancel button based on appointment status and date.
+ * Integrates CancellationModal and useAppointmentCancellation hook for cancellation flow.
+ * Displays appointment notes and cancellation reasons when present.
+ * Manages success/error notices via useNotice hook.
  *
  * @param {Object} appointment - Appointment object containing appointment details
- * @param {Function} onCancelled - Optional callback function called after successful cancellation
+ * @param {Function} onCancelled - Optional callback function called after successful cancellation (e.g., refresh list)
  */
 
 
@@ -36118,7 +36123,12 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * AppointmentTicket Component
  *
- * Displays appointment confirmation ticket after successful booking.
+ * Displays a formatted appointment confirmation ticket after successful booking.
+ * Shows customizable reservation message from WordPress settings, appointment details,
+ * and unique appointment ID. Used as success state replacement for BookingForm.
+ * Supports Jalali date format and styled status badge.
+ *
+ * @param {Object} appointment - Appointment object containing id, dates, times, and status
  */
 
 
@@ -36220,6 +36230,11 @@ __webpack_require__.r(__webpack_exports__);
  * BookingForm Component
  *
  * Form component for booking new appointments.
+ * Handles day and time slot selection, optional notes, form submission,
+ * and success/error notifications. Displays booking confirmation ticket
+ * after successful booking.
+ *
+ * @param {Object} schedule - Schedule object containing timeslots data
  */
 
 
@@ -36384,8 +36399,12 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * BookingView Component
  *
- * Parent component that handles schedule fetching, loading, and error states.
- * Renders the BookingForm child component with schedule data.
+ * Parent component that handles schedule fetching with smart endpoint selection.
+ * Supports both active schedule and specific schedule ID scenarios.
+ * Manages loading states with Spinner, error handling, and data extraction.
+ * Renders BookingForm with validated schedule data.
+ *
+ * @param {string} scheduleId - Optional schedule ID, uses active schedule if not provided
  */
 
 
@@ -36460,7 +36479,9 @@ __webpack_require__.r(__webpack_exports__);
  * CancellationModal Component
  *
  * A reusable modal component for requesting appointment cancellation.
- * Displays appointment details and collects optional cancellation reason.
+ * Displays appointment details (date/time) in formatted view, collects optional
+ * cancellation reason via textarea, and provides confirmation actions.
+ * Handles loading state with spinner and disabled inputs during submission.
  *
  * @param {Object} appointment - Appointment object containing appointment details
  * @param {boolean} isOpen - Whether the modal is open
@@ -36564,12 +36585,14 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * DayButton Component
  *
- * Button component for selecting a specific day.
- * Highlights if selected or if it's the current day.
+ * Button component for selecting a specific day in the booking calendar.
+ * Displays Jalali date format with weekday, day number, and month name.
+ * Automatically highlights the current day and selected day with CSS classes.
+ * Helps users navigate through available booking dates.
  *
  * @param {Object} day - Day object containing date, jalali_date, weekday, day_number, month_name
  * @param {boolean} isSelected - Whether this day is currently selected
- * @param {Function} onClick - Callback function when button is clicked
+ * @param {Function} onClick - Callback function when button is clicked (receives day object)
  */
 const DayButton = ({
   day,
@@ -36615,7 +36638,9 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * EmptyAppointmentsState Component
  *
- * Displays empty state message when user has no appointments yet.
+ * Displays a comprehensive empty state UI when user has no appointments yet.
+ * Features include motivational message, call-to-action button, and feature highlights.
+ * Designed to encourage first-time booking with visual elements.
  */
 
 
@@ -36796,8 +36821,10 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * LoginRequired Component
  *
- * Displays authentication prompt for unauthenticated users.
- * Shows a warning notice and provides login and registration button links.
+ * Displays a authentication gate UI for unauthenticated users.
+ * Shows a warning notice explaining the requirement to be logged in.
+ * Provides login and registration button links with proper styling.
+ * Used as a fallback in Main component when user is not authenticated.
  *
  * @param {string} loginUrl - URL to the login page
  * @param {string} registerUrl - URL to the registration page
@@ -36875,9 +36902,12 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Main Component
  *
- * Main container component that handles view switching between appointments list and booking form.
- * Checks authentication status and renders either LoginRequired component for unauthenticated users,
- * or the toggle view interface for authenticated users.
+ * Main container component that orchestrates the booking application flow.
+ * Handles authentication gate, view switching between appointments list and booking form,
+ * and provides a unified header with dynamic action buttons.
+ * Wraps all views in a Card layout for consistent styling.
+ *
+ * @param {string} scheduleId - Optional schedule ID for targeted booking
  */
 
 
@@ -36966,8 +36996,12 @@ __webpack_require__.r(__webpack_exports__);
  * MyAppointments Component
  *
  * Displays user appointments with categorized tabs (upcoming, cancelled, past).
- * Shows appointment count, handles tab navigation, and renders either the appointments list
- * or an empty state when no appointments exist.
+ * Features tab-based navigation with appointment counts, loading states with Spinner,
+ * error handling, and empty state messaging.
+ * Automatically fetches appointments on mount and supports manual refetch.
+ * Only shows tabs when appointments exist for better UX.
+ *
+ * @todo Replace Notice component with useNotice hook
  */
 
 
@@ -37072,7 +37106,9 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * TimeSlotButton Component
  *
- * Button component for selecting a time slot.
+ * Interactive button component for selecting a time slot.
+ * Handles multiple states: available (selectable), booked (disabled), and selected (highlighted).
+ * Automatically formats time display and handles booking status.
  *
  * @param {Object} slot - Time slot object containing id, start_time, end_time, status
  * @param {boolean} isSelected - Whether this slot is currently selected
@@ -37154,13 +37190,16 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * TimeSlotSelector Component
  *
- * Manages day and time slot selection for appointment booking.
+ * Manages day and time slot selection for appointment booking with two-step selection.
+ * Renders week days grid for day selection, then displays available time slots for selected day.
+ * Shows empty state message when no slots are available for the selected day.
+ * Resets slot selection when day changes to prevent inconsistent state.
  *
- * @param {Array} days - Array of day objects with available slots
+ * @param {Array} days - Array of day objects with available slots (timeslots from schedule)
  * @param {Object} selectedDay - Currently selected day object
  * @param {Object} selectedSlot - Currently selected time slot object
- * @param {Function} onDaySelect - Callback when a day is selected
- * @param {Function} onSlotSelect - Callback when a time slot is selected
+ * @param {Function} onDaySelect - Callback when a day is selected (receives day object)
+ * @param {Function} onSlotSelect - Callback when a time slot is selected (receives slot object)
  */
 
 
@@ -37234,14 +37273,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * Authentication Context for Front Section
- * Provides user authentication state and utilities
+ * Provides user authentication state, user data, and login/registration URLs
+ * Exposes data from WordPress wpApiSettings localization
  */
 
 const AuthContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)();
 
 /**
  * AuthProvider component
- * Wraps the app and provides authentication context
+ * Wraps the app and provides authentication context with WordPress integration.
+ * Extracts auth data from wpApiSettings and makes it available to all children.
+ *
+ * @param {ReactNode} children - Child components that will have access to auth context
  */
 const AuthProvider = ({
   children
@@ -37266,7 +37309,11 @@ const AuthProvider = ({
 
 /**
  * Custom hook to use authentication context
- * @returns {Object} Authentication state and utilities
+ * Throws an error if used outside of AuthProvider to ensure proper setup.
+ *
+ * @returns {Object} Authentication state and utilities:
+ * { isLoggedIn, currentUser, loginUrl, registerUrl }
+ * @throws {Error} If used outside AuthProvider
  */
 const useAuth = () => {
   const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(AuthContext);
@@ -37303,15 +37350,17 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * useAppointmentCancellation Hook
  *
- * A custom hook that manages the appointment cancellation flow including:
- * - Modal state management
- * - Cancellation reason input
- * - API request handling
- * - Success/error notifications
+ * A comprehensive custom hook that manages the appointment cancellation flow including:
+ * - Modal open/close state management
+ * - Cancellation reason input state
+ * - API request handling via useFetch
+ * - Loading state during submission
+ * - Success/error notifications via useNotice
+ * - Automatic cleanup and callback triggering on success
  *
  * @param {number|string} appointmentId - The ID of the appointment to cancel
- * @param {Function} onSuccess - Optional callback function called after successful cancellation
- * @returns {Object} Object containing cancellation state and control functions
+ * @param {Function} onSuccess - Optional callback function called after successful cancellation (e.g., refresh list)
+ * @returns {Object} Object containing cancellation state and control functions (isCancelling, showModal, etc.)
  */
 function useAppointmentCancellation(appointmentId, onSuccess) {
   const [isCancelling, setIsCancelling] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
@@ -37409,8 +37458,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * Custom hook for making HTTP requests with loading states and error handling
- * WordPress-compatible with nonce and proper error handling
- * @param {string|Function} url - URL string or function that returns URL
+ * WordPress-compatible with nonce, JSON handling, and proper error extraction.
+ * Supports both automatic (immediate) and manual execution modes.
+ * Automatically stringifies request bodies for POST/PUT/PATCH requests.
+ * Handles WordPress error responses with code and data extraction.
+ *
+ * @param {string|Function} url - URL string or function that returns URL dynamically
  * @param {Object} options - Fetch options (method, headers, body, etc.)
  * @param {Object} config - Configuration object
  * @param {boolean} config.immediate - If true (default), fetch on mount. If false, fetch manually via execute
@@ -37527,6 +37580,9 @@ const useFetch = (url, options = {}, {
 
 /**
  * Hook for GET requests
+ * Convenience wrapper around useFetch for GET requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 const useGet = url => {
   const getOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
@@ -37537,6 +37593,10 @@ const useGet = url => {
 
 /**
  * Hook for POST requests
+ * Convenience wrapper around useFetch for POST requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 const usePost = (url, body) => {
   const postOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
@@ -37548,6 +37608,10 @@ const usePost = (url, body) => {
 
 /**
  * Hook for PUT requests
+ * Convenience wrapper around useFetch for PUT requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 const usePut = (url, body) => {
   const putOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
@@ -37559,6 +37623,9 @@ const usePut = (url, body) => {
 
 /**
  * Hook for DELETE requests
+ * Convenience wrapper around useFetch for DELETE requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 const useDelete = url => {
   const deleteOptions = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
@@ -37589,9 +37656,12 @@ __webpack_require__.r(__webpack_exports__);
  * useNotice Hook
  *
  * A reusable hook for managing notice/message state to be used with the Notice component.
- * Provides functions to show success, error, warning, and info messages.
+ * Provides functions to show success, error, warning, and info messages with automatic
+ * visibility management and cleanup animations.
+ * Messages persist until manually dismissed or cleared.
  *
- * @returns {Object} Object containing notice state and control functions
+ * @returns {Object} Object containing notice state and control functions:
+ * { message, status, isVisible, showMessage, showSuccess, showError, showWarning, showInfo, clearMessage, reset }
  */
 function useNotice() {
   const [message, setMessage] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -37670,9 +37740,12 @@ const sortAppointmentsByDate = appointments => {
 };
 
 /**
- * Check if appointment can be cancelled
- * @param {Object} appointment - Appointment object
- * @returns {boolean}
+ * Check if user is allowed to cancel an appointment
+ * Validates appointment status and ensures the appointment date hasn't passed.
+ * Prevents cancellation of already cancelled, completed, or cancel-requested appointments.
+ *
+ * @param {Object} appointment - Appointment object with status and slot_date fields
+ * @returns {boolean} True if user can cancel this appointment, false otherwise
  */
 const userAllowedToCancelAppointment = appointment => {
   if (!appointment) return false;
@@ -37690,8 +37763,13 @@ const userAllowedToCancelAppointment = appointment => {
 
 /**
  * Categorize appointments based on status and date, with sorting applied
+ * Places appointments into three categories: upcoming, cancelled, past.
+ * Past appointments include completed status and any appointment with past datetime.
+ * Only future cancelled appointments stay in cancelled tab.
+ * All categories are sorted by date (oldest first).
+ *
  * @param {Array} appointments - Array of appointment objects
- * @returns {Object} Object with categorized and sorted appointments
+ * @returns {Object} Object with categorized arrays: { upcoming, cancelled, past }
  */
 const categorizeAppointments = appointments => {
   const now = new Date();
@@ -37741,9 +37819,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Get color for status badge
- * @param {string} status - Status value
- * @returns {string} CSS color variable
+ * Get color for status badge based on appointment status
+ * Maps each status to a corresponding CSS custom property color
+ * @param {string} status - Appointment status value (pending, confirmed, completed, cancelled, etc.)
+ * @returns {string} CSS color variable or default gray
  */
 const getStatusColor = status => {
   switch (status) {
@@ -37755,6 +37834,8 @@ const getStatusColor = status => {
       return "var(--color-success-600)";
     case "cancelled":
       return "var(--color-error-500)";
+    case "cancel_requested":
+      return "var(--color-warning-500)";
     default:
       return "var(--color-secondary-400)";
   }
@@ -38647,6 +38728,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./src/bookingNew/components/Main.jsx");
 /* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contexts/AuthContext */ "./src/bookingNew/contexts/AuthContext.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * Booking Application Entry Point
+ *
+ * Initializes the Nobat booking application by:
+ * - Finding all booking form containers on the page (supports multiple shortcodes)
+ * - Creating React roots and rendering the Main component
+ * - Wrapping each instance with AuthProvider for authentication context
+ * - Extracting schedule ID from data attributes
+ *
+ * This file serves as the DOM-ready initialization script for the booking module.
+ */
 
 
 

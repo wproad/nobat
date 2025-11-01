@@ -1,11 +1,14 @@
 /**
  * AppointmentRow Component
  *
- * Displays individual appointment item in the appointments list.
- * Shows cancel button (if appointment can be cancelled).
+ * Displays individual appointment item in the appointments list with full details.
+ * Conditionally shows cancel button based on appointment status and date.
+ * Integrates CancellationModal and useAppointmentCancellation hook for cancellation flow.
+ * Displays appointment notes and cancellation reasons when present.
+ * Manages success/error notices via useNotice hook.
  *
  * @param {Object} appointment - Appointment object containing appointment details
- * @param {Function} onCancelled - Optional callback function called after successful cancellation
+ * @param {Function} onCancelled - Optional callback function called after successful cancellation (e.g., refresh list)
  */
 import { AppointmentInfo } from "./AppointmentInfo.jsx";
 import { CancellationModal } from "./CancellationModal.jsx";

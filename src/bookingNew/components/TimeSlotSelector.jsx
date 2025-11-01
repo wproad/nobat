@@ -1,13 +1,16 @@
 /**
  * TimeSlotSelector Component
  *
- * Manages day and time slot selection for appointment booking.
+ * Manages day and time slot selection for appointment booking with two-step selection.
+ * Renders week days grid for day selection, then displays available time slots for selected day.
+ * Shows empty state message when no slots are available for the selected day.
+ * Resets slot selection when day changes to prevent inconsistent state.
  *
- * @param {Array} days - Array of day objects with available slots
+ * @param {Array} days - Array of day objects with available slots (timeslots from schedule)
  * @param {Object} selectedDay - Currently selected day object
  * @param {Object} selectedSlot - Currently selected time slot object
- * @param {Function} onDaySelect - Callback when a day is selected
- * @param {Function} onSlotSelect - Callback when a time slot is selected
+ * @param {Function} onDaySelect - Callback when a day is selected (receives day object)
+ * @param {Function} onSlotSelect - Callback when a time slot is selected (receives slot object)
  */
 import { __ } from "../../utils/i18n";
 import DayButton from "./DayButton";

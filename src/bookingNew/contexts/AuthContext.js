@@ -2,13 +2,17 @@ import { createContext, useContext } from "react";
 
 /**
  * Authentication Context for Front Section
- * Provides user authentication state and utilities
+ * Provides user authentication state, user data, and login/registration URLs
+ * Exposes data from WordPress wpApiSettings localization
  */
 const AuthContext = createContext();
 
 /**
  * AuthProvider component
- * Wraps the app and provides authentication context
+ * Wraps the app and provides authentication context with WordPress integration.
+ * Extracts auth data from wpApiSettings and makes it available to all children.
+ *
+ * @param {ReactNode} children - Child components that will have access to auth context
  */
 export const AuthProvider = ({ children }) => {
   // Get authentication data from WordPress localization
@@ -30,7 +34,11 @@ export const AuthProvider = ({ children }) => {
 
 /**
  * Custom hook to use authentication context
- * @returns {Object} Authentication state and utilities
+ * Throws an error if used outside of AuthProvider to ensure proper setup.
+ *
+ * @returns {Object} Authentication state and utilities:
+ * { isLoggedIn, currentUser, loginUrl, registerUrl }
+ * @throws {Error} If used outside AuthProvider
  */
 export const useAuth = () => {
   const context = useContext(AuthContext);

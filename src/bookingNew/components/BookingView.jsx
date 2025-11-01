@@ -1,8 +1,12 @@
 /**
  * BookingView Component
  *
- * Parent component that handles schedule fetching, loading, and error states.
- * Renders the BookingForm child component with schedule data.
+ * Parent component that handles schedule fetching with smart endpoint selection.
+ * Supports both active schedule and specific schedule ID scenarios.
+ * Manages loading states with Spinner, error handling, and data extraction.
+ * Renders BookingForm with validated schedule data.
+ *
+ * @param {string} scheduleId - Optional schedule ID, uses active schedule if not provided
  */
 import BookingForm from "./BookingForm";
 import { __ } from "../../utils/i18n";

@@ -1,9 +1,12 @@
 /**
  * Main Component
  *
- * Main container component that handles view switching between appointments list and booking form.
- * Checks authentication status and renders either LoginRequired component for unauthenticated users,
- * or the toggle view interface for authenticated users.
+ * Main container component that orchestrates the booking application flow.
+ * Handles authentication gate, view switching between appointments list and booking form,
+ * and provides a unified header with dynamic action buttons.
+ * Wraps all views in a Card layout for consistent styling.
+ *
+ * @param {string} scheduleId - Optional schedule ID for targeted booking
  */
 import { useState } from "react";
 import MyAppointments from "./MyAppointments.jsx";

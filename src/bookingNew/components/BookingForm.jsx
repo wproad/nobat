@@ -2,6 +2,11 @@
  * BookingForm Component
  *
  * Form component for booking new appointments.
+ * Handles day and time slot selection, optional notes, form submission,
+ * and success/error notifications. Displays booking confirmation ticket
+ * after successful booking.
+ *
+ * @param {Object} schedule - Schedule object containing timeslots data
  */
 import { useState, useEffect } from "react";
 import { Button, TextareaControl, Notice } from "../../ui";

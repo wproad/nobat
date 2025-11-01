@@ -2,8 +2,12 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 
 /**
  * Custom hook for making HTTP requests with loading states and error handling
- * WordPress-compatible with nonce and proper error handling
- * @param {string|Function} url - URL string or function that returns URL
+ * WordPress-compatible with nonce, JSON handling, and proper error extraction.
+ * Supports both automatic (immediate) and manual execution modes.
+ * Automatically stringifies request bodies for POST/PUT/PATCH requests.
+ * Handles WordPress error responses with code and data extraction.
+ *
+ * @param {string|Function} url - URL string or function that returns URL dynamically
  * @param {Object} options - Fetch options (method, headers, body, etc.)
  * @param {Object} config - Configuration object
  * @param {boolean} config.immediate - If true (default), fetch on mount. If false, fetch manually via execute
@@ -143,6 +147,9 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
 
 /**
  * Hook for GET requests
+ * Convenience wrapper around useFetch for GET requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 export const useGet = (url) => {
   const getOptions = useMemo(() => ({ method: "GET" }), []);
@@ -151,6 +158,10 @@ export const useGet = (url) => {
 
 /**
  * Hook for POST requests
+ * Convenience wrapper around useFetch for POST requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 export const usePost = (url, body) => {
   const postOptions = useMemo(
@@ -165,6 +176,10 @@ export const usePost = (url, body) => {
 
 /**
  * Hook for PUT requests
+ * Convenience wrapper around useFetch for PUT requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 export const usePut = (url, body) => {
   const putOptions = useMemo(
@@ -179,6 +194,9 @@ export const usePut = (url, body) => {
 
 /**
  * Hook for DELETE requests
+ * Convenience wrapper around useFetch for DELETE requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
 export const useDelete = (url) => {
   const deleteOptions = useMemo(() => ({ method: "DELETE" }), []);

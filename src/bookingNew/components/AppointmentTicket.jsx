@@ -1,7 +1,12 @@
 /**
  * AppointmentTicket Component
  *
- * Displays appointment confirmation ticket after successful booking.
+ * Displays a formatted appointment confirmation ticket after successful booking.
+ * Shows customizable reservation message from WordPress settings, appointment details,
+ * and unique appointment ID. Used as success state replacement for BookingForm.
+ * Supports Jalali date format and styled status badge.
+ *
+ * @param {Object} appointment - Appointment object containing id, dates, times, and status
  */
 import React from "react";
 import {

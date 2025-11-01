@@ -1,10 +1,12 @@
 /**
  * AppointmentInfo Component
  *
- * Displays appointment information including date, time, and status.
- * This component handles the display logic separately from action logic.
+ * Display-only component for appointment information (date, time, status).
+ * Separates presentation logic from action logic for better component architecture.
+ * Uses utility functions for time formatting and status color/text mapping.
+ * Renders Jalali date and formatted time range with status badge.
  *
- * @param {Object} appointment - Appointment object containing appointment details
+ * @param {Object} appointment - Appointment object containing slot_date_jalali, start_time, end_time, status
  */
 import {
   getStatusColor,

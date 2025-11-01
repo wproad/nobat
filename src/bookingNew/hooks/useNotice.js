@@ -4,9 +4,12 @@ import { useState, useCallback } from "react";
  * useNotice Hook
  *
  * A reusable hook for managing notice/message state to be used with the Notice component.
- * Provides functions to show success, error, warning, and info messages.
+ * Provides functions to show success, error, warning, and info messages with automatic
+ * visibility management and cleanup animations.
+ * Messages persist until manually dismissed or cleared.
  *
- * @returns {Object} Object containing notice state and control functions
+ * @returns {Object} Object containing notice state and control functions:
+ * { message, status, isVisible, showMessage, showSuccess, showError, showWarning, showInfo, clearMessage, reset }
  */
 export function useNotice() {
   const [message, setMessage] = useState(null);

@@ -1,7 +1,9 @@
 /**
  * TimeSlotButton Component
  *
- * Button component for selecting a time slot.
+ * Interactive button component for selecting a time slot.
+ * Handles multiple states: available (selectable), booked (disabled), and selected (highlighted).
+ * Automatically formats time display and handles booking status.
  *
  * @param {Object} slot - Time slot object containing id, start_time, end_time, status
  * @param {boolean} isSelected - Whether this slot is currently selected

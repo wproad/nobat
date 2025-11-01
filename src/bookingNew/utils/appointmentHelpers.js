@@ -12,9 +12,12 @@ export const sortAppointmentsByDate = (appointments) => {
 };
 
 /**
- * Check if appointment can be cancelled
- * @param {Object} appointment - Appointment object
- * @returns {boolean}
+ * Check if user is allowed to cancel an appointment
+ * Validates appointment status and ensures the appointment date hasn't passed.
+ * Prevents cancellation of already cancelled, completed, or cancel-requested appointments.
+ *
+ * @param {Object} appointment - Appointment object with status and slot_date fields
+ * @returns {boolean} True if user can cancel this appointment, false otherwise
  */
 export const userAllowedToCancelAppointment = (appointment) => {
   if (!appointment) return false;
@@ -22,7 +25,7 @@ export const userAllowedToCancelAppointment = (appointment) => {
   // Can't cancel if already cancelled or completed
   if (
     appointment.status === "cancelled" ||
-    appointment.status === "completed" || 
+    appointment.status === "completed" ||
     appointment.status === "cancel_requested"
   ) {
     return false;
@@ -37,8 +40,13 @@ export const userAllowedToCancelAppointment = (appointment) => {
 
 /**
  * Categorize appointments based on status and date, with sorting applied
+ * Places appointments into three categories: upcoming, cancelled, past.
+ * Past appointments include completed status and any appointment with past datetime.
+ * Only future cancelled appointments stay in cancelled tab.
+ * All categories are sorted by date (oldest first).
+ *
  * @param {Array} appointments - Array of appointment objects
- * @returns {Object} Object with categorized and sorted appointments
+ * @returns {Object} Object with categorized arrays: { upcoming, cancelled, past }
  */
 export const categorizeAppointments = (appointments) => {
   const now = new Date();

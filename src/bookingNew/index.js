@@ -1,3 +1,14 @@
+/**
+ * Booking Application Entry Point
+ *
+ * Initializes the Nobat booking application by:
+ * - Finding all booking form containers on the page (supports multiple shortcodes)
+ * - Creating React roots and rendering the Main component
+ * - Wrapping each instance with AuthProvider for authentication context
+ * - Extracting schedule ID from data attributes
+ *
+ * This file serves as the DOM-ready initialization script for the booking module.
+ */
 import "./bookingNew.scss";
 import "../ui/ui-components.scss";
 import domReady from "../utils/dom-ready";

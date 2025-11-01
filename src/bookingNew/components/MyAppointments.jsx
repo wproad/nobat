@@ -2,8 +2,12 @@
  * MyAppointments Component
  *
  * Displays user appointments with categorized tabs (upcoming, cancelled, past).
- * Shows appointment count, handles tab navigation, and renders either the appointments list
- * or an empty state when no appointments exist.
+ * Features tab-based navigation with appointment counts, loading states with Spinner,
+ * error handling, and empty state messaging.
+ * Automatically fetches appointments on mount and supports manual refetch.
+ * Only shows tabs when appointments exist for better UX.
+ *
+ * @todo Replace Notice component with useNotice hook
  */
 import { useState } from "react";
 import { useGet } from "../hooks/useFetch.js";
