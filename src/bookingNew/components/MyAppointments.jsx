@@ -5,12 +5,11 @@
  * Shows appointment count, handles tab navigation, and renders either the appointments list
  * or an empty state when no appointments exist.
  */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useGet } from "../hooks/useFetch.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
-import { Card, CardHeader, CardBody } from "../../ui/Card.jsx";
 import { Spinner, Notice } from "../../ui/index.js";
 import { __ } from "../../utils/i18n.js";
 
@@ -52,18 +51,7 @@ const MyAppointments = () => {
   ];
 
   return (
-    <Card className="my-appointments">
-      <CardHeader className="appointments-header">
-        <h1>{__("My Appointments", "nobat")}</h1>
-        <div className="header-actions">
-          {totalAppointments > 0 && (
-            <span className="appointments-count">
-              {totalAppointments} {__("appointments", "nobat")}
-            </span>
-          )}
-        </div>
-      </CardHeader>
-
+    <div className="my-appointments">
       {/* Tab Navigation */}
       {hasAnyAppointments && (
         <div className="appointments-tabs">
@@ -81,7 +69,7 @@ const MyAppointments = () => {
       )}
 
       {/* Tab Content */}
-      <CardBody className="tab-content">
+      <div className="tab-content">
         {loading ? (
           <div className="loading-appointments">
             <Spinner />
@@ -111,8 +99,8 @@ const MyAppointments = () => {
             ))}
           </div>
         )}
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 };
 

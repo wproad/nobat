@@ -4,7 +4,6 @@
  * Parent component that handles schedule fetching, loading, and error states.
  * Renders the BookingForm child component with schedule data.
  */
-import { Card, CardBody, CardHeader } from "../../ui";
 import BookingForm from "./BookingForm";
 import { __ } from "../../utils/i18n";
 import { useGet } from "../hooks/useFetch";
@@ -12,10 +11,10 @@ import { Spinner } from "../../ui";
 
 const BookingView = ({ scheduleId }) => {
   // Determine which endpoint to use based on scheduleId prop
-  const endpoint = scheduleId 
+  const endpoint = scheduleId
     ? `/nobat/v2/schedules/${scheduleId}`
     : "/nobat/v2/schedules/active";
-  
+
   // Fetch schedule using useGet
   const {
     data: scheduleData,
@@ -55,16 +54,7 @@ const BookingView = ({ scheduleId }) => {
     return <BookingForm schedule={schedule} />;
   };
 
-  return (
-    <div className="appointment-booking-form">
-      <Card>
-        <CardHeader>
-          <h3>{__("Book an Appointment", "nobat")}</h3>
-        </CardHeader>
-        <CardBody>{renderCardBody()}</CardBody>
-      </Card>
-    </div>
-  );
+  return <div className="appointment-booking-form">{renderCardBody()}</div>;
 };
 
 export default BookingView;

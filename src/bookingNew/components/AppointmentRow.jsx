@@ -35,17 +35,32 @@ const AppointmentRow = ({ appointment, onCancelled }) => {
 
   return (
     <div className="appointment-item">
-      <AppointmentInfo appointment={appointment} />
+      <div className="appointment-item-header">
+        <AppointmentInfo appointment={appointment} />
 
-      {cancelAllowed && (
-        <div className="appointment-actions">
-          <button
-            className="btn-cancel"
-            onClick={openModal}
-            disabled={isCancelling}
-          >
-            {__("Cancel Appointment", "nobat")}
-          </button>
+        {cancelAllowed && (
+          <div className="appointment-actions">
+            <button
+              className="btn-cancel"
+              onClick={openModal}
+              disabled={isCancelling}
+            >
+              {__("Cancel Appointment", "nobat")}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {appointment.note && (
+        <div className="appointment-note">
+          <strong>{__("Note:", "nobat")}</strong> {appointment.note}
+        </div>
+      )}
+
+      {appointment.cancellation_reason && (
+        <div className="cancellation-reason">
+          <strong>{__("Cancellation Reason:", "nobat")}</strong>{" "}
+          {appointment.cancellation_reason}
         </div>
       )}
 
