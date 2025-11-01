@@ -36542,6 +36542,73 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/front/components/AppointmentInfo.jsx":
+/*!**************************************************!*\
+  !*** ./src/front/components/AppointmentInfo.jsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AppointmentInfo: () => (/* binding */ AppointmentInfo)
+/* harmony export */ });
+/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * AppointmentInfo Component
+ *
+ * Displays appointment information including date, time, status, notes, and cancellation reasons.
+ * This component handles the display logic separately from action logic.
+ *
+ * @param {Object} appointment - Appointment object containing appointment details
+ */
+
+
+
+function AppointmentInfo({
+  appointment
+}) {
+  if (!appointment) return null;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "appointment-info",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "appointment-date-time",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "date-jalali",
+          children: appointment.slot_date_jalali
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "time-range",
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.formatTimeRange)(appointment.start_time, appointment.end_time)
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "appointment-status",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: "status-badge",
+          style: {
+            backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusColor)(appointment.status)
+          },
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusText)(appointment.status)
+        })
+      })]
+    }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "appointment-note",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Note:", "nobat")
+      }), " ", appointment.note]
+    }), appointment.cancellation_reason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "cancellation-reason",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancellation Reason:", "nobat")
+      }), " ", appointment.cancellation_reason]
+    })]
+  });
+}
+
+/***/ }),
+
 /***/ "./src/front/components/AppointmentRow.jsx":
 /*!*************************************************!*\
   !*** ./src/front/components/AppointmentRow.jsx ***!
@@ -36553,15 +36620,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
-/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
-/* harmony import */ var _hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFetch.js */ "./src/front/hooks/useFetch.js");
-/* harmony import */ var _hooks_useNotice_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useNotice.js */ "./src/front/hooks/useNotice.js");
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _AppointmentInfo_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppointmentInfo.jsx */ "./src/front/components/AppointmentInfo.jsx");
+/* harmony import */ var _CancellationModal_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CancellationModal.jsx */ "./src/front/components/CancellationModal.jsx");
+/* harmony import */ var _hooks_useAppointmentCancellation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useAppointmentCancellation.js */ "./src/front/hooks/useAppointmentCancellation.js");
+/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
+/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * AppointmentRow Component
  *
@@ -36578,172 +36643,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const AppointmentRow = ({
   appointment,
   onCancelled
 }) => {
   if (!appointment) return null;
-  const cancelAllowed = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.userAllowedToCancelAppointment)(appointment);
-  const [isCancelling, setIsCancelling] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [showCancelModal, setShowCancelModal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [cancellationReason, setCancellationReason] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const cancelAllowed = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_3__.userAllowedToCancelAppointment)(appointment);
   const {
+    isCancelling,
+    showModal,
+    cancellationReason,
+    setCancellationReason,
     message,
     status,
     isVisible,
-    showSuccess,
-    showError,
-    clearMessage
-  } = (0,_hooks_useNotice_js__WEBPACK_IMPORTED_MODULE_4__.useNotice)();
-
-  // Use useFetch with immediate=false to manually trigger the request
-  const {
-    execute
-  } = (0,_hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_3__.useFetch)(`/nobat/v2/appointments/${appointment.id}/cancel`, {
-    method: "POST"
-  }, {
-    immediate: false
-  });
-  const handleCancelClick = () => {
-    setShowCancelModal(true);
-  };
-  const handleCloseModal = () => {
-    if (!isCancelling) {
-      setShowCancelModal(false);
-      setCancellationReason("");
-    }
-  };
-  const handleSubmitCancellation = async () => {
-    setIsCancelling(true);
-    try {
-      const response = await execute({
-        body: {
-          reason: cancellationReason.trim() || ""
-        }
-      });
-      if (response?.success) {
-        showSuccess(response.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancellation request submitted. An admin will review your request.", "nobat"));
-
-        // Close modal and reset form
-        setShowCancelModal(false);
-        setCancellationReason("");
-
-        // Call the callback to refresh the appointments list
-        if (onCancelled) {
-          onCancelled();
-        }
-      }
-    } catch (error) {
-      const errorMessage = error.message || error.data?.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Failed to request cancellation.", "nobat");
-      showError(errorMessage);
-    } finally {
-      setIsCancelling(false);
-    }
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+    clearMessage,
+    openModal,
+    closeModal,
+    submitCancellation
+  } = (0,_hooks_useAppointmentCancellation_js__WEBPACK_IMPORTED_MODULE_2__.useAppointmentCancellation)(appointment.id, onCancelled);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "appointment-item",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "appointment-info",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "appointment-date-time",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "date-jalali",
-          children: appointment.slot_date_jalali
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "time-range",
-          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "appointment-status",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-          className: "status-badge",
-          style: {
-            backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.getStatusColor)(appointment.status)
-          },
-          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.getStatusText)(appointment.status)
-        })
-      })]
-    }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "appointment-note",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Note:", "nobat")
-      }), " ", appointment.note]
-    }), appointment.cancellation_reason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "cancellation-reason",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancellation Reason:", "nobat")
-      }), " ", appointment.cancellation_reason]
-    }), cancelAllowed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AppointmentInfo_jsx__WEBPACK_IMPORTED_MODULE_0__.AppointmentInfo, {
+      appointment: appointment
+    }), cancelAllowed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "appointment-actions",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
         className: "btn-cancel",
-        onClick: handleCancelClick,
+        onClick: openModal,
         disabled: isCancelling,
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancel Appointment", "nobat")
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Cancel Appointment", "nobat")
       })
-    }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Notice, {
+    }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_4__.Notice, {
       status: status,
       onRemove: clearMessage,
       isDismissible: true,
       children: message
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Modal, {
-      title: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Request Cancellation", "nobat"),
-      isOpen: showCancelModal,
-      onRequestClose: handleCloseModal,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Are you sure you want to request cancellation for this appointment?", "nobat")
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "cancellation-appointment-info",
-        style: {
-          marginTop: "16px",
-          marginBottom: "16px"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
-            children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Date:", "nobat")
-          }), " ", appointment.slot_date_jalali || appointment.slot_date]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
-            children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Time:", "nobat")
-          }), " ", (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.TextareaControl, {
-        label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Reason for cancellation (optional)", "nobat"),
-        value: cancellationReason,
-        onChange: setCancellationReason,
-        placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Please provide a reason for cancellation", "nobat"),
-        rows: 4,
-        disabled: isCancelling
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "modal-actions",
-        style: {
-          marginTop: "16px",
-          display: "flex",
-          gap: "8px",
-          justifyContent: "flex-end"
-        },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "secondary",
-          onClick: handleCloseModal,
-          disabled: isCancelling,
-          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancel", "nobat")
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Button, {
-          variant: "primary",
-          isDestructive: true,
-          onClick: handleSubmitCancellation,
-          disabled: isCancelling,
-          isBusy: isCancelling,
-          children: isCancelling ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("span", {
-            style: {
-              display: "flex",
-              alignItems: "center",
-              gap: "8px"
-            },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Spinner, {}), (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Submitting...", "nobat")]
-          }) : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Submit Request", "nobat")
-        })]
-      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_CancellationModal_jsx__WEBPACK_IMPORTED_MODULE_1__.CancellationModal, {
+      appointment: appointment,
+      isOpen: showModal,
+      onClose: closeModal,
+      onConfirm: submitCancellation,
+      isCancelling: isCancelling,
+      cancellationReason: cancellationReason,
+      onReasonChange: setCancellationReason
     })]
   });
 };
@@ -36981,6 +36924,113 @@ const BookingView = () => {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BookingView);
+
+/***/ }),
+
+/***/ "./src/front/components/CancellationModal.jsx":
+/*!****************************************************!*\
+  !*** ./src/front/components/CancellationModal.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CancellationModal: () => (/* binding */ CancellationModal)
+/* harmony export */ });
+/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * CancellationModal Component
+ *
+ * A reusable modal component for requesting appointment cancellation.
+ * Displays appointment details and collects optional cancellation reason.
+ *
+ * @param {Object} appointment - Appointment object containing appointment details
+ * @param {boolean} isOpen - Whether the modal is open
+ * @param {Function} onClose - Function to call when modal should be closed
+ * @param {Function} onConfirm - Function to call when cancellation is confirmed
+ * @param {boolean} isCancelling - Whether cancellation is in progress
+ * @param {string} cancellationReason - Current value of cancellation reason input
+ * @param {Function} onReasonChange - Function to call when reason input changes
+ */
+
+
+
+
+function CancellationModal({
+  appointment,
+  isOpen,
+  onClose,
+  onConfirm,
+  isCancelling,
+  cancellationReason,
+  onReasonChange
+}) {
+  if (!appointment) return null;
+  // TODO: sjhow taost on successful cancellation
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Modal, {
+    title: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Request Cancellation", "nobat"),
+    isOpen: isOpen,
+    onRequestClose: onClose,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Are you sure you want to request cancellation for this appointment?", "nobat")
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "cancellation-appointment-info",
+      style: {
+        marginTop: "16px",
+        marginBottom: "16px"
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Date:", "nobat")
+        }), " ", appointment.slot_date_jalali || appointment.slot_date]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Time:", "nobat")
+        }), " ", (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.TextareaControl, {
+      label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Reason for cancellation (optional)", "nobat"),
+      value: cancellationReason,
+      onChange: onReasonChange,
+      placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Please provide a reason for cancellation", "nobat"),
+      rows: 4,
+      disabled: isCancelling
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "modal-actions",
+      style: {
+        marginTop: "16px",
+        display: "flex",
+        gap: "8px",
+        justifyContent: "flex-end"
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Button, {
+        variant: "secondary",
+        onClick: onClose,
+        disabled: isCancelling,
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Cancel", "nobat")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Button, {
+        variant: "primary",
+        isDestructive: true,
+        onClick: onConfirm,
+        disabled: isCancelling,
+        isBusy: isCancelling,
+        children: isCancelling ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+          style: {
+            display: "flex",
+            alignItems: "center",
+            gap: "8px"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Spinner, {}), (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Submitting...", "nobat")]
+        }) : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Submit Request", "nobat")
+      })]
+    })]
+  });
+}
 
 /***/ }),
 
@@ -37716,6 +37766,114 @@ const useAuth = () => {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "./src/front/hooks/useAppointmentCancellation.js":
+/*!*******************************************************!*\
+  !*** ./src/front/hooks/useAppointmentCancellation.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useAppointmentCancellation: () => (/* binding */ useAppointmentCancellation)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useFetch.js */ "./src/front/hooks/useFetch.js");
+/* harmony import */ var _useNotice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useNotice.js */ "./src/front/hooks/useNotice.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+
+
+
+
+
+/**
+ * useAppointmentCancellation Hook
+ *
+ * A custom hook that manages the appointment cancellation flow including:
+ * - Modal state management
+ * - Cancellation reason input
+ * - API request handling
+ * - Success/error notifications
+ *
+ * @param {number|string} appointmentId - The ID of the appointment to cancel
+ * @param {Function} onSuccess - Optional callback function called after successful cancellation
+ * @returns {Object} Object containing cancellation state and control functions
+ */
+function useAppointmentCancellation(appointmentId, onSuccess) {
+  const [isCancelling, setIsCancelling] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [showModal, setShowModal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [cancellationReason, setCancellationReason] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+
+  // Use useFetch with immediate=false to manually trigger the request
+  const {
+    execute
+  } = (0,_useFetch_js__WEBPACK_IMPORTED_MODULE_1__.useFetch)(`/nobat/v2/appointments/${appointmentId}/cancel`, {
+    method: "POST"
+  }, {
+    immediate: false
+  });
+  const {
+    message,
+    status,
+    isVisible,
+    showSuccess,
+    showError,
+    clearMessage
+  } = (0,_useNotice_js__WEBPACK_IMPORTED_MODULE_2__.useNotice)();
+  const openModal = () => {
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    if (!isCancelling) {
+      setShowModal(false);
+      setCancellationReason("");
+    }
+  };
+  const submitCancellation = async () => {
+    setIsCancelling(true);
+    try {
+      const response = await execute({
+        body: {
+          reason: cancellationReason.trim() || ""
+        }
+      });
+      if (response?.success) {
+        showSuccess(response.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Cancellation request submitted. An admin will review your request.", "nobat"));
+
+        // Close modal and reset form
+        setShowModal(false);
+        setCancellationReason("");
+
+        // Call the callback to refresh the appointments list
+        if (onSuccess) {
+          onSuccess();
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.message || error.data?.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Failed to request cancellation.", "nobat");
+      showError(errorMessage);
+    } finally {
+      setIsCancelling(false);
+    }
+  };
+  return {
+    isCancelling,
+    showModal,
+    cancellationReason,
+    setCancellationReason,
+    message,
+    status,
+    isVisible,
+    clearMessage,
+    openModal,
+    closeModal,
+    submitCancellation
+  };
+}
 
 /***/ }),
 
