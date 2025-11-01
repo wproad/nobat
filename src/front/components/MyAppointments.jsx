@@ -24,6 +24,7 @@ const MyAppointments = () => {
     data: appointmentsData,
     loading,
     error,
+    refetch,
   } = useGet("/nobat/v2/appointments");
 
   const appointments = appointmentsData?.appointments || [];
@@ -95,7 +96,14 @@ const MyAppointments = () => {
         ) : (
           <div className="appointments-list">
             {currentAppointments.map((appointment) => (
-              <AppointmentRow key={appointment.id} appointment={appointment} />
+              <AppointmentRow
+                key={appointment.id}
+                appointment={appointment}
+                onCancelled={() => {
+                  // Refetch appointments after cancellation
+                  refetch();
+                }}
+              />
             ))}
           </div>
         )}

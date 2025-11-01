@@ -36553,10 +36553,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
-/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
+/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
+/* harmony import */ var _hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFetch.js */ "./src/front/hooks/useFetch.js");
+/* harmony import */ var _hooks_useNotice_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useNotice.js */ "./src/front/hooks/useNotice.js");
+/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * AppointmentRow Component
  *
@@ -36564,60 +36569,181 @@ __webpack_require__.r(__webpack_exports__);
  * Shows cancel button (if appointment can be cancelled).
  *
  * @param {Object} appointment - Appointment object containing appointment details
+ * @param {Function} onCancelled - Optional callback function called after successful cancellation
  */
 
 
 
 
+
+
+
+
 const AppointmentRow = ({
-  appointment
+  appointment,
+  onCancelled
 }) => {
   if (!appointment) return null;
-  const canCancel = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_1__.canCancelAppointment)(appointment);
-  const handleCancel = () => {
-    // TODO: Refresh appointments list when connected to real API
-    console.log("Appointment cancelled - refresh needed");
+  const cancelAllowed = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.userAllowedToCancelAppointment)(appointment);
+  const [isCancelling, setIsCancelling] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [showCancelModal, setShowCancelModal] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [cancellationReason, setCancellationReason] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  const {
+    message,
+    status,
+    isVisible,
+    showSuccess,
+    showError,
+    clearMessage
+  } = (0,_hooks_useNotice_js__WEBPACK_IMPORTED_MODULE_4__.useNotice)();
+
+  // Use useFetch with immediate=false to manually trigger the request
+  const {
+    execute
+  } = (0,_hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_3__.useFetch)(`/nobat/v2/appointments/${appointment.id}/cancel`, {
+    method: "POST"
+  }, {
+    immediate: false
+  });
+  const handleCancelClick = () => {
+    setShowCancelModal(true);
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  const handleCloseModal = () => {
+    if (!isCancelling) {
+      setShowCancelModal(false);
+      setCancellationReason("");
+    }
+  };
+  const handleSubmitCancellation = async () => {
+    setIsCancelling(true);
+    try {
+      const response = await execute({
+        body: {
+          reason: cancellationReason.trim() || ""
+        }
+      });
+      if (response?.success) {
+        showSuccess(response.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancellation request submitted. An admin will review your request.", "nobat"));
+
+        // Close modal and reset form
+        setShowCancelModal(false);
+        setCancellationReason("");
+
+        // Call the callback to refresh the appointments list
+        if (onCancelled) {
+          onCancelled();
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.message || error.data?.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Failed to request cancellation.", "nobat");
+      showError(errorMessage);
+    } finally {
+      setIsCancelling(false);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "appointment-item",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "appointment-info",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "appointment-date-time",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "date-jalali",
           children: appointment.slot_date_jalali
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "time-range",
-          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.formatTimeRange)(appointment.start_time, appointment.end_time)
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "appointment-status",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
           className: "status-badge",
           style: {
-            backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusColor)(appointment.status)
+            backgroundColor: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.getStatusColor)(appointment.status)
           },
-          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__.getStatusText)(appointment.status)
+          children: (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.getStatusText)(appointment.status)
         })
       })]
-    }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "appointment-note",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Note:", "nobat")
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Note:", "nobat")
       }), " ", appointment.note]
-    }), appointment.cancellation_reason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), appointment.cancellation_reason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "cancellation-reason",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Cancellation Reason:", "nobat")
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancellation Reason:", "nobat")
       }), " ", appointment.cancellation_reason]
-    }), canCancel && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), cancelAllowed && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "appointment-actions",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
         className: "btn-cancel",
-        onClick: handleCancel,
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Cancel Appointment", "nobat")
+        onClick: handleCancelClick,
+        disabled: isCancelling,
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancel Appointment", "nobat")
       })
+    }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Notice, {
+      status: status,
+      onRemove: clearMessage,
+      isDismissible: true,
+      children: message
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Modal, {
+      title: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Request Cancellation", "nobat"),
+      isOpen: showCancelModal,
+      onRequestClose: handleCloseModal,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Are you sure you want to request cancellation for this appointment?", "nobat")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "cancellation-appointment-info",
+        style: {
+          marginTop: "16px",
+          marginBottom: "16px"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
+            children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Date:", "nobat")
+          }), " ", appointment.slot_date_jalali || appointment.slot_date]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("strong", {
+            children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Time:", "nobat")
+          }), " ", (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.TextareaControl, {
+        label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Reason for cancellation (optional)", "nobat"),
+        value: cancellationReason,
+        onChange: setCancellationReason,
+        placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Please provide a reason for cancellation", "nobat"),
+        rows: 4,
+        disabled: isCancelling
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "modal-actions",
+        style: {
+          marginTop: "16px",
+          display: "flex",
+          gap: "8px",
+          justifyContent: "flex-end"
+        },
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "secondary",
+          onClick: handleCloseModal,
+          disabled: isCancelling,
+          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Cancel", "nobat")
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Button, {
+          variant: "primary",
+          isDestructive: true,
+          onClick: handleSubmitCancellation,
+          disabled: isCancelling,
+          isBusy: isCancelling,
+          children: isCancelling ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("span", {
+            style: {
+              display: "flex",
+              alignItems: "center",
+              gap: "8px"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_5__.Spinner, {}), (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Submitting...", "nobat")]
+          }) : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_6__.__)("Submit Request", "nobat")
+        })]
+      })]
     })]
   });
 };
@@ -36641,7 +36767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
 /* harmony import */ var _TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotSelector */ "./src/front/components/TimeSlotSelector.jsx");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _hooks_useFormSubmit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFormSubmit */ "./src/front/hooks/useFormSubmit.js");
+/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/front/hooks/useFetch.js");
 /* harmony import */ var _hooks_useNotice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useNotice */ "./src/front/hooks/useNotice.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
@@ -36663,11 +36789,15 @@ const BookingForm = ({
   const [selectedDay, setSelectedDay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [selectedSlot, setSelectedSlot] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const {
-    submitForm,
+    execute,
     loading,
     error,
-    response
-  } = (0,_hooks_useFormSubmit__WEBPACK_IMPORTED_MODULE_4__.useFormSubmit)();
+    data
+  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__.useFetch)("/nobat/v2/appointments", {
+    method: "POST"
+  }, {
+    immediate: false
+  });
   const {
     showError,
     showSuccess,
@@ -36688,10 +36818,10 @@ const BookingForm = ({
 
   // Handle success messages from form submission
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (response?.success) {
+    if (data?.success) {
       showSuccess((0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Appointment booked successfully!", "nobat"));
     }
-  }, [response, showSuccess]);
+  }, [data, showSuccess]);
   const handleDaySelect = day => {
     setSelectedDay(day);
     setSelectedSlot(null); // Reset slot when day changes
@@ -36711,8 +36841,12 @@ const BookingForm = ({
         schedule_id: parseInt(schedule.id),
         note: notes.trim()
       };
-      const result = await submitForm("/nobat/v2/appointments", requestBody);
-      if (result.success) {
+
+      // Use execute function from useFetch to trigger the POST request
+      const result = await execute({
+        body: requestBody
+      });
+      if (result?.success) {
         // Reset form
         setNotes("");
         setSelectedDay(null);
@@ -37273,7 +37407,8 @@ const MyAppointments = () => {
   const {
     data: appointmentsData,
     loading,
-    error
+    error,
+    refetch
   } = (0,_hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_1__.useGet)("/nobat/v2/appointments");
   const appointments = appointmentsData?.appointments || [];
   const categorizedAppointments = (0,_utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__.categorizeAppointments)(appointments);
@@ -37333,7 +37468,11 @@ const MyAppointments = () => {
       }) : !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "appointments-list",
         children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          appointment: appointment
+          appointment: appointment,
+          onCancelled: () => {
+            // Refetch appointments after cancellation
+            refetch();
+          }
         }, appointment.id))
       })
     })]
@@ -37605,9 +37744,13 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress-compatible with nonce and proper error handling
  * @param {string|Function} url - URL string or function that returns URL
  * @param {Object} options - Fetch options (method, headers, body, etc.)
- * @returns {Object} - { data, loading, error, refetch }
+ * @param {Object} config - Configuration object
+ * @param {boolean} config.immediate - If true (default), fetch on mount. If false, fetch manually via execute
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
-const useFetch = (url, options = {}) => {
+const useFetch = (url, options = {}, {
+  immediate = true
+} = {}) => {
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
@@ -37688,18 +37831,27 @@ const useFetch = (url, options = {}) => {
     return executeRequest(urlToFetch, newOptions);
   }, [url, executeRequest]);
 
-  // Main effect
+  // Execute function for manual triggering (when immediate = false)
+  const execute = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((requestOptions = {}) => {
+    const urlToFetch = typeof url === "function" ? url() : url;
+    if (!urlToFetch) return;
+    return executeRequest(urlToFetch, requestOptions);
+  }, [url, executeRequest]);
+
+  // Main effect - only runs when immediate is true
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!immediate) return;
     console.log("useFetch: ", url);
     const urlToFetch = typeof url === "function" ? url() : url;
     if (!urlToFetch) return;
     executeRequest(urlToFetch);
-  }, [url, executeRequest]);
+  }, [url, executeRequest, immediate]);
   return {
     data,
     loading,
     error,
-    refetch
+    refetch,
+    execute
   };
 };
 
@@ -37745,84 +37897,6 @@ const useDelete = url => {
   return useFetch(url, deleteOptions);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useFetch);
-
-/***/ }),
-
-/***/ "./src/front/hooks/useFormSubmit.js":
-/*!******************************************!*\
-  !*** ./src/front/hooks/useFormSubmit.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useFormSubmit: () => (/* binding */ useFormSubmit)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function useFormSubmit() {
-  const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const [error, setError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  const [response, setResponse] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-
-  // Get WordPress API settings from localized script
-  const getApiSettings = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {
-    return window.wpApiSettings || {};
-  }, []);
-
-  // TODO: don't throw error on 4xx errors, return the error object instead
-  const submitForm = async (url, data) => {
-    setLoading(true);
-    setError(null);
-    try {
-      // Get WordPress API settings
-      const apiSettings = getApiSettings();
-
-      // Normalize the root URL and path to avoid double slashes
-      let root = apiSettings.root || "/wp-json";
-      root = root.endsWith("/") ? root.slice(0, -1) : root; // Remove trailing slash
-      const normalizedPath = url.startsWith("/") ? url : `/${url}`;
-      const normalizedUrl = `${root}${normalizedPath}`;
-      const res = await fetch(normalizedUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-WP-Nonce": apiSettings.nonce || ""
-        },
-        credentials: "same-origin",
-        body: JSON.stringify(data)
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        // Handle WordPress error responses
-        const errorObj = new Error(json.message || `HTTP Error ${res.status}`);
-        errorObj.code = json.code || res.status;
-        errorObj.data = json.data || null;
-        setError(errorObj);
-        throw errorObj;
-      }
-      setResponse(json);
-      return json;
-    } catch (err) {
-      // Enhanced error handling for network errors
-      if (err.message === "Failed to fetch") {
-        err.message = "Network error. Please check your connection.";
-      }
-      setError(err);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-  return {
-    submitForm,
-    loading,
-    error,
-    response
-  };
-}
 
 /***/ }),
 
@@ -37908,9 +37982,9 @@ function useNotice() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   canCancelAppointment: () => (/* binding */ canCancelAppointment),
 /* harmony export */   categorizeAppointments: () => (/* binding */ categorizeAppointments),
-/* harmony export */   sortAppointmentsByDate: () => (/* binding */ sortAppointmentsByDate)
+/* harmony export */   sortAppointmentsByDate: () => (/* binding */ sortAppointmentsByDate),
+/* harmony export */   userAllowedToCancelAppointment: () => (/* binding */ userAllowedToCancelAppointment)
 /* harmony export */ });
 /**
  * Sort appointments by date (oldest first)
@@ -37930,11 +38004,11 @@ const sortAppointmentsByDate = appointments => {
  * @param {Object} appointment - Appointment object
  * @returns {boolean}
  */
-const canCancelAppointment = appointment => {
+const userAllowedToCancelAppointment = appointment => {
   if (!appointment) return false;
 
   // Can't cancel if already cancelled or completed
-  if (appointment.status === "cancelled" || appointment.status === "completed") {
+  if (appointment.status === "cancelled" || appointment.status === "completed" || appointment.status === "cancel_requested") {
     return false;
   }
 
@@ -38031,6 +38105,8 @@ const getStatusText = status => {
       return (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_0__.__)("تکمیل شده", "nobat");
     case "cancelled":
       return (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_0__.__)("لغو شده", "nobat");
+    case "cancel_requested":
+      return (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_0__.__)("درخواست لغو ارسال شده", "nobat");
     default:
       return status;
   }

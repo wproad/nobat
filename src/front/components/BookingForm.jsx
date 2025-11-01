@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Button, TextareaControl, Notice } from "../../components/ui";
 import TimeSlotSelector from "./TimeSlotSelector";
 import { __ } from "../../utils/i18n";
-import { useFormSubmit } from "../hooks/useFormSubmit";
+import { useFetch } from "../hooks/useFetch";
 import { useNotice } from "../hooks/useNotice";
 
 const BookingForm = ({ schedule }) => {
@@ -15,7 +15,11 @@ const BookingForm = ({ schedule }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  const { submitForm, loading, error, response } = useFormSubmit();
+  const { execute, loading, error, data } = useFetch(
+    "/nobat/v2/appointments",
+    { method: "POST" },
+    { immediate: false }
+  );
   const { showError, showSuccess, isVisible, message, status, clearMessage } =
     useNotice();
   const isFormValid = selectedDay && selectedSlot;
@@ -32,10 +36,10 @@ const BookingForm = ({ schedule }) => {
 
   // Handle success messages from form submission
   useEffect(() => {
-    if (response?.success) {
+    if (data?.success) {
       showSuccess(__("Appointment booked successfully!", "nobat"));
     }
-  }, [response, showSuccess]);
+  }, [data, showSuccess]);
 
   const handleDaySelect = (day) => {
     setSelectedDay(day);
@@ -61,9 +65,10 @@ const BookingForm = ({ schedule }) => {
         note: notes.trim(),
       };
 
-      const result = await submitForm("/nobat/v2/appointments", requestBody);
+      // Use execute function from useFetch to trigger the POST request
+      const result = await execute({ body: requestBody });
 
-      if (result.success) {
+      if (result?.success) {
         // Reset form
         setNotes("");
         setSelectedDay(null);

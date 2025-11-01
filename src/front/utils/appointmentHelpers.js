@@ -16,13 +16,14 @@ export const sortAppointmentsByDate = (appointments) => {
  * @param {Object} appointment - Appointment object
  * @returns {boolean}
  */
-export const canCancelAppointment = (appointment) => {
+export const userAllowedToCancelAppointment = (appointment) => {
   if (!appointment) return false;
 
   // Can't cancel if already cancelled or completed
   if (
     appointment.status === "cancelled" ||
-    appointment.status === "completed"
+    appointment.status === "completed" || 
+    appointment.status === "cancel_requested"
   ) {
     return false;
   }

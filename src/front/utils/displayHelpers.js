@@ -35,6 +35,8 @@ export const getStatusText = (status) => {
       return __("تکمیل شده", "nobat");
     case "cancelled":
       return __("لغو شده", "nobat");
+    case "cancel_requested":
+      return __("درخواست لغو ارسال شده", "nobat");
     default:
       return status;
   }
