@@ -36391,13 +36391,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const BookingView = () => {
-  // Fetch active schedule using useGet
+const BookingView = ({
+  scheduleId
+}) => {
+  // Determine which endpoint to use based on scheduleId prop
+  const endpoint = scheduleId ? `/nobat/v2/schedules/${scheduleId}` : "/nobat/v2/schedules/active";
+
+  // Fetch schedule using useGet
   const {
     data: scheduleData,
     loading: scheduleLoading,
     error: scheduleError
-  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_3__.useGet)("/nobat/v2/schedules/active");
+  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_3__.useGet)(endpoint);
 
   // Extract schedule from API response
   const schedule = scheduleData?.schedule || scheduleData || null;
@@ -36887,7 +36892,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Main = () => {
+const Main = ({
+  scheduleId
+}) => {
   const {
     isLoggedIn,
     loginUrl,
@@ -36919,7 +36926,9 @@ const Main = () => {
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "main-content",
-      children: currentView === "appointments" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_BookingView_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      children: currentView === "appointments" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_BookingView_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        scheduleId: scheduleId
+      })
     })]
   });
 };
@@ -38651,13 +38660,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_utils_dom_ready__WEBPACK_IMPORTED_MODULE_2__["default"])(() => {
-  // TODO: later attach it to shortcode's id
+  // Find all new booking form containers (multiple shortcodes can exist on one page)
+  const containers = document.querySelectorAll(".nobat-new-container");
+  if (containers.length === 0) {
+    console.warn("Nobat: No new booking form containers found on page");
+    return;
+  }
 
-  // Create React root and render
-  const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(document.getElementById("nobat-new"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__.AuthProvider, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Main__WEBPACK_IMPORTED_MODULE_4__["default"], {})
-  }));
+  // Initialize each booking form
+  containers.forEach(container => {
+    const appContainer = container.querySelector(".nobat-new-app");
+    if (!appContainer) {
+      console.warn("Nobat: Booking app container not found", container);
+      return;
+    }
+
+    // Get schedule ID from data attribute
+    const scheduleId = container.dataset.scheduleId || "";
+    console.log("Nobat: Initializing new booking form", {
+      scheduleId
+    });
+
+    // Create React root and render
+    const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(appContainer);
+    root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__.AuthProvider, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Main__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        scheduleId: scheduleId
+      })
+    }));
+  });
 });
 })();
 

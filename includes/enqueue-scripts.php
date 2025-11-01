@@ -157,7 +157,7 @@ add_action( 'wp_enqueue_scripts', 'nobat_frontend_enqueue_scripts' );
 
 /**
  * Enqueues bookingNew.js for pages that need it
- * Checks if page has an element with id 'nobat-new'
+ * Checks if page has the nobat_new shortcode
  */
 function nobat_front_enqueue_scripts() {
 	global $post;
@@ -167,16 +167,11 @@ function nobat_front_enqueue_scripts() {
 	
 	// Check if we're on a page/post
 	if ( $post ) {
-		// Check if post content contains 'nobat-new' id or has a specific container
+		// Check if post content contains 'nobat-new' id or has the shortcode
 		if ( strpos( $post->post_content, 'nobat-new' ) !== false || 
-			 has_shortcode( $post->post_content, 'nobat_front' ) ) {
+			 has_shortcode( $post->post_content, 'nobat_new' ) ) {
 			$should_enqueue = true;
 		}
-	}
-	
-	// Also check if current page has the nobat-new element in body class or other indicators
-	if ( ! $should_enqueue && ( is_page() || is_single() || is_front_page() ) ) {
-		$should_enqueue = true; // Load on all pages for now, can be optimized later
 	}
 	
 	if ( ! $should_enqueue ) {

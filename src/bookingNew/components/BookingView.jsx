@@ -10,13 +10,18 @@ import { __ } from "../../utils/i18n";
 import { useGet } from "../hooks/useFetch";
 import { Spinner } from "../../ui";
 
-const BookingView = () => {
-  // Fetch active schedule using useGet
+const BookingView = ({ scheduleId }) => {
+  // Determine which endpoint to use based on scheduleId prop
+  const endpoint = scheduleId 
+    ? `/nobat/v2/schedules/${scheduleId}`
+    : "/nobat/v2/schedules/active";
+  
+  // Fetch schedule using useGet
   const {
     data: scheduleData,
     loading: scheduleLoading,
     error: scheduleError,
-  } = useGet("/nobat/v2/schedules/active");
+  } = useGet(endpoint);
 
   // Extract schedule from API response
   const schedule = scheduleData?.schedule || scheduleData || null;

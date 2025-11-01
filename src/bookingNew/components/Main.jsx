@@ -12,7 +12,7 @@ import LoginRequired from "./LoginRequired.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
 import { __ } from "../../utils/i18n.js";
 
-const Main = () => {
+const Main = ({ scheduleId }) => {
   const { isLoggedIn, loginUrl, registerUrl } = useAuth();
   const [currentView, setCurrentView] = useState("appointments");
 
@@ -40,7 +40,11 @@ const Main = () => {
       </div>
 
       <div className="main-content">
-        {currentView === "appointments" ? <MyAppointments /> : <BookingView />}
+        {currentView === "appointments" ? (
+          <MyAppointments />
+        ) : (
+          <BookingView scheduleId={scheduleId} />
+        )}
       </div>
     </div>
   );
