@@ -4,11 +4,11 @@
  * Parent component that handles schedule fetching, loading, and error states.
  * Renders the BookingForm child component with schedule data.
  */
-import { useMemo } from "react";
-import { Card, CardBody } from "../../components/ui";
+import { Card, CardBody, CardHeader } from "../../components/ui";
 import BookingForm from "./BookingForm";
 import { __ } from "../../utils/i18n";
 import { useGet } from "../hooks/useFetch";
+import { Spinner } from "../../components/ui";
 
 const BookingView = () => {
   // Fetch active schedule using useGet
@@ -21,39 +21,45 @@ const BookingView = () => {
   // Extract schedule from API response
   const schedule = scheduleData?.schedule || scheduleData || null;
 
-  // Show loading state
-  if (scheduleLoading) {
-    return (
-      <div className="appointment-booking-form">
-        <Card>
-          <CardBody>
-            <p>{__("Loading schedule...", "nobat")}</p>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  }
+  // Determine card body content based on state
+  const renderCardBody = () => {
+    // Show loading state
+    if (scheduleLoading) {
+      return (
+        <>
+          <Spinner />
+          <p>{__("Loading schedule...", "nobat")}</p>
+        </>
+      );
+    }
 
-  // Show error state
-  if (scheduleError || !schedule) {
-    return (
-      <div className="appointment-booking-form">
-        <Card>
-          <CardBody>
-            <p className="error">
-              {scheduleError ||
-                __(
-                  "No active schedule found. Please contact the administrator.",
-                  "nobat"
-                )}
-            </p>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  }
+    // Show error state
+    if (scheduleError || !schedule) {
+      return (
+        <p className="error">
+          {scheduleError ||
+            __(
+              "No active schedule found. Please contact the administrator.",
+              "nobat"
+            )}
+        </p>
+      );
+    }
 
-  return <BookingForm schedule={schedule} />;
+    // Show booking form
+    return <BookingForm schedule={schedule} />;
+  };
+
+  return (
+    <div className="appointment-booking-form">
+      <Card>
+        <CardHeader>
+          <h3>{__("Book an Appointment", "nobat")}</h3>
+        </CardHeader>
+        <CardBody>{renderCardBody()}</CardBody>
+      </Card>
+    </div>
+  );
 };
 
 export default BookingView;
