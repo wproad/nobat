@@ -5,9 +5,11 @@ import { useState, useEffect, useCallback, useMemo } from "react";
  * WordPress-compatible with nonce and proper error handling
  * @param {string|Function} url - URL string or function that returns URL
  * @param {Object} options - Fetch options (method, headers, body, etc.)
- * @returns {Object} - { data, loading, error, refetch }
+ * @param {Object} config - Configuration object
+ * @param {boolean} config.immediate - If true (default), fetch on mount. If false, fetch manually via execute
+ * @returns {Object} - { data, loading, error, refetch, execute }
  */
-export const useFetch = (url, options = {}) => {
+export const useFetch = (url, options = {}, { immediate = true } = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -103,21 +105,34 @@ export const useFetch = (url, options = {}) => {
     [url, executeRequest]
   );
 
-  // Main effect
+  // Execute function for manual triggering (when immediate = false)
+  const execute = useCallback(
+    (requestOptions = {}) => {
+      const urlToFetch = typeof url === "function" ? url() : url;
+      if (!urlToFetch) return;
+      return executeRequest(urlToFetch, requestOptions);
+    },
+    [url, executeRequest]
+  );
+
+  // Main effect - only runs when immediate is true
   useEffect(() => {
+    if (!immediate) return;
+
     console.log("useFetch: ", url);
 
     const urlToFetch = typeof url === "function" ? url() : url;
     if (!urlToFetch) return;
 
     executeRequest(urlToFetch);
-  }, [url, executeRequest]);
+  }, [url, executeRequest, immediate]);
 
   return {
     data,
     loading,
     error,
     refetch,
+    execute,
   };
 };
 
