@@ -14,6 +14,7 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // TODO: remove throw errors of console
   // Get WordPress API settings from localized script
   const getApiSettings = useCallback(() => {
     return window.wpApiSettings || {};
@@ -86,8 +87,12 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
         if (err.message === "Failed to fetch") {
           err.message = "Network error. Please check your connection.";
         }
-        const errorMessage = err.message || "An error occurred";
-        setError(errorMessage);
+        // Ensure we store an Error object, not just a string
+        const errorObj =
+          err instanceof Error
+            ? err
+            : new Error(err.message || "An error occurred");
+        setError(errorObj);
         throw err;
       } finally {
         setLoading(false);

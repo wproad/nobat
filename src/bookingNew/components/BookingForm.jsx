@@ -30,8 +30,9 @@ const BookingForm = ({ schedule }) => {
   useEffect(() => {
     if (error) {
       const errorMessage =
-        error.message ||
+        (error instanceof Error ? error.message : error) ||
         __("An error occurred while booking the appointment.", "nobat");
+      console.log("booking form error: ", errorMessage);
       showError(errorMessage);
     }
   }, [error, showError]);
