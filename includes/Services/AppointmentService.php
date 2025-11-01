@@ -312,6 +312,16 @@ class AppointmentService {
 					throw new \Exception( __( 'Appointment not found.', 'nobat' ) );
 				}
 				
+				// If no reason provided and appointment is cancel_requested, use the user's cancellation reason
+				if ( ! $reason && isset( $appointment['status'] ) && $appointment['status'] === 'cancel_requested' && ! empty( $appointment['cancellation_reason'] ) ) {
+					$reason = $appointment['cancellation_reason'];
+				}
+				
+				// If still no reason, use default message
+				if ( ! $reason ) {
+					$reason = __( 'Cancelled by admin', 'nobat' );
+				}
+				
 				// Update status to cancelled
 				$success = $this->appointment_repo->update_status( $appointment_id, 'cancelled' );
 				
@@ -319,10 +329,8 @@ class AppointmentService {
 					throw new \Exception( __( 'Failed to cancel appointment.', 'nobat' ) );
 				}
 				
-				// Update cancellation reason if provided
-				if ( $reason ) {
-					$this->appointment_repo->update( $appointment_id, array( 'cancellation_reason' => $reason ) );
-				}
+				// Update cancellation reason
+				$this->appointment_repo->update( $appointment_id, array( 'cancellation_reason' => $reason ) );
 				
 					// Mark slot as available again
 				$slot_updated = $this->slot_repo->mark_as_available( $appointment['slot_id'] );
@@ -338,7 +346,7 @@ class AppointmentService {
 					$appointment_id,
 					$admin_id,
 					'cancelled',
-					$reason ? sprintf( __( 'Cancelled by admin: %s', 'nobat' ), $reason ) : __( 'Cancelled by admin', 'nobat' )
+					sprintf( __( 'Cancelled by admin: %s', 'nobat' ), $reason )
 				);
 				
 				return true;

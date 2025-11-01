@@ -335,10 +335,10 @@ class AppointmentController {
 				$message = __( 'Appointment marked as completed.', 'nobat' );
 				break;
 			
-			case 'cancelled':
-				$result = $this->appointment_service->cancel_appointment( $appointment_id, $admin_id, __( 'Cancelled by admin', 'nobat' ) );
-				$message = __( 'Appointment cancelled successfully.', 'nobat' );
-				break;
+		case 'cancelled':
+			$result = $this->appointment_service->cancel_appointment( $appointment_id, $admin_id );
+			$message = __( 'Appointment cancelled successfully.', 'nobat' );
+			break;
 			
 			default:
 				return new WP_Error(

@@ -236,9 +236,8 @@
 }
 .calendar-view .time-column .time-slot .time-slot-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 2px;
   line-height: 1;
 }
 .calendar-view .time-column .time-slot .time-slot-content .time-start {
