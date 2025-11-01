@@ -6,6 +6,7 @@
 import { useState, useEffect } from "react";
 import { Button, TextareaControl, Notice } from "../../ui";
 import TimeSlotSelector from "./TimeSlotSelector";
+import AppointmentTicket from "./AppointmentTicket";
 import { __ } from "../../utils/i18n";
 import { useFetch } from "../hooks/useFetch";
 import { useNotice } from "../hooks/useNotice";
@@ -14,6 +15,7 @@ const BookingForm = ({ schedule }) => {
   const [notes, setNotes] = useState("");
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [bookedAppointment, setBookedAppointment] = useState(null);
 
   const { execute, loading, error, data } = useFetch(
     "/nobat/v2/appointments",
@@ -68,7 +70,9 @@ const BookingForm = ({ schedule }) => {
       // Use execute function from useFetch to trigger the POST request
       const result = await execute({ body: requestBody });
 
-      if (result?.success) {
+      if (result?.success && result?.appointment) {
+        // Store appointment data to show ticket
+        setBookedAppointment(result.appointment);
         // Reset form
         setNotes("");
         setSelectedDay(null);
@@ -80,6 +84,15 @@ const BookingForm = ({ schedule }) => {
       console.error("Failed to book appointment:", err);
     }
   };
+
+  // Show ticket if appointment was booked successfully
+  if (bookedAppointment) {
+    return (
+      <div className="appointment-booking-form">
+        <AppointmentTicket appointment={bookedAppointment} />
+      </div>
+    );
+  }
 
   return (
     <div className="appointment-booking-form">

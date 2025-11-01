@@ -36098,6 +36098,103 @@ const AppointmentRow = ({
 
 /***/ }),
 
+/***/ "./src/bookingNew/components/AppointmentTicket.jsx":
+/*!*********************************************************!*\
+  !*** ./src/bookingNew/components/AppointmentTicket.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers */ "./src/bookingNew/utils/displayHelpers.js");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ * AppointmentTicket Component
+ *
+ * Displays appointment confirmation ticket after successful booking.
+ */
+
+
+
+
+const AppointmentTicket = ({
+  appointment
+}) => {
+  if (!appointment) {
+    return null;
+  }
+  const {
+    id,
+    slot_date_jalali,
+    start_time,
+    end_time,
+    status,
+    slot_date
+  } = appointment;
+
+  // Get reservation message from WordPress settings
+  const reservationMessage = typeof window !== "undefined" && window.wpApiSettings?.reservationMessage || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("نوبت شما با موفقیت رزرو شد!", "nobat");
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "appointment-ticket",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "ticket-header",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+        dangerouslySetInnerHTML: {
+          __html: reservationMessage
+        }
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "ticket-content",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "ticket-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "label",
+          children: "\u062A\u0627\u0631\u06CC\u062E:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "value",
+          children: slot_date_jalali || slot_date
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "ticket-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "label",
+          children: "\u0633\u0627\u0639\u062A:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "value",
+          children: (0,_utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(start_time, end_time)
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "ticket-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "label",
+          children: "\u0648\u0636\u0639\u06CC\u062A:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "status-badge",
+          style: {
+            backgroundColor: (0,_utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__.getStatusColor)(status)
+          },
+          children: (0,_utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__.getStatusText)(status)
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "ticket-footer",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "ticket-id",
+        children: ["\u0634\u0645\u0627\u0631\u0647 \u0646\u0648\u0628\u062A: #", id]
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppointmentTicket);
+
+/***/ }),
+
 /***/ "./src/bookingNew/components/BookingForm.jsx":
 /*!***************************************************!*\
   !*** ./src/bookingNew/components/BookingForm.jsx ***!
@@ -36113,15 +36210,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui */ "./src/ui/index.js");
 /* harmony import */ var _TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotSelector */ "./src/bookingNew/components/TimeSlotSelector.jsx");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/bookingNew/hooks/useFetch.js");
-/* harmony import */ var _hooks_useNotice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useNotice */ "./src/bookingNew/hooks/useNotice.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _AppointmentTicket__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentTicket */ "./src/bookingNew/components/AppointmentTicket.jsx");
+/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/bookingNew/hooks/useFetch.js");
+/* harmony import */ var _hooks_useNotice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useNotice */ "./src/bookingNew/hooks/useNotice.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * BookingForm Component
  *
  * Form component for booking new appointments.
  */
+
 
 
 
@@ -36135,12 +36234,13 @@ const BookingForm = ({
   const [notes, setNotes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   const [selectedDay, setSelectedDay] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const [selectedSlot, setSelectedSlot] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  const [bookedAppointment, setBookedAppointment] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const {
     execute,
     loading,
     error,
     data
-  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__.useFetch)("/nobat/v2/appointments", {
+  } = (0,_hooks_useFetch__WEBPACK_IMPORTED_MODULE_5__.useFetch)("/nobat/v2/appointments", {
     method: "POST"
   }, {
     immediate: false
@@ -36152,13 +36252,13 @@ const BookingForm = ({
     message,
     status,
     clearMessage
-  } = (0,_hooks_useNotice__WEBPACK_IMPORTED_MODULE_5__.useNotice)();
+  } = (0,_hooks_useNotice__WEBPACK_IMPORTED_MODULE_6__.useNotice)();
   const isFormValid = selectedDay && selectedSlot;
 
   // Handle error messages from form submission
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (error) {
-      const errorMessage = error.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("An error occurred while booking the appointment.", "nobat");
+      const errorMessage = error.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("An error occurred while booking the appointment.", "nobat");
       showError(errorMessage);
     }
   }, [error, showError]);
@@ -36166,7 +36266,7 @@ const BookingForm = ({
   // Handle success messages from form submission
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (data?.success) {
-      showSuccess((0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Appointment booked successfully!", "nobat"));
+      showSuccess((0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Appointment booked successfully!", "nobat"));
     }
   }, [data, showSuccess]);
   const handleDaySelect = day => {
@@ -36193,7 +36293,9 @@ const BookingForm = ({
       const result = await execute({
         body: requestBody
       });
-      if (result?.success) {
+      if (result?.success && result?.appointment) {
+        // Store appointment data to show ticket
+        setBookedAppointment(result.appointment);
         // Reset form
         setNotes("");
         setSelectedDay(null);
@@ -36205,43 +36307,53 @@ const BookingForm = ({
       console.error("Failed to book appointment:", err);
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+
+  // Show ticket if appointment was booked successfully
+  if (bookedAppointment) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      className: "appointment-booking-form",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_AppointmentTicket__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        appointment: bookedAppointment
+      })
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "appointment-booking-form",
-    children: [isVisible && message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+    children: [isVisible && message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
       status: status,
       isDismissible: true,
       onRemove: clearMessage,
       className: "booking-form__notice",
       children: message
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
       className: "booking-form",
       onSubmit: handleSubmit,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "form-row",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
           days: schedule.timeslots,
           selectedDay: selectedDay,
           selectedSlot: selectedSlot,
           onDaySelect: handleDaySelect,
           onSlotSelect: handleSlotSelect
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "form-row",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-          label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Additional Notes", "nobat"),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+          label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Additional Notes", "nobat"),
           value: notes,
           onChange: value => setNotes(value),
-          placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Any special requests or additional information", "nobat"),
+          placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Any special requests or additional information", "nobat"),
           rows: 3,
-          help: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Optional: Add any specific requirements or questions", "nobat")
+          help: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Optional: Add any specific requirements or questions", "nobat")
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "form-actions",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
           type: "submit",
           variant: "primary",
           disabled: !isFormValid || loading,
-          children: loading ? (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Booking...", "nobat") : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Book Appointment", "nobat")
+          children: loading ? (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Booking...", "nobat") : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Book Appointment", "nobat")
         })
       })]
     })]

@@ -216,6 +216,7 @@ function nobat_front_enqueue_scripts() {
 		'root' => esc_url_raw( rest_url() ),
 		'nonce' => wp_create_nonce( 'wp_rest' ),
 		'registerUrl' => wp_login_url( get_permalink() ) . '?action=register',
+		'reservationMessage' => get_option( 'nobat_success_message', '' ),
 	) );
 
 	// Enqueue styles
