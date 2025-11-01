@@ -9,7 +9,7 @@ import {
   Spinner,
   Modal,
   TextareaControl,
-} from "../../../components/ui";
+} from "../../../ui";
 
 /**
  * MyAppointments component - Shows user's appointments

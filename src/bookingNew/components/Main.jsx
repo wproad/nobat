@@ -9,8 +9,8 @@ import { useState } from "react";
 import MyAppointments from "./MyAppointments.jsx";
 import BookingView from "./BookingView.jsx";
 import LoginRequired from "./LoginRequired.jsx";
-import { useAuth } from "../contexts/AuthContext";
-import { __ } from "../../utils/i18n";
+import { useAuth } from "../contexts/AuthContext.js";
+import { __ } from "../../utils/i18n.js";
 
 const Main = () => {
   const { isLoggedIn, loginUrl, registerUrl } = useAuth();

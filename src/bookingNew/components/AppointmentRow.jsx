@@ -11,8 +11,8 @@ import { AppointmentInfo } from "./AppointmentInfo.jsx";
 import { CancellationModal } from "./CancellationModal.jsx";
 import { useAppointmentCancellation } from "../hooks/useAppointmentCancellation.js";
 import { userAllowedToCancelAppointment } from "../utils/appointmentHelpers.js";
-import { Notice } from "../../components/ui";
-import { __ } from "../../utils/i18n";
+import { Notice } from "../../ui/index.js";
+import { __ } from "../../utils/i18n.js";
 
 const AppointmentRow = ({ appointment, onCancelled }) => {
   if (!appointment) return null;

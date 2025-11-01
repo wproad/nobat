@@ -4,11 +4,11 @@
  * Parent component that handles schedule fetching, loading, and error states.
  * Renders the BookingForm child component with schedule data.
  */
-import { Card, CardBody, CardHeader } from "../../components/ui";
+import { Card, CardBody, CardHeader } from "../../ui";
 import BookingForm from "./BookingForm";
 import { __ } from "../../utils/i18n";
 import { useGet } from "../hooks/useFetch";
-import { Spinner } from "../../components/ui";
+import { Spinner } from "../../ui";
 
 const BookingView = () => {
   // Fetch active schedule using useGet

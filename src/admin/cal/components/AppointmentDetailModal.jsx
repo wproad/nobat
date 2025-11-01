@@ -1,6 +1,6 @@
 import { __ } from "../../../utils/i18n";
 import { useState } from "react";
-import { Button, Modal, TextareaControl } from "../../../components/ui";
+import { Button, Modal, TextareaControl } from "../../../ui";
 import apiFetch from "../../../utils/api-fetch";
 import {
   getStatusColor,

@@ -11,7 +11,7 @@ import {
   getStatusText,
   formatTimeRange,
 } from "../utils/displayHelpers.js";
-import { __ } from "../../utils/i18n";
+import { __ } from "../../utils/i18n.js";
 
 export function AppointmentInfo({ appointment }) {
   if (!appointment) return null;

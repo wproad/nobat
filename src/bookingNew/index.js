@@ -1,5 +1,5 @@
-import "./front.scss";
-import "../components/ui/ui-components.scss";
+import "./bookingNew.scss";
+import "../ui/ui-components.scss";
 import domReady from "../utils/dom-ready";
 import { createRoot } from "react-dom/client";
 import Main from "./components/Main";

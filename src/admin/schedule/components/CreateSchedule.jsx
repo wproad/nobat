@@ -4,7 +4,7 @@ import {
   ToggleControl,
   Button,
   Notice,
-} from "../../../components/ui";
+} from "../../../ui";
 import { __ } from "../../../utils/i18n";
 import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";

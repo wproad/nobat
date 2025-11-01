@@ -10,9 +10,9 @@ import { useGet } from "../hooks/useFetch.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
-import { Card, CardHeader, CardBody } from "../../components/ui/Card.jsx";
-import { Spinner, Notice } from "../../components/ui";
-import { __ } from "../../utils/i18n";
+import { Card, CardHeader, CardBody } from "../../ui/Card.jsx";
+import { Spinner, Notice } from "../../ui/index.js";
+import { __ } from "../../utils/i18n.js";
 
 // TODO: repalce Notic with useNotice hook
 

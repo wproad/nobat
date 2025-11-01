@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFetch } from "./useFetch.js";
 import { useNotice } from "./useNotice.js";
-import { __ } from "../../utils/i18n";
+import { __ } from "../../utils/i18n.js";
 
 /**
  * useAppointmentCancellation Hook

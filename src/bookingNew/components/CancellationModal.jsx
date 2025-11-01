@@ -12,9 +12,9 @@
  * @param {string} cancellationReason - Current value of cancellation reason input
  * @param {Function} onReasonChange - Function to call when reason input changes
  */
-import { Modal, TextareaControl, Button, Spinner } from "../../components/ui";
+import { Modal, TextareaControl, Button, Spinner } from "../../ui/index.js";
 import { formatTimeRange } from "../utils/displayHelpers.js";
-import { __ } from "../../utils/i18n";
+import { __ } from "../../utils/i18n.js";
 
 export function CancellationModal({
   appointment,
@@ -27,7 +27,7 @@ export function CancellationModal({
 }) {
   if (!appointment) return null;
   // TODO: sjhow taost on successful cancellation
-  
+
   return (
     <Modal
       title={__("Request Cancellation", "nobat")}
@@ -73,11 +73,7 @@ export function CancellationModal({
           justifyContent: "flex-end",
         }}
       >
-        <Button
-          variant="secondary"
-          onClick={onClose}
-          disabled={isCancelling}
-        >
+        <Button variant="secondary" onClick={onClose} disabled={isCancelling}>
           {__("Cancel", "nobat")}
         </Button>
         <Button
@@ -88,9 +84,7 @@ export function CancellationModal({
           isBusy={isCancelling}
         >
           {isCancelling ? (
-            <span
-              style={{ display: "flex", alignItems: "center", gap: "8px" }}
-            >
+            <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <Spinner />
               {__("Submitting...", "nobat")}
             </span>
@@ -102,4 +96,3 @@ export function CancellationModal({
     </Modal>
   );
 }
-

@@ -4,7 +4,7 @@
  * Form component for booking new appointments.
  */
 import { useState, useEffect } from "react";
-import { Button, TextareaControl, Notice } from "../../components/ui";
+import { Button, TextareaControl, Notice } from "../../ui";
 import TimeSlotSelector from "./TimeSlotSelector";
 import { __ } from "../../utils/i18n";
 import { useFetch } from "../hooks/useFetch";

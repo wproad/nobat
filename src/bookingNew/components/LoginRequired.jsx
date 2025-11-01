@@ -14,7 +14,7 @@ import {
   CardBody,
   CardHeader,
   Notice,
-} from "../../components/ui";
+} from "../../ui";
 
 const LoginRequired = ({ loginUrl, registerUrl }) => {
   return (

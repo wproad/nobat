@@ -35933,606 +35933,10 @@ if (false) // removed by dead control flow
 
 /***/ }),
 
-/***/ "./src/components/ui/Button.jsx":
-/*!**************************************!*\
-  !*** ./src/components/ui/Button.jsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Button: () => (/* binding */ Button)
-/* harmony export */ });
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function Button({
-  variant = 'secondary',
-  isDestructive = false,
-  isBusy = false,
-  disabled = false,
-  type = 'button',
-  onClick,
-  href,
-  className,
-  children,
-  style,
-  size,
-  ...props
-}) {
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('nobat-button', className, {
-    'nobat-button--primary': variant === 'primary',
-    'nobat-button--secondary': variant === 'secondary',
-    'nobat-button--tertiary': variant === 'tertiary',
-    'nobat-button--link': variant === 'link',
-    'nobat-button--destructive': isDestructive,
-    'nobat-button--busy': isBusy,
-    'nobat-button--compact': size === 'compact'
-  });
-  if (href) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-      href: href,
-      className: classes,
-      style: style,
-      ...props,
-      children: children
-    });
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-    type: type,
-    className: classes,
-    disabled: disabled || isBusy,
-    onClick: onClick,
-    style: style,
-    ...props,
-    children: children
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/Card.jsx":
-/*!************************************!*\
-  !*** ./src/components/ui/Card.jsx ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Card: () => (/* binding */ Card),
-/* harmony export */   CardBody: () => (/* binding */ CardBody),
-/* harmony export */   CardHeader: () => (/* binding */ CardHeader)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function Card({
-  children,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: `nobat-card ${className || ''}`,
-    ...props,
-    children: children
-  });
-}
-function CardHeader({
-  children,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: `nobat-card__header ${className || ''}`,
-    ...props,
-    children: children
-  });
-}
-function CardBody({
-  children,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: `nobat-card__body ${className || ''}`,
-    ...props,
-    children: children
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/Modal.jsx":
-/*!*************************************!*\
-  !*** ./src/components/ui/Modal.jsx ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Modal: () => (/* binding */ Modal)
-/* harmony export */ });
-/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/components/dialog/dialog.js");
-/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/components/transitions/transition.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-function Modal({
-  title,
-  isOpen = false,
-  onRequestClose,
-  children,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition, {
-    show: isOpen,
-    as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog, {
-      as: "div",
-      className: `nobat-modal ${className || ''}`,
-      onClose: onRequestClose,
-      ...props,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition.Child, {
-        as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
-        enter: "nobat-modal-overlay--enter",
-        enterFrom: "nobat-modal-overlay--enter-from",
-        enterTo: "nobat-modal-overlay--enter-to",
-        leave: "nobat-modal-overlay--leave",
-        leaveFrom: "nobat-modal-overlay--leave-from",
-        leaveTo: "nobat-modal-overlay--leave-to",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "nobat-modal__overlay",
-          "aria-hidden": "true"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "nobat-modal__wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "nobat-modal__container",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition.Child, {
-            as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
-            enter: "nobat-modal-content--enter",
-            enterFrom: "nobat-modal-content--enter-from",
-            enterTo: "nobat-modal-content--enter-to",
-            leave: "nobat-modal-content--leave",
-            leaveFrom: "nobat-modal-content--leave-from",
-            leaveTo: "nobat-modal-content--leave-to",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog.Panel, {
-              className: "nobat-modal__panel",
-              children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                className: "nobat-modal__header",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog.Title, {
-                  as: "h2",
-                  className: "nobat-modal__title",
-                  children: title
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                  className: "nobat-modal__close",
-                  onClick: onRequestClose,
-                  "aria-label": "Close",
-                  children: "\xD7"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                className: "nobat-modal__body",
-                children: children
-              })]
-            })
-          })
-        })
-      })]
-    })
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/Notice.jsx":
-/*!**************************************!*\
-  !*** ./src/components/ui/Notice.jsx ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Notice: () => (/* binding */ Notice)
-/* harmony export */ });
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function Notice({
-  status = 'info',
-  children,
-  isDismissible = false,
-  onRemove,
-  className,
-  ...props
-}) {
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('nobat-notice', className, {
-    'nobat-notice--success': status === 'success',
-    'nobat-notice--error': status === 'error',
-    'nobat-notice--warning': status === 'warning',
-    'nobat-notice--info': status === 'info',
-    'nobat-notice--dismissible': isDismissible
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: classes,
-    ...props,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "nobat-notice__content",
-      children: children
-    }), isDismissible && onRemove && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-      className: "nobat-notice__dismiss",
-      onClick: onRemove,
-      "aria-label": "Dismiss",
-      children: "\xD7"
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/PanelBody.jsx":
-/*!*****************************************!*\
-  !*** ./src/components/ui/PanelBody.jsx ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanelBody: () => (/* binding */ PanelBody)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function PanelBody({
-  children,
-  title,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: `nobat-panel-body ${className || ''}`,
-    ...props,
-    children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
-      className: "nobat-panel-body__title",
-      children: title
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      className: "nobat-panel-body__content",
-      children: children
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/PanelRow.jsx":
+/***/ "./src/bookingNew/bookingNew.scss":
 /*!****************************************!*\
-  !*** ./src/components/ui/PanelRow.jsx ***!
+  !*** ./src/bookingNew/bookingNew.scss ***!
   \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanelRow: () => (/* binding */ PanelRow)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function PanelRow({
-  children,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    className: `nobat-panel-row ${className || ''}`,
-    ...props,
-    children: children
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/SelectControl.jsx":
-/*!*********************************************!*\
-  !*** ./src/components/ui/SelectControl.jsx ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   SelectControl: () => (/* binding */ SelectControl)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function SelectControl({
-  label,
-  value,
-  options = [],
-  onChange,
-  help,
-  disabled,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: `nobat-select-control ${className || ''}`,
-    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-      className: "nobat-select-control__label",
-      children: label
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("select", {
-      className: "nobat-select-control__select",
-      value: value,
-      onChange: e => onChange(e.target.value),
-      disabled: disabled,
-      ...props,
-      children: options.map(option => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", {
-        value: option.value,
-        disabled: option.disabled,
-        children: option.label
-      }, option.value))
-    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      className: "nobat-select-control__help",
-      children: help
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/Spinner.jsx":
-/*!***************************************!*\
-  !*** ./src/components/ui/Spinner.jsx ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Spinner: () => (/* binding */ Spinner)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function Spinner({
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-    className: `nobat-spinner ${className || ''}`,
-    ...props,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-      className: "nobat-spinner__svg",
-      viewBox: "0 0 50 50",
-      xmlns: "http://www.w3.org/2000/svg",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", {
-        className: "nobat-spinner__circle",
-        cx: "25",
-        cy: "25",
-        r: "20",
-        fill: "none",
-        strokeWidth: "5"
-      })
-    })
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/TextControl.jsx":
-/*!*******************************************!*\
-  !*** ./src/components/ui/TextControl.jsx ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   TextControl: () => (/* binding */ TextControl)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function TextControl({
-  label,
-  value,
-  onChange,
-  type = 'text',
-  placeholder,
-  help,
-  disabled,
-  className,
-  min,
-  max,
-  step,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: `nobat-text-control ${className || ''}`,
-    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-      className: "nobat-text-control__label",
-      children: label
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-      type: type,
-      className: "nobat-text-control__input",
-      value: value,
-      onChange: e => onChange(e.target.value),
-      placeholder: placeholder,
-      disabled: disabled,
-      min: min,
-      max: max,
-      step: step,
-      ...props
-    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      className: "nobat-text-control__help",
-      children: help
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/TextareaControl.jsx":
-/*!***********************************************!*\
-  !*** ./src/components/ui/TextareaControl.jsx ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   TextareaControl: () => (/* binding */ TextareaControl)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function TextareaControl({
-  label,
-  value,
-  onChange,
-  placeholder,
-  help,
-  disabled,
-  rows = 4,
-  className,
-  style,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: `nobat-textarea-control ${className || ''}`,
-    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-      className: "nobat-textarea-control__label",
-      children: label
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", {
-      className: "nobat-textarea-control__textarea",
-      value: value,
-      onChange: e => onChange(e.target.value),
-      placeholder: placeholder,
-      disabled: disabled,
-      rows: rows,
-      style: style,
-      ...props
-    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      className: "nobat-textarea-control__help",
-      children: help
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/ToggleControl.jsx":
-/*!*********************************************!*\
-  !*** ./src/components/ui/ToggleControl.jsx ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ToggleControl: () => (/* binding */ ToggleControl)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function ToggleControl({
-  label,
-  checked,
-  onChange,
-  help,
-  disabled,
-  className,
-  ...props
-}) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-    className: `nobat-toggle-control ${className || ''}`,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      className: "nobat-toggle-control__wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
-        className: "nobat-toggle-control__label",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
-          type: "checkbox",
-          className: "nobat-toggle-control__input",
-          checked: checked,
-          onChange: e => onChange(e.target.checked),
-          disabled: disabled,
-          ...props
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-          className: "nobat-toggle-control__track",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-            className: "nobat-toggle-control__thumb"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-          className: "nobat-toggle-control__text",
-          children: label
-        })]
-      })
-    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      className: "nobat-toggle-control__help",
-      children: help
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/ui/index.js":
-/*!************************************!*\
-  !*** ./src/components/ui/index.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Button: () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_0__.Button),
-/* harmony export */   Card: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.Card),
-/* harmony export */   CardBody: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.CardBody),
-/* harmony export */   CardHeader: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.CardHeader),
-/* harmony export */   Modal: () => (/* reexport safe */ _Modal__WEBPACK_IMPORTED_MODULE_8__.Modal),
-/* harmony export */   Notice: () => (/* reexport safe */ _Notice__WEBPACK_IMPORTED_MODULE_6__.Notice),
-/* harmony export */   PanelBody: () => (/* reexport safe */ _PanelBody__WEBPACK_IMPORTED_MODULE_10__.PanelBody),
-/* harmony export */   PanelRow: () => (/* reexport safe */ _PanelRow__WEBPACK_IMPORTED_MODULE_9__.PanelRow),
-/* harmony export */   SelectControl: () => (/* reexport safe */ _SelectControl__WEBPACK_IMPORTED_MODULE_3__.SelectControl),
-/* harmony export */   Spinner: () => (/* reexport safe */ _Spinner__WEBPACK_IMPORTED_MODULE_7__.Spinner),
-/* harmony export */   TextControl: () => (/* reexport safe */ _TextControl__WEBPACK_IMPORTED_MODULE_1__.TextControl),
-/* harmony export */   TextareaControl: () => (/* reexport safe */ _TextareaControl__WEBPACK_IMPORTED_MODULE_2__.TextareaControl),
-/* harmony export */   ToggleControl: () => (/* reexport safe */ _ToggleControl__WEBPACK_IMPORTED_MODULE_4__.ToggleControl)
-/* harmony export */ });
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Button */ "./src/components/ui/Button.jsx");
-/* harmony import */ var _TextControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextControl */ "./src/components/ui/TextControl.jsx");
-/* harmony import */ var _TextareaControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TextareaControl */ "./src/components/ui/TextareaControl.jsx");
-/* harmony import */ var _SelectControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SelectControl */ "./src/components/ui/SelectControl.jsx");
-/* harmony import */ var _ToggleControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ToggleControl */ "./src/components/ui/ToggleControl.jsx");
-/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Card */ "./src/components/ui/Card.jsx");
-/* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Notice */ "./src/components/ui/Notice.jsx");
-/* harmony import */ var _Spinner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Spinner */ "./src/components/ui/Spinner.jsx");
-/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Modal */ "./src/components/ui/Modal.jsx");
-/* harmony import */ var _PanelRow__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PanelRow */ "./src/components/ui/PanelRow.jsx");
-/* harmony import */ var _PanelBody__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./PanelBody */ "./src/components/ui/PanelBody.jsx");
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/components/ui/ui-components.scss":
-/*!**********************************************!*\
-  !*** ./src/components/ui/ui-components.scss ***!
-  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36542,10 +35946,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/front/components/AppointmentInfo.jsx":
-/*!**************************************************!*\
-  !*** ./src/front/components/AppointmentInfo.jsx ***!
-  \**************************************************/
+/***/ "./src/bookingNew/components/AppointmentInfo.jsx":
+/*!*******************************************************!*\
+  !*** ./src/bookingNew/components/AppointmentInfo.jsx ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36553,8 +35957,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AppointmentInfo: () => (/* binding */ AppointmentInfo)
 /* harmony export */ });
-/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/bookingNew/utils/displayHelpers.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * AppointmentInfo Component
@@ -36596,12 +36000,12 @@ function AppointmentInfo({
     }), appointment.note && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "appointment-note",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Note:", "nobat")
+        children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_1__.__)("Note:", "nobat")
       }), " ", appointment.note]
     }), appointment.cancellation_reason && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "cancellation-reason",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Cancellation Reason:", "nobat")
+        children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_1__.__)("Cancellation Reason:", "nobat")
       }), " ", appointment.cancellation_reason]
     })]
   });
@@ -36609,10 +36013,10 @@ function AppointmentInfo({
 
 /***/ }),
 
-/***/ "./src/front/components/AppointmentRow.jsx":
-/*!*************************************************!*\
-  !*** ./src/front/components/AppointmentRow.jsx ***!
-  \*************************************************/
+/***/ "./src/bookingNew/components/AppointmentRow.jsx":
+/*!******************************************************!*\
+  !*** ./src/bookingNew/components/AppointmentRow.jsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36620,12 +36024,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AppointmentInfo_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppointmentInfo.jsx */ "./src/front/components/AppointmentInfo.jsx");
-/* harmony import */ var _CancellationModal_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CancellationModal.jsx */ "./src/front/components/CancellationModal.jsx");
-/* harmony import */ var _hooks_useAppointmentCancellation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useAppointmentCancellation.js */ "./src/front/hooks/useAppointmentCancellation.js");
-/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _AppointmentInfo_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppointmentInfo.jsx */ "./src/bookingNew/components/AppointmentInfo.jsx");
+/* harmony import */ var _CancellationModal_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CancellationModal.jsx */ "./src/bookingNew/components/CancellationModal.jsx");
+/* harmony import */ var _hooks_useAppointmentCancellation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useAppointmentCancellation.js */ "./src/bookingNew/hooks/useAppointmentCancellation.js");
+/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/bookingNew/utils/appointmentHelpers.js");
+/* harmony import */ var _ui_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/index.js */ "./src/ui/index.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * AppointmentRow Component
@@ -36672,9 +36076,9 @@ const AppointmentRow = ({
         className: "btn-cancel",
         onClick: openModal,
         disabled: isCancelling,
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Cancel Appointment", "nobat")
+        children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_5__.__)("Cancel Appointment", "nobat")
       })
-    }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_4__.Notice, {
+    }), isVisible && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_4__.Notice, {
       status: status,
       onRemove: clearMessage,
       isDismissible: true,
@@ -36694,10 +36098,10 @@ const AppointmentRow = ({
 
 /***/ }),
 
-/***/ "./src/front/components/BookingForm.jsx":
-/*!**********************************************!*\
-  !*** ./src/front/components/BookingForm.jsx ***!
-  \**********************************************/
+/***/ "./src/bookingNew/components/BookingForm.jsx":
+/*!***************************************************!*\
+  !*** ./src/bookingNew/components/BookingForm.jsx ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36707,11 +36111,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotSelector */ "./src/front/components/TimeSlotSelector.jsx");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui */ "./src/ui/index.js");
+/* harmony import */ var _TimeSlotSelector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotSelector */ "./src/bookingNew/components/TimeSlotSelector.jsx");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/front/hooks/useFetch.js");
-/* harmony import */ var _hooks_useNotice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useNotice */ "./src/front/hooks/useNotice.js");
+/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/bookingNew/hooks/useFetch.js");
+/* harmony import */ var _hooks_useNotice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useNotice */ "./src/bookingNew/hooks/useNotice.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * BookingForm Component
@@ -36803,7 +36207,7 @@ const BookingForm = ({
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "appointment-booking-form",
-    children: [isVisible && message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+    children: [isVisible && message && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
       status: status,
       isDismissible: true,
       onRemove: clearMessage,
@@ -36823,7 +36227,7 @@ const BookingForm = ({
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "form-row",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
           label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Additional Notes", "nobat"),
           value: notes,
           onChange: value => setNotes(value),
@@ -36833,7 +36237,7 @@ const BookingForm = ({
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "form-actions",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
           type: "submit",
           variant: "primary",
           disabled: !isFormValid || loading,
@@ -36847,10 +36251,10 @@ const BookingForm = ({
 
 /***/ }),
 
-/***/ "./src/front/components/BookingView.jsx":
-/*!**********************************************!*\
-  !*** ./src/front/components/BookingView.jsx ***!
-  \**********************************************/
+/***/ "./src/bookingNew/components/BookingView.jsx":
+/*!***************************************************!*\
+  !*** ./src/bookingNew/components/BookingView.jsx ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36858,10 +36262,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _BookingForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingForm */ "./src/front/components/BookingForm.jsx");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui */ "./src/ui/index.js");
+/* harmony import */ var _BookingForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingForm */ "./src/bookingNew/components/BookingForm.jsx");
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/front/hooks/useFetch.js");
+/* harmony import */ var _hooks_useFetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useFetch */ "./src/bookingNew/hooks/useFetch.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * BookingView Component
@@ -36891,7 +36295,7 @@ const BookingView = () => {
     // Show loading state
     if (scheduleLoading) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_0__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Loading schedule...", "nobat")
         })]
       });
@@ -36912,12 +36316,12 @@ const BookingView = () => {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "appointment-booking-form",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Card, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.CardHeader, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_ui__WEBPACK_IMPORTED_MODULE_0__.Card, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_0__.CardHeader, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
           children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Book an Appointment", "nobat")
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.CardBody, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_0__.CardBody, {
         children: renderCardBody()
       })]
     })
@@ -36927,10 +36331,10 @@ const BookingView = () => {
 
 /***/ }),
 
-/***/ "./src/front/components/CancellationModal.jsx":
-/*!****************************************************!*\
-  !*** ./src/front/components/CancellationModal.jsx ***!
-  \****************************************************/
+/***/ "./src/bookingNew/components/CancellationModal.jsx":
+/*!*********************************************************!*\
+  !*** ./src/bookingNew/components/CancellationModal.jsx ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36938,9 +36342,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CancellationModal: () => (/* binding */ CancellationModal)
 /* harmony export */ });
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/front/utils/displayHelpers.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _ui_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/index.js */ "./src/ui/index.js");
+/* harmony import */ var _utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers.js */ "./src/bookingNew/utils/displayHelpers.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * CancellationModal Component
@@ -36972,12 +36376,12 @@ function CancellationModal({
   if (!appointment) return null;
   // TODO: sjhow taost on successful cancellation
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Modal, {
-    title: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Request Cancellation", "nobat"),
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_ui_index_js__WEBPACK_IMPORTED_MODULE_0__.Modal, {
+    title: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Request Cancellation", "nobat"),
     isOpen: isOpen,
     onRequestClose: onClose,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-      children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Are you sure you want to request cancellation for this appointment?", "nobat")
+      children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Are you sure you want to request cancellation for this appointment?", "nobat")
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "cancellation-appointment-info",
       style: {
@@ -36986,18 +36390,18 @@ function CancellationModal({
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Date:", "nobat")
+          children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Date:", "nobat")
         }), " ", appointment.slot_date_jalali || appointment.slot_date]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Time:", "nobat")
+          children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Time:", "nobat")
         }), " ", (0,_utils_displayHelpers_js__WEBPACK_IMPORTED_MODULE_1__.formatTimeRange)(appointment.start_time, appointment.end_time)]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.TextareaControl, {
-      label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Reason for cancellation (optional)", "nobat"),
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_0__.TextareaControl, {
+      label: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Reason for cancellation (optional)", "nobat"),
       value: cancellationReason,
       onChange: onReasonChange,
-      placeholder: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Please provide a reason for cancellation", "nobat"),
+      placeholder: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Please provide a reason for cancellation", "nobat"),
       rows: 4,
       disabled: isCancelling
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -37008,12 +36412,12 @@ function CancellationModal({
         gap: "8px",
         justifyContent: "flex-end"
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Button, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_0__.Button, {
         variant: "secondary",
         onClick: onClose,
         disabled: isCancelling,
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Cancel", "nobat")
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Button, {
+        children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Cancel", "nobat")
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_0__.Button, {
         variant: "primary",
         isDestructive: true,
         onClick: onConfirm,
@@ -37025,8 +36429,8 @@ function CancellationModal({
             alignItems: "center",
             gap: "8px"
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_0__.Spinner, {}), (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Submitting...", "nobat")]
-        }) : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Submit Request", "nobat")
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_0__.Spinner, {}), (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Submitting...", "nobat")]
+        }) : (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_2__.__)("Submit Request", "nobat")
       })]
     })]
   });
@@ -37034,10 +36438,10 @@ function CancellationModal({
 
 /***/ }),
 
-/***/ "./src/front/components/DayButton.jsx":
-/*!********************************************!*\
-  !*** ./src/front/components/DayButton.jsx ***!
-  \********************************************/
+/***/ "./src/bookingNew/components/DayButton.jsx":
+/*!*************************************************!*\
+  !*** ./src/bookingNew/components/DayButton.jsx ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37085,10 +36489,10 @@ const DayButton = ({
 
 /***/ }),
 
-/***/ "./src/front/components/EmptyAppointmentsState.jsx":
-/*!*********************************************************!*\
-  !*** ./src/front/components/EmptyAppointmentsState.jsx ***!
-  \*********************************************************/
+/***/ "./src/bookingNew/components/EmptyAppointmentsState.jsx":
+/*!**************************************************************!*\
+  !*** ./src/bookingNew/components/EmptyAppointmentsState.jsx ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37265,10 +36669,10 @@ const EmptyAppointmentsState = () => {
 
 /***/ }),
 
-/***/ "./src/front/components/LoginRequired.jsx":
-/*!************************************************!*\
-  !*** ./src/front/components/LoginRequired.jsx ***!
-  \************************************************/
+/***/ "./src/bookingNew/components/LoginRequired.jsx":
+/*!*****************************************************!*\
+  !*** ./src/bookingNew/components/LoginRequired.jsx ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37277,7 +36681,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui */ "./src/ui/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * LoginRequired Component
@@ -37299,13 +36703,13 @@ const LoginRequired = ({
     className: "main-container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "auth-prompt",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Card, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.CardHeader, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_ui__WEBPACK_IMPORTED_MODULE_1__.Card, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.CardHeader, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
             children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Access Required", "nobat")
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.CardBody, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_ui__WEBPACK_IMPORTED_MODULE_1__.CardBody, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Notice, {
             status: "warning",
             isDismissible: false,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -37316,11 +36720,11 @@ const LoginRequired = ({
             style: {
               marginTop: "16px"
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
               variant: "primary",
               href: loginUrl,
               children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Log In", "nobat")
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_ui__WEBPACK_IMPORTED_MODULE_1__.Button, {
               variant: "secondary",
               href: registerUrl,
               style: {
@@ -37338,10 +36742,10 @@ const LoginRequired = ({
 
 /***/ }),
 
-/***/ "./src/front/components/Main.jsx":
-/*!***************************************!*\
-  !*** ./src/front/components/Main.jsx ***!
-  \***************************************/
+/***/ "./src/bookingNew/components/Main.jsx":
+/*!********************************************!*\
+  !*** ./src/bookingNew/components/Main.jsx ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37351,11 +36755,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyAppointments.jsx */ "./src/front/components/MyAppointments.jsx");
-/* harmony import */ var _BookingView_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookingView.jsx */ "./src/front/components/BookingView.jsx");
-/* harmony import */ var _LoginRequired_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginRequired.jsx */ "./src/front/components/LoginRequired.jsx");
-/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/AuthContext */ "./src/front/contexts/AuthContext.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _MyAppointments_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyAppointments.jsx */ "./src/bookingNew/components/MyAppointments.jsx");
+/* harmony import */ var _BookingView_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BookingView.jsx */ "./src/bookingNew/components/BookingView.jsx");
+/* harmony import */ var _LoginRequired_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginRequired.jsx */ "./src/bookingNew/components/LoginRequired.jsx");
+/* harmony import */ var _contexts_AuthContext_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts/AuthContext.js */ "./src/bookingNew/contexts/AuthContext.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * Main Component
@@ -37376,13 +36780,13 @@ const Main = () => {
     isLoggedIn,
     loginUrl,
     registerUrl
-  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__.useAuth)();
+  } = (0,_contexts_AuthContext_js__WEBPACK_IMPORTED_MODULE_4__.useAuth)();
   const [currentView, setCurrentView] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("appointments");
   const toggleView = () => {
     setCurrentView(currentView === "appointments" ? "booking" : "appointments");
   };
   const getButtonText = () => {
-    return currentView === "appointments" ? (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Book New Appointment", "nobat") : (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("View My Appointments", "nobat");
+    return currentView === "appointments" ? (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_5__.__)("Book New Appointment", "nobat") : (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_5__.__)("View My Appointments", "nobat");
   };
 
   // Check if user is logged in
@@ -37411,10 +36815,10 @@ const Main = () => {
 
 /***/ }),
 
-/***/ "./src/front/components/MyAppointments.jsx":
-/*!*************************************************!*\
-  !*** ./src/front/components/MyAppointments.jsx ***!
-  \*************************************************/
+/***/ "./src/bookingNew/components/MyAppointments.jsx":
+/*!******************************************************!*\
+  !*** ./src/bookingNew/components/MyAppointments.jsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37424,13 +36828,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hooks/useFetch.js */ "./src/front/hooks/useFetch.js");
-/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/front/utils/appointmentHelpers.js");
-/* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/front/components/AppointmentRow.jsx");
-/* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/front/components/EmptyAppointmentsState.jsx");
-/* harmony import */ var _components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/ui/Card.jsx */ "./src/components/ui/Card.jsx");
-/* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/ui */ "./src/components/ui/index.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _hooks_useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hooks/useFetch.js */ "./src/bookingNew/hooks/useFetch.js");
+/* harmony import */ var _utils_appointmentHelpers_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/appointmentHelpers.js */ "./src/bookingNew/utils/appointmentHelpers.js");
+/* harmony import */ var _AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppointmentRow.jsx */ "./src/bookingNew/components/AppointmentRow.jsx");
+/* harmony import */ var _EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EmptyAppointmentsState.jsx */ "./src/bookingNew/components/EmptyAppointmentsState.jsx");
+/* harmony import */ var _ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/Card.jsx */ "./src/ui/Card.jsx");
+/* harmony import */ var _ui_index_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/index.js */ "./src/ui/index.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * MyAppointments Component
@@ -37467,28 +36871,28 @@ const MyAppointments = () => {
   const hasAnyAppointments = totalAppointments > 0;
   const tabs = [{
     id: "upcoming",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Upcoming", "nobat"),
+    label: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("Upcoming", "nobat"),
     count: categorizedAppointments.upcoming.length
   }, {
     id: "cancelled",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Cancelled", "nobat"),
+    label: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("Cancelled", "nobat"),
     count: categorizedAppointments.cancelled.length
   }, {
     id: "past",
-    label: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Past", "nobat"),
+    label: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("Past", "nobat"),
     count: categorizedAppointments.past.length
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.Card, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.Card, {
     className: "my-appointments",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
       className: "appointments-header",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
-        children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("My Appointments", "nobat")
+        children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("My Appointments", "nobat")
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "header-actions",
         children: totalAppointments > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("span", {
           className: "appointments-count",
-          children: [totalAppointments, " ", (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("appointments", "nobat")]
+          children: [totalAppointments, " ", (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("appointments", "nobat")]
         })
       })]
     }), hasAnyAppointments && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
@@ -37504,21 +36908,21 @@ const MyAppointments = () => {
           children: tab.count
         })]
       }, tab.id))
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_ui_Card_jsx__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
       className: "tab-content",
       children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
         className: "loading-appointments",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_6__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
-          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Loading appointments...", "nobat")
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_6__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+          children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("Loading appointments...", "nobat")
         })]
-      }) : error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_ui__WEBPACK_IMPORTED_MODULE_6__.Notice, {
+      }) : error ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_ui_index_js__WEBPACK_IMPORTED_MODULE_6__.Notice, {
         status: "error",
         isDismissible: false,
         children: error
       }) : !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : currentAppointments.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "empty-tab-message",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
-          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Nothing here!", "nobat")
+          children: (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_7__.__)("Nothing here!", "nobat")
         })
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "appointments-list",
@@ -37537,10 +36941,10 @@ const MyAppointments = () => {
 
 /***/ }),
 
-/***/ "./src/front/components/TimeSlotButton.jsx":
-/*!*************************************************!*\
-  !*** ./src/front/components/TimeSlotButton.jsx ***!
-  \*************************************************/
+/***/ "./src/bookingNew/components/TimeSlotButton.jsx":
+/*!******************************************************!*\
+  !*** ./src/bookingNew/components/TimeSlotButton.jsx ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37549,7 +36953,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers */ "./src/front/utils/displayHelpers.js");
+/* harmony import */ var _utils_displayHelpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/displayHelpers */ "./src/bookingNew/utils/displayHelpers.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * TimeSlotButton Component
@@ -37618,10 +37022,10 @@ const TimeSlotButton = ({
 
 /***/ }),
 
-/***/ "./src/front/components/TimeSlotSelector.jsx":
-/*!***************************************************!*\
-  !*** ./src/front/components/TimeSlotSelector.jsx ***!
-  \***************************************************/
+/***/ "./src/bookingNew/components/TimeSlotSelector.jsx":
+/*!********************************************************!*\
+  !*** ./src/bookingNew/components/TimeSlotSelector.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37630,8 +37034,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
-/* harmony import */ var _DayButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayButton */ "./src/front/components/DayButton.jsx");
-/* harmony import */ var _TimeSlotButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotButton */ "./src/front/components/TimeSlotButton.jsx");
+/* harmony import */ var _DayButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DayButton */ "./src/bookingNew/components/DayButton.jsx");
+/* harmony import */ var _TimeSlotButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSlotButton */ "./src/bookingNew/components/TimeSlotButton.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  * TimeSlotSelector Component
@@ -37696,10 +37100,10 @@ const TimeSlotSelector = ({
 
 /***/ }),
 
-/***/ "./src/front/contexts/AuthContext.js":
-/*!*******************************************!*\
-  !*** ./src/front/contexts/AuthContext.js ***!
-  \*******************************************/
+/***/ "./src/bookingNew/contexts/AuthContext.js":
+/*!************************************************!*\
+  !*** ./src/bookingNew/contexts/AuthContext.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37761,23 +37165,10 @@ const useAuth = () => {
 
 /***/ }),
 
-/***/ "./src/front/front.scss":
-/*!******************************!*\
-  !*** ./src/front/front.scss ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/front/hooks/useAppointmentCancellation.js":
-/*!*******************************************************!*\
-  !*** ./src/front/hooks/useAppointmentCancellation.js ***!
-  \*******************************************************/
+/***/ "./src/bookingNew/hooks/useAppointmentCancellation.js":
+/*!************************************************************!*\
+  !*** ./src/bookingNew/hooks/useAppointmentCancellation.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37787,9 +37178,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useFetch.js */ "./src/front/hooks/useFetch.js");
-/* harmony import */ var _useNotice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useNotice.js */ "./src/front/hooks/useNotice.js");
-/* harmony import */ var _utils_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n */ "./src/utils/i18n.js");
+/* harmony import */ var _useFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useFetch.js */ "./src/bookingNew/hooks/useFetch.js");
+/* harmony import */ var _useNotice_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useNotice.js */ "./src/bookingNew/hooks/useNotice.js");
+/* harmony import */ var _utils_i18n_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/i18n.js */ "./src/utils/i18n.js");
 
 
 
@@ -37847,7 +37238,7 @@ function useAppointmentCancellation(appointmentId, onSuccess) {
         }
       });
       if (response?.success) {
-        showSuccess(response.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Cancellation request submitted. An admin will review your request.", "nobat"));
+        showSuccess(response.message || (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_3__.__)("Cancellation request submitted. An admin will review your request.", "nobat"));
 
         // Close modal and reset form
         setShowModal(false);
@@ -37859,7 +37250,7 @@ function useAppointmentCancellation(appointmentId, onSuccess) {
         }
       }
     } catch (error) {
-      const errorMessage = error.message || error.data?.message || (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Failed to request cancellation.", "nobat");
+      const errorMessage = error.message || error.data?.message || (0,_utils_i18n_js__WEBPACK_IMPORTED_MODULE_3__.__)("Failed to request cancellation.", "nobat");
       showError(errorMessage);
     } finally {
       setIsCancelling(false);
@@ -37882,10 +37273,10 @@ function useAppointmentCancellation(appointmentId, onSuccess) {
 
 /***/ }),
 
-/***/ "./src/front/hooks/useFetch.js":
-/*!*************************************!*\
-  !*** ./src/front/hooks/useFetch.js ***!
-  \*************************************/
+/***/ "./src/bookingNew/hooks/useFetch.js":
+/*!******************************************!*\
+  !*** ./src/bookingNew/hooks/useFetch.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38063,10 +37454,10 @@ const useDelete = url => {
 
 /***/ }),
 
-/***/ "./src/front/hooks/useNotice.js":
-/*!**************************************!*\
-  !*** ./src/front/hooks/useNotice.js ***!
-  \**************************************/
+/***/ "./src/bookingNew/hooks/useNotice.js":
+/*!*******************************************!*\
+  !*** ./src/bookingNew/hooks/useNotice.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38136,10 +37527,10 @@ function useNotice() {
 
 /***/ }),
 
-/***/ "./src/front/utils/appointmentHelpers.js":
-/*!***********************************************!*\
-  !*** ./src/front/utils/appointmentHelpers.js ***!
-  \***********************************************/
+/***/ "./src/bookingNew/utils/appointmentHelpers.js":
+/*!****************************************************!*\
+  !*** ./src/bookingNew/utils/appointmentHelpers.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38215,10 +37606,10 @@ const categorizeAppointments = appointments => {
 
 /***/ }),
 
-/***/ "./src/front/utils/displayHelpers.js":
-/*!*******************************************!*\
-  !*** ./src/front/utils/displayHelpers.js ***!
-  \*******************************************/
+/***/ "./src/bookingNew/utils/displayHelpers.js":
+/*!************************************************!*\
+  !*** ./src/bookingNew/utils/displayHelpers.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38306,6 +37697,615 @@ const getUserDisplayName = user => {
   if (!user) return "";
   return user.user_name || user.name || user.display_name || "";
 };
+
+/***/ }),
+
+/***/ "./src/ui/Button.jsx":
+/*!***************************!*\
+  !*** ./src/ui/Button.jsx ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Button: () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function Button({
+  variant = 'secondary',
+  isDestructive = false,
+  isBusy = false,
+  disabled = false,
+  type = 'button',
+  onClick,
+  href,
+  className,
+  children,
+  style,
+  size,
+  ...props
+}) {
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('nobat-button', className, {
+    'nobat-button--primary': variant === 'primary',
+    'nobat-button--secondary': variant === 'secondary',
+    'nobat-button--tertiary': variant === 'tertiary',
+    'nobat-button--link': variant === 'link',
+    'nobat-button--destructive': isDestructive,
+    'nobat-button--busy': isBusy,
+    'nobat-button--compact': size === 'compact'
+  });
+  if (href) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+      href: href,
+      className: classes,
+      style: style,
+      ...props,
+      children: children
+    });
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+    type: type,
+    className: classes,
+    disabled: disabled || isBusy,
+    onClick: onClick,
+    style: style,
+    ...props,
+    children: children
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/Card.jsx":
+/*!*************************!*\
+  !*** ./src/ui/Card.jsx ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Card: () => (/* binding */ Card),
+/* harmony export */   CardBody: () => (/* binding */ CardBody),
+/* harmony export */   CardHeader: () => (/* binding */ CardHeader)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function Card({
+  children,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: `nobat-card ${className || ''}`,
+    ...props,
+    children: children
+  });
+}
+function CardHeader({
+  children,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: `nobat-card__header ${className || ''}`,
+    ...props,
+    children: children
+  });
+}
+function CardBody({
+  children,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: `nobat-card__body ${className || ''}`,
+    ...props,
+    children: children
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/Modal.jsx":
+/*!**************************!*\
+  !*** ./src/ui/Modal.jsx ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Modal: () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/components/dialog/dialog.js");
+/* harmony import */ var _headlessui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headlessui/react */ "./node_modules/@headlessui/react/dist/components/transitions/transition.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function Modal({
+  title,
+  isOpen = false,
+  onRequestClose,
+  children,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition, {
+    show: isOpen,
+    as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog, {
+      as: "div",
+      className: `nobat-modal ${className || ''}`,
+      onClose: onRequestClose,
+      ...props,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition.Child, {
+        as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
+        enter: "nobat-modal-overlay--enter",
+        enterFrom: "nobat-modal-overlay--enter-from",
+        enterTo: "nobat-modal-overlay--enter-to",
+        leave: "nobat-modal-overlay--leave",
+        leaveFrom: "nobat-modal-overlay--leave-from",
+        leaveTo: "nobat-modal-overlay--leave-to",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "nobat-modal__overlay",
+          "aria-hidden": "true"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "nobat-modal__wrapper",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "nobat-modal__container",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_1__.Transition.Child, {
+            as: react__WEBPACK_IMPORTED_MODULE_2__.Fragment,
+            enter: "nobat-modal-content--enter",
+            enterFrom: "nobat-modal-content--enter-from",
+            enterTo: "nobat-modal-content--enter-to",
+            leave: "nobat-modal-content--leave",
+            leaveFrom: "nobat-modal-content--leave-from",
+            leaveTo: "nobat-modal-content--leave-to",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog.Panel, {
+              className: "nobat-modal__panel",
+              children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                className: "nobat-modal__header",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_headlessui_react__WEBPACK_IMPORTED_MODULE_0__.Dialog.Title, {
+                  as: "h2",
+                  className: "nobat-modal__title",
+                  children: title
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  className: "nobat-modal__close",
+                  onClick: onRequestClose,
+                  "aria-label": "Close",
+                  children: "\xD7"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "nobat-modal__body",
+                children: children
+              })]
+            })
+          })
+        })
+      })]
+    })
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/Notice.jsx":
+/*!***************************!*\
+  !*** ./src/ui/Notice.jsx ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Notice: () => (/* binding */ Notice)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function Notice({
+  status = 'info',
+  children,
+  isDismissible = false,
+  onRemove,
+  className,
+  ...props
+}) {
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_0___default()('nobat-notice', className, {
+    'nobat-notice--success': status === 'success',
+    'nobat-notice--error': status === 'error',
+    'nobat-notice--warning': status === 'warning',
+    'nobat-notice--info': status === 'info',
+    'nobat-notice--dismissible': isDismissible
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: classes,
+    ...props,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "nobat-notice__content",
+      children: children
+    }), isDismissible && onRemove && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+      className: "nobat-notice__dismiss",
+      onClick: onRemove,
+      "aria-label": "Dismiss",
+      children: "\xD7"
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/PanelBody.jsx":
+/*!******************************!*\
+  !*** ./src/ui/PanelBody.jsx ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PanelBody: () => (/* binding */ PanelBody)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function PanelBody({
+  children,
+  title,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: `nobat-panel-body ${className || ''}`,
+    ...props,
+    children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      className: "nobat-panel-body__title",
+      children: title
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "nobat-panel-body__content",
+      children: children
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/PanelRow.jsx":
+/*!*****************************!*\
+  !*** ./src/ui/PanelRow.jsx ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PanelRow: () => (/* binding */ PanelRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function PanelRow({
+  children,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: `nobat-panel-row ${className || ''}`,
+    ...props,
+    children: children
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/SelectControl.jsx":
+/*!**********************************!*\
+  !*** ./src/ui/SelectControl.jsx ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SelectControl: () => (/* binding */ SelectControl)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function SelectControl({
+  label,
+  value,
+  options = [],
+  onChange,
+  help,
+  disabled,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: `nobat-select-control ${className || ''}`,
+    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+      className: "nobat-select-control__label",
+      children: label
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("select", {
+      className: "nobat-select-control__select",
+      value: value,
+      onChange: e => onChange(e.target.value),
+      disabled: disabled,
+      ...props,
+      children: options.map(option => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", {
+        value: option.value,
+        disabled: option.disabled,
+        children: option.label
+      }, option.value))
+    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "nobat-select-control__help",
+      children: help
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/Spinner.jsx":
+/*!****************************!*\
+  !*** ./src/ui/Spinner.jsx ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Spinner: () => (/* binding */ Spinner)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function Spinner({
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+    className: `nobat-spinner ${className || ''}`,
+    ...props,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
+      className: "nobat-spinner__svg",
+      viewBox: "0 0 50 50",
+      xmlns: "http://www.w3.org/2000/svg",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", {
+        className: "nobat-spinner__circle",
+        cx: "25",
+        cy: "25",
+        r: "20",
+        fill: "none",
+        strokeWidth: "5"
+      })
+    })
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/TextControl.jsx":
+/*!********************************!*\
+  !*** ./src/ui/TextControl.jsx ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextControl: () => (/* binding */ TextControl)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function TextControl({
+  label,
+  value,
+  onChange,
+  type = 'text',
+  placeholder,
+  help,
+  disabled,
+  className,
+  min,
+  max,
+  step,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: `nobat-text-control ${className || ''}`,
+    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+      className: "nobat-text-control__label",
+      children: label
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+      type: type,
+      className: "nobat-text-control__input",
+      value: value,
+      onChange: e => onChange(e.target.value),
+      placeholder: placeholder,
+      disabled: disabled,
+      min: min,
+      max: max,
+      step: step,
+      ...props
+    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "nobat-text-control__help",
+      children: help
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/TextareaControl.jsx":
+/*!************************************!*\
+  !*** ./src/ui/TextareaControl.jsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextareaControl: () => (/* binding */ TextareaControl)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function TextareaControl({
+  label,
+  value,
+  onChange,
+  placeholder,
+  help,
+  disabled,
+  rows = 4,
+  className,
+  style,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: `nobat-textarea-control ${className || ''}`,
+    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+      className: "nobat-textarea-control__label",
+      children: label
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", {
+      className: "nobat-textarea-control__textarea",
+      value: value,
+      onChange: e => onChange(e.target.value),
+      placeholder: placeholder,
+      disabled: disabled,
+      rows: rows,
+      style: style,
+      ...props
+    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "nobat-textarea-control__help",
+      children: help
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/ToggleControl.jsx":
+/*!**********************************!*\
+  !*** ./src/ui/ToggleControl.jsx ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ToggleControl: () => (/* binding */ ToggleControl)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+function ToggleControl({
+  label,
+  checked,
+  onChange,
+  help,
+  disabled,
+  className,
+  ...props
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    className: `nobat-toggle-control ${className || ''}`,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: "nobat-toggle-control__wrapper",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
+        className: "nobat-toggle-control__label",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+          type: "checkbox",
+          className: "nobat-toggle-control__input",
+          checked: checked,
+          onChange: e => onChange(e.target.checked),
+          disabled: disabled,
+          ...props
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+          className: "nobat-toggle-control__track",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+            className: "nobat-toggle-control__thumb"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+          className: "nobat-toggle-control__text",
+          children: label
+        })]
+      })
+    }), help && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      className: "nobat-toggle-control__help",
+      children: help
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/ui/index.js":
+/*!*************************!*\
+  !*** ./src/ui/index.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Button: () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_0__.Button),
+/* harmony export */   Card: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.Card),
+/* harmony export */   CardBody: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.CardBody),
+/* harmony export */   CardHeader: () => (/* reexport safe */ _Card__WEBPACK_IMPORTED_MODULE_5__.CardHeader),
+/* harmony export */   Modal: () => (/* reexport safe */ _Modal__WEBPACK_IMPORTED_MODULE_8__.Modal),
+/* harmony export */   Notice: () => (/* reexport safe */ _Notice__WEBPACK_IMPORTED_MODULE_6__.Notice),
+/* harmony export */   PanelBody: () => (/* reexport safe */ _PanelBody__WEBPACK_IMPORTED_MODULE_10__.PanelBody),
+/* harmony export */   PanelRow: () => (/* reexport safe */ _PanelRow__WEBPACK_IMPORTED_MODULE_9__.PanelRow),
+/* harmony export */   SelectControl: () => (/* reexport safe */ _SelectControl__WEBPACK_IMPORTED_MODULE_3__.SelectControl),
+/* harmony export */   Spinner: () => (/* reexport safe */ _Spinner__WEBPACK_IMPORTED_MODULE_7__.Spinner),
+/* harmony export */   TextControl: () => (/* reexport safe */ _TextControl__WEBPACK_IMPORTED_MODULE_1__.TextControl),
+/* harmony export */   TextareaControl: () => (/* reexport safe */ _TextareaControl__WEBPACK_IMPORTED_MODULE_2__.TextareaControl),
+/* harmony export */   ToggleControl: () => (/* reexport safe */ _ToggleControl__WEBPACK_IMPORTED_MODULE_4__.ToggleControl)
+/* harmony export */ });
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Button */ "./src/ui/Button.jsx");
+/* harmony import */ var _TextControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextControl */ "./src/ui/TextControl.jsx");
+/* harmony import */ var _TextareaControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TextareaControl */ "./src/ui/TextareaControl.jsx");
+/* harmony import */ var _SelectControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SelectControl */ "./src/ui/SelectControl.jsx");
+/* harmony import */ var _ToggleControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ToggleControl */ "./src/ui/ToggleControl.jsx");
+/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Card */ "./src/ui/Card.jsx");
+/* harmony import */ var _Notice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Notice */ "./src/ui/Notice.jsx");
+/* harmony import */ var _Spinner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Spinner */ "./src/ui/Spinner.jsx");
+/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Modal */ "./src/ui/Modal.jsx");
+/* harmony import */ var _PanelRow__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./PanelRow */ "./src/ui/PanelRow.jsx");
+/* harmony import */ var _PanelBody__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./PanelBody */ "./src/ui/PanelBody.jsx");
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/ui/ui-components.scss":
+/*!***********************************!*\
+  !*** ./src/ui/ui-components.scss ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -38520,16 +38520,16 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-/*!****************************!*\
-  !*** ./src/front/index.js ***!
-  \****************************/
+/*!*********************************!*\
+  !*** ./src/bookingNew/index.js ***!
+  \*********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _front_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./front.scss */ "./src/front/front.scss");
-/* harmony import */ var _components_ui_ui_components_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ui/ui-components.scss */ "./src/components/ui/ui-components.scss");
+/* harmony import */ var _bookingNew_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bookingNew.scss */ "./src/bookingNew/bookingNew.scss");
+/* harmony import */ var _ui_ui_components_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ui/ui-components.scss */ "./src/ui/ui-components.scss");
 /* harmony import */ var _utils_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/dom-ready */ "./src/utils/dom-ready.js");
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./src/front/components/Main.jsx");
-/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contexts/AuthContext */ "./src/front/contexts/AuthContext.js");
+/* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./src/bookingNew/components/Main.jsx");
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contexts/AuthContext */ "./src/bookingNew/contexts/AuthContext.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -38551,4 +38551,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=front.js.map
+//# sourceMappingURL=bookingNew.js.map
