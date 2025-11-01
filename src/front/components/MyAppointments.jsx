@@ -5,7 +5,7 @@
  * Shows appointment count, handles tab navigation, and renders either the appointments list
  * or an empty state when no appointments exist.
  */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGet } from "../hooks/useFetch.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
@@ -93,6 +93,10 @@ const MyAppointments = () => {
           </Notice>
         ) : !hasAnyAppointments ? (
           <EmptyAppointmentsState />
+        ) : currentAppointments.length === 0 ? (
+          <div className="empty-tab-message">
+            <span>{__("Nothing here!", "nobat")}</span>
+          </div>
         ) : (
           <div className="appointments-list">
             {currentAppointments.map((appointment) => (

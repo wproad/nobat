@@ -251,6 +251,13 @@
   display: flex;
   align-items: center;
 }
+.my-appointments .empty-tab-message {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--color-secondary-400);
+  font-size: 1.2rem;
+  font-style: italic;
+}
 .my-appointments .appointments-list {
   display: flex;
   flex-direction: column;
@@ -572,8 +579,9 @@
 }
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button .slot-time-display {
   display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
   text-align: center;
 }
 .appointment-booking-form .appointment-selector .time-slots-container .time-slots-grid .time-slot-button .slot-time-display .time-start {

@@ -37515,7 +37515,12 @@ const MyAppointments = () => {
         status: "error",
         isDismissible: false,
         children: error
-      }) : !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      }) : !hasAnyAppointments ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_EmptyAppointmentsState_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}) : currentAppointments.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        className: "empty-tab-message",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+          children: (0,_utils_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Nothing here!", "nobat")
+        })
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "appointments-list",
         children: currentAppointments.map(appointment => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_AppointmentRow_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
           appointment: appointment,
