@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   TextControl,
   ToggleControl,
   Button,
   Notice,
+  JalaliDatePickerInput,
 } from "../../../ui";
 import { __ } from "../../../utils/i18n";
 import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
-import { JalaliDatePickerInput } from "./JalaliDatePicker";
 import { useSchedule } from "../../../hooks/useSchedule";
 
 function CreateSchedule() {

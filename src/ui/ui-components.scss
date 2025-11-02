@@ -109,9 +109,9 @@
   }
 
   &--primary {
-    background: var(--color-neutral-900, #171717);
-    border-color: var(--color-neutral-900, #171717);
-    color: var(--color-neutral-50, #fafafa);
+    background: var(--color-neutral-900, #171717) !important;
+    border-color: var(--color-neutral-900, #171717) !important;
+    color: var(--color-neutral-50, #fafafa) !important;
 
     &:hover:not(:disabled) {
       background: var(--color-neutral-800, #262626);
@@ -156,13 +156,13 @@
   }
 
   &--destructive {
-    border-color: var(--color-error-600, #db2719);
-    color: var(--color-neutral-50, #fafafa);
-    background: var(--color-primary-0, #db2719);
+    border-color: var(--color-error-600, #db2719) !important;
+    color: var(--color-neutral-50, #fafafa) !important;
+    background: var(--color-error-600, #db2719) !important;
 
     &:hover:not(:disabled) {
-      background: var(--color-error-700, #b71112);
-      border-color: var(--color-error-700, #b71112);
+      background: var(--color-error-700, #b71112) !important;
+      border-color: var(--color-error-700, #b71112) !important;
     }
   }
 
@@ -703,5 +703,53 @@
     > *:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+/* Jalali Date Picker Component */
+.nobat-jalali-datepicker {
+  margin-bottom: 16px;
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-neutral-900, #171717);
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-neutral-300, #d4d4d4);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    background: var(--color-neutral-50, #fafafa);
+    color: var(--color-neutral-900, #171717);
+    font-family: inherit;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-neutral-600, #525252);
+      box-shadow: 0 0 0 3px rgba(82, 82, 82, 0.1);
+    }
+
+    &::placeholder {
+      color: var(--color-neutral-400, #a3a3a3);
+    }
+
+    &:disabled {
+      background: var(--color-neutral-100, #f5f5f5);
+      color: var(--color-neutral-500, #737373);
+      cursor: not-allowed;
+    }
+  }
+
+  &__help {
+    margin: 0.375rem 0 0;
+    font-size: 0.75rem;
+    color: var(--color-neutral-600, #525252);
   }
 }

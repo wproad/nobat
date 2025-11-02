@@ -9,17 +9,17 @@ import { __ } from "../../utils/i18n.js";
 export const getStatusColor = (status) => {
   switch (status) {
     case "pending":
-      return "var(--color-warning-500)";
+      return "var(--color-warning-300)";
     case "confirmed":
-      return "var(--color-success-500)";
+      return "var(--color-success-300)";
     case "completed":
-      return "var(--color-success-600)";
+      return "var(--color-success-300)";
     case "cancelled":
-      return "var(--color-error-500)";
+      return "var(--color-error-300)";
     case "cancel_requested":
-      return "var(--color-secondary-500)";
+      return "var(--color-secondary-300)";
     default:
-      return "var(--color-secondary-400)";
+      return "var(--color-secondary-300)";
   }
 };
 

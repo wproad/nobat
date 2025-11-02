@@ -35,6 +35,7 @@ export function CancellationModal({
       title={__("Request Cancellation", "nobat")}
       isOpen={isOpen}
       onRequestClose={onClose}
+      className="cancellation-modal"
     >
       <p>
         {__(
@@ -43,10 +44,7 @@ export function CancellationModal({
         )}
       </p>
 
-      <div
-        className="cancellation-appointment-info"
-        style={{ marginTop: "16px", marginBottom: "16px" }}
-      >
+      <div className="cancellation-appointment-info">
         <p>
           <strong>{__("Date:", "nobat")}</strong>{" "}
           {appointment.slot_date_jalali || appointment.slot_date}
@@ -66,30 +64,22 @@ export function CancellationModal({
         disabled={isCancelling}
       />
 
-      <div
-        className="modal-actions"
-        style={{
-          marginTop: "16px",
-          display: "flex",
-          gap: "8px",
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className="modal-actions">
         <Button variant="secondary" onClick={onClose} disabled={isCancelling}>
           {__("Cancel", "nobat")}
         </Button>
         <Button
           variant="primary"
-          isDestructive
+          // isDestructive
           onClick={onConfirm}
           disabled={isCancelling}
           isBusy={isCancelling}
         >
           {isCancelling ? (
-            <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <>
               <Spinner />
               {__("Submitting...", "nobat")}
-            </span>
+            </>
           ) : (
             __("Submit Request", "nobat")
           )}
