@@ -6,7 +6,7 @@ function JalaliDatePickerInput({
   value,
   onChange,
   placeholder,
-  className = "components-base-control__input",
+  className = "nobat-jalali-datepicker__input",
   minDate = "today",
   autoReadOnlyInput = true,
   format = "YYYY/MM/DD",
@@ -56,9 +56,9 @@ function JalaliDatePickerInput({
   ]);
 
   return (
-    <div className="components-base-control">
+    <div className="nobat-jalali-datepicker">
       {label && (
-        <label htmlFor={id} className="components-base-control__label">
+        <label htmlFor={id} className="nobat-jalali-datepicker__label">
           {label}
         </label>
       )}

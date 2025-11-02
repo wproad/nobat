@@ -28,7 +28,7 @@ class AppointmentsListTable extends \WP_List_Table {
 	 *
 	 * @var array
 	 */
-	private $statuses = [ 'pending', 'confirmed', 'cancelled', 'completed' ];
+	private $statuses = [ 'pending', 'confirmed', 'cancelled', 'completed', 'cancel_requested' ];
 
 	/**
 	 * Constructor
@@ -90,12 +90,13 @@ class AppointmentsListTable extends \WP_List_Table {
 	public function column_status( $item ) {
 		$status = esc_html( $item['status'] );
 
-		$colors = array(
-			'pending'   => '#f0ad4e',
-			'confirmed' => '#5cb85c',
-			'completed' => '#337ab7',
-			'cancelled' => '#d9534f',
-		);
+	$colors = array(
+		'pending'   => '#f0ad4e',
+		'confirmed' => '#5cb85c',
+		'completed' => '#337ab7',
+		'cancelled' => '#d9534f',
+		'cancel_requested' => '#e67e22',
+	);
 		$color = isset( $colors[ $status ] ) ? $colors[ $status ] : '#777';
 
 		return sprintf(

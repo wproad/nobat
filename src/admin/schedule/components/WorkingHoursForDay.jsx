@@ -2,9 +2,8 @@ import {
   PanelBody,
   PanelRow,
   Button,
-} from "../../../components/ui";
+} from "../../../ui";
 import { __ } from "../../../utils/i18n";
-import { useState } from "react";
 import { weekdayLabels } from "../../../lib/constants";
 
 export function WorkingHoursForDay({ day, hours, onAdd, onRemove, onUpdate }) {

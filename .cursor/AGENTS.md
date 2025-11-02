@@ -11,3 +11,4 @@
 - Use React hooks and functional components for frontend
 - Follow PSR-4 autoloading standards for PHP code
 - Only lint and format the modified sections of the code; do not reformat or alter unchanged code.
+- for css put it inside corresponding .scss file, keep degin modern vibrant and minimal, use provided color variables

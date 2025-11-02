@@ -8,7 +8,7 @@ import {
   CardBody,
   CardHeader,
   Spinner,
-} from "../../../components/ui";
+} from "../../../ui";
 import { useBookingForm } from "../hooks";
 import TimeSlotSelector from "./TimeSlotSelector";
 import { useAvailableSchedule } from "../hooks";

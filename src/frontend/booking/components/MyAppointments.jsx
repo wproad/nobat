@@ -9,7 +9,7 @@ import {
   Spinner,
   Modal,
   TextareaControl,
-} from "../../../components/ui";
+} from "../../../ui";
 
 /**
  * MyAppointments component - Shows user's appointments
@@ -81,7 +81,8 @@ const MyAppointments = ({ shouldLoad = true, onBookNew, onAppointmentsLoaded }) 
       setLoading(false);
     }
   };
-
+  console.log(appointments);
+  
   const handleRequestCancellation = (appointment) => {
     setSelectedAppointment(appointment);
     setCancellationReason("");

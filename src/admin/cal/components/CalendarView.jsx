@@ -1,6 +1,6 @@
 import { __ } from "../../../utils/i18n";
 import { useState } from "react";
-import { Modal, Button } from "../../../components/ui";
+import { Modal, Button } from "../../../ui";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarGrid } from "./CalendarGrid";
 

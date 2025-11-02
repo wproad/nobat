@@ -8,6 +8,29 @@ if ( ! defined('ABSPATH') ) {
 }
 
 /**
+ * Get current user data for frontend
+ *
+ * @return array User data.
+ */
+function nobat_get_current_user_data() {
+	if ( ! is_user_logged_in() ) {
+		return array(
+			'id' => 0,
+			'name' => '',
+			'email' => '',
+		);
+	}
+
+	$current_user = wp_get_current_user();
+
+	return array(
+		'id' => $current_user->ID,
+		'name' => $current_user->display_name,
+		'email' => $current_user->user_email,
+	);
+}
+
+/**
  * Enqueues the necessary styles and script only on the admin page
  */
 function nobat_admin_enqueue_scripts( $admin_page ) {
@@ -131,3 +154,72 @@ function nobat_frontend_enqueue_scripts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'nobat_frontend_enqueue_scripts' );
+
+/**
+ * Enqueues bookingNew.js for pages that need it
+ * Checks if page has the nobat_new shortcode
+ */
+function nobat_front_enqueue_scripts() {
+	global $post;
+	
+	// Check if we need to enqueue bookingNew.js
+	$should_enqueue = false;
+	
+	// Check if we're on a page/post
+	if ( $post ) {
+		// Check if post content contains 'nobat-new' id or has the shortcode
+		if ( strpos( $post->post_content, 'nobat-new' ) !== false || 
+			 has_shortcode( $post->post_content, 'nobat_new' ) ) {
+			$should_enqueue = true;
+		}
+	}
+	
+	if ( ! $should_enqueue ) {
+		return;
+	}
+
+	// Use file modification time as version for cache busting
+	$js_file = NOBAT_PLUGIN_DIR . 'build/bookingNew.js';
+	$css_file = NOBAT_PLUGIN_DIR . 'build/bookingNew.css';
+	$version = file_exists( $js_file ) ? filemtime( $js_file ) : NOBAT_VERSION;
+
+	// Enqueue our standalone React bundle (no WordPress dependencies)
+	wp_enqueue_script(
+		'nobat-front-script',
+		NOBAT_PLUGIN_URL . 'build/bookingNew.js',
+		array(), // No dependencies - everything is bundled
+		$version,
+		array(
+			'in_footer' => true,
+		)
+	);
+
+	// Load JS translations for the front handle
+	wp_set_script_translations( 'nobat-front-script', 'nobat', NOBAT_PLUGIN_DIR . 'languages' );
+
+	// Localize script with REST API nonce and user data
+	// wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
+	// 	'root' => esc_url_raw( rest_url() ),
+	// 	'nonce' => wp_create_nonce( 'wp_rest' ),
+	// ) );
+
+	// Add authentication data for front section
+	wp_localize_script( 'nobat-front-script', 'wpApiSettings', array(
+		'isLoggedIn' => is_user_logged_in(),
+		'currentUser' => nobat_get_current_user_data(),
+		'loginUrl' => wp_login_url( get_permalink() ),
+		'root' => esc_url_raw( rest_url() ),
+		'nonce' => wp_create_nonce( 'wp_rest' ),
+		'registerUrl' => wp_login_url( get_permalink() ) . '?action=register',
+		'reservationMessage' => get_option( 'nobat_success_message', '' ),
+	) );
+
+	// Enqueue styles
+	wp_enqueue_style(
+		'nobat-front-style',
+		NOBAT_PLUGIN_URL . 'build/bookingNew.css',
+		array(), // No dependencies - everything is bundled
+		$version,
+	);
+}
+add_action( 'wp_enqueue_scripts', 'nobat_front_enqueue_scripts' );

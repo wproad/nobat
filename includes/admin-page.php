@@ -146,7 +146,7 @@ function appointment_list_page_callback() {
 
 	class Appointment_List_Table extends WP_List_Table {
 
-		private $statuses = [ 'pending', 'confirmed', 'cancelled', 'completed' ];
+		private $statuses = [ 'pending', 'confirmed', 'cancelled', 'completed', 'cancel_requested' ];
 
 		public function __construct() {
 			parent::__construct( [
@@ -372,13 +372,14 @@ function appointment_list_page_callback() {
 		public function column_status( $item ) {
 			$status = esc_html( $item['status'] );
 
-			// TODO: shared colors in php and js
-			$colors = array(
-				'pending'   => '#f0ad4e',
-				'confirmed' => '#5cb85c',
-				'completed' => '#337ab7',
-				'cancelled' => '#d9534f',
-			);
+		// TODO: shared colors in php and js
+		$colors = array(
+			'pending'   => '#f0ad4e',
+			'confirmed' => '#5cb85c',
+			'completed' => '#337ab7',
+			'cancelled' => '#d9534f',
+			'cancel_requested' => '#e67e22',
+		);
 			$color = isset( $colors[ $status ] ) ? $colors[ $status ] : '#777';
 
 			return sprintf(

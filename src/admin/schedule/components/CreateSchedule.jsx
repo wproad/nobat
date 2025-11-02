@@ -4,13 +4,12 @@ import {
   ToggleControl,
   Button,
   Notice,
-} from "../../../components/ui";
+  JalaliDatePickerInput,
+} from "../../../ui";
 import { __ } from "../../../utils/i18n";
 import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
-import { JalaliDatePickerInput } from "./JalaliDatePicker";
 import { useSchedule } from "../../../hooks/useSchedule";
-import { jalaliToGregorian } from "../../../lib/dateConverter";
 
 function CreateSchedule() {
   const [name, setName] = useState("");
@@ -24,28 +23,16 @@ function CreateSchedule() {
   const buffer = 0;
 
   const handleSubmit = () => {
-    // Convert Jalali dates to Gregorian before sending to API
-    const startDate = jalaliToGregorian(startDay);
-    const endDate = jalaliToGregorian(endDay);
-    
-    if (!startDate || !endDate) {
-      setNotice({
-        status: "error",
-        message: __("Invalid date format. Please check your dates.", "nobat"),
-      });
-      return;
-    }
-    
     const payload = {
       name,
       isActive,
-      startDate,  // Gregorian format YYYY-MM-DD
-      endDate,    // Gregorian format YYYY-MM-DD
+      startDate: startDay, // Jalali format YYYY/MM/DD - will be converted to Gregorian in API
+      endDate: endDay, // Jalali format YYYY/MM/DD - will be converted to Gregorian in API
       meetingDuration,
       buffer,
       weeklyHours,
     };
-    
+
     saveSchedule(payload)
       .then(() => {
         // Redirect to all schedules page after successful creation
@@ -64,7 +51,10 @@ function CreateSchedule() {
           📅 {__("Create New Schedule", "nobat")}
         </h1>
         <p className="schedule-subtitle">
-          {__("Set up your availability schedule with working hours and time slots", "nobat")}
+          {__(
+            "Set up your availability schedule with working hours and time slots",
+            "nobat"
+          )}
         </p>
       </div>
 
@@ -98,7 +88,10 @@ function CreateSchedule() {
                 value={name}
                 onChange={setName}
                 placeholder={__("e.g., Summer 2024 Schedule", "nobat")}
-                help={__("A descriptive name to identify this schedule", "nobat")}
+                help={__(
+                  "A descriptive name to identify this schedule",
+                  "nobat"
+                )}
               />
             </div>
           </div>
@@ -109,9 +102,16 @@ function CreateSchedule() {
                 label={__("Activate Schedule", "nobat")}
                 checked={isActive}
                 onChange={setIsActive}
-                help={isActive 
-                  ? __("This schedule is active and visible to users", "nobat")
-                  : __("This schedule is inactive and hidden from users", "nobat")
+                help={
+                  isActive
+                    ? __(
+                        "This schedule is active and visible to users",
+                        "nobat"
+                      )
+                    : __(
+                        "This schedule is inactive and hidden from users",
+                        "nobat"
+                      )
                 }
               />
             </div>
@@ -134,6 +134,7 @@ function CreateSchedule() {
         <div className="section-content">
           <div className="form-row two-columns">
             <div className="form-field">
+              {/* TODO: show georgian date picker when parsi-date is not available */}
               <JalaliDatePickerInput
                 id="start-day"
                 label={__("Start Date", "nobat")}
@@ -191,7 +192,10 @@ function CreateSchedule() {
             {__("Weekly Working Hours", "nobat")}
           </h2>
           <p className="section-description">
-            {__("Define your available hours for each day of the week", "nobat")}
+            {__(
+              "Define your available hours for each day of the week",
+              "nobat"
+            )}
           </p>
         </div>
 
@@ -206,14 +210,14 @@ function CreateSchedule() {
 
       {/* Action Buttons */}
       <div className="schedule-actions">
-        <Button 
+        <Button
           variant="secondary"
           href="/wp-admin/admin.php?page=nobat-schedules"
         >
           {__("Cancel", "nobat")}
         </Button>
-        <Button 
-          variant="primary" 
+        <Button
+          variant="primary"
           onClick={handleSubmit}
           disabled={!name || !startDay || !endDay}
         >

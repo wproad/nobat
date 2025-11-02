@@ -277,9 +277,9 @@
 
       .time-slot-content {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        gap: 2px;
+        // gap: 0.5rem;
         line-height: 1;
 
         .time-start {

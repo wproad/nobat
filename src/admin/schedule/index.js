@@ -1,5 +1,5 @@
 import "./schedule.scss";
-import "../../components/ui/ui-components.scss";
+import "../../ui/ui-components.scss";
 import domReady from "../../utils/dom-ready";
 import { createRoot } from "react-dom/client";
 import { CreateSchedule } from "./components";

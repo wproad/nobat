@@ -1,0 +1,206 @@
+import { useState, useEffect, useCallback, useMemo } from "react";
+
+/**
+ * Custom hook for making HTTP requests with loading states and error handling
+ * WordPress-compatible with nonce, JSON handling, and proper error extraction.
+ * Supports both automatic (immediate) and manual execution modes.
+ * Automatically stringifies request bodies for POST/PUT/PATCH requests.
+ * Handles WordPress error responses with code and data extraction.
+ *
+ * @param {string|Function} url - URL string or function that returns URL dynamically
+ * @param {Object} options - Fetch options (method, headers, body, etc.)
+ * @param {Object} config - Configuration object
+ * @param {boolean} config.immediate - If true (default), fetch on mount. If false, fetch manually via execute
+ * @returns {Object} - { data, loading, error, refetch, execute }
+ */
+export const useFetch = (url, options = {}, { immediate = true } = {}) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // TODO: remove throw errors of console
+  // Get WordPress API settings from localized script
+  const getApiSettings = useCallback(() => {
+    return window.wpApiSettings || {};
+  }, []);
+
+  // Create a stable executeRequest using useCallback
+  const executeRequest = useCallback(
+    async (urlToFetch, requestOptions = {}) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Get WordPress API settings
+        const apiSettings = getApiSettings();
+
+        // Normalize the root URL and path to avoid double slashes
+        let root = apiSettings.root || "/wp-json";
+        root = root.endsWith("/") ? root.slice(0, -1) : root; // Remove trailing slash
+        const normalizedPath = urlToFetch.startsWith("/")
+          ? urlToFetch
+          : `/${urlToFetch}`;
+        const normalizedUrl = `${root}${normalizedPath}`;
+
+        // Build fetch options with WordPress headers
+        const fetchOptions = {
+          ...options,
+          ...requestOptions,
+          headers: {
+            "Content-Type": "application/json",
+            "X-WP-Nonce": apiSettings.nonce || "",
+            ...options.headers,
+            ...requestOptions.headers,
+          },
+          credentials: "same-origin",
+        };
+
+        // Handle body for POST/PUT/PATCH requests
+        if (fetchOptions.body && typeof fetchOptions.body === "object") {
+          fetchOptions.body = JSON.stringify(fetchOptions.body);
+        }
+
+        const response = await fetch(normalizedUrl, fetchOptions);
+
+        if (!response.ok) {
+          // Handle WordPress error responses
+          const errorData = await response.json().catch(() => ({}));
+          const error = new Error(
+            errorData.message || `HTTP Error ${response.status}`
+          );
+          error.code = errorData.code || response.status;
+          error.data = errorData.data || null;
+          throw error;
+        }
+
+        // Handle empty responses
+        const contentType = response.headers.get("content-type");
+        let responseData;
+
+        if (contentType && contentType.includes("application/json")) {
+          responseData = await response.json();
+        } else {
+          responseData = await response.text();
+        }
+
+        setData(responseData);
+        setError(null);
+        return responseData;
+      } catch (err) {
+        // Enhanced error handling for network errors
+        if (err.message === "Failed to fetch") {
+          err.message = "Network error. Please check your connection.";
+        }
+        // Ensure we store an Error object, not just a string
+        const errorObj =
+          err instanceof Error
+            ? err
+            : new Error(err.message || "An error occurred");
+        setError(errorObj);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [getApiSettings, options]
+  );
+
+  // Refetch function
+  const refetch = useCallback(
+    (newOptions = {}) => {
+      const urlToFetch = typeof url === "function" ? url() : url;
+      return executeRequest(urlToFetch, newOptions);
+    },
+    [url, executeRequest]
+  );
+
+  // Execute function for manual triggering (when immediate = false)
+  const execute = useCallback(
+    (requestOptions = {}) => {
+      const urlToFetch = typeof url === "function" ? url() : url;
+      if (!urlToFetch) return;
+      return executeRequest(urlToFetch, requestOptions);
+    },
+    [url, executeRequest]
+  );
+
+  // Main effect - only runs when immediate is true
+  useEffect(() => {
+    if (!immediate) return;
+
+    console.log("useFetch: ", url);
+
+    const urlToFetch = typeof url === "function" ? url() : url;
+    if (!urlToFetch) return;
+
+    executeRequest(urlToFetch);
+  }, [url, executeRequest, immediate]);
+
+  return {
+    data,
+    loading,
+    error,
+    refetch,
+    execute,
+  };
+};
+
+/**
+ * Hook for GET requests
+ * Convenience wrapper around useFetch for GET requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
+ */
+export const useGet = (url) => {
+  const getOptions = useMemo(() => ({ method: "GET" }), []);
+  return useFetch(url, getOptions);
+};
+
+/**
+ * Hook for POST requests
+ * Convenience wrapper around useFetch for POST requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
+ */
+export const usePost = (url, body) => {
+  const postOptions = useMemo(
+    () => ({
+      method: "POST",
+      body: body, // Will be JSON stringified automatically
+    }),
+    [body]
+  );
+  return useFetch(url, postOptions);
+};
+
+/**
+ * Hook for PUT requests
+ * Convenience wrapper around useFetch for PUT requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @param {Object} body - Request body object (will be JSON stringified automatically)
+ * @returns {Object} - { data, loading, error, refetch, execute }
+ */
+export const usePut = (url, body) => {
+  const putOptions = useMemo(
+    () => ({
+      method: "PUT",
+      body: body, // Will be JSON stringified automatically
+    }),
+    [body]
+  );
+  return useFetch(url, putOptions);
+};
+
+/**
+ * Hook for DELETE requests
+ * Convenience wrapper around useFetch for DELETE requests
+ * @param {string|Function} url - URL string or function that returns URL
+ * @returns {Object} - { data, loading, error, refetch, execute }
+ */
+export const useDelete = (url) => {
+  const deleteOptions = useMemo(() => ({ method: "DELETE" }), []);
+  return useFetch(url, deleteOptions);
+};
+
+export default useFetch;

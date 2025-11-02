@@ -9,4 +9,5 @@ export { Spinner } from './Spinner';
 export { Modal } from './Modal';
 export { PanelRow } from './PanelRow';
 export { PanelBody } from './PanelBody';
+export { JalaliDatePickerInput } from './JalaliDatePicker';
 

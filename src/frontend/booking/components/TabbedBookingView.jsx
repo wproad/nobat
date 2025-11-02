@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { __ } from "../../../utils/i18n";
-import { Button } from "../../../components/ui";
+import { Button } from "../../../ui";
 import { BookingForm } from "./BookingForm";
 import { MyAppointments } from "./MyAppointments";
 

@@ -1,0 +1,111 @@
+/**
+ * MyAppointments Component
+ *
+ * Displays user appointments with categorized tabs (upcoming, cancelled, past).
+ * Features tab-based navigation with appointment counts, loading states with Spinner,
+ * error handling, and empty state messaging.
+ * Automatically fetches appointments on mount and supports manual refetch.
+ * Only shows tabs when appointments exist for better UX.
+ *
+ * @todo Replace Notice component with useNotice hook
+ */
+import { useState } from "react";
+import { useGet } from "../hooks/useFetch.js";
+import { categorizeAppointments } from "../utils/appointmentHelpers.js";
+import AppointmentRow from "./AppointmentRow.jsx";
+import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
+import { Spinner, Notice } from "../../ui/index.js";
+import { __ } from "../../utils/i18n.js";
+
+// TODO: repalce Notic with useNotice hook
+
+const MyAppointments = () => {
+  const [activeTab, setActiveTab] = useState("upcoming");
+
+  // Fetch appointments from API
+  const {
+    data: appointmentsData,
+    loading,
+    error,
+    refetch,
+  } = useGet("/nobat/v2/appointments");
+
+  const appointments = appointmentsData?.appointments || [];
+  const categorizedAppointments = categorizeAppointments(appointments);
+  const currentAppointments = categorizedAppointments[activeTab];
+  const totalAppointments = appointments.length;
+  const hasAnyAppointments = totalAppointments > 0;
+
+  const tabs = [
+    {
+      id: "upcoming",
+      label: __("Upcoming", "nobat"),
+      count: categorizedAppointments.upcoming.length,
+    },
+    {
+      id: "cancelled",
+      label: __("Cancelled", "nobat"),
+      count: categorizedAppointments.cancelled.length,
+    },
+    {
+      id: "past",
+      label: __("Past", "nobat"),
+      count: categorizedAppointments.past.length,
+    },
+  ];
+
+  return (
+    <div className="my-appointments">
+      {/* Tab Navigation */}
+      {hasAnyAppointments && (
+        <div className="appointments-tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <span className="tab-label">{tab.label}</span>
+              {tab.count > 0 && <span className="tab-count">{tab.count}</span>}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Tab Content */}
+      <div className="tab-content">
+        {loading ? (
+          <div className="loading-appointments">
+            <Spinner />
+            <span>{__("Loading appointments...", "nobat")}</span>
+          </div>
+        ) : error ? (
+          <Notice status="error" isDismissible={false}>
+            {error}
+          </Notice>
+        ) : !hasAnyAppointments ? (
+          <EmptyAppointmentsState />
+        ) : currentAppointments.length === 0 ? (
+          <div className="empty-tab-message">
+            <span>{__("Nothing here!", "nobat")}</span>
+          </div>
+        ) : (
+          <div className="appointments-list">
+            {currentAppointments.map((appointment) => (
+              <AppointmentRow
+                key={appointment.id}
+                appointment={appointment}
+                onCancelled={() => {
+                  // Refetch appointments after cancellation
+                  refetch();
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MyAppointments;
