@@ -1,20 +1,14 @@
 import { __ } from "../../../utils/i18n";
 import { useState } from "react";
-import {
-  Button,
-  Modal,
-  TextareaControl,
-} from "../../../components/ui";
+import { Button, Modal, TextareaControl } from "../../../components/ui";
 import apiFetch from "../../../utils/api-fetch";
 import {
   getStatusColor,
   getStatusLabel,
-  statusOptions,
   formatDate,
   generateWhatsAppLink,
   getDefaultWhatsAppMessage,
 } from "../../../lib/appointmentUtils";
-import { gregorianToJalali } from "../../../lib/dateConverter";
 
 const AppointmentDetailModal = ({
   appointment,
@@ -32,13 +26,16 @@ const AppointmentDetailModal = ({
   if (!appointment) return null;
 
   const handleWhatsAppClick = () => {
-    const timeSlot = `${appointment.start_time.substring(0, 5)}-${appointment.end_time.substring(0, 5)}`;
+    const timeSlot = `${appointment.start_time.substring(
+      0,
+      5
+    )}-${appointment.end_time.substring(0, 5)}`;
     const message = getDefaultWhatsAppMessage({
       ...appointment,
       client_name: appointment.user_name,
       client_phone: appointment.user_phone,
       appointment_date: appointment.slot_date,
-      time_slot: timeSlot
+      time_slot: timeSlot,
     });
     const whatsappLink = generateWhatsAppLink(appointment.user_phone, message);
     window.open(whatsappLink, "_blank");
@@ -91,97 +88,109 @@ const AppointmentDetailModal = ({
   // Get available actions based on current status
   const getStatusActions = () => {
     const currentStatus = appointment.status;
-    
+
     // Define all possible status transition actions
     const statusActions = {
       confirm: {
-        label: __('Confirm Appointment', 'nobat'),
-        description: __('Approve and confirm this appointment', 'nobat'),
-        status: 'confirmed',
-        variant: 'primary',
-        icon: '✓',
-        type: 'status'
+        label: __("Confirm Appointment", "nobat"),
+        description: __("Approve and confirm this appointment", "nobat"),
+        status: "confirmed",
+        variant: "primary",
+        icon: "✓",
+        type: "status",
       },
       complete: {
-        label: __('Mark as Completed', 'nobat'),
-        description: __('Mark this appointment as successfully completed', 'nobat'),
-        status: 'completed',
-        variant: 'primary',
-        icon: '✓✓',
-        type: 'status'
+        label: __("Mark as Completed", "nobat"),
+        description: __(
+          "Mark this appointment as successfully completed",
+          "nobat"
+        ),
+        status: "completed",
+        variant: "primary",
+        icon: "✓✓",
+        type: "status",
       },
       cancel: {
-        label: __('Cancel Appointment', 'nobat'),
-        description: __('Cancel this appointment and free the time slot', 'nobat'),
-        status: 'cancelled',
-        variant: 'secondary',
+        label: __("Cancel Appointment", "nobat"),
+        description: __(
+          "Cancel this appointment and free the time slot",
+          "nobat"
+        ),
+        status: "cancelled",
+        variant: "secondary",
         isDestructive: true,
-        icon: '✕',
-        type: 'status'
+        icon: "✕",
+        type: "status",
       },
       restore: {
-        label: __('Restore Appointment', 'nobat'),
-        description: __('Restore this appointment to confirmed status', 'nobat'),
-        status: 'confirmed',
-        variant: 'primary',
-        icon: '↶',
-        type: 'status'
-      }
+        label: __("Restore Appointment", "nobat"),
+        description: __(
+          "Restore this appointment to confirmed status",
+          "nobat"
+        ),
+        status: "confirmed",
+        variant: "primary",
+        icon: "↶",
+        type: "status",
+      },
     };
-    
+
     // Common actions available for all statuses
     const commonActions = {
       whatsapp: {
-        label: __('Send WhatsApp Message', 'nobat'),
-        description: __('Open WhatsApp to message the client', 'nobat'),
-        variant: 'secondary',
-        icon: '💬',
-        type: 'communication',
-        className: 'whatsapp-action',
-        onClick: handleWhatsAppClick
+        label: __("Send WhatsApp Message", "nobat"),
+        description: __("Open WhatsApp to message the client", "nobat"),
+        variant: "secondary",
+        icon: "💬",
+        type: "communication",
+        className: "whatsapp-action",
+        onClick: handleWhatsAppClick,
       },
       delete: {
-        label: __('Delete Permanently', 'nobat'),
-        description: __('Permanently delete this appointment (cannot be undone)', 'nobat'),
-        variant: 'link',
+        label: __("Delete Permanently", "nobat"),
+        description: __(
+          "Permanently delete this appointment (cannot be undone)",
+          "nobat"
+        ),
+        variant: "link",
         isDestructive: true,
         icon: null,
-        type: 'delete',
-        onClick: () => setShowDeleteModal(true)
-      }
+        type: "delete",
+        onClick: () => setShowDeleteModal(true),
+      },
     };
-    
+
     let actions = [];
-    
+
     // Add status-specific actions
     switch (currentStatus) {
-      case 'pending':
+      case "pending":
         actions = [statusActions.confirm, statusActions.cancel];
         break;
-      
-      case 'confirmed':
+
+      case "confirmed":
         actions = [statusActions.complete, statusActions.cancel];
         break;
-      
-      case 'cancel_requested':
+
+      case "cancel_requested":
         actions = [statusActions.cancel, statusActions.restore];
         break;
-      
-      case 'completed':
+
+      case "completed":
         actions = [statusActions.cancel];
         break;
-      
-      case 'cancelled':
+
+      case "cancelled":
         actions = [statusActions.restore];
         break;
-      
+
       default:
         actions = [];
     }
-    
+
     // Add common actions to all
     actions.push(commonActions.whatsapp, commonActions.delete);
-    
+
     return actions;
   };
 
@@ -222,51 +231,58 @@ const AppointmentDetailModal = ({
               <div className="info-row">
                 <strong>{__("Date:", "nobat")}</strong>
                 <span className="date-value">
-                  {gregorianToJalali(appointment.slot_date) || formatDate(appointment.slot_date)}
+                  {appointment?.slot_date_jalali ||
+                    formatDate(appointment.slot_date)}
                 </span>
               </div>
               <div className="info-row">
                 <strong>{__("Time:", "nobat")}</strong>
                 <span className="time-slot">
-                  {`${appointment.start_time.substring(0, 5)} - ${appointment.end_time.substring(0, 5)}`}
+                  {`${appointment.start_time.substring(
+                    0,
+                    5
+                  )} - ${appointment.end_time.substring(0, 5)}`}
                 </span>
               </div>
-            <div className="info-row">
-              <strong>{__("Status:", "nobat")}</strong>
-              <span
-                className="status-badge"
-                style={{
-                  backgroundColor: getStatusColor(appointment.status),
-                }}
-              >
-                {getStatusLabel(appointment.status)}
-              </span>
-            </div>
-            {appointment.admin_name && (
               <div className="info-row">
-                <strong>{__("Assigned Admin:", "nobat")}</strong>
-                <span className="admin-name">{appointment.admin_name}</span>
+                <strong>{__("Status:", "nobat")}</strong>
+                <span
+                  className="status-badge"
+                  style={{
+                    backgroundColor: getStatusColor(appointment.status),
+                  }}
+                >
+                  {getStatusLabel(appointment.status)}
+                </span>
               </div>
-            )}
-            {appointment.note && (
-              <div className="info-row note-row">
-                <strong>{__("Note:", "nobat")}</strong>
-                <span className="note-content">{appointment.note}</span>
-              </div>
-            )}
-            {appointment.status === 'cancelled' && appointment.cancellation_reason && (
-              <div className="info-row cancellation-row">
-                <strong>{__("Cancellation Reason:", "nobat")}</strong>
-                <span className="cancellation-reason">{appointment.cancellation_reason}</span>
-              </div>
-            )}
+              {appointment.admin_name && (
+                <div className="info-row">
+                  <strong>{__("Assigned Admin:", "nobat")}</strong>
+                  <span className="admin-name">{appointment.admin_name}</span>
+                </div>
+              )}
+              {appointment.note && (
+                <div className="info-row note-row">
+                  <strong>{__("Note:", "nobat")}</strong>
+                  <span className="note-content">{appointment.note}</span>
+                </div>
+              )}
+              {appointment.status === "cancelled" &&
+                appointment.cancellation_reason && (
+                  <div className="info-row cancellation-row">
+                    <strong>{__("Cancellation Reason:", "nobat")}</strong>
+                    <span className="cancellation-reason">
+                      {appointment.cancellation_reason}
+                    </span>
+                  </div>
+                )}
             </div>
 
             {/* All Action Buttons */}
             {allActions.length > 0 && (
               <div className="appointment-actions">
                 <h4 className="actions-title">
-                  {__('Available Actions', 'nobat')}
+                  {__("Available Actions", "nobat")}
                 </h4>
                 <div className="actions-list">
                   {allActions.map((action, index) => (
@@ -274,22 +290,19 @@ const AppointmentDetailModal = ({
                       key={action.status || action.type || index}
                       variant={action.variant}
                       isDestructive={action.isDestructive}
-                      className={`action-button ${action.className || ''}`}
-                      onClick={action.type === 'status' 
-                        ? () => handleStatusChange(action.status)
-                        : action.onClick
+                      className={`action-button ${action.className || ""}`}
+                      onClick={
+                        action.type === "status"
+                          ? () => handleStatusChange(action.status)
+                          : action.onClick
                       }
                     >
                       <div className="action-content">
                         {action.icon && (
-                          <span className="action-icon">
-                            {action.icon}
-                          </span>
+                          <span className="action-icon">{action.icon}</span>
                         )}
                         <div className="action-text">
-                          <span className="action-label">
-                            {action.label}
-                          </span>
+                          <span className="action-label">{action.label}</span>
                           {action.description && (
                             <span className="action-description">
                               {action.description}
@@ -307,7 +320,7 @@ const AppointmentDetailModal = ({
             <div className="appointment-report">
               <div className="report-header">
                 <h4 className="report-title">
-                  {__('Session Report', 'nobat')}
+                  {__("Session Report", "nobat")}
                 </h4>
                 {!isEditingReport && report && (
                   <Button
@@ -315,11 +328,11 @@ const AppointmentDetailModal = ({
                     onClick={() => setIsEditingReport(true)}
                     className="edit-button"
                   >
-                    {__('Edit', 'nobat')}
+                    {__("Edit", "nobat")}
                   </Button>
                 )}
               </div>
-              
+
               {reportMessage && (
                 <div className={`report-message ${reportMessage.type}`}>
                   {reportMessage.text}
@@ -331,10 +344,13 @@ const AppointmentDetailModal = ({
                   <TextareaControl
                     value={report}
                     onChange={setReport}
-                    placeholder={__('Add notes, observations, or session summary...', 'nobat')}
+                    placeholder={__(
+                      "Add notes, observations, or session summary...",
+                      "nobat"
+                    )}
                     rows={2}
                   />
-                  
+
                   <div className="report-actions">
                     <Button
                       variant="primary"
@@ -342,7 +358,9 @@ const AppointmentDetailModal = ({
                       isBusy={isSavingReport}
                       disabled={isSavingReport}
                     >
-                      {isSavingReport ? __('Saving...', 'nobat') : __('Save Report', 'nobat')}
+                      {isSavingReport
+                        ? __("Saving...", "nobat")
+                        : __("Save Report", "nobat")}
                     </Button>
                     {report && appointment?.report && (
                       <Button
@@ -354,14 +372,18 @@ const AppointmentDetailModal = ({
                         disabled={isSavingReport}
                         className="cancel-button"
                       >
-                        {__('Cancel', 'nobat')}
+                        {__("Cancel", "nobat")}
                       </Button>
                     )}
                   </div>
                 </>
               ) : (
                 <div className="report-display">
-                  {report || <span className="empty-state">{__('No report added yet', 'nobat')}</span>}
+                  {report || (
+                    <span className="empty-state">
+                      {__("No report added yet", "nobat")}
+                    </span>
+                  )}
                 </div>
               )}
             </div>
