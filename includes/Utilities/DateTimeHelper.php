@@ -64,7 +64,8 @@ class DateTimeHelper {
 			}
 		}
 
-		error_log( 'DateTimeHelper: wp-parsidate plugin not available for Jalali conversion' );
+		// Silently return false if wp-parsidate is not available
+		// Caller should handle gracefully by falling back to Gregorian date
 		return false;
 	}
 

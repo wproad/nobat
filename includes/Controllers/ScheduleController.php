@@ -84,11 +84,43 @@ class ScheduleController {
 			);
 		}
 		
-		// Validate date format (YYYY-MM-DD)
-		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $start_date ) || ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $end_date ) ) {
+		// Convert Jalali dates to Gregorian before validation
+		// Accept both Jalali (YYYY/MM/DD) and Gregorian (YYYY-MM-DD) formats
+		$start_date_gregorian = convertJalaliToGregorian( $start_date );
+		$end_date_gregorian = convertJalaliToGregorian( $end_date );
+		
+		// If conversion failed, assume date was already in Gregorian format
+		if ( false === $start_date_gregorian ) {
+			// Check if it's already in Gregorian format
+			if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $start_date ) ) {
+				$start_date_gregorian = $start_date;
+			} else {
+				return new WP_Error(
+					'invalid_date',
+					__( 'Invalid date format. Expected Jalali (YYYY/MM/DD) or Gregorian (YYYY-MM-DD)', 'nobat' ),
+					array( 'status' => 400 )
+				);
+			}
+		}
+		
+		if ( false === $end_date_gregorian ) {
+			// Check if it's already in Gregorian format
+			if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $end_date ) ) {
+				$end_date_gregorian = $end_date;
+			} else {
+				return new WP_Error(
+					'invalid_date',
+					__( 'Invalid date format. Expected Jalali (YYYY/MM/DD) or Gregorian (YYYY-MM-DD)', 'nobat' ),
+					array( 'status' => 400 )
+				);
+			}
+		}
+		
+		// Validate Gregorian date format (YYYY-MM-DD)
+		if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $start_date_gregorian ) || ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $end_date_gregorian ) ) {
 			return new WP_Error(
 				'invalid_date',
-				__( 'Invalid date format. Expected YYYY-MM-DD (Gregorian)', 'nobat' ),
+				__( 'Invalid date format after conversion. Expected YYYY-MM-DD (Gregorian)', 'nobat' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -122,12 +154,12 @@ class ScheduleController {
 			}
 		}
 		
-		// Sanitize and prepare data (Gregorian dates only!)
+		// Sanitize and prepare data (use converted Gregorian dates)
 		$schedule_data = array(
 			'name' => sanitize_text_field( $name ),
 			'is_active' => ! empty( $data['isActive'] ) || ! empty( $data['is_active'] ) ? 1 : 0,
-			'start_date' => sanitize_text_field( $start_date ),
-			'end_date' => sanitize_text_field( $end_date ),
+			'start_date' => sanitize_text_field( $start_date_gregorian ),
+			'end_date' => sanitize_text_field( $end_date_gregorian ),
 			'meeting_duration' => (int) $meeting_duration,
 			'buffer_time' => isset( $data['buffer'] ) ? (int) $data['buffer'] : ( isset( $data['buffer_time'] ) ? (int) $data['buffer_time'] : 0 ),
 			'working_hours' => $working_hours

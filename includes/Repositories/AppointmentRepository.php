@@ -115,7 +115,17 @@ class AppointmentRepository extends BaseRepository {
 		
 		$query .= " ORDER BY a.{$args['orderby']} {$args['order']}";
 		
-		return $this->wpdb->get_results( $query, ARRAY_A );
+		$results = $this->wpdb->get_results( $query, ARRAY_A );
+		
+		// Add Jalali date to each appointment
+		foreach ( $results as &$appointment ) {
+			if ( ! empty( $appointment['slot_date'] ) ) {
+				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $appointment['slot_date'] );
+				$appointment['slot_date_jalali'] = $jalali_date ? $jalali_date : $appointment['slot_date'];
+			}
+		}
+		
+		return $results;
 	}
 	
 	/**
@@ -219,7 +229,17 @@ class AppointmentRepository extends BaseRepository {
 			$query .= $this->wpdb->prepare( " LIMIT %d OFFSET %d", $args['limit'], $args['offset'] );
 		}
 		
-		return $this->wpdb->get_results( $query, ARRAY_A );
+		$results = $this->wpdb->get_results( $query, ARRAY_A );
+		
+		// Add Jalali date to each appointment
+		foreach ( $results as &$appointment ) {
+			if ( ! empty( $appointment['slot_date'] ) ) {
+				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $appointment['slot_date'] );
+				$appointment['slot_date_jalali'] = $jalali_date ? $jalali_date : $appointment['slot_date'];
+			}
+		}
+		
+		return $results;
 	}
 	
 	/**
@@ -228,7 +248,7 @@ class AppointmentRepository extends BaseRepository {
 	 * @return array
 	 */
 	public function find_cancellation_requests() {
-		return $this->wpdb->get_results(
+		$results = $this->wpdb->get_results(
 			"SELECT a.*, 
 			s.slot_date, s.start_time, s.end_time,
 			u.display_name as user_name, u.user_email,
@@ -241,6 +261,16 @@ class AppointmentRepository extends BaseRepository {
 			ORDER BY a.cancellation_requested_at ASC",
 			ARRAY_A
 		);
+		
+		// Add Jalali date to each appointment
+		foreach ( $results as &$appointment ) {
+			if ( ! empty( $appointment['slot_date'] ) ) {
+				$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $appointment['slot_date'] );
+				$appointment['slot_date_jalali'] = $jalali_date ? $jalali_date : $appointment['slot_date'];
+			}
+		}
+		
+		return $results;
 	}
 	
 	/**

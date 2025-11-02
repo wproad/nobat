@@ -5,12 +5,10 @@ import apiFetch from "../../../utils/api-fetch";
 import {
   getStatusColor,
   getStatusLabel,
-  statusOptions,
   formatDate,
   generateWhatsAppLink,
   getDefaultWhatsAppMessage,
 } from "../../../lib/appointmentUtils";
-import { gregorianToJalali } from "../../../lib/dateConverter";
 
 const AppointmentDetailModal = ({
   appointment,
@@ -233,7 +231,7 @@ const AppointmentDetailModal = ({
               <div className="info-row">
                 <strong>{__("Date:", "nobat")}</strong>
                 <span className="date-value">
-                  {gregorianToJalali(appointment.slot_date) ||
+                  {appointment?.slot_date_jalali ||
                     formatDate(appointment.slot_date)}
                 </span>
               </div>
