@@ -17,7 +17,7 @@ export const getStatusColor = (status) => {
     case "cancelled":
       return "var(--color-error-500)";
     case "cancel_requested":
-      return "var(--color-warning-500)";
+      return "var(--color-secondary-500)";
     default:
       return "var(--color-secondary-400)";
   }
@@ -31,15 +31,15 @@ export const getStatusColor = (status) => {
 export const getStatusText = (status) => {
   switch (status) {
     case "pending":
-      return __("در انتظار تایید", "nobat");
+      return __("Pending Confirmation", "nobat");
     case "confirmed":
-      return __("تایید شده", "nobat");
+      return __("Confirmed", "nobat");
     case "completed":
-      return __("تکمیل شده", "nobat");
+      return __("Completed", "nobat");
     case "cancelled":
-      return __("لغو شده", "nobat");
+      return __("Cancelled", "nobat");
     case "cancel_requested":
-      return __("درخواست لغو ارسال شده", "nobat");
+      return __("Cancel Requested", "nobat");
     default:
       return status;
   }
@@ -64,7 +64,7 @@ export const stripSeconds = (time) => {
 export const formatTimeRange = (startTime, endTime) => {
   const formattedStart = stripSeconds(startTime);
   const formattedEnd = stripSeconds(endTime);
-  return `${formattedStart} تا ${formattedEnd}`;
+  return `${formattedStart} ${__("to", "nobat")} ${formattedEnd}`;
 };
 
 /**

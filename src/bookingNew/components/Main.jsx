@@ -14,7 +14,7 @@ import BookingView from "./BookingView.jsx";
 import LoginRequired from "./LoginRequired.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
 import { Card, CardHeader, CardBody } from "../../ui/Card.jsx";
-import { __ } from "../../utils/i18n.js";
+import { __ } from "../../utils/i18n";
 
 const Main = ({ scheduleId }) => {
   const { isLoggedIn, loginUrl, registerUrl } = useAuth();

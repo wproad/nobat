@@ -28,7 +28,7 @@ const AppointmentTicket = ({ appointment }) => {
   const reservationMessage =
     (typeof window !== "undefined" &&
       window.wpApiSettings?.reservationMessage) ||
-    __("نوبت شما با موفقیت رزرو شد!", "nobat");
+    __("Appointment booked successfully!", "nobat");
 
   return (
     <div className="appointment-ticket">
@@ -38,17 +38,17 @@ const AppointmentTicket = ({ appointment }) => {
 
       <div className="ticket-content">
         <div className="ticket-row">
-          <span className="label">تاریخ:</span>
+          <span className="label">{__("Date:", "nobat")}</span>
           <span className="value">{slot_date_jalali || slot_date}</span>
         </div>
 
         <div className="ticket-row">
-          <span className="label">ساعت:</span>
+          <span className="label">{__("Time:", "nobat")}</span>
           <span className="value">{formatTimeRange(start_time, end_time)}</span>
         </div>
 
         <div className="ticket-row">
-          <span className="label">وضعیت:</span>
+          <span className="label">{__("Status:", "nobat")}</span>
           <span
             className="status-badge"
             style={{ backgroundColor: getStatusColor(status) }}
@@ -59,7 +59,9 @@ const AppointmentTicket = ({ appointment }) => {
       </div>
 
       <div className="ticket-footer">
-        <div className="ticket-id">شماره نوبت: #{id}</div>
+        <div className="ticket-id">
+          {__("Appointment Number:", "nobat")} #{id}
+        </div>
       </div>
     </div>
   );
