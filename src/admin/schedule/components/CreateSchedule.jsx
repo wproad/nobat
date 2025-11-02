@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextControl,
   ToggleControl,
@@ -10,7 +10,7 @@ import { defaultWeeklyHours, weekdayLabels } from "../../../lib/constants";
 import { WeeklyHoursEditor } from "./WeeklyHoursEditor";
 import { JalaliDatePickerInput } from "./JalaliDatePicker";
 import { useSchedule } from "../../../hooks/useSchedule";
-import { jalaliToGregorian } from "../../../lib/dateConverter";
+import { convertJalaliToGregorian, jalaliToGregorian } from "../../../lib/dateConverter";
 
 function CreateSchedule() {
   const [name, setName] = useState("");
@@ -22,6 +22,14 @@ function CreateSchedule() {
 
   const { notice, setNotice, saveSchedule } = useSchedule();
   const buffer = 0;
+
+  useEffect(() => {
+    console.log("startDay: ", startDay);
+    // console.log("endDay: ", endDay);
+    console.log("gregorian startDay: ", convertJalaliToGregorian(startDay));
+    // console.log("gregorian endDay: ", jalaliToGregorian(endDay));
+    
+  }, [startDay]);
 
   const handleSubmit = () => {
     // Convert Jalali dates to Gregorian before sending to API

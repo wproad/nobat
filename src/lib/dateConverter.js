@@ -71,6 +71,20 @@ function jalaaliToGregorianCore(jy, jm, jd) {
   return [gy, gm, gd];
 }
 
+function convertJalaliToGregorian( $jalaliDate ) {
+  // Check if wp-parsidate plugin is installed and active
+  if ( function_exists( 'gregdate' )  ) {
+   try {
+    // Use wp-parsidate plugin functions
+     return gregdate( 'Y-m-d' , $jalaliDate);
+   } catch ( error ) {
+    return false;
+   }
+  }
+ 
+        return false;
+ }
+
 /**
  * Convert Jalali date to Gregorian date
  *
@@ -115,7 +129,7 @@ export function jalaliToGregorian(jalaliDate) {
     const day = String(gDay).padStart(2, '0');
     
     const result = `${year}-${month}-${day}`;
-    console.log('jalaliToGregorian: Converted', jalaliDate, '→', result);
+    // console.log('jalaliToGregorian: Converted', jalaliDate, '→', result);
     
     return result;
   } catch (error) {
