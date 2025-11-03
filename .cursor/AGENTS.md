@@ -4,6 +4,8 @@
 - Do NOT create any documentation unless explicitly asked
 - Keep explanations minimal - provide only a bullet list abstract of tasks completed
 - Avoid lengthy explanations after each task
+- After completing a task, suggest a few appropriate commit messages.
+The commit messages should reflect the purpose of the task rather than the specific implementation details, especially when multiple files are modified.
 
 ## Code Standards
 - Follow the WordPress plugin development best practices

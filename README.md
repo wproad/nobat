@@ -63,13 +63,21 @@ npm run build
 
 ### For Users (Booking Appointments)
 
-Users must be logged in to book appointments. Add the booking form to any page or post using the shortcode:
+Users must be logged in to book appointments. Add the booking form to any page or post using one of these shortcodes:
 
-```فر
+**New Booking Interface (Recommended):**
+
+```
+[nobat_new]
+```
+
+**Legacy Booking Interface:**
+
+```
 [nobat_booking]
 ```
 
-**Note:** Guests will see a login prompt. Users are limited to 3 active appointments by default.
+**Note:** Guests will see a login prompt. Users are limited to 3 active appointments by default. The `nobat_new` shortcode uses the modern React-based booking interface, while `nobat_booking` is the legacy interface (to be deprecated in a future release).
 
 ### For Admins (Managing Appointments)
 
@@ -185,7 +193,13 @@ nobat/
 │   │   ├── cal/              # Calendar view
 │   │   ├── schedule/         # Schedule builder
 │   │   └── cancellations/    # Cancellation requests
-│   └── frontend/             # (Reserved for future frontend UI)
+│   ├── bookingNew/           # New React booking interface
+│   │   ├── components/       # Booking components
+│   │   ├── contexts/         # React contexts (Auth)
+│   │   ├── hooks/            # Custom React hooks
+│   │   └── utils/            # Utility functions
+│   └── frontend/             # Legacy booking interface (to be deprecated)
+│       └── booking/          # Old booking components
 ├── docs/                     # Comprehensive documentation
 └── build/                    # Compiled assets
 ```
@@ -212,6 +226,7 @@ Edit SCSS files in `src/`:
 - `src/admin/cal/cal.scss` — Calendar view
 - `src/admin/schedule/schedule.scss` — Schedule builder
 - `src/admin/cancellations/cancellations.scss` — Cancellation requests
+- `src/bookingNew/bookingNew.scss` — New booking interface styles
 
 After editing, run `npm run build` to compile.
 
@@ -287,7 +302,7 @@ See [docs/UPGRADE-GUIDE.md](docs/UPGRADE-GUIDE.md) for detailed migration instru
 
 ## 🐛 Known Issues
 
-- Frontend booking UI is reserved for future release (v2.1)
+- Legacy `nobat_booking` shortcode will be deprecated in a future release (use `nobat_new` instead)
 - Old v1 API endpoints are deprecated but maintained for backward compatibility
 - Persian calendar widget requires custom JavaScript library
 
@@ -295,11 +310,11 @@ See [docs/UPGRADE-GUIDE.md](docs/UPGRADE-GUIDE.md) for detailed migration instru
 
 ### v2.1 (Planned)
 
-- [ ] Complete frontend React booking interface
 - [ ] Email notifications
 - [ ] SMS integration
 - [ ] Payment gateway integration
 - [ ] Multiple service types
+- [ ] Deprecate legacy `nobat_booking` shortcode
 
 ### v2.2 (Future)
 

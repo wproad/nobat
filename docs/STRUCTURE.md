@@ -88,8 +88,15 @@ nobat/
 │   │   │   └── components/
 │   │   └── components/          # Shared admin components
 │   │       └── CancellationRequests.jsx
-│   ├── frontend/                # Frontend components (reserved)
-│   │   └── booking/
+│   ├── bookingNew/              # New React booking interface
+│   │   ├── index.js            # Entry point
+│   │   ├── bookingNew.scss     # Styles
+│   │   ├── components/         # Booking components
+│   │   ├── contexts/           # React contexts (AuthContext)
+│   │   ├── hooks/              # Custom React hooks
+│   │   └── utils/              # Utility functions
+│   ├── frontend/                # Legacy booking interface (to be deprecated)
+│   │   └── booking/            # Old booking components
 │   └── hooks/                   # Shared React hooks
 │       └── ScheduleContext.js
 │
@@ -97,6 +104,8 @@ nobat/
 │   ├── cal.js / cal.css
 │   ├── schedule.js / schedule.css
 │   ├── cancellations.js / cancellations.css
+│   ├── bookingNew.js / bookingNew.css  # New booking interface
+│   ├── booking.js / booking.css        # Legacy booking (to be deprecated)
 │   └── *.asset.php
 │
 ├── languages/                   # Translation files
@@ -153,16 +162,19 @@ The plugin follows **Clean Architecture** principles with clear separation of co
 ### Key Patterns
 
 1. **Repository Pattern**
+
    - Abstracts database operations
    - Located in `includes/Repositories/`
    - Extends `BaseRepository`
 
 2. **Service Layer**
+
    - Encapsulates business logic
    - Located in `includes/Services/`
    - Uses repositories for data access
 
 3. **Dependency Injection**
+
    - Container in `includes/Core/Container.php`
    - Configured in `includes/bootstrap.php`
    - Services resolved via `nobat_service()`
@@ -195,11 +207,13 @@ See [DATABASE-SCHEMA.md](DATABASE-SCHEMA.md) for complete schema documentation.
 **Namespace:** `/wp-json/nobat/v2/`
 
 **Controllers:**
+
 - `AppointmentController` - Appointment management
 - `ScheduleController` - Schedule CRUD
 - `SlotController` - Slot management
 
 **Authentication:**
+
 - All endpoints require authentication
 - `AuthMiddleware` handles permission checks
 - Nonce-based for admin, cookie-based for users
@@ -218,14 +232,18 @@ Maintained for backward compatibility. Delegates to v2 services internally.
 
 ### React Applications
 
-The plugin uses **separate React apps** for different admin pages:
+The plugin uses **separate React apps** for different admin pages and frontend interfaces:
+
+**Admin Applications:**
 
 1. **Calendar App** (`src/admin/cal/`)
+
    - Entry: `cal/index.js`
    - Mount: `#nobat-cal`
    - Page: Admin → Nobat → Cal
 
 2. **Schedule Builder** (`src/admin/schedule/`)
+
    - Entry: `schedule/index.js`
    - Mount: `#nobat-scheduling`
    - Page: Admin → Nobat → Add Schedule
@@ -235,9 +253,26 @@ The plugin uses **separate React apps** for different admin pages:
    - Mount: `#nobat-cancellations`
    - Page: Admin → Nobat → Cancellations
 
+**Frontend Applications:**
+
+4. **New Booking Interface** (`src/bookingNew/`)
+
+   - Entry: `bookingNew/index.js`
+   - Mount: `.nobat-new-app`
+   - Shortcode: `[nobat_new]`
+   - Status: **Recommended** - Modern React-based booking interface
+
+5. **Legacy Booking Interface** (`src/frontend/booking/`)
+   - Entry: `frontend/booking/index.js`
+   - Mount: `.nobat-booking-app`
+   - Shortcode: `[nobat_booking]`
+   - Status: **Legacy** - To be deprecated in future release
+
 ### Asset Loading
 
-Assets are loaded conditionally based on the admin page:
+Assets are loaded conditionally based on the admin page or shortcode presence:
+
+**Admin Pages:**
 
 ```php
 // In enqueue-scripts.php
@@ -245,6 +280,22 @@ if ( strpos( $admin_page, 'nobat-cal' ) !== false ) {
     // Load calendar bundle
     wp_enqueue_script( 'nobat-cal-script', ... );
     wp_enqueue_style( 'nobat-cal-style', ... );
+}
+```
+
+**Frontend Shortcodes:**
+
+```php
+// New booking interface - checks for 'nobat_new' shortcode
+if ( has_shortcode( $post->post_content, 'nobat_new' ) ) {
+    wp_enqueue_script( 'nobat-front-script', ... ); // bookingNew.js
+    wp_enqueue_style( 'nobat-front-style', ... );   // bookingNew.css
+}
+
+// Legacy booking interface - checks for 'nobat_booking' shortcode
+if ( has_shortcode( $post->post_content, 'nobat_booking' ) ) {
+    wp_enqueue_script( 'nobat-frontend-script', ... ); // booking.js
+    wp_enqueue_style( 'nobat-frontend-style', ... );   // booking.css
 }
 ```
 
@@ -300,6 +351,7 @@ Currently using **PSR-4 autoloading only** (no external dependencies):
 ### JavaScript Dependencies (NPM)
 
 Key dependencies:
+
 - `@wordpress/components` - UI components
 - `@wordpress/element` - React wrapper
 - `@wordpress/i18n` - Internationalization
@@ -322,6 +374,7 @@ _e( 'Save Settings', 'nobat' )
 ### Translation Files
 
 Located in `languages/`:
+
 - `nobat.pot` - Translation template
 - `nobat-{locale}.po` - Translations
 - `nobat-{locale}.mo` - Compiled translations
@@ -362,6 +415,7 @@ wp i18n make-pot . languages/nobat.pot
 ### 1. Schedule System
 
 A **schedule** defines:
+
 - Date range (start/end with Jalali support)
 - Working hours per day of week
 - Meeting duration & buffer time
@@ -370,6 +424,7 @@ A **schedule** defines:
 ### 2. Slot Generation
 
 Slots are **automatically generated** when a schedule is created:
+
 - Based on working hours
 - Respects meeting duration & buffer
 - Created for each day in range
@@ -410,6 +465,7 @@ Slots are **automatically generated** when a schedule is created:
 ### Caching
 
 Currently **no caching layer**. Future consideration:
+
 - Transient API for schedule data
 - Object cache for slot availability
 - Page cache compatibility
@@ -428,15 +484,14 @@ Currently **no caching layer**. Future consideration:
 
 ## 🔄 Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | - | Original "Appointment Booking" plugin |
-| 2.0.0 | Oct 2024 | Complete refactor as "Nobat" |
+| Version | Date     | Changes                               |
+| ------- | -------- | ------------------------------------- |
+| 1.0.0   | -        | Original "Appointment Booking" plugin |
+| 2.0.0   | Oct 2024 | Complete refactor as "Nobat"          |
 
 **Current Version:** 2.0.0  
 **Status:** Production Ready
 
 ---
 
-*This document is maintained as the authoritative source for plugin structure information.*
-
+_This document is maintained as the authoritative source for plugin structure information._

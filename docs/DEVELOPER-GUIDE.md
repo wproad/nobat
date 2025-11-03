@@ -7,13 +7,15 @@ This guide helps developers understand, maintain, and extend the Appointment Boo
 ## Prerequisites
 
 ### Required Knowledge
-- PHP 7.4+ 
+
+- PHP 7.4+
 - WordPress plugin development
 - MySQL/MariaDB
 - React.js basics
 - REST API concepts
 
 ### Development Environment
+
 - Local WordPress installation (Local by Flywheel, XAMPP, etc.)
 - PHP IDE (VS Code, PHPStorm)
 - Node.js and npm (for React compilation)
@@ -95,7 +97,8 @@ appointment-booking/
 │   └── rest/              # API endpoints
 ├── src/                   # React frontend
 │   ├── admin/             # Admin interface
-│   └── frontend/          # Public booking form
+│   ├── bookingNew/        # New booking interface (recommended)
+│   └── frontend/          # Legacy booking form (to be deprecated)
 ├── build/                 # Compiled JavaScript
 ├── docs/                  # Documentation
 └── languages/             # Translations
@@ -104,18 +107,22 @@ appointment-booking/
 ### Naming Conventions
 
 **Files:**
+
 - PHP: `PascalCase.php` (e.g., `ScheduleService.php`)
 - React: `PascalCase.jsx` (components), `camelCase.js` (hooks/utils)
 
 **Classes:**
+
 - `Appointment_Booking_` prefix (e.g., `Appointment_Booking_Schedule_Service`)
 - Descriptive names (e.g., `SlotRepository` not `SR`)
 
 **Functions:**
+
 - Prefix with `appointment_booking_` for global functions
 - Use verb_noun pattern (e.g., `get_active_schedule`)
 
 **Database:**
+
 - Tables: `wp_nobat_{entity}` (e.g., `wp_nobat_appointments`)
 - Columns: `snake_case`
 
@@ -130,31 +137,31 @@ appointment-booking/
 
 /**
  * Get appointments by status
- * 
+ *
  * @param string $status
  * @param int $limit
  * @return array
  */
 public function find_by_status( $status, $limit = 100 ) {
     $table = $this->get_table_name();
-    
+
     $results = $this->wpdb->get_results(
         $this->wpdb->prepare(
-            "SELECT * FROM {$table} 
-             WHERE status = %s 
-             ORDER BY created_at DESC 
+            "SELECT * FROM {$table}
+             WHERE status = %s
+             ORDER BY created_at DESC
              LIMIT %d",
             $status,
             $limit
         ),
         ARRAY_A
     );
-    
+
     if ( $this->wpdb->last_error ) {
         error_log( 'AppointmentRepository::find_by_status error: ' . $this->wpdb->last_error );
         return array();
     }
-    
+
     return $results ? $results : array();
 }
 ```
@@ -168,7 +175,7 @@ public function find_by_status( $status, $limit = 100 ) {
 
 /**
  * Get upcoming appointments for a user
- * 
+ *
  * @param int $user_id
  * @param int $days Number of days to look ahead
  * @return array|WP_Error
@@ -178,24 +185,24 @@ public function get_upcoming_appointments( $user_id, $days = 7 ) {
     if ( ! $user_id || $user_id < 1 ) {
         return new WP_Error( 'invalid_user_id', 'Invalid user ID' );
     }
-    
+
     // Get user's appointments
     $appointments = $this->appointment_repo->find_by_user( $user_id );
-    
+
     // Filter for upcoming only
     $upcoming = array_filter( $appointments, function( $appointment ) use ( $days ) {
         $slot = $this->slot_repo->find_by_id( $appointment['slot_id'] );
         if ( ! $slot ) {
             return false;
         }
-        
+
         $slot_datetime = strtotime( $slot['slot_date'] . ' ' . $slot['start_time'] );
         $now = time();
         $future_limit = $now + ( $days * 86400 );
-        
+
         return $slot_datetime >= $now && $slot_datetime <= $future_limit;
     } );
-    
+
     return array_values( $upcoming );
 }
 ```
@@ -209,23 +216,23 @@ public function get_upcoming_appointments( $user_id, $days = 7 ) {
 
 /**
  * Get upcoming appointments
- * 
+ *
  * @param WP_REST_Request $request
  * @return WP_REST_Response|WP_Error
  */
 public function get_upcoming( $request ) {
     $user_id = $this->auth_service->get_current_user_id();
     $days = $request->get_param( 'days' ) ?: 7;
-    
+
     $result = $this->appointment_service->get_upcoming_appointments(
         $user_id,
         (int) $days
     );
-    
+
     if ( is_wp_error( $result ) ) {
         return $result;
     }
-    
+
     return new WP_REST_Response( array(
         'appointments' => $result
     ), 200 );
@@ -258,7 +265,7 @@ register_rest_route( $namespace, '/appointments/upcoming', array(
 
 Add to `docs/API-v2-ENDPOINTS.md`:
 
-```markdown
+````markdown
 ### GET /appointments/upcoming
 
 Get upcoming appointments for current user.
@@ -266,73 +273,74 @@ Get upcoming appointments for current user.
 **Authentication:** Required
 
 **Parameters:**
+
 - `days` (integer, optional) - Number of days to look ahead (1-30, default: 7)
 
 **Response:**
+
 ```json
 {
     "appointments": [...]
 }
 ```
+````
 
 ### Adding a React Component
 
 **Example: UpcomingAppointments.jsx**
 
 ```jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 export const UpcomingAppointments = () => {
-    const [appointments, setAppointments] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetchUpcoming();
-    }, []);
+  useEffect(() => {
+    fetchUpcoming();
+  }, []);
 
-    const fetchUpcoming = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch(
-                '/wp-json/appointment-booking/v2/appointments/upcoming?days=7',
-                {
-                    credentials: 'include'
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch appointments');
-            }
-
-            const data = await response.json();
-            setAppointments(data.appointments);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
+  const fetchUpcoming = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        "/wp-json/appointment-booking/v2/appointments/upcoming?days=7",
+        {
+          credentials: "include",
         }
-    };
+      );
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+      if (!response.ok) {
+        throw new Error("Failed to fetch appointments");
+      }
 
-    return (
-        <div className="upcoming-appointments">
-            <h3>Upcoming Appointments</h3>
-            {appointments.length === 0 ? (
-                <p>No upcoming appointments</p>
-            ) : (
-                <ul>
-                    {appointments.map(appointment => (
-                        <li key={appointment.id}>
-                            {/* Render appointment details */}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
+      const data = await response.json();
+      setAppointments(data.appointments);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div className="upcoming-appointments">
+      <h3>Upcoming Appointments</h3>
+      {appointments.length === 0 ? (
+        <p>No upcoming appointments</p>
+      ) : (
+        <ul>
+          {appointments.map((appointment) => (
+            <li key={appointment.id}>{/* Render appointment details */}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 ```
 
@@ -433,7 +441,7 @@ echo $wpdb->last_error;
 
 ```javascript
 // Browser console
-console.log('State:', appointments);
+console.log("State:", appointments);
 
 // React DevTools (Chrome/Firefox extension)
 // Inspect component props and state
@@ -444,17 +452,20 @@ console.log('State:', appointments);
 ### Security
 
 1. **Always sanitize input:**
+
 ```php
 $name = sanitize_text_field( $request->get_param( 'name' ) );
 $email = sanitize_email( $request->get_param( 'email' ) );
 ```
 
 2. **Use prepared statements:**
+
 ```php
 $wpdb->prepare( "SELECT * FROM table WHERE id = %d", $id );
 ```
 
 3. **Check permissions:**
+
 ```php
 if ( ! current_user_can( 'manage_options' ) ) {
     return new WP_Error( 'forbidden', 'Insufficient permissions', array( 'status' => 403 ) );
@@ -462,6 +473,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 ```
 
 4. **Validate nonces (for forms):**
+
 ```php
 if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'action_name' ) ) {
     wp_die( 'Invalid nonce' );
@@ -507,6 +519,7 @@ if ( ! $result ) {
 **Issue: Slots not generating**
 
 Check:
+
 1. Working hours properly defined
 2. Date range includes future dates
 3. Meeting duration set
@@ -515,6 +528,7 @@ Check:
 **Issue: "Not logged in" error**
 
 Check:
+
 1. User is actually logged in
 2. Session cookies enabled
 3. `credentials: 'include'` in fetch requests
@@ -523,6 +537,7 @@ Check:
 **Issue: Database errors**
 
 Check:
+
 1. Table prefixes correct (`wp_nobat_`)
 2. Foreign keys valid
 3. Database user permissions
@@ -531,6 +546,7 @@ Check:
 **Issue: React not updating**
 
 Check:
+
 1. Run `npm run build`
 2. Clear browser cache
 3. Check browser console for errors
@@ -539,30 +555,36 @@ Check:
 ## Resources
 
 ### Documentation
+
 - `docs/ARCHITECTURE.md` - Architecture overview
 - `docs/DATABASE-SCHEMA.md` - Database schema
 - `docs/API-v2-ENDPOINTS.md` - API documentation
 - `docs/REFACTOR-PLAN.md` - Original refactor plan
 
 ### WordPress Resources
+
 - [Plugin Handbook](https://developer.wordpress.org/plugins/)
 - [REST API Handbook](https://developer.wordpress.org/rest-api/)
 - [Database Class (wpdb)](https://developer.wordpress.org/reference/classes/wpdb/)
 
 ### Code Standards
+
 - [WordPress PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/)
 - [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/)
 
 ## Getting Help
 
 ### Before Asking
+
 1. Check error logs
 2. Review relevant documentation
 3. Search closed issues
 4. Try debugging with `error_log()` and `console.log()`
 
 ### When Asking
+
 Include:
+
 - What you're trying to do
 - What you expected
 - What actually happened
@@ -573,6 +595,7 @@ Include:
 ## Contributing
 
 ### Workflow
+
 1. Create feature branch: `git checkout -b feature/new-feature`
 2. Make changes
 3. Test thoroughly
@@ -581,6 +604,7 @@ Include:
 6. Create pull request
 
 ### Commit Messages
+
 ```
 Add: New feature
 Fix: Bug description
@@ -594,4 +618,3 @@ Docs: Documentation update
 This plugin uses modern, maintainable architecture. Follow the patterns established, write clean code, test thoroughly, and document your changes. When in doubt, look at existing code for examples.
 
 Happy coding! 🚀
-

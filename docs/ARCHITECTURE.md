@@ -439,7 +439,8 @@ appointment-booking/
 │   └── enqueue-scripts.php
 ├── src/
 │   ├── admin/ (React admin components)
-│   └── frontend/ (React booking components)
+│   ├── bookingNew/ (New React booking interface - recommended)
+│   └── frontend/ (Legacy React booking components - to be deprecated)
 └── docs/ (comprehensive documentation)
 ```
 
