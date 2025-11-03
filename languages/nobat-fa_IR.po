@@ -1513,10 +1513,12 @@ msgstr "ساعات در دسترس خود را برای هر روز از هفت�
 msgid "Create Schedule"
 msgstr "ایجاد برنامه"
 
+#: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:367
 msgid "Saving..."
 msgstr "در حال ذخیره‌سازی..."
 
+#: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:368
 msgid "Save Report"
 msgstr "ذخیره گزارش"

@@ -10,7 +10,7 @@
  */
 import React from "react";
 import {
-  getStatusColor,
+  getStatusClass,
   getStatusText,
   formatTimeRange,
 } from "../utils/displayHelpers";
@@ -49,10 +49,7 @@ const AppointmentTicket = ({ appointment }) => {
 
         <div className="ticket-row">
           <span className="label">{__("Status:", "nobat")}</span>
-          <span
-            className="status-badge"
-            style={{ backgroundColor: getStatusColor(status) }}
-          >
+          <span className={`status-badge ${getStatusClass(status)}`}>
             {getStatusText(status)}
           </span>
         </div>

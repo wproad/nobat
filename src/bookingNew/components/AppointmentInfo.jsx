@@ -9,7 +9,7 @@
  * @param {Object} appointment - Appointment object containing slot_date_jalali, start_time, end_time, status
  */
 import {
-  getStatusColor,
+  getStatusClass,
   getStatusText,
   formatTimeRange,
 } from "../utils/displayHelpers.js";
@@ -28,10 +28,7 @@ export function AppointmentInfo({ appointment }) {
       </div>
       <div className="appointment-status">
         <span
-          className="status-badge"
-          style={{
-            backgroundColor: getStatusColor(appointment.status),
-          }}
+          className={`status-badge ${getStatusClass(appointment.status)}`}
         >
           {getStatusText(appointment.status)}
         </span>

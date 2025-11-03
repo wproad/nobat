@@ -1,25 +1,25 @@
 import { __ } from "../../utils/i18n.js";
 
 /**
- * Get color for status badge based on appointment status
- * Maps each status to a corresponding CSS custom property color
+ * Get CSS class for status badge based on appointment status
+ * Maps each status to a corresponding CSS class for automatic styling
  * @param {string} status - Appointment status value (pending, confirmed, completed, cancelled, etc.)
- * @returns {string} CSS color variable or default gray
+ * @returns {string} CSS class name
  */
-export const getStatusColor = (status) => {
+export const getStatusClass = (status) => {
   switch (status) {
     case "pending":
-      return "var(--color-warning-300)";
+      return "status-pending";
     case "confirmed":
-      return "var(--color-success-300)";
+      return "status-confirmed";
     case "completed":
-      return "var(--color-success-300)";
+      return "status-completed";
     case "cancelled":
-      return "var(--color-error-300)";
+      return "status-cancelled";
     case "cancel_requested":
-      return "var(--color-secondary-300)";
+      return "status-cancel-requested";
     default:
-      return "var(--color-secondary-300)";
+      return "status-default";
   }
 };
 

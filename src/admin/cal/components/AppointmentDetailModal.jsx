@@ -152,7 +152,7 @@ const AppointmentDetailModal = ({
           "Permanently delete this appointment (cannot be undone)",
           "nobat"
         ),
-        variant: "link",
+        variant: "secondary",
         isDestructive: true,
         icon: null,
         type: "delete",
