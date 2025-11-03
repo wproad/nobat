@@ -1,6 +1,6 @@
 # Nobat (نوبت) - WordPress Appointment Booking Plugin
 
-**Version:** 2.0.0  
+**Version:** 2.2.0  
 **Requires WordPress:** 6.1+  
 **Requires PHP:** 7.4+  
 **License:** GPL-2.0-or-later  
@@ -11,6 +11,7 @@ A modern, feature-rich appointment booking system for WordPress with admin manag
 ## ✨ Features
 
 ### Core Functionality
+
 - 🗓️ **Schedule Management**: Create and manage multiple schedules with custom working hours
 - 📅 **Persian Calendar Support**: Full Jalali (Shamsi) calendar integration
 - 👥 **User-Based Appointments**: Appointments tied to WordPress user accounts
@@ -21,6 +22,7 @@ A modern, feature-rich appointment booking system for WordPress with admin manag
 - 🔐 **Role-Based Access**: Secure API with admin/user permission checks
 
 ### Technical Features
+
 - 🏗️ **Clean Architecture**: Repository pattern, service layer, dependency injection
 - 🔌 **REST API v2**: Modern, versioned API with full authentication
 - 📦 **PSR-4 Autoloading**: Composer-based class autoloading
@@ -106,6 +108,7 @@ For detailed schema documentation, see [docs/DATABASE-SCHEMA.md](docs/DATABASE-S
 All endpoints use the namespace `nobat/v2`:
 
 #### Appointments
+
 - `GET /wp-json/nobat/v2/appointments` — List appointments (admin/user)
 - `POST /wp-json/nobat/v2/appointments` — Create appointment (authenticated users)
 - `GET /wp-json/nobat/v2/appointments/{id}` — Get single appointment
@@ -116,6 +119,7 @@ All endpoints use the namespace `nobat/v2`:
 - `POST /wp-json/nobat/v2/appointments/{id}/complete` — Mark as completed (admin)
 
 #### Schedules
+
 - `GET /wp-json/nobat/v2/schedules` — List all schedules (admin)
 - `POST /wp-json/nobat/v2/schedules` — Create schedule (admin)
 - `GET /wp-json/nobat/v2/schedules/{id}` — Get schedule by ID
@@ -124,6 +128,7 @@ All endpoints use the namespace `nobat/v2`:
 - `GET /wp-json/nobat/v2/schedules/active` — Get active schedule (public)
 
 #### Slots
+
 - `GET /wp-json/nobat/v2/slots` — List slots (with filters)
 - `GET /wp-json/nobat/v2/slots/{id}` — Get single slot
 - `PUT /wp-json/nobat/v2/slots/{id}` — Update slot status (admin)
@@ -289,6 +294,7 @@ See [docs/UPGRADE-GUIDE.md](docs/UPGRADE-GUIDE.md) for detailed migration instru
 ## 🗺️ Roadmap
 
 ### v2.1 (Planned)
+
 - [ ] Complete frontend React booking interface
 - [ ] Email notifications
 - [ ] SMS integration
@@ -296,6 +302,7 @@ See [docs/UPGRADE-GUIDE.md](docs/UPGRADE-GUIDE.md) for detailed migration instru
 - [ ] Multiple service types
 
 ### v2.2 (Future)
+
 - [ ] Recurring appointments
 - [ ] Google Calendar sync
 - [ ] Multi-admin assignment
