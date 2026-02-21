@@ -54,7 +54,7 @@ const EmptyAppointmentsState = () => {
           )}
         </p>
 
-        <button
+        {/* <button
           className="book-appointment-btn"
           onClick={handleBookAppointment}
         >
@@ -73,7 +73,7 @@ const EmptyAppointmentsState = () => {
             </svg>
           </span>
           {__("Book New Appointment", "nobat")}
-        </button>
+        </button> */}
 
         <div className="empty-state-features">
           <div className="feature-item">

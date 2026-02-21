@@ -65,11 +65,11 @@ class ScheduleListTable extends \WP_List_Table {
 				esc_js( __( 'Are you sure you want to delete this schedule?', 'nobat' ) ),
 				__( 'Delete', 'nobat' )
 			),
-			'show' => sprintf(
-				'<a href="%s">%s</a>',
-				esc_url( admin_url( 'admin.php?page=nobat-cal&schedule_id=' . intval( $item['id'] ) ) ),
-				__( 'Show Calendar View', 'nobat' )
-			),
+			// 'show' => sprintf(
+			// 	'<a href="%s">%s</a>',
+			// 	esc_url( admin_url( 'admin.php?page=nobat-cal&schedule_id=' . intval( $item['id'] ) ) ),
+			// 	__( 'Show Calendar View', 'nobat' )
+			// ),
 		];
 
 		return sprintf(

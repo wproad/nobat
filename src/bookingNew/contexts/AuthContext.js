@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
       name: "",
       email: "",
     },
-    loginUrl: authData.loginUrl || "/wp-login.php",
-    registerUrl: authData.registerUrl || "/wp-login.php?action=register",
+    loginUrl: "/my-account/",
+    registerUrl: "/my-account/",
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

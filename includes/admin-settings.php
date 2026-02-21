@@ -23,12 +23,12 @@ function nobat_register_settings() {
 		'nobat_settings'
 	);
 
-	add_settings_section(
-		'nobat_notifications_section',
-		__( 'SMS Notifications', 'nobat' ),
-		'__return_false',
-		'nobat_settings'
-	);
+	// add_settings_section(
+	// 	'nobat_notifications_section',
+	// 	__( 'SMS Notifications', 'nobat' ),
+	// 	'__return_false',
+	// 	'nobat_settings'
+	// );
 
 	register_setting( 'nobat_settings', 'nobat_max_appointments', array(
 		'type' => 'integer',
@@ -135,29 +135,29 @@ function nobat_register_settings() {
 		'nobat_messages_section'
 	);
 
-    add_settings_field(
-        'nobat_notify_admin',
-        __( 'Notify Admin', 'nobat' ),
-        'nobat_field_notify_admin',
-        'nobat_settings',
-        'nobat_notifications_section'
-    );
+    // add_settings_field(
+    //     'nobat_notify_admin',
+    //     __( 'Notify Admin', 'nobat' ),
+    //     'nobat_field_notify_admin',
+    //     'nobat_settings',
+    //     'nobat_notifications_section'
+    // );
 
-	add_settings_field(
-		'nobat_notify_client',
-		__( 'Notify Client', 'nobat' ),
-		'nobat_field_notify_client',
-		'nobat_settings',
-		'nobat_notifications_section'
-	);
+	// add_settings_field(
+	// 	'nobat_notify_client',
+	// 	__( 'Notify Client', 'nobat' ),
+	// 	'nobat_field_notify_client',
+	// 	'nobat_settings',
+	// 	'nobat_notifications_section'
+	// );
 
-	add_settings_field(
-		'nobat_reminder_minutes',
-		__( 'Reminder (minutes before)', 'nobat' ),
-		'nobat_field_reminder_minutes',
-		'nobat_settings',
-		'nobat_notifications_section'
-	);
+	// add_settings_field(
+	// 	'nobat_reminder_minutes',
+	// 	__( 'Reminder (minutes before)', 'nobat' ),
+	// 	'nobat_field_reminder_minutes',
+	// 	'nobat_settings',
+	// 	'nobat_notifications_section'
+	// );
 
 	// // Time slots fields
 	// add_settings_field(
