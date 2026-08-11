@@ -3,7 +3,6 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   direction: rtl;
   text-align: right;
   // background: var(--color-neutral-50);
@@ -423,7 +422,6 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   direction: rtl;
   text-align: right;
   // background: var(--color-neutral-50);
@@ -685,7 +683,6 @@
       font-size: 0.875rem;
       transition: all 0.2s ease;
       width: 100%;
-      font-family: inherit;
       color: var(--color-neutral-900);
 
       &:focus {
@@ -861,7 +858,6 @@
   position: relative;
   max-width: 400px;
   margin: 0 auto;
-  font-family: inherit;
 
   .ticket-header {
     display: flex;
@@ -1016,7 +1012,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 // CardHeader with toggle button support
