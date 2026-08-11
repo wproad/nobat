@@ -20,6 +20,14 @@ const TimeSlotSelector = ({
   onDaySelect,
   onSlotSelect,
 }) => {
+  if (!days || days.length === 0) {
+    return (
+      <p className="bf-field__help">
+        {__("No available booking dates at this time.", "nobat")}
+      </p>
+    );
+  }
+
   return (
     <div className="bf-stack">
       <section aria-label={__("Select a date", "nobat")}>

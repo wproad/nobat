@@ -6,13 +6,14 @@
  *
  * @param {Object} schedule - Schedule object containing timeslots data
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Notice } from "../../ui";
 import TimeSlotSelector from "./TimeSlotSelector";
 import AppointmentTicket from "./AppointmentTicket";
 import { __ } from "../../utils/i18n";
 import { useFetch } from "../hooks/useFetch";
 import { useNotice } from "../hooks/useNotice";
+import { getBookableDays } from "../utils/slotHelpers";
 
 const BookingForm = ({ schedule }) => {
   const [notes, setNotes] = useState("");
@@ -27,6 +28,10 @@ const BookingForm = ({ schedule }) => {
   );
   const { showError, showSuccess, isVisible, message, status, clearMessage } =
     useNotice();
+  const bookableDays = useMemo(
+    () => getBookableDays(schedule?.timeslots),
+    [schedule?.timeslots]
+  );
   const isFormValid = selectedDay && selectedSlot;
 
   useEffect(() => {
@@ -99,7 +104,7 @@ const BookingForm = ({ schedule }) => {
       )}
       <form onSubmit={handleSubmit}>
         <TimeSlotSelector
-          days={schedule.timeslots}
+          days={bookableDays}
           selectedDay={selectedDay}
           selectedSlot={selectedSlot}
           onDaySelect={handleDaySelect}
