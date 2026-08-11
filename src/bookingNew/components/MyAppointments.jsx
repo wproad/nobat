@@ -85,7 +85,9 @@ const MyAppointments = () => {
           </div>
         ) : error ? (
           <Notice status="error" isDismissible={false}>
-            {error}
+            {error instanceof Error
+              ? error.message
+              : String(error || __("Failed to load appointments.", "nobat"))}
           </Notice>
         ) : !hasAnyAppointments ? (
           <EmptyAppointmentsState />
@@ -97,7 +99,7 @@ const MyAppointments = () => {
               key={appointment.id}
               appointment={appointment}
               onCancelled={() => {
-                refetch();
+                refetch().catch(() => {});
               }}
             />
           ))

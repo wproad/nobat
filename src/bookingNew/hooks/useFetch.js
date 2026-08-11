@@ -15,10 +15,10 @@ import { useState, useEffect, useCallback, useMemo } from "react";
  */
 export const useFetch = (url, options = {}, { immediate = true } = {}) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // Start loading when an automatic fetch is about to run; stay idle for manual mode.
+  const [loading, setLoading] = useState(Boolean(immediate));
   const [error, setError] = useState(null);
 
-  // TODO: remove throw errors of console
   // Get WordPress API settings from localized script
   const getApiSettings = useCallback(() => {
     return window.wpApiSettings || {};
@@ -96,8 +96,10 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
           err instanceof Error
             ? err
             : new Error(err.message || "An error occurred");
+        // Keep prior data so manual callers (forms) can still show UI while
+        // error state is handled via `error` / thrown promise.
         setError(errorObj);
-        throw err;
+        throw errorObj;
       } finally {
         setLoading(false);
       }
@@ -105,7 +107,7 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
     [getApiSettings, options]
   );
 
-  // Refetch function
+  // Refetch function — rejects on failure (callers that don't await should .catch)
   const refetch = useCallback(
     (newOptions = {}) => {
       const urlToFetch = typeof url === "function" ? url() : url;
@@ -115,6 +117,7 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
   );
 
   // Execute function for manual triggering (when immediate = false)
+  // Rejects on failure so await + try/catch callers keep working.
   const execute = useCallback(
     (requestOptions = {}) => {
       const urlToFetch = typeof url === "function" ? url() : url;
@@ -128,12 +131,11 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
   useEffect(() => {
     if (!immediate) return;
 
-    console.log("useFetch: ", url);
-
     const urlToFetch = typeof url === "function" ? url() : url;
     if (!urlToFetch) return;
 
-    executeRequest(urlToFetch);
+    // Swallow rejection here only — execute/refetch still reject for callers.
+    executeRequest(urlToFetch).catch(() => {});
   }, [url, executeRequest, immediate]);
 
   return {

@@ -24,7 +24,7 @@ const BookingView = ({ scheduleId }) => {
     error: scheduleError,
   } = useGet(endpoint);
 
-  const schedule = scheduleData?.schedule || scheduleData || null;
+  const schedule = scheduleData?.schedule || null;
 
   if (scheduleLoading) {
     return (
@@ -35,15 +35,13 @@ const BookingView = ({ scheduleId }) => {
     );
   }
 
-  if (scheduleError || !schedule) {
+  if (scheduleError || !schedule?.id) {
     return (
-      <p className="bf-empty__muted">
-        {scheduleError ||
-          __(
-            "No active schedule found. Please contact the administrator.",
-            "nobat"
-          )}
-      </p>
+      <div className="bf-empty">
+        <p className="bf-empty__muted">
+          {__("فعلا برنامه خالی نداریم.", "nobat")}
+        </p>
+      </div>
     );
   }
 
