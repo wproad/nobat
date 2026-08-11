@@ -828,6 +828,11 @@ msgstr "لغو شده"
 msgid "Cancellation Requested"
 msgstr "درخواست لغو شده"
 
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js:41
+msgid "Cancel Requested"
+msgstr "درخواست لغو شده"
+
 #: build/booking.js:1
 #: build/bookingNew.js:1
 #: src/bookingNew/components/Main.jsx:35

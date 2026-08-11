@@ -5,8 +5,8 @@
  */
 
 .bf-root {
-  /* Surfaces — light plugin canvas */
-  --bg:           oklch(0.985 0.004 250);
+  /* Surfaces — transparent so the host site shows through */
+  --bg:           transparent;
   --surface:      oklch(1 0 0);
   --surface-2:    oklch(0.965 0.006 250);
   --fg:           oklch(0.22 0.02 260);
