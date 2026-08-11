@@ -355,5 +355,5 @@ slot: booked → available
 
 ---
 
-*Last updated: Based on plugin v2.0.0 schema*
+*Last updated: Plugin 2.2.0*
 

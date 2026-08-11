@@ -474,23 +474,9 @@ All frequently queried columns are indexed:
 - Times stored as VARCHAR(5) (HH:MM) for simplicity
 - Text fields use TEXT type (unlimited length)
 
-## Migration History
+## Schema Notes
 
-**Version 1.0.0:** Initial JSON-based schema
-- Schedules stored working hours as JSON
-- Slots stored as JSON array
-
-**Version 1.0.1:** Added appointment_date_jalali
-- Schema mismatch fix
-
-**Version 2.0.0:** Normalized schema
-- Removed JSON storage
-- Created 5 normalized tables
-- Added foreign key constraints
-
-**Version 3.0:** Table prefixing
-- Added `nobat_` prefix to all tables
-- Updated all references
+Current schema uses five normalized `wp_nobat_*` tables with foreign keys and no JSON storage for working hours or slots.
 
 ## Backup Recommendations
 

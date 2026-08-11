@@ -1,95 +1,54 @@
 # Nobat Plugin Documentation
 
-Welcome to the Nobat WordPress plugin documentation.
+Documentation for the Nobat WordPress appointment booking plugin.
 
-## 📚 Available Documentation
+## Available Documentation
 
-### Essential Reading
-
-1. **[STRUCTURE.md](STRUCTURE.md)** - Complete plugin structure and architecture overview
-   - Directory structure
-   - Architecture patterns
-   - Database structure
-   - Development workflow
-   
-2. **[API-v2-ENDPOINTS.md](API-v2-ENDPOINTS.md)** - REST API reference
-   - All endpoints documented
-   - Request/response examples
-   - Authentication details
-
-3. **[DATABASE-SCHEMA.md](DATABASE-SCHEMA.md)** - Database documentation
-   - Table structures
-   - Relationships
-   - Indexes and constraints
-
-4. **[ARCHITECTURE.md](ARCHITECTURE.md)** - Architecture deep dive
-   - Design patterns
-   - Clean architecture layers
-   - Dependency injection
-
-5. **[DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md)** - Development guide
-   - Setup instructions
-   - Common tasks
-   - Best practices
-
-6. **[UPGRADE-GUIDE.md](UPGRADE-GUIDE.md)** - Upgrade from v1.x to v2.0
-   - Migration steps
-   - Breaking changes
-   - Verification checklist
+1. **[STRUCTURE.md](STRUCTURE.md)** — Plugin structure and organization
+2. **[API-ENDPOINTS.md](API-ENDPOINTS.md)** — REST API reference (`nobat/v2`)
+3. **[DATABASE-SCHEMA.md](DATABASE-SCHEMA.md)** — Database tables and relationships
+4. **[ARCHITECTURE.md](ARCHITECTURE.md)** — Clean architecture layers and patterns
+5. **[DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md)** — Local setup and common tasks
+6. **[STATUS-REFERENCE.md](STATUS-REFERENCE.md)** — Slot and appointment status values
+7. **[LANDING-PAGE-CONTENT.json](LANDING-PAGE-CONTENT.json)** — Marketing handoff: landing page copy and features (FA/EN)
 
 ---
 
-## 🚀 Quick Start
-
-### For Developers
+## Quick Start
 
 ```bash
-# Install dependencies
 composer install
 npm install
-
-# Build assets
 npm run build
 
-# Development mode
+# Watch mode
 npm run start
 ```
 
-See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for complete setup.
+See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for full setup.
 
-### For Users
-
-See [UPGRADE-GUIDE.md](UPGRADE-GUIDE.md) for installation and upgrade instructions.
-
----
-
-## 📖 Documentation Structure
+### Booking shortcode
 
 ```
-docs/
-├── README.md (this file)
-├── STRUCTURE.md        - Plugin structure overview
-├── API-v2-ENDPOINTS.md - API documentation
-├── DATABASE-SCHEMA.md  - Database reference
-├── ARCHITECTURE.md     - Architecture patterns
-├── DEVELOPER-GUIDE.md  - Development setup
-└── UPGRADE-GUIDE.md    - Upgrade instructions
+[nobat_new]
+[nobat_new schedule_id="5"]
 ```
 
 ---
 
-## 🔍 Finding Information
+## Finding Information
 
-**Want to know about...**
-
-- **Project structure?** → [STRUCTURE.md](STRUCTURE.md)
-- **Making API calls?** → [API-v2-ENDPOINTS.md](API-v2-ENDPOINTS.md)
-- **Database tables?** → [DATABASE-SCHEMA.md](DATABASE-SCHEMA.md)
-- **Architecture patterns?** → [ARCHITECTURE.md](ARCHITECTURE.md)
-- **Setting up dev environment?** → [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md)
-- **Upgrading from v1?** → [UPGRADE-GUIDE.md](UPGRADE-GUIDE.md)
+| Need | Doc |
+|------|-----|
+| Project structure | [STRUCTURE.md](STRUCTURE.md) |
+| API calls | [API-ENDPOINTS.md](API-ENDPOINTS.md) |
+| Database tables | [DATABASE-SCHEMA.md](DATABASE-SCHEMA.md) |
+| Architecture patterns | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Dev environment | [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) |
+| Status meanings | [STATUS-REFERENCE.md](STATUS-REFERENCE.md) |
+| Landing / marketing copy | [LANDING-PAGE-CONTENT.json](LANDING-PAGE-CONTENT.json) |
 
 ---
 
-**Plugin Version:** 2.0.0  
-**Last Updated:** October 22, 2024
+**Plugin Version:** 2.2.0  
+**Last Updated:** August 2026

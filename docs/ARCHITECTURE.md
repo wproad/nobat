@@ -196,7 +196,7 @@ The Appointment Booking Plugin follows a clean, layered architecture with proper
 ```
 User Interaction (React Component)
         ↓
-    HTTP POST /wp-json/appointment-booking/v2/appointments
+    HTTP POST /wp-json/nobat/v2/appointments
         ↓
     AuthMiddleware (check login)
         ↓
@@ -346,20 +346,6 @@ if (is_wp_error($result)) {
 - **Browser**: Cross-browser compatibility
 - **Performance**: Load testing for large datasets
 
-## Backward Compatibility
-
-### V1 API (Legacy)
-- Still supported for admin interface
-- Acts as compatibility layer
-- Transforms data for old React components
-- Will be deprecated after Phase 8
-
-### V2 API (Current)
-- Uses normalized schema directly
-- Clean RESTful design
-- Proper authentication
-- Used by new frontend components
-
 ## Extension Points
 
 ### Adding New Features
@@ -386,62 +372,38 @@ if (is_wp_error($result)) {
 1. Add method in controller
 2. Register route in routes.php
 3. Apply middleware if needed
-4. Document in API-v2-ENDPOINTS.md
+4. Document in API-ENDPOINTS.md
 ```
 
 ## File Organization
 
 ```
-appointment-booking/
-├── appointment-booking.php (main plugin file, loads bootstrap)
+nobat/
+├── nobat.php
 ├── includes/
-│   ├── bootstrap.php (DI container initialization)
-│   ├── core/
-│   │   └── Container.php (DI container)
-│   ├── database/
-│   │   ├── DatabaseManager.php (schema management)
-│   │   ├── DatabaseTransaction.php (transaction support)
-│   │   ├── test-data.php (test data generation)
-│   │   └── verify-migration.php (verification script)
-│   ├── repositories/
-│   │   ├── BaseRepository.php
-│   │   ├── ScheduleRepository.php
-│   │   ├── WorkingHoursRepository.php
-│   │   ├── SlotRepository.php
-│   │   ├── AppointmentRepository.php
-│   │   ├── AppointmentHistoryRepository.php
-│   │   └── UserRepository.php
-│   ├── services/
-│   │   ├── AuthService.php
-│   │   ├── ScheduleService.php
-│   │   ├── SlotService.php
-│   │   └── AppointmentService.php
-│   ├── utilities/
-│   │   ├── DateTimeHelper.php
-│   │   ├── Validator.php
-│   │   └── SlotGenerator.php
-│   ├── rest/
-│   │   ├── controllers/
-│   │   │   ├── AppointmentController.php
-│   │   │   ├── ScheduleController.php
-│   │   │   └── SlotController.php
-│   │   ├── middleware/
-│   │   │   └── AuthMiddleware.php
-│   │   ├── routes.php (v2 API routes)
-│   │   ├── register.php (v1 API routes - legacy)
-│   │   ├── appointment-api.php (v1 handlers - legacy)
-│   │   └── schedule-api.php (v1 handlers - legacy)
-│   ├── activation.php (plugin activation, DB check)
-│   ├── helpers.php (legacy wrapper functions)
+│   ├── bootstrap.php
+│   ├── Core/          # Container, DatabaseManager, Router, ShortcodeHandler
+│   ├── Repositories/
+│   ├── Services/
+│   ├── Controllers/
+│   ├── Middleware/
+│   ├── Utilities/
+│   ├── Admin/
+│   ├── activation.php
+│   ├── helpers.php
 │   ├── admin-menu.php
 │   ├── admin-page.php
 │   ├── admin-settings.php
 │   └── enqueue-scripts.php
 ├── src/
-│   ├── admin/ (React admin components)
-│   ├── bookingNew/ (New React booking interface - recommended)
-│   └── frontend/ (Legacy React booking components - to be deprecated)
-└── docs/ (comprehensive documentation)
+│   ├── admin/         # Calendar + schedule builder
+│   ├── bookingNew/    # Soft Slot booking UI
+│   ├── ui/
+│   ├── hooks/
+│   ├── lib/
+│   └── utils/
+├── design-system/
+└── docs/
 ```
 
 ## Best Practices Followed
@@ -460,7 +422,6 @@ appointment-booking/
 ## Future Improvements
 
 ### Short Term
-- Complete Phase 8 (Admin Interface Updates)
 - Add comprehensive unit tests
 - Performance benchmarking
 

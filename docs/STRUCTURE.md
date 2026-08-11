@@ -1,7 +1,7 @@
 # Nobat Plugin Structure
 
-**Version:** 2.0.0  
-**Last Updated:** October 22, 2024
+**Version:** 2.2.0  
+**Last Updated:** August 2026
 
 This document provides a comprehensive overview of the Nobat plugin's structure, architecture, and organization.
 
@@ -54,16 +54,11 @@ nobat/
 │   │   ├── AppointmentsListTable.php
 │   │   └── ScheduleListTable.php
 │   │
+│   ├── Core/Router.php          # REST API route registration (nobat/v2)
+│   ├── Core/ShortcodeHandler.php # Booking shortcodes
 │   ├── bootstrap.php            # DI container initialization
 │   ├── activation.php           # Plugin activation logic
-│   ├── helpers.php              # Legacy helper functions (deprecated)
-│   │
-│   ├── rest/                    # REST API
-│   │   ├── routes.php           # v2 API route registration
-│   │   ├── register.php         # v1 API registration (legacy)
-│   │   ├── schedule-api.php     # v1 schedule endpoints (legacy)
-│   │   └── appointment-api.php  # v1 appointment endpoints (legacy)
-│   │
+│   ├── helpers.php              # Shared PHP helpers
 │   ├── admin-menu.php           # Admin menu registration
 │   ├── admin-page.php           # Admin page callbacks
 │   ├── admin-settings.php       # Settings page
@@ -71,41 +66,32 @@ nobat/
 │
 ├── src/                         # JavaScript/React source
 │   ├── admin/                   # Admin React components
-│   │   ├── admin.scss           # Base admin styles
 │   │   ├── cal/                 # Calendar view
 │   │   │   ├── index.js
-│   │   │   ├── cal.scss
 │   │   │   ├── components/
 │   │   │   ├── hooks/
 │   │   │   └── utils/
-│   │   ├── schedule/            # Schedule builder
-│   │   │   ├── index.js
-│   │   │   ├── schedule.scss
-│   │   │   └── components/
-│   │   ├── cancellations/       # Cancellation requests
-│   │   │   ├── index.js
-│   │   │   ├── cancellations.scss
-│   │   │   └── components/
-│   │   └── components/          # Shared admin components
-│   │       └── CancellationRequests.jsx
-│   ├── bookingNew/              # New React booking interface
-│   │   ├── index.js            # Entry point
-│   │   ├── bookingNew.scss     # Styles
-│   │   ├── components/         # Booking components
-│   │   ├── contexts/           # React contexts (AuthContext)
-│   │   ├── hooks/              # Custom React hooks
-│   │   └── utils/              # Utility functions
-│   ├── frontend/                # Legacy booking interface (to be deprecated)
-│   │   └── booking/            # Old booking components
-│   └── hooks/                   # Shared React hooks
-│       └── ScheduleContext.js
+│   │   └── schedule/            # Schedule builder
+│   │       ├── index.js
+│   │       └── components/
+│   ├── bookingNew/              # Frontend booking interface (Soft Slot)
+│   │   ├── index.js
+│   │   ├── soft-slot/          # Design tokens & booking form CSS
+│   │   ├── components/
+│   │   ├── contexts/
+│   │   ├── hooks/
+│   │   └── utils/
+│   ├── ui/                      # Shared UI components
+│   ├── hooks/                   # Shared React hooks
+│   ├── lib/                     # Shared JS helpers
+│   └── utils/                   # i18n, api-fetch, dom-ready
+│
+├── design-system/               # Soft Slot design system docs
 │
 ├── build/                       # Compiled assets (generated)
 │   ├── cal.js / cal.css
 │   ├── schedule.js / schedule.css
-│   ├── cancellations.js / cancellations.css
-│   ├── bookingNew.js / bookingNew.css  # New booking interface
-│   ├── booking.js / booking.css        # Legacy booking (to be deprecated)
+│   ├── bookingNew.js / bookingNew.css
 │   └── *.asset.php
 │
 ├── languages/                   # Translation files
@@ -117,11 +103,12 @@ nobat/
 ├── docs/                        # Documentation
 │   ├── README.md                # Documentation index
 │   ├── STRUCTURE.md             # This file
-│   ├── API-v2-ENDPOINTS.md      # API reference
+│   ├── API-ENDPOINTS.md         # API reference
 │   ├── ARCHITECTURE.md          # Architecture overview
 │   ├── DATABASE-SCHEMA.md       # Database documentation
 │   ├── DEVELOPER-GUIDE.md       # Development guide
-│   └── UPGRADE-GUIDE.md         # Upgrade instructions
+│   ├── STATUS-REFERENCE.md      # Status value reference
+│   └── LANDING-PAGE-CONTENT.json # Marketing landing handoff
 │
 ├── vendor/                      # Composer dependencies (generated)
 │   └── autoload.php
@@ -202,29 +189,25 @@ See [DATABASE-SCHEMA.md](DATABASE-SCHEMA.md) for complete schema documentation.
 
 ## 🔌 API Structure
 
-### REST API v2 (Primary)
+### REST API
 
 **Namespace:** `/wp-json/nobat/v2/`
 
 **Controllers:**
 
-- `AppointmentController` - Appointment management
-- `ScheduleController` - Schedule CRUD
-- `SlotController` - Slot management
+- `AppointmentController` — Appointment management
+- `ScheduleController` — Schedule CRUD
+- `SlotController` — Slot management
+
+Routes are registered in `includes/Core/Router.php`.
 
 **Authentication:**
 
-- All endpoints require authentication
 - `AuthMiddleware` handles permission checks
-- Nonce-based for admin, cookie-based for users
+- Cookie/nonce auth for logged-in users and admins
+- Some schedule/slot read endpoints are public where needed for booking
 
-See [API-v2-ENDPOINTS.md](API-v2-ENDPOINTS.md) for complete API documentation.
-
-### REST API v1 (Legacy)
-
-**Namespace:** `/wp-json/appointment-booking/v1/`
-
-Maintained for backward compatibility. Delegates to v2 services internally.
+See [API-ENDPOINTS.md](API-ENDPOINTS.md) for complete API documentation.
 
 ---
 
@@ -232,72 +215,20 @@ Maintained for backward compatibility. Delegates to v2 services internally.
 
 ### React Applications
 
-The plugin uses **separate React apps** for different admin pages and frontend interfaces:
+**Admin:**
 
-**Admin Applications:**
+1. **Calendar** (`src/admin/cal/`) — Admin → Nobat → Calendar
+2. **Schedule builder** (`src/admin/schedule/`) — Create/edit schedules
 
-1. **Calendar App** (`src/admin/cal/`)
+**Frontend booking (Soft Slot):**
 
-   - Entry: `cal/index.js`
-   - Mount: `#nobat-cal`
-   - Page: Admin → Nobat → Cal
+3. **Booking interface** (`src/bookingNew/`)
+   - Shortcodes: `[nobat_new]` and `[nobat_booking]` (same handler)
+   - Optional attribute: `schedule_id`
+   - Features: login gate, my appointments, book flow, cancellation requests
+   - Brand colors from Settings inject Soft Slot `--accent*` tokens
 
-2. **Schedule Builder** (`src/admin/schedule/`)
-
-   - Entry: `schedule/index.js`
-   - Mount: `#nobat-scheduling`
-   - Page: Admin → Nobat → Add Schedule
-
-3. **Cancellations** (`src/admin/cancellations/`)
-   - Entry: `cancellations/index.js`
-   - Mount: `#nobat-cancellations`
-   - Page: Admin → Nobat → Cancellations
-
-**Frontend Applications:**
-
-4. **New Booking Interface** (`src/bookingNew/`)
-
-   - Entry: `bookingNew/index.js`
-   - Mount: `.nobat-new-app`
-   - Shortcode: `[nobat_new]`
-   - Status: **Recommended** - Modern React-based booking interface
-
-5. **Legacy Booking Interface** (`src/frontend/booking/`)
-   - Entry: `frontend/booking/index.js`
-   - Mount: `.nobat-booking-app`
-   - Shortcode: `[nobat_booking]`
-   - Status: **Legacy** - To be deprecated in future release
-
-### Asset Loading
-
-Assets are loaded conditionally based on the admin page or shortcode presence:
-
-**Admin Pages:**
-
-```php
-// In enqueue-scripts.php
-if ( strpos( $admin_page, 'nobat-cal' ) !== false ) {
-    // Load calendar bundle
-    wp_enqueue_script( 'nobat-cal-script', ... );
-    wp_enqueue_style( 'nobat-cal-style', ... );
-}
-```
-
-**Frontend Shortcodes:**
-
-```php
-// New booking interface - checks for 'nobat_new' shortcode
-if ( has_shortcode( $post->post_content, 'nobat_new' ) ) {
-    wp_enqueue_script( 'nobat-front-script', ... ); // bookingNew.js
-    wp_enqueue_style( 'nobat-front-style', ... );   // bookingNew.css
-}
-
-// Legacy booking interface - checks for 'nobat_booking' shortcode
-if ( has_shortcode( $post->post_content, 'nobat_booking' ) ) {
-    wp_enqueue_script( 'nobat-frontend-script', ... ); // booking.js
-    wp_enqueue_style( 'nobat-frontend-style', ... );   // booking.css
-}
-```
+Assets load conditionally from `includes/enqueue-scripts.php` for admin pages and when a booking shortcode is present.
 
 ---
 
@@ -326,7 +257,7 @@ composer dump-autoload
 2. **Repository**: Create repository class
 3. **Service**: Create service class
 4. **Controller**: Create API controller
-5. **Routes**: Register in `rest/routes.php`
+5. **Routes**: Register in `includes/Core/Router.php`
 6. **Bootstrap**: Wire up in `bootstrap.php`
 7. **UI**: Create React components
 
@@ -444,7 +375,7 @@ Slots are **automatically generated** when a schedule is created:
 
 - Max 3 active appointments per user
 - Enforced in `AppointmentService`
-- Configurable via filter
+- Configurable in Settings (and via filter)
 
 ---
 
@@ -474,24 +405,17 @@ Currently **no caching layer**. Future consideration:
 
 ## 📖 Related Documentation
 
-- [API Reference](API-v2-ENDPOINTS.md) - Complete API documentation
-- [Architecture](ARCHITECTURE.md) - Detailed architecture patterns
-- [Database Schema](DATABASE-SCHEMA.md) - Database structure
-- [Developer Guide](DEVELOPER-GUIDE.md) - Development setup
-- [Upgrade Guide](UPGRADE-GUIDE.md) - Migration from v1.x
+- [API Reference](API-ENDPOINTS.md)
+- [Architecture](ARCHITECTURE.md)
+- [Database Schema](DATABASE-SCHEMA.md)
+- [Developer Guide](DEVELOPER-GUIDE.md)
+- [Status Reference](STATUS-REFERENCE.md)
+- [Landing page content](LANDING-PAGE-CONTENT.json)
 
 ---
 
-## 🔄 Version History
-
-| Version | Date     | Changes                               |
-| ------- | -------- | ------------------------------------- |
-| 1.0.0   | -        | Original "Appointment Booking" plugin |
-| 2.0.0   | Oct 2024 | Complete refactor as "Nobat"          |
-
-**Current Version:** 2.0.0  
-**Status:** Production Ready
+**Current Version:** 2.2.0
 
 ---
 
-_This document is maintained as the authoritative source for plugin structure information._
+_This document is the authoritative source for plugin structure information._

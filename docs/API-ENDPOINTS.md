@@ -1,8 +1,8 @@
-# Appointment Booking API v2 - Endpoints Documentation
+# Nobat REST API — Endpoints
 
 ## Base URL
 ```
-/wp-json/appointment-booking/v2
+/wp-json/nobat/v2
 ```
 
 ## Authentication
@@ -645,7 +645,7 @@ Unblocks a previously blocked slot.
 
 **Book Appointment:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/appointment-booking/v2/appointments \
+curl -X POST https://yoursite.com/wp-json/nobat/v2/appointments \
   -H "Content-Type: application/json" \
   -b "wordpress_logged_in_cookie=..." \
   -d '{
@@ -657,42 +657,13 @@ curl -X POST https://yoursite.com/wp-json/appointment-booking/v2/appointments \
 
 **Get Available Slots:**
 ```bash
-curl https://yoursite.com/wp-json/appointment-booking/v2/slots/available?days=7
+curl https://yoursite.com/wp-json/nobat/v2/slots/available?days=7
 ```
+
 
 ---
 
-## 📝 Migration from v1
-
-### Key Changes
-
-| v1 Endpoint | v2 Endpoint | Changes |
-|-------------|-------------|---------|
-| `POST /appointments` | `POST /appointments` | - Removed `client_name`, `client_phone`<br>- Added `note`<br>- Requires login |
-| `GET /available-slots` | `GET /slots/available` | - New structure (grouped by date)<br>- Returns objects, not strings |
-| `POST /schedule` | `POST /schedules` | - Removed `admin_id`<br>- Renamed `selectedAdmin` → removed<br>- Renamed `weeklyHours` → `working_hours` |
-
-### Response Structure Changes
-
-**v1 Slots:**
-```json
-["09:00-09:30", "09:30-10:00"]
-```
-
-**v2 Slots:**
-```json
-[
-  {
-    "id": 123,
-    "start_time": "09:00:00",
-    "end_time": "09:30:00",
-    "status": "available"
-  }
-]
-```
-
----
-
-**API Version**: 2.0.0  
-**Last Updated**: October 2025
+**API Namespace**: `nobat/v2`  
+**Plugin Version**: 2.2.0  
+**Last Updated**: August 2026
 

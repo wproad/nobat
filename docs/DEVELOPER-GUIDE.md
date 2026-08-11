@@ -30,10 +30,10 @@ This guide helps developers understand, maintain, and extend the Appointment Boo
 cd wp-content/plugins/
 
 # Clone repository
-git clone [repository-url] appointment-booking
+git clone [repository-url] nobat
 
 # Install npm dependencies (for React)
-cd appointment-booking
+cd nobat
 npm install
 ```
 
@@ -87,21 +87,18 @@ $service = new Appointment_Service($mock_repo, $mock_slot_repo);
 ### Directory Structure
 
 ```
-appointment-booking/
-├── includes/               # PHP backend
-│   ├── core/              # DI container
-│   ├── database/          # Schema, migrations
-│   ├── repositories/      # Data access
-│   ├── services/          # Business logic
-│   ├── utilities/         # Helper classes
-│   └── rest/              # API endpoints
-├── src/                   # React frontend
-│   ├── admin/             # Admin interface
-│   ├── bookingNew/        # New booking interface (recommended)
-│   └── frontend/          # Legacy booking form (to be deprecated)
-├── build/                 # Compiled JavaScript
-├── docs/                  # Documentation
-└── languages/             # Translations
+nobat/
+├── includes/               # PHP backend (Core, Repositories, Services, Controllers, …)
+├── src/
+│   ├── admin/             # Calendar + schedule builder
+│   ├── bookingNew/        # Soft Slot booking UI
+│   ├── ui/
+│   ├── hooks/
+│   ├── lib/
+│   └── utils/
+├── build/
+├── docs/
+└── languages/
 ```
 
 ### Naming Conventions
@@ -113,13 +110,13 @@ appointment-booking/
 
 **Classes:**
 
-- `Appointment_Booking_` prefix (e.g., `Appointment_Booking_Schedule_Service`)
+- PSR-4 under `Nobat\` (e.g., `Nobat\Services\ScheduleService`)
 - Descriptive names (e.g., `SlotRepository` not `SR`)
 
 **Functions:**
 
-- Prefix with `appointment_booking_` for global functions
-- Use verb_noun pattern (e.g., `get_active_schedule`)
+- Prefix with `nobat_` for global functions
+- Use verb_noun pattern (e.g., `nobat_get_brand_colors`)
 
 **Database:**
 
@@ -263,7 +260,7 @@ register_rest_route( $namespace, '/appointments/upcoming', array(
 
 **Step 3: Document Endpoint**
 
-Add to `docs/API-v2-ENDPOINTS.md`:
+Add to `docs/API-ENDPOINTS.md`:
 
 ````markdown
 ### GET /appointments/upcoming
@@ -305,7 +302,7 @@ export const UpcomingAppointments = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "/wp-json/appointment-booking/v2/appointments/upcoming?days=7",
+        "/wp-json/nobat/v2/appointments/upcoming?days=7",
         {
           credentials: "include",
         }
@@ -392,9 +389,8 @@ When version is bumped, `dbDelta()` will automatically add the new column on nex
 
 ```bash
 # Load test data script via WordPress admin
-# Navigate to: wp-admin/admin.php?page=appointment-booking
-# Or run via WP-CLI:
-wp eval-file includes/database/test-data.php
+# Navigate to: wp-admin/admin.php?page=nobat
+# Or seed via WP-CLI / custom scripts as needed
 ```
 
 ### Verification
@@ -558,7 +554,7 @@ Check:
 
 - `docs/ARCHITECTURE.md` - Architecture overview
 - `docs/DATABASE-SCHEMA.md` - Database schema
-- `docs/API-v2-ENDPOINTS.md` - API documentation
+- `docs/API-ENDPOINTS.md` - API documentation
 - `docs/REFACTOR-PLAN.md` - Original refactor plan
 
 ### WordPress Resources

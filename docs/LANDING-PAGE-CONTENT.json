@@ -1,0 +1,450 @@
+{
+  "meta": {
+    "product": "Nobat",
+    "product_fa": "نوبت",
+    "tagline_en": "Appointment booking for WordPress — built for Persian sites",
+    "tagline_fa": "سیستم نوبت‌دهی وردپرس؛ مناسب سایت‌های فارسی",
+    "version": "2.2.0",
+    "vendor": "WPROAD",
+    "vendor_url": "https://wproad.ir/nobat",
+    "plugin_uri": "https://github.com/wproad/nobat",
+    "audience": [
+      "clinics",
+      "consultants",
+      "salons",
+      "coaches",
+      "service businesses",
+      "WordPress site owners in Iran / Persian RTL markets"
+    ],
+    "notes_for_marketing": [
+      "Copy below reflects shipped features only (no SMS, email automation, or payment claims).",
+      "Primary market language is Persian (fa); English is provided for bilingual pages.",
+      "Brand accent default is teal (#2A9B9B); hosts can override brand colors in Settings.",
+      "Embed is shortcode-based on any WordPress page/post."
+    ],
+    "last_updated": "2026-08-11"
+  },
+  "brand": {
+    "name": "Nobat",
+    "name_fa": "نوبت",
+    "default_accent": "#2A9B9B",
+    "visual_direction": "Soft Slot — light, calm RTL booking UI with swappable brand accent",
+    "keywords": [
+      "نوبت‌دهی",
+      "رزرو آنلاین",
+      "تقویم شمسی",
+      "وردپرس",
+      "appointment booking",
+      "Jalali calendar",
+      "WordPress plugin"
+    ]
+  },
+  "landing_page": {
+    "hero": {
+      "eyebrow_fa": "افزونه نوبت‌دهی وردپرس",
+      "eyebrow_en": "WordPress appointment plugin",
+      "headline_fa": "نوبت؛ رزرو آنلاین ساده با تقویم شمسی",
+      "headline_en": "Nobat — simple online booking with Persian calendar",
+      "subheadline_fa": "برای کلینیک‌ها، مشاوران و کسب‌وکارهای خدماتی: نوبت بگیرید، مدیریت کنید، و ظاهر فرم را با رنگ برند خود هماهنگ کنید.",
+      "subheadline_en": "For clinics, consultants, and service businesses: take bookings, manage the calendar, and match the form to your brand colors.",
+      "primary_cta_fa": "شروع با نوبت",
+      "primary_cta_en": "Get started with Nobat",
+      "secondary_cta_fa": "مشاهده امکانات",
+      "secondary_cta_en": "See features"
+    },
+    "problem_section": {
+      "title_fa": "رزرو تلفنی وقت‌گیر و نامنظم است",
+      "title_en": "Phone booking is slow and messy",
+      "points": [
+        {
+          "fa": "مشتری نمی‌داند چه ساعاتی آزاد است",
+          "en": "Customers cannot see real availability"
+        },
+        {
+          "fa": "مدیر باید دستی زمان‌ها را هماهنگ کند",
+          "en": "Staff waste time coordinating slots by hand"
+        },
+        {
+          "fa": "لغو و پیگیری وضعیت شفاف نیست",
+          "en": "Cancellations and status are unclear"
+        }
+      ]
+    },
+    "solution_section": {
+      "title_fa": "نوبت، رزرو را داخل سایت شما می‌آورد",
+      "title_en": "Nobat brings booking into your WordPress site",
+      "body_fa": "با یک شورت‌کد، فرم رزرو مدرن را در هر صفحه قرار دهید. کاربر وارد می‌شود، روز و ساعت آزاد را انتخاب می‌کند، و نوبت‌های خودش را می‌بیند.",
+      "body_en": "Drop a modern booking form on any page with one shortcode. Users log in, pick an open day and time, and manage their own appointments."
+    },
+    "feature_groups": [
+      {
+        "id": "booking_experience",
+        "title_fa": "تجربه رزرو برای مشتری",
+        "title_en": "Customer booking experience",
+        "features": [
+          {
+            "id": "shortcode_embed",
+            "title_fa": "نصب روی هر صفحه با شورت‌کد",
+            "title_en": "Embed on any page via shortcode",
+            "description_fa": "با `[nobat_new]` فرم رزرو را در برگه یا نوشته قرار دهید. در صورت نیاز می‌توانید یک برنامه زمانی مشخص را با `schedule_id` هدف بگیرید.",
+            "description_en": "Add `[nobat_new]` to any page or post. Optionally target a specific schedule with `schedule_id`.",
+            "customer_benefit_fa": "بدون نیاز به صفحه جدا یا افزونه پیچیده؛ داخل همان سایت شما کار می‌کند.",
+            "customer_benefit_en": "Works inside your existing site—no separate booking portal required."
+          },
+          {
+            "id": "jalali_calendar",
+            "title_fa": "تقویم شمسی (جلالی)",
+            "title_en": "Persian (Jalali) calendar",
+            "description_fa": "انتخاب تاریخ و نمایش نوبت‌ها با تاریخ شمسی؛ مناسب مخاطب فارسی‌زبان.",
+            "description_en": "Date picking and appointment display use Jalali dates for Persian-speaking audiences.",
+            "customer_benefit_fa": "کاربر دقیقاً همان تقویمی را می‌بیند که در ایران استفاده می‌کند.",
+            "customer_benefit_en": "Users see the calendar they already use day to day."
+          },
+          {
+            "id": "rtl_ui",
+            "title_fa": "رابط راست‌به‌چپ و مدرن",
+            "title_en": "Modern RTL booking UI",
+            "description_fa": "رابط Soft Slot با طراحی روشن، خوانا و سازگار با RTL برای موبایل و دسکتاپ.",
+            "description_en": "Soft Slot UI: light, readable, RTL-first layout for mobile and desktop.",
+            "customer_benefit_fa": "فرم رزرو حرفه‌ای به نظر می‌رسد و با قالب فارسی سایت هماهنگ است.",
+            "customer_benefit_en": "The booking form looks professional and fits Persian site layouts."
+          },
+          {
+            "id": "login_required",
+            "title_fa": "رزرو برای کاربران واردشده",
+            "title_en": "Login-required booking",
+            "description_fa": "مهمان‌ها به ورود یا ثبت‌نام هدایت می‌شوند؛ هر نوبت به حساب کاربری وردپرس وصل است.",
+            "description_en": "Guests are prompted to log in or register; every appointment is tied to a WordPress user.",
+            "customer_benefit_fa": "هویت مشتری مشخص است و لیست نوبت‌های شخصی قابل پیگیری است.",
+            "customer_benefit_en": "You know who booked, and each customer has a personal appointment list."
+          },
+          {
+            "id": "my_appointments",
+            "title_fa": "مشاهده «نوبت‌های من»",
+            "title_en": "“My appointments” view",
+            "description_fa": "کاربر بین رزرو جدید و لیست نوبت‌های خودش جابه‌جا می‌شود و وضعیت هر نوبت را می‌بیند.",
+            "description_en": "Users switch between booking and their appointment list, with clear status badges.",
+            "customer_benefit_fa": "کمتر تماس پشتیبانی برای «نوبت من کی است؟».",
+            "customer_benefit_en": "Fewer “when is my appointment?” support calls."
+          },
+          {
+            "id": "optional_note",
+            "title_fa": "یادداشت هنگام رزرو",
+            "title_en": "Optional note on booking",
+            "description_fa": "کاربر می‌تواند هنگام ثبت نوبت یادداشت کوتاه اضافه کند.",
+            "description_en": "Customers can add a short note when booking.",
+            "customer_benefit_fa": "اطلاعات لازم قبل از جلسه در اختیار شماست.",
+            "customer_benefit_en": "You get context before the visit."
+          },
+          {
+            "id": "success_message",
+            "title_fa": "پیام موفقیت سفارشی",
+            "title_en": "Custom success message",
+            "description_fa": "بعد از رزرو موفق می‌توانید پیام اختصاصی (با ویرایشگر وردپرس) نشان دهید یا کاربر را به لیست نوبت‌ها بفرستید.",
+            "description_en": "After a successful booking, show a custom message (WordPress editor) or send users to their appointment list.",
+            "customer_benefit_fa": "راهنمایی‌های بعدی (آدرس، آماده‌سازی، تماس) را همان لحظه به مشتری بدهید.",
+            "customer_benefit_en": "Share next steps (address, prep, contact) right after booking."
+          }
+        ]
+      },
+      {
+        "id": "cancellation",
+        "title_fa": "لغو امن و کنترل‌شده",
+        "title_en": "Controlled cancellation workflow",
+        "features": [
+          {
+            "id": "user_cancel_request",
+            "title_fa": "درخواست لغو توسط کاربر",
+            "title_en": "User cancellation requests",
+            "description_fa": "کاربر می‌تواند برای نوبت خود درخواست لغو بفرستد و در صورت تمایل دلیل بنویسد.",
+            "description_en": "Users can request cancellation for their appointment and optionally add a reason.",
+            "customer_benefit_fa": "لغو بدون تماس تلفنی؛ با ثبت دلیل.",
+            "customer_benefit_en": "Cancellations happen in-app, with an optional reason."
+          },
+          {
+            "id": "admin_approve_cancel",
+            "title_fa": "تأیید لغو توسط مدیر",
+            "title_en": "Admin approves cancellations",
+            "description_fa": "لغو قطعی پس از بررسی مدیر انجام می‌شود؛ وضعیت نوبت شفاف می‌ماند.",
+            "description_en": "Final cancellation is approved by an admin so status stays clear.",
+            "customer_benefit_fa": "کنترل ظرفیت در دست شما می‌ماند.",
+            "customer_benefit_en": "You keep control over capacity and calendar integrity."
+          }
+        ]
+      },
+      {
+        "id": "admin_management",
+        "title_fa": "مدیریت برای صاحب کسب‌وکار",
+        "title_en": "Admin & business management",
+        "features": [
+          {
+            "id": "weekly_calendar",
+            "title_fa": "تقویم هفتگی مدیریتی",
+            "title_en": "Admin weekly calendar",
+            "description_fa": "نمای تقویمی برای دیدن نوبت‌ها، جزئیات هر اسلات، و مدیریت وضعیت.",
+            "description_en": "A weekly calendar view to see appointments, open details, and manage slot status.",
+            "customer_benefit_fa": "یک نگاه به روز کاری شما کافی است.",
+            "customer_benefit_en": "See your workday at a glance."
+          },
+          {
+            "id": "appointments_list",
+            "title_fa": "لیست همه نوبت‌ها",
+            "title_en": "All appointments list",
+            "description_fa": "جدول مدیریتی برای مرور، فیلتر و پیگیری نوبت‌ها در پیشخوان وردپرس.",
+            "description_en": "Admin list table to review and track appointments in wp-admin.",
+            "customer_benefit_fa": "جستجو و پیگیری سریع‌تر از دفترچه یا اکسل.",
+            "customer_benefit_en": "Faster than a notebook or spreadsheet."
+          },
+          {
+            "id": "status_lifecycle",
+            "title_fa": "وضعیت‌های شفاف نوبت",
+            "title_en": "Clear appointment statuses",
+            "description_fa": "وضعیت‌هایی مثل در انتظار، تأییدشده، تکمیل‌شده، لغوشده و درخواست لغو — با تاریخچه تغییرات.",
+            "description_en": "Statuses such as pending, confirmed, completed, cancelled, and cancel requested — plus change history.",
+            "customer_benefit_fa": "تیم می‌داند هر نوبت در چه مرحله‌ای است.",
+            "customer_benefit_en": "Your team knows exactly where each booking stands."
+          },
+          {
+            "id": "slot_block",
+            "title_fa": "مسدود کردن اسلات‌ها",
+            "title_en": "Block / unblock time slots",
+            "description_fa": "ساعات داخل برنامه کاری را موقتاً ببندید (ناهار، تعطیلی، اضطراری) و بعداً باز کنید.",
+            "description_en": "Temporarily block times inside working hours (lunch, holidays, emergencies) and unblock later.",
+            "customer_benefit_fa": "ظرفیت واقعی را بدون ساختن برنامه جدید تنظیم کنید.",
+            "customer_benefit_en": "Adjust real availability without rebuilding the whole schedule."
+          },
+          {
+            "id": "multiple_schedules",
+            "title_fa": "چند برنامه زمانی",
+            "title_en": "Multiple schedules",
+            "description_fa": "چند برنامه بسازید، ساعات کاری هفتگی تعریف کنید، یکی را فعال کنید یا در شورت‌کد برنامه مشخص انتخاب کنید.",
+            "description_en": "Create multiple schedules with weekly hours, activate one, or target a schedule from the shortcode.",
+            "customer_benefit_fa": "مناسب فصل‌ها، شعب، یا دوره‌های مختلف کاری.",
+            "customer_benefit_en": "Useful for seasons, branches, or different working periods."
+          },
+          {
+            "id": "auto_slots",
+            "title_fa": "تولید خودکار اسلات‌ها",
+            "title_en": "Automatic slot generation",
+            "description_fa": "با تعریف بازه تاریخ، ساعات کاری، مدت جلسه و بافر، اسلات‌ها به‌صورت خودکار ساخته می‌شوند.",
+            "description_en": "Define date range, working hours, meeting length, and buffer—slots are generated automatically.",
+            "customer_benefit_fa": "نیازی به وارد کردن دستی هر ساعت نیست.",
+            "customer_benefit_en": "No manual entry of every time slot."
+          },
+          {
+            "id": "appointment_limit",
+            "title_fa": "سقف نوبت فعال برای هر کاربر",
+            "title_en": "Max active appointments per user",
+            "description_fa": "از تنظیمات می‌توانید حداکثر نوبت همزمان (پیش‌فرض ۳) را محدود کنید.",
+            "description_en": "Cap concurrent active bookings per user from Settings (default: 3).",
+            "customer_benefit_fa": "از رزرو بیش‌ازحد توسط یک نفر جلوگیری می‌شود.",
+            "customer_benefit_en": "Prevents one person from hoarding your calendar."
+          },
+          {
+            "id": "brand_colors",
+            "title_fa": "رنگ‌بندی برند روی فرم رزرو",
+            "title_en": "Brand colors on the booking form",
+            "description_fa": "چهار رنگ برند (accent، on، soft، hover) را در تنظیمات تنظیم کنید تا دکمه و انتخاب‌ها با هویت بصری سایت هماهنگ شوند.",
+            "description_en": "Set four brand accents in Settings so buttons and selections match your site identity.",
+            "customer_benefit_fa": "فرم رزرو شبیه افزونه جدا نیست؛ شبیه برند شماست.",
+            "customer_benefit_en": "The form feels on-brand, not like a third-party widget."
+          }
+        ]
+      },
+      {
+        "id": "platform",
+        "title_fa": "مناسب وردپرس فارسی",
+        "title_en": "Built for WordPress & Persian sites",
+        "features": [
+          {
+            "id": "wordpress_native",
+            "title_fa": "یکپارچه با وردپرس",
+            "title_en": "Native WordPress integration",
+            "description_fa": "کاربران وردپرس، پیشخوان ادمین، شورت‌کد و REST API استاندارد.",
+            "description_en": "Uses WordPress users, wp-admin, shortcodes, and the standard REST API.",
+            "customer_benefit_fa": "بدون پنل خارجی جدا برای شروع کار.",
+            "customer_benefit_en": "No separate SaaS panel required to get started."
+          },
+          {
+            "id": "i18n",
+            "title_fa": "آماده ترجمه؛ فارسی موجود",
+            "title_en": "Translation-ready with Persian",
+            "description_fa": "رشته‌ها با text domain افزونه قابل ترجمه هستند و فایل‌های فارسی همراه است.",
+            "description_en": "Strings use the plugin text domain; Persian language files are included.",
+            "customer_benefit_fa": "رابط کاربری برای مخاطب فارسی آماده است.",
+            "customer_benefit_en": "UI is ready for Persian audiences out of the box."
+          },
+          {
+            "id": "secure_roles",
+            "title_fa": "دسترسی نقش‌محور",
+            "title_en": "Role-based access",
+            "description_fa": "رزرو برای کاربر واردشده؛ مدیریت کامل برای مدیران با بررسی دسترسی.",
+            "description_en": "Booking for logged-in users; full management for admins with permission checks.",
+            "customer_benefit_fa": "عملیات حساس فقط در اختیار تیم مجاز است.",
+            "customer_benefit_en": "Sensitive actions stay with authorized staff."
+          }
+        ]
+      }
+    ],
+    "how_it_works": {
+      "title_fa": "چطور کار می‌کند؟",
+      "title_en": "How it works",
+      "steps": [
+        {
+          "step": 1,
+          "title_fa": "نصب و فعال‌سازی",
+          "title_en": "Install & activate",
+          "body_fa": "افزونه را روی وردپرس فعال کنید؛ جداول دیتابیس ساخته می‌شوند.",
+          "body_en": "Activate on WordPress; database tables are created automatically."
+        },
+        {
+          "step": 2,
+          "title_fa": "ساخت برنامه زمانی",
+          "title_en": "Create a schedule",
+          "body_fa": "ساعات کاری، مدت جلسه و بازه تاریخ را تعریف کنید تا اسلات‌ها ساخته شوند.",
+          "body_en": "Set working hours, meeting length, and date range so slots are generated."
+        },
+        {
+          "step": 3,
+          "title_fa": "قرار دادن فرم در سایت",
+          "title_en": "Place the form on your site",
+          "body_fa": "شورت‌کد `[nobat_new]` را در صفحه رزرو بگذارید و در صورت نیاز رنگ برند را تنظیم کنید.",
+          "body_en": "Add `[nobat_new]` to your booking page and optionally set brand colors."
+        },
+        {
+          "step": 4,
+          "title_fa": "دریافت و مدیریت نوبت‌ها",
+          "title_en": "Receive & manage bookings",
+          "body_fa": "از تقویم و لیست نوبت‌ها وضعیت را تأیید، تکمیل یا لغو کنید.",
+          "body_en": "Confirm, complete, or cancel from the calendar and appointments list."
+        }
+      ]
+    },
+    "use_cases": [
+      {
+        "id": "clinic",
+        "title_fa": "کلینیک و مطب",
+        "title_en": "Clinics & practices",
+        "body_fa": "بیماران آنلاین نوبت می‌گیرند؛ پذیرش از تقویم مدیریت می‌کند.",
+        "body_en": "Patients book online; front desk manages the calendar."
+      },
+      {
+        "id": "consulting",
+        "title_fa": "مشاوره و کوچینگ",
+        "title_en": "Consulting & coaching",
+        "body_fa": "جلسات زمان‌بندی‌شده با سقف نوبت فعال برای هر مراجع.",
+        "body_en": "Timed sessions with a cap on active bookings per client."
+      },
+      {
+        "id": "salon",
+        "title_fa": "سالن و خدمات زیبایی",
+        "title_en": "Salons & beauty services",
+        "body_fa": "اسلات‌های آزاد را نشان دهید؛ ساعات شلوغ را مسدود کنید.",
+        "body_en": "Show open slots; block busy or break times."
+      },
+      {
+        "id": "service_business",
+        "title_fa": "کسب‌وکار خدماتی",
+        "title_en": "General service businesses",
+        "body_fa": "هر خدمتی که نیاز به نوبت حضوری یا آنلاین دارد روی سایت وردپرسی شما.",
+        "body_en": "Any appointment-based service on your WordPress site."
+      }
+    ],
+    "faq": [
+      {
+        "q_fa": "آیا مشتری باید حساب کاربری داشته باشد؟",
+        "q_en": "Do customers need an account?",
+        "a_fa": "بله. برای رزرو باید وارد وردپرس شوند؛ مهمان‌ها به صفحه ورود هدایت می‌شوند.",
+        "a_en": "Yes. Booking requires a logged-in WordPress user; guests are sent to login."
+      },
+      {
+        "q_fa": "آیا تقویم شمسی پشتیبانی می‌شود؟",
+        "q_en": "Is Persian calendar supported?",
+        "a_fa": "بله. نمایش و انتخاب تاریخ جلالی در تجربه رزرو پشتیبانی می‌شود.",
+        "a_en": "Yes. Jalali date display and selection are part of the booking experience."
+      },
+      {
+        "q_fa": "چطور فرم را در سایت می‌گذارم؟",
+        "q_en": "How do I add the form to my site?",
+        "a_fa": "شورت‌کد `[nobat_new]` را در هر برگه یا نوشته قرار دهید. برای برنامه خاص: `[nobat_new schedule_id=\"ID\"]`.",
+        "a_en": "Place `[nobat_new]` on any page or post. For a specific schedule: `[nobat_new schedule_id=\"ID\"]`."
+      },
+      {
+        "q_fa": "آیا می‌توانم ظاهر فرم را با برند هماهنگ کنم؟",
+        "q_en": "Can I match the form to my brand?",
+        "a_fa": "بله. از تنظیمات نوبت، رنگ‌های accent را تغییر دهید.",
+        "a_en": "Yes. Change accent colors under Nobat → Settings."
+      },
+      {
+        "q_fa": "آیا پرداخت آنلاین یا پیامک داخل افزونه هست؟",
+        "q_en": "Does the plugin include payments or SMS?",
+        "a_fa": "در نسخه فعلی تمرکز روی رزرو، تقویم و مدیریت وضعیت است؛ پرداخت و پیامک به‌عنوان امکانات فعلی ادعا نمی‌شوند.",
+        "a_en": "Current release focuses on booking, calendar, and status management; do not claim payments or SMS as included features."
+      },
+      {
+        "q_fa": "حداکثر چند نوبت همزمان برای هر کاربر؟",
+        "q_en": "How many active appointments per user?",
+        "a_fa": "پیش‌فرض ۳ است و از تنظیمات قابل تغییر است.",
+        "a_en": "Default is 3; configurable in Settings."
+      }
+    ],
+    "cta_closing": {
+      "headline_fa": "نوبت‌گیری را به سایت خود بسپارید",
+      "headline_en": "Let your site take the appointments",
+      "body_fa": "تقویم شمسی، فرم RTL، مدیریت ادمین و رنگ برند — همه داخل وردپرس.",
+      "body_en": "Jalali calendar, RTL form, admin tools, and brand colors — all inside WordPress.",
+      "cta_fa": "دریافت نوبت",
+      "cta_en": "Get Nobat"
+    }
+  },
+  "feature_checklist_flat": [
+    "WordPress shortcode booking form (`[nobat_new]`)",
+    "Optional `schedule_id` shortcode attribute",
+    "Persian / Jalali calendar support",
+    "RTL Soft Slot booking UI",
+    "Login / register gate for guests",
+    "My appointments list for users",
+    "Book by selecting day + available time slot",
+    "Optional booking note",
+    "Custom post-booking success message",
+    "User cancellation request with optional reason",
+    "Admin approval for cancellations",
+    "Appointment statuses: pending, confirmed, completed, cancelled, cancel_requested",
+    "Appointment change history",
+    "Admin weekly calendar view",
+    "Admin all-appointments list",
+    "Create / manage multiple schedules",
+    "Weekly working hours per schedule",
+    "Auto-generated slots from duration + buffer",
+    "Activate / deactivate schedules",
+    "Block and unblock slots",
+    "Configurable max active appointments per user",
+    "Brand color customization (4 Soft Slot accent tokens)",
+    "Persian translations included",
+    "Role-based admin vs user access",
+    "REST API (`nobat/v2`) for integrations"
+  ],
+  "do_not_claim_yet": [
+    "SMS notifications",
+    "Email notification automation as a product feature",
+    "Payment gateway / online checkout",
+    "Google Calendar sync",
+    "Recurring appointments",
+    "Multi-location / multi-provider marketplace"
+  ],
+  "admin_menu_labels": {
+    "fa_hint": "Use product UI language as installed; English labels in code:",
+    "items_en": [
+      "Nobat → Calendar",
+      "Nobat → All Appointments",
+      "Nobat → Schedules",
+      "Nobat → Settings",
+      "Add Schedule (via Schedules)"
+    ]
+  },
+  "technical_requirements": {
+    "wordpress": "6.1+",
+    "php": "8.0+",
+    "notes_en": "Requires standard WordPress install; assets built with npm; PHP via Composer autoload."
+  }
+}
