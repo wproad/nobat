@@ -9,6 +9,8 @@
  *
  * This file serves as the DOM-ready initialization script for the booking module.
  */
+import "./soft-slot/tokens.css";
+import "./soft-slot/booking-form.css";
 import "./bookingNew.scss";
 import "../ui/ui-components.scss";
 import domReady from "../utils/dom-ready";

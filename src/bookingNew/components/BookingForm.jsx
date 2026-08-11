@@ -2,14 +2,12 @@
  * BookingForm Component
  *
  * Form component for booking new appointments.
- * Handles day and time slot selection, optional notes, form submission,
- * and success/error notifications. Displays booking confirmation ticket
- * after successful booking.
+ * Soft Slot layout: date strip → slots → notes → primary CTA; success uses AppointmentTicket.
  *
  * @param {Object} schedule - Schedule object containing timeslots data
  */
 import { useState, useEffect } from "react";
-import { Button, TextareaControl, Notice } from "../../ui";
+import { Notice } from "../../ui";
 import TimeSlotSelector from "./TimeSlotSelector";
 import AppointmentTicket from "./AppointmentTicket";
 import { __ } from "../../utils/i18n";
@@ -31,7 +29,6 @@ const BookingForm = ({ schedule }) => {
     useNotice();
   const isFormValid = selectedDay && selectedSlot;
 
-  // Handle error messages from form submission
   useEffect(() => {
     if (error) {
       const errorMessage =
@@ -42,7 +39,6 @@ const BookingForm = ({ schedule }) => {
     }
   }, [error, showError]);
 
-  // Handle success messages from form submission
   useEffect(() => {
     if (data?.success) {
       showSuccess(__("Appointment booked successfully!", "nobat"));
@@ -51,7 +47,7 @@ const BookingForm = ({ schedule }) => {
 
   const handleDaySelect = (day) => {
     setSelectedDay(day);
-    setSelectedSlot(null); // Reset slot when day changes
+    setSelectedSlot(null);
   };
 
   const handleSlotSelect = (slot) => {
@@ -66,90 +62,85 @@ const BookingForm = ({ schedule }) => {
     }
 
     try {
-      // Build request body with required fields
       const requestBody = {
         slot_id: parseInt(selectedSlot.id),
         schedule_id: parseInt(schedule.id),
         note: notes.trim(),
       };
 
-      // Use execute function from useFetch to trigger the POST request
       const result = await execute({ body: requestBody });
 
       if (result?.success && result?.appointment) {
-        // Store appointment data to show ticket
         setBookedAppointment(result.appointment);
-        // Reset form
         setNotes("");
         setSelectedDay(null);
         setSelectedSlot(null);
-        // Success message will be handled by useEffect
       }
     } catch (err) {
-      // Error message will be handled by useEffect
       console.error("Failed to book appointment:", err);
     }
   };
 
-  // Show ticket if appointment was booked successfully
   if (bookedAppointment) {
-    return (
-      <div className="appointment-booking-form">
-        <AppointmentTicket appointment={bookedAppointment} />
-      </div>
-    );
+    return <AppointmentTicket appointment={bookedAppointment} />;
   }
 
   return (
-    <div className="appointment-booking-form">
+    <div>
       {isVisible && message && (
         <Notice
           status={status}
           isDismissible={true}
           onRemove={clearMessage}
-          className="booking-form__notice"
+          className="bf-notice"
         >
           {message}
         </Notice>
       )}
-      <form className="booking-form" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <TimeSlotSelector
-            days={schedule.timeslots}
-            selectedDay={selectedDay}
-            selectedSlot={selectedSlot}
-            onDaySelect={handleDaySelect}
-            onSlotSelect={handleSlotSelect}
-          />
-        </div>
+      <form onSubmit={handleSubmit}>
+        <TimeSlotSelector
+          days={schedule.timeslots}
+          selectedDay={selectedDay}
+          selectedSlot={selectedSlot}
+          onDaySelect={handleDaySelect}
+          onSlotSelect={handleSlotSelect}
+        />
 
-        <div className="form-row">
-          <TextareaControl
-            label={__("Additional Notes", "nobat")}
+        <div className="bf-field">
+          <label className="bf-field__label" htmlFor="nobat-booking-notes">
+            {__("Additional Notes", "nobat")}
+          </label>
+          <textarea
+            id="nobat-booking-notes"
+            className="bf-textarea"
             value={notes}
-            onChange={(value) => setNotes(value)}
+            onChange={(e) => setNotes(e.target.value)}
             placeholder={__(
               "Any special requests or additional information",
               "nobat"
             )}
-            rows={3}
-            help={__(
+            rows={4}
+          />
+          <p className="bf-field__help">
+            {__(
               "Optional: Add any specific requirements or questions",
               "nobat"
             )}
-          />
+          </p>
         </div>
 
-        <div className="form-actions">
-          <Button
+        <hr className="bf-divider" />
+
+        <div className="bf-actions">
+          <button
             type="submit"
-            variant="primary"
+            className="bf-btn bf-btn--primary"
             disabled={!isFormValid || loading}
           >
             {loading
               ? __("Booking...", "nobat")
               : __("Book Appointment", "nobat")}
-          </Button>
+          </button>
         </div>
       </form>
     </div>

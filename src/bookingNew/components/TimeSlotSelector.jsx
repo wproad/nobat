@@ -1,10 +1,7 @@
 /**
  * TimeSlotSelector Component
  *
- * Manages day and time slot selection for appointment booking with two-step selection.
- * Renders week days grid for day selection, then displays available time slots for selected day.
- * Shows empty state message when no slots are available for the selected day.
- * Resets slot selection when day changes to prevent inconsistent state.
+ * Soft Slot date strip + time slot panel for appointment booking.
  *
  * @param {Array} days - Array of day objects with available slots (timeslots from schedule)
  * @param {Object} selectedDay - Currently selected day object
@@ -24,11 +21,16 @@ const TimeSlotSelector = ({
   onSlotSelect,
 }) => {
   return (
-    <div className="appointment-selector">
-      <div className="week-days-selector">
-        <div className="week-days-grid">
+    <div className="bf-stack">
+      <section aria-label={__("Select a date", "nobat")}>
+        <div
+          className="bf-dates"
+          role="listbox"
+          aria-label={__("Available booking dates", "nobat")}
+        >
           {days.map((dayData) => {
-            const isSelected = selectedDay?.jalali_date === dayData.jalali_date;
+            const isSelected =
+              selectedDay?.jalali_date === dayData.jalali_date;
 
             return (
               <DayButton
@@ -40,32 +42,39 @@ const TimeSlotSelector = ({
             );
           })}
         </div>
-      </div>
+      </section>
 
       {selectedDay && (
-        <div className="time-slots-container">
-          <div className="date-selector-label">
-            {__("Available time slots for", "nobat")} {selectedDay.jalali_date}
+        <section>
+          <div className="bf-panel">
+            <p className="bf-panel__title" id="nobat-slot-title">
+              {__("Available time slots for", "nobat")} {selectedDay.jalali_date}
+            </p>
+            {selectedDay.slots && selectedDay.slots.length > 0 ? (
+              <div
+                className="bf-slots"
+                role="group"
+                aria-labelledby="nobat-slot-title"
+              >
+                {selectedDay.slots.map((slot) => {
+                  const isSelected = selectedSlot?.id === slot.id;
+                  return (
+                    <TimeSlotButton
+                      key={slot.id}
+                      slot={slot}
+                      isSelected={isSelected}
+                      onClick={() => onSlotSelect(slot)}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="bf-field__help">
+                {__("No available time slots for this day", "nobat")}
+              </p>
+            )}
           </div>
-          <div className="time-slots-grid">
-            {selectedDay.slots?.map((slot) => {
-              const isSelected = selectedSlot?.id === slot.id;
-              return (
-                <TimeSlotButton
-                  key={slot.id}
-                  slot={slot}
-                  isSelected={isSelected}
-                  onClick={() => onSlotSelect(slot)}
-                />
-              );
-            })}
-          </div>
-          {!selectedDay.slots || selectedDay.slots.length === 0 ? (
-            <div className="no-slots">
-              {__("No available time slots for this day", "nobat")}
-            </div>
-          ) : null}
-        </div>
+        </section>
       )}
     </div>
   );

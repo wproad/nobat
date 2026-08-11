@@ -23,6 +23,13 @@ function nobat_register_settings() {
 		'nobat_settings'
 	);
 
+	add_settings_section(
+		'nobat_appearance_section',
+		__( 'Appearance', 'nobat' ),
+		'__return_false',
+		'nobat_settings'
+	);
+
 	// add_settings_section(
 	// 	'nobat_notifications_section',
 	// 	__( 'SMS Notifications', 'nobat' ),
@@ -43,6 +50,38 @@ function nobat_register_settings() {
 		'type' => 'string',
 		'default' => '',
 		'sanitize_callback' => 'wp_kses_post',
+	) );
+
+	register_setting( 'nobat_settings', 'nobat_brand_color', array(
+		'type' => 'string',
+		'default' => '#2A9B9B',
+		'sanitize_callback' => function( $value ) {
+			return nobat_sanitize_brand_color( $value, '#2A9B9B' );
+		},
+	) );
+
+	register_setting( 'nobat_settings', 'nobat_brand_color_on', array(
+		'type' => 'string',
+		'default' => '#FCFCFC',
+		'sanitize_callback' => function( $value ) {
+			return nobat_sanitize_brand_color( $value, '#FCFCFC' );
+		},
+	) );
+
+	register_setting( 'nobat_settings', 'nobat_brand_color_soft', array(
+		'type' => 'string',
+		'default' => '#E6F3F3',
+		'sanitize_callback' => function( $value ) {
+			return nobat_sanitize_brand_color( $value, '#E6F3F3' );
+		},
+	) );
+
+	register_setting( 'nobat_settings', 'nobat_brand_color_hover', array(
+		'type' => 'string',
+		'default' => '#217A7A',
+		'sanitize_callback' => function( $value ) {
+			return nobat_sanitize_brand_color( $value, '#217A7A' );
+		},
 	) );
 
     register_setting( 'nobat_settings', 'nobat_notify_admin', array(
@@ -135,6 +174,14 @@ function nobat_register_settings() {
 		'nobat_messages_section'
 	);
 
+	add_settings_field(
+		'nobat_brand_color',
+		__( 'Brand Colors', 'nobat' ),
+		'nobat_field_brand_color',
+		'nobat_settings',
+		'nobat_appearance_section'
+	);
+
     // add_settings_field(
     //     'nobat_notify_admin',
     //     __( 'Notify Admin', 'nobat' ),
@@ -219,6 +266,124 @@ function nobat_field_success_message() {
 			),
 		)
 	);
+}
+
+/**
+ * Sanitize a brand color to #RRGGBB.
+ *
+ * @param string $value   Raw option value.
+ * @param string $default Fallback hex when invalid.
+ * @return string
+ */
+function nobat_sanitize_brand_color( $value, $default = '#2A9B9B' ) {
+	$value = trim( (string) $value );
+	if ( preg_match( '/^#([A-Fa-f0-9]{6})$/', $value ) ) {
+		return strtoupper( $value );
+	}
+	if ( preg_match( '/^#([A-Fa-f0-9]{3})$/', $value ) ) {
+		$r = $value[1];
+		$g = $value[2];
+		$b = $value[3];
+		return strtoupper( "#{$r}{$r}{$g}{$g}{$b}{$b}" );
+	}
+
+	$default = trim( (string) $default );
+	if ( preg_match( '/^#([A-Fa-f0-9]{6})$/', $default ) ) {
+		return strtoupper( $default );
+	}
+
+	return '#2A9B9B';
+}
+
+/**
+ * Soft Slot accent token defaults (hex equivalents of tokens.css placeholders).
+ *
+ * @return array{accent:string,on:string,soft:string,hover:string}
+ */
+function nobat_get_brand_color_defaults() {
+	return array(
+		'accent' => '#2A9B9B',
+		'on'     => '#FCFCFC',
+		'soft'   => '#E6F3F3',
+		'hover'  => '#217A7A',
+	);
+}
+
+/**
+ * Resolved Soft Slot --accent* brand colors from options.
+ *
+ * @return array{accent:string,on:string,soft:string,hover:string}
+ */
+function nobat_get_brand_colors() {
+	$defaults = nobat_get_brand_color_defaults();
+
+	return array(
+		'accent' => nobat_sanitize_brand_color( (string) get_option( 'nobat_brand_color', $defaults['accent'] ), $defaults['accent'] ),
+		'on'     => nobat_sanitize_brand_color( (string) get_option( 'nobat_brand_color_on', $defaults['on'] ), $defaults['on'] ),
+		'soft'   => nobat_sanitize_brand_color( (string) get_option( 'nobat_brand_color_soft', $defaults['soft'] ), $defaults['soft'] ),
+		'hover'  => nobat_sanitize_brand_color( (string) get_option( 'nobat_brand_color_hover', $defaults['hover'] ), $defaults['hover'] ),
+	);
+}
+
+/**
+ * Brand color fields (WP color pickers for Soft Slot --accent* knobs).
+ */
+function nobat_field_brand_color() {
+	$defaults = nobat_get_brand_color_defaults();
+	$colors   = nobat_get_brand_colors();
+
+	$fields = array(
+		array(
+			'name'        => 'nobat_brand_color',
+			'label'       => __( 'Accent', 'nobat' ),
+			'value'       => $colors['accent'],
+			'default'     => $defaults['accent'],
+			'description' => __( 'Primary buttons and selected dates/slots (--accent).', 'nobat' ),
+		),
+		array(
+			'name'        => 'nobat_brand_color_on',
+			'label'       => __( 'Accent on', 'nobat' ),
+			'value'       => $colors['on'],
+			'default'     => $defaults['on'],
+			'description' => __( 'Text/icon color on accent fills (--accent-on).', 'nobat' ),
+		),
+		array(
+			'name'        => 'nobat_brand_color_soft',
+			'label'       => __( 'Accent soft', 'nobat' ),
+			'value'       => $colors['soft'],
+			'default'     => $defaults['soft'],
+			'description' => __( 'Soft accent surfaces such as active tabs (--accent-soft).', 'nobat' ),
+		),
+		array(
+			'name'        => 'nobat_brand_color_hover',
+			'label'       => __( 'Accent hover', 'nobat' ),
+			'value'       => $colors['hover'],
+			'default'     => $defaults['hover'],
+			'description' => __( 'Hover state for primary accent controls (--accent-hover).', 'nobat' ),
+		),
+	);
+
+	echo '<div class="nobat-brand-colors" style="display:flex;flex-direction:column;gap:16px;max-width:420px;">';
+	foreach ( $fields as $field ) {
+		echo '<div class="nobat-brand-color-row">';
+		printf(
+			'<label for="%1$s" style="display:block;font-weight:600;margin-bottom:4px;">%2$s</label>',
+			esc_attr( $field['name'] ),
+			esc_html( $field['label'] )
+		);
+		printf(
+			'<input type="text" id="%1$s" class="nobat-brand-color-field" name="%1$s" value="%2$s" data-default-color="%3$s" />',
+			esc_attr( $field['name'] ),
+			esc_attr( $field['value'] ),
+			esc_attr( $field['default'] )
+		);
+		printf(
+			'<p class="description" style="margin-top:4px;">%s</p>',
+			esc_html( $field['description'] )
+		);
+		echo '</div>';
+	}
+	echo '</div>';
 }
 
 function nobat_field_notify_admin() {

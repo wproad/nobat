@@ -1,51 +1,32 @@
 /**
  * LoginRequired Component
  *
- * Displays a authentication gate UI for unauthenticated users.
- * Shows a warning notice explaining the requirement to be logged in.
- * Provides login and registration button links with proper styling.
- * Used as a fallback in Main component when user is not authenticated.
+ * Soft Slot auth gate for unauthenticated users.
  *
  * @param {string} loginUrl - URL to the login page
  * @param {string} registerUrl - URL to the registration page
  */
 import { __ } from "../../utils/i18n";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Notice,
-} from "../../ui";
+import { Notice } from "../../ui";
 
 const LoginRequired = ({ loginUrl, registerUrl }) => {
   return (
-    <div className="main-container">
-      <div className="auth-prompt">
-        <Card>
-          <CardHeader>
-            <h3>{__("Access Required", "nobat")}</h3>
-          </CardHeader>
-          <CardBody>
-            <Notice status="warning" isDismissible={false}>
-              <p>
-                {__("You must be logged in to view appointments.", "nobat")}
-              </p>
-            </Notice>
-            <div className="form-actions" style={{ marginTop: "16px" }}>
-              <Button variant="primary" href={loginUrl}>
-                {__("Log In", "nobat")}
-              </Button>
-              <Button
-                variant="secondary"
-                href={registerUrl}
-                style={{ marginLeft: "8px" }}
-              >
-                {__("Register", "nobat")}
-              </Button>
-            </div>
-          </CardBody>
-        </Card>
+    <div className="bf-shell">
+      <header className="bf-header">
+        <h1 className="bf-title">{__("Access Required", "nobat")}</h1>
+      </header>
+      <div className="bf-card bf-auth">
+        <Notice status="warning" isDismissible={false}>
+          {__("You must be logged in to view appointments.", "nobat")}
+        </Notice>
+        <div className="bf-auth__actions">
+          <a className="bf-btn bf-btn--primary" href={loginUrl}>
+            {__("Log In", "nobat")}
+          </a>
+          <a className="bf-btn bf-btn--ghost" href={registerUrl}>
+            {__("Register", "nobat")}
+          </a>
+        </div>
       </div>
     </div>
   );

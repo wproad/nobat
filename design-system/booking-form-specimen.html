@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soft Slot · Specimen</title>
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/tokens.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/booking-form.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <style>
+    body { margin: 0; background: oklch(0.97 0.004 250); font-family: "Vazirmatn", system-ui, sans-serif; }
+    .page { max-width: 880px; margin: 0 auto; padding: 24px 16px 64px; }
+    .page-intro h1 { margin: 0 0 8px; font-size: 24px; font-weight: 600; }
+    .page-intro p { margin: 0 0 24px; color: oklch(0.45 0.02 260); font-size: 14px; line-height: 1.6; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .nav-links a {
+      display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px;
+      border: 1px solid oklch(0.88 0.01 260); border-radius: 8px; background: #fff;
+      color: oklch(0.22 0.02 260); text-decoration: none; font-size: 13px; font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="page" data-od-id="specimen-page">
+    <header class="page-intro" data-od-id="specimen-intro">
+      <h1>Soft Slot · نمونهٔ کامپوننت‌ها</h1>
+      <p>سیستم طراحی افزونهٔ رزرو — accent placeholder (teal) قابل تعویض. همهٔ وضعیت‌ها و بج‌ها.</p>
+      <nav class="nav-links" aria-label="پروتوتایپ‌ها">
+        <a href="./index.html">Launcher</a>
+        <a href="./booking-screen.html">A · رزرو</a>
+        <a href="./booking-success.html">B · موفقیت</a>
+        <a href="./my-appointments.html">C · نوبت‌های من</a>
+      </nav>
+    </header>
+
+    <section class="bf-specimen-section" data-od-id="specimen-badges">
+      <h2>Badges</h2>
+      <div class="bf-root bf-specimen-row" style="background:transparent;padding:0">
+        <span class="bf-badge bf-badge--pending">در انتظار تأیید</span>
+        <span class="bf-badge bf-badge--confirmed">تأیید شده</span>
+        <span class="bf-badge bf-badge--cancelled">لغو شده</span>
+        <span class="bf-badge bf-badge--past">گذشته</span>
+        <span class="bf-badge bf-badge--upcoming">پیش رو</span>
+        <span class="bf-badge bf-badge--count">3</span>
+      </div>
+    </section>
+
+    <section class="bf-specimen-section" data-od-id="specimen-buttons">
+      <h2>Buttons</h2>
+      <div class="bf-root bf-specimen-row" style="background:transparent;padding:0">
+        <button type="button" class="bf-btn bf-btn--primary">رزرو نوبت</button>
+        <button type="button" class="bf-btn bf-btn--ghost">مشاهده نوبت‌های من</button>
+        <button type="button" class="bf-btn bf-btn--danger" title="رزرو برای تأیید لغو در نسخه‌های بعدی">لغو نوبت · بعدی</button>
+        <button type="button" class="bf-btn bf-btn--primary" disabled>غیرفعال</button>
+      </div>
+    </section>
+
+    <div class="bf-root">
+      <section class="bf-specimen-section" data-od-id="specimen-dates">
+        <h2>Date chips</h2>
+        <div class="bf-dates" role="listbox" aria-label="نمونه تاریخ">
+          <button type="button" class="bf-date" aria-selected="true">
+            <span class="bf-date__weekday">شنبه</span>
+            <span class="bf-date__day">17</span>
+            <span class="bf-date__month">مرداد</span>
+          </button>
+          <button type="button" class="bf-date" aria-selected="false">
+            <span class="bf-date__weekday">یکشنبه</span>
+            <span class="bf-date__day">18</span>
+            <span class="bf-date__month">مرداد</span>
+          </button>
+          <button type="button" class="bf-date" disabled>
+            <span class="bf-date__weekday">جمعه</span>
+            <span class="bf-date__day">16</span>
+            <span class="bf-date__month">مرداد</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="bf-specimen-section" data-od-id="specimen-slots">
+        <h2>Time slots</h2>
+        <div class="bf-panel">
+          <p class="bf-panel__title">بازه‌های زمانی موجود برای 1405/05/17</p>
+          <div class="bf-slots">
+            <button type="button" class="bf-slot" aria-pressed="true">09:00 تا 09:15</button>
+            <button type="button" class="bf-slot">09:30 تا 09:45</button>
+            <button type="button" class="bf-slot" disabled>09:15 تا 09:30</button>
+            <button type="button" class="bf-slot">10:00 تا 10:15</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bf-specimen-section" data-od-id="specimen-tabs">
+        <h2>Tabs</h2>
+        <div class="bf-tabs" role="tablist">
+          <button type="button" class="bf-tab" role="tab" aria-selected="false">پیش رو</button>
+          <button type="button" class="bf-tab" role="tab" aria-selected="false">لغو شده</button>
+          <button type="button" class="bf-tab" role="tab" aria-selected="true">گذشته <span class="bf-badge bf-badge--count">3</span></button>
+        </div>
+      </section>
+
+      <section class="bf-specimen-section" data-od-id="specimen-card">
+        <h2>Appointment card + wells</h2>
+        <article class="bf-card">
+          <div class="bf-card__row">
+            <div class="bf-card__meta">
+              <span class="bf-card__date">1405/05/17</span>
+              <span class="bf-card__time">09:00 تا 09:15</span>
+            </div>
+            <span class="bf-badge bf-badge--cancelled">لغو شده</span>
+          </div>
+          <div class="bf-well">یادداشت: در مورد روتین پوستی مناسب خودم میخواستم اطلاعات دریافت کنم</div>
+          <div class="bf-well bf-well--cancel">دلیل لغو: توسط مدیر حذف شد</div>
+        </article>
+      </section>
+
+      <section class="bf-specimen-section" data-od-id="specimen-success">
+        <h2>Success summary</h2>
+        <div class="bf-card bf-success">
+          <p class="bf-success__lead">نوبت شما با موفقیت رزرو شد. کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت.</p>
+          <hr class="bf-divider" />
+          <div class="bf-success__rows">
+            <div class="bf-success__row"><span class="bf-success__label">تاریخ</span><span class="bf-success__value">1405/05/17</span></div>
+            <div class="bf-success__row"><span class="bf-success__label">زمان</span><span class="bf-success__value">09:00 تا 09:15</span></div>
+            <div class="bf-success__row"><span class="bf-success__label">وضعیت</span><span class="bf-badge bf-badge--pending">در انتظار تأیید</span></div>
+          </div>
+          <hr class="bf-divider" />
+          <div class="bf-queue">شماره نوبت: #6</div>
+        </div>
+      </section>
+
+      <section class="bf-specimen-section" data-od-id="specimen-hosts">
+        <h2>Host backgrounds</h2>
+        <div class="bf-specimen-row" style="align-items:stretch">
+          <div class="bf-host-demo bf-host-demo--white" style="flex:1;min-width:200px">
+            <span class="bf-btn bf-btn--primary" style="pointer-events:none">روی میزبان سفید</span>
+          </div>
+          <div class="bf-host-demo bf-host-demo--gray" style="flex:1;min-width:200px">
+            <span class="bf-btn bf-btn--primary" style="pointer-events:none">روی میزبان خاکستری روشن</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

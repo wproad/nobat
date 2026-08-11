@@ -49,7 +49,7 @@ class ShortcodeHandler {
 
 		ob_start();
 		?>
-		<div id="<?php echo esc_attr( $container_id ); ?>" class="nobat-new-container" data-schedule-id="<?php echo esc_attr( $atts['schedule_id'] ); ?>">
+		<div id="<?php echo esc_attr( $container_id ); ?>" class="nobat-new-container bf-root" data-schedule-id="<?php echo esc_attr( $atts['schedule_id'] ); ?>" dir="rtl">
 			<div class="nobat-new-wrapper">
 				<div class="nobat-new-app"></div>
 			</div>

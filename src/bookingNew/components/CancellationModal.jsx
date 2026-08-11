@@ -1,10 +1,7 @@
 /**
  * CancellationModal Component
  *
- * A reusable modal component for requesting appointment cancellation.
- * Displays appointment details (date/time) in formatted view, collects optional
- * cancellation reason via textarea, and provides confirmation actions.
- * Handles loading state with spinner and disabled inputs during submission.
+ * Soft Slot-styled cancel confirm: appointment meta, optional reason, danger + ghost actions.
  *
  * @param {Object} appointment - Appointment object containing appointment details
  * @param {boolean} isOpen - Whether the modal is open
@@ -14,7 +11,7 @@
  * @param {string} cancellationReason - Current value of cancellation reason input
  * @param {Function} onReasonChange - Function to call when reason input changes
  */
-import { Modal, TextareaControl, Button, Spinner } from "../../ui/index.js";
+import { Modal, Spinner } from "../../ui/index.js";
 import { formatTimeRange } from "../utils/displayHelpers.js";
 import { __ } from "../../utils/i18n.js";
 
@@ -28,14 +25,13 @@ export function CancellationModal({
   onReasonChange,
 }) {
   if (!appointment) return null;
-  // TODO: sjhow taost on successful cancellation
 
   return (
     <Modal
       title={__("Request Cancellation", "nobat")}
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="cancellation-modal"
+      className="cancellation-modal bf-root"
     >
       <p>
         {__(
@@ -55,25 +51,35 @@ export function CancellationModal({
         </p>
       </div>
 
-      <TextareaControl
-        label={__("Reason for cancellation (optional)", "nobat")}
-        value={cancellationReason}
-        onChange={onReasonChange}
-        placeholder={__("Please provide a reason for cancellation", "nobat")}
-        rows={4}
-        disabled={isCancelling}
-      />
+      <div className="bf-field">
+        <label className="bf-field__label" htmlFor="nobat-cancel-reason">
+          {__("Reason for cancellation (optional)", "nobat")}
+        </label>
+        <textarea
+          id="nobat-cancel-reason"
+          className="bf-textarea"
+          value={cancellationReason}
+          onChange={(e) => onReasonChange(e.target.value)}
+          placeholder={__("Please provide a reason for cancellation", "nobat")}
+          rows={4}
+          disabled={isCancelling}
+        />
+      </div>
 
       <div className="modal-actions">
-        <Button variant="secondary" onClick={onClose} disabled={isCancelling}>
+        <button
+          type="button"
+          className="bf-btn bf-btn--ghost"
+          onClick={onClose}
+          disabled={isCancelling}
+        >
           {__("Cancel", "nobat")}
-        </Button>
-        <Button
-          variant="primary"
-          // isDestructive
+        </button>
+        <button
+          type="button"
+          className="bf-btn bf-btn--danger"
           onClick={onConfirm}
           disabled={isCancelling}
-          isBusy={isCancelling}
         >
           {isCancelling ? (
             <>
@@ -83,7 +89,7 @@ export function CancellationModal({
           ) : (
             __("Submit Request", "nobat")
           )}
-        </Button>
+        </button>
       </div>
     </Modal>
   );

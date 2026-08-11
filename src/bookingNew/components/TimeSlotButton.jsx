@@ -1,9 +1,8 @@
 /**
  * TimeSlotButton Component
  *
- * Interactive button component for selecting a time slot.
- * Handles multiple states: available (selectable), booked (disabled), and selected (highlighted).
- * Automatically formats time display and handles booking status.
+ * Soft Slot time slot control. Available slots are selectable; booked/unavailable
+ * slots stay in the grid as muted dashed buttons.
  *
  * @param {Object} slot - Time slot object containing id, start_time, end_time, status
  * @param {boolean} isSelected - Whether this slot is currently selected
@@ -14,40 +13,25 @@ import { stripSeconds } from "../utils/displayHelpers";
 
 const TimeSlotButton = ({ slot, isSelected, onClick }) => {
   const { start_time, end_time, status } = slot;
-  const isBooked = status === "booked";
+  const isUnavailable = status !== "available";
+  const label = `${stripSeconds(start_time)} ${__("to", "nobat")} ${stripSeconds(end_time)}`;
 
-  const buttonClasses = [
-    "time-slot-button",
-    status,
-    isSelected ? "selected" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  if (isBooked) {
+  if (isUnavailable) {
     return (
-      <span className={`${buttonClasses} booked`} disabled>
-        <div className="slot-time-display">
-          <div className="time-start">{stripSeconds(start_time)}</div>
-          <div className="time-separator">{__("to", "nobat")}</div>
-          <div className="time-end">{stripSeconds(end_time)}</div>
-        </div>
-      </span>
+      <button type="button" className="bf-slot" disabled aria-disabled="true">
+        {label}
+      </button>
     );
   }
 
   return (
     <button
       type="button"
-      className={buttonClasses}
+      className="bf-slot"
+      aria-pressed={isSelected ? "true" : "false"}
       onClick={() => onClick(slot)}
-      disabled={status !== "available"}
     >
-      <div className="slot-time-display">
-        <div className="time-start">{stripSeconds(start_time)}</div>
-        <div className="time-separator">{__("to", "nobat")}</div>
-        <div className="time-end">{stripSeconds(end_time)}</div>
-      </div>
+      {label}
     </button>
   );
 };

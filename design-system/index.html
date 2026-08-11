@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soft Slot · Booking Form Kit</title>
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/tokens.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600&display=swap");
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: oklch(0.985 0.004 250);
+      color: oklch(0.22 0.02 260);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+    }
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      margin: 0 0 28px;
+      color: oklch(0.55 0.02 260);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+    a.card {
+      display: block;
+      padding: 16px 18px;
+      border: 1px solid oklch(0.88 0.01 260);
+      border-radius: 12px;
+      background: oklch(1 0 0);
+      box-shadow: 0 1px 2px oklch(0.2 0.02 260 / 0.06);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 150ms cubic-bezier(0.2, 0, 0, 1), background 150ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    a.card:hover {
+      border-color: oklch(0.55 0.12 195);
+      background: oklch(0.94 0.03 195);
+    }
+    a.card:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px color-mix(in oklab, oklch(0.55 0.12 195), transparent 70%);
+    }
+    .card strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .card span {
+      font-size: 13px;
+      color: oklch(0.55 0.02 260);
+    }
+    .meta {
+      margin-top: 28px;
+      font-size: 12px;
+      color: oklch(0.55 0.02 260);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" data-od-id="launcher">
+    <h1>Soft Slot</h1>
+    <p class="lead">کیت طراحی افزونهٔ رزرو — نمونهٔ کامپوننت‌ها و سه صفحهٔ پروتوتایپ.</p>
+    <div class="grid">
+      <a class="card" href="./booking-form-specimen.html" data-od-id="link-specimen">
+        <strong>Specimen</strong>
+        <span>بج‌ها، دکمه‌ها، تاریخ، اسلات، تب، کارت و موفقیت</span>
+      </a>
+      <a class="card" href="./booking-screen.html" data-od-id="link-a">
+        <strong>A · رزرو نوبت</strong>
+        <span>تاریخ ← اسلات ← یادداشت ← ارسال</span>
+      </a>
+      <a class="card" href="./booking-success.html" data-od-id="link-b">
+        <strong>B · موفقیت</strong>
+        <span>خلاصه + بج وضعیت + شماره نوبت</span>
+      </a>
+      <a class="card" href="./my-appointments.html" data-od-id="link-c">
+        <strong>C · نوبت‌های من</strong>
+        <span>تب‌ها + کارت‌ها + چاه‌های یادداشت/لغو</span>
+      </a>
+      <a class="card" href="./DESIGN.md" data-od-id="link-design">
+        <strong>DESIGN.md</strong>
+        <span>قوانین بصری و قرارداد توکن‌ها</span>
+      </a>
+    </div>
+    <p class="meta">Accent placeholder teal — فقط `--accent*` را عوض کنید. Embed پیش‌فرض: `.bf-root`.</p>
+  </main>
+</body>
+</html>

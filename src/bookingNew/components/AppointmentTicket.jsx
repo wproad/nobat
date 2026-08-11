@@ -1,14 +1,10 @@
 /**
  * AppointmentTicket Component
  *
- * Displays a formatted appointment confirmation ticket after successful booking.
- * Shows customizable reservation message from WordPress settings, appointment details,
- * and unique appointment ID. Used as success state replacement for BookingForm.
- * Supports Jalali date format and styled status badge.
+ * Soft Slot success summary after booking: lead → meta → status → queue chip.
  *
  * @param {Object} appointment - Appointment object containing id, dates, times, and status
  */
-import React from "react";
 import {
   getStatusClass,
   getStatusText,
@@ -24,43 +20,43 @@ const AppointmentTicket = ({ appointment }) => {
   const { id, slot_date_jalali, start_time, end_time, status, slot_date } =
     appointment;
 
-  // Get reservation message from WordPress settings
   const reservationMessage =
     (typeof window !== "undefined" &&
       window.wpApiSettings?.reservationMessage) ||
     __("Appointment booked successfully!", "nobat");
 
   return (
-    <div className="appointment-ticket">
-      <div className="ticket-header">
-        <h3 dangerouslySetInnerHTML={{ __html: reservationMessage }} />
-      </div>
-
-      <div className="ticket-content">
-        <div className="ticket-row">
-          <span className="label">{__("Date:", "nobat")}</span>
-          <span className="value">{slot_date_jalali || slot_date}</span>
+    <section className="bf-card bf-success">
+      <p
+        className="bf-success__lead"
+        dangerouslySetInnerHTML={{ __html: reservationMessage }}
+      />
+      <hr className="bf-divider" />
+      <div className="bf-success__rows">
+        <div className="bf-success__row">
+          <span className="bf-success__label">{__("Date", "nobat")}</span>
+          <span className="bf-success__value">
+            {slot_date_jalali || slot_date}
+          </span>
         </div>
-
-        <div className="ticket-row">
-          <span className="label">{__("Time:", "nobat")}</span>
-          <span className="value">{formatTimeRange(start_time, end_time)}</span>
+        <div className="bf-success__row">
+          <span className="bf-success__label">{__("Time", "nobat")}</span>
+          <span className="bf-success__value">
+            {formatTimeRange(start_time, end_time)}
+          </span>
         </div>
-
-        <div className="ticket-row">
-          <span className="label">{__("Status:", "nobat")}</span>
-          <span className={`status-badge ${getStatusClass(status)}`}>
+        <div className="bf-success__row">
+          <span className="bf-success__label">{__("Status", "nobat")}</span>
+          <span className={`bf-badge ${getStatusClass(status)}`}>
             {getStatusText(status)}
           </span>
         </div>
       </div>
-
-      <div className="ticket-footer">
-        <div className="ticket-id">
-          {__("Appointment Number:", "nobat")} #{id}
-        </div>
+      <hr className="bf-divider" />
+      <div className="bf-queue">
+        {__("Appointment Number:", "nobat")} #{id}
       </div>
-    </div>
+    </section>
   );
 };
 

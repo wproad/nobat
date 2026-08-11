@@ -1,13 +1,7 @@
 /**
  * MyAppointments Component
  *
- * Displays user appointments with categorized tabs (upcoming, cancelled, past).
- * Features tab-based navigation with appointment counts, loading states with Spinner,
- * error handling, and empty state messaging.
- * Automatically fetches appointments on mount and supports manual refetch.
- * Only shows tabs when appointments exist for better UX.
- *
- * @todo Replace Notice component with useNotice hook
+ * Soft Slot tabs + appointment cards for upcoming / cancelled / past.
  */
 import { useState } from "react";
 import { useGet } from "../hooks/useFetch.js";
@@ -17,12 +11,9 @@ import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
 import { Spinner, Notice } from "../../ui/index.js";
 import { __ } from "../../utils/i18n.js";
 
-// TODO: repalce Notic with useNotice hook
-
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
 
-  // Fetch appointments from API
   const {
     data: appointmentsData,
     loading,
@@ -55,27 +46,40 @@ const MyAppointments = () => {
   ];
 
   return (
-    <div className="my-appointments">
-      {/* Tab Navigation */}
+    <div>
       {hasAnyAppointments && (
-        <div className="appointments-tabs">
+        <div
+          className="bf-tabs"
+          role="tablist"
+          aria-label={__("Filter appointments", "nobat")}
+        >
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+              type="button"
+              id={`nobat-tab-${tab.id}`}
+              className="bf-tab"
+              role="tab"
+              aria-selected={activeTab === tab.id ? "true" : "false"}
+              aria-controls="nobat-appointment-panel"
               onClick={() => setActiveTab(tab.id)}
             >
-              <span className="tab-label">{tab.label}</span>
-              {tab.count > 0 && <span className="tab-count">{tab.count}</span>}
+              {tab.label}
+              {tab.count > 0 && (
+                <span className="bf-badge bf-badge--count">{tab.count}</span>
+              )}
             </button>
           ))}
         </div>
       )}
 
-      {/* Tab Content */}
-      <div className="tab-content">
+      <section
+        id="nobat-appointment-panel"
+        role="tabpanel"
+        aria-labelledby={`nobat-tab-${activeTab}`}
+      >
         {loading ? (
-          <div className="loading-appointments">
+          <div className="bf-loading">
             <Spinner />
             <span>{__("Loading appointments...", "nobat")}</span>
           </div>
@@ -86,24 +90,19 @@ const MyAppointments = () => {
         ) : !hasAnyAppointments ? (
           <EmptyAppointmentsState />
         ) : currentAppointments.length === 0 ? (
-          <div className="empty-tab-message">
-            <span>{__("Nothing here!", "nobat")}</span>
-          </div>
+          <p className="bf-empty__muted">{__("Nothing here!", "nobat")}</p>
         ) : (
-          <div className="appointments-list">
-            {currentAppointments.map((appointment) => (
-              <AppointmentRow
-                key={appointment.id}
-                appointment={appointment}
-                onCancelled={() => {
-                  // Refetch appointments after cancellation
-                  refetch();
-                }}
-              />
-            ))}
-          </div>
+          currentAppointments.map((appointment) => (
+            <AppointmentRow
+              key={appointment.id}
+              appointment={appointment}
+              onCancelled={() => {
+                refetch();
+              }}
+            />
+          ))
         )}
-      </div>
+      </section>
     </div>
   );
 };

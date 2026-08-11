@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>رزرو نوبت</title>
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/tokens.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/booking-form.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <style>
+    body { margin: 0; background: oklch(0.97 0.004 250); }
+    .host { min-height: 100vh; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div class="host">
+    <div class="bf-root" data-od-id="booking-root">
+      <div class="bf-shell">
+        <header class="bf-header" data-od-id="booking-header">
+          <h1 class="bf-title">رزرو نوبت</h1>
+          <a class="bf-btn bf-btn--ghost" href="./my-appointments.html" data-od-id="cta-view-appointments">مشاهده نوبت‌های من</a>
+        </header>
+
+        <section data-od-id="date-strip" aria-label="انتخاب تاریخ">
+          <div class="bf-dates" role="listbox" aria-label="تاریخ‌های قابل رزرو">
+            <button type="button" class="bf-date" role="option" aria-selected="true" data-date="1405/05/17">
+              <span class="bf-date__weekday">شنبه</span>
+              <span class="bf-date__day">17</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+            <button type="button" class="bf-date" role="option" aria-selected="false" data-date="1405/05/18">
+              <span class="bf-date__weekday">یکشنبه</span>
+              <span class="bf-date__day">18</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+            <button type="button" class="bf-date" role="option" aria-selected="false" data-date="1405/05/19">
+              <span class="bf-date__weekday">دوشنبه</span>
+              <span class="bf-date__day">19</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+            <button type="button" class="bf-date" role="option" aria-selected="false" data-date="1405/05/20">
+              <span class="bf-date__weekday">سه‌شنبه</span>
+              <span class="bf-date__day">20</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+            <button type="button" class="bf-date" role="option" aria-selected="false" data-date="1405/05/21">
+              <span class="bf-date__weekday">چهارشنبه</span>
+              <span class="bf-date__day">21</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+            <button type="button" class="bf-date" role="option" aria-selected="false" data-date="1405/05/22">
+              <span class="bf-date__weekday">پنجشنبه</span>
+              <span class="bf-date__day">22</span>
+              <span class="bf-date__month">مرداد</span>
+            </button>
+          </div>
+        </section>
+
+        <section data-od-id="time-panel">
+          <div class="bf-panel">
+            <p class="bf-panel__title" id="slot-title">بازه‌های زمانی موجود برای 1405/05/17</p>
+            <div class="bf-slots" role="group" aria-labelledby="slot-title">
+              <button type="button" class="bf-slot" aria-pressed="false">09:00 تا 09:15</button>
+              <button type="button" class="bf-slot" disabled>09:15 تا 09:30</button>
+              <button type="button" class="bf-slot" aria-pressed="false">09:30 تا 09:45</button>
+              <button type="button" class="bf-slot" aria-pressed="false">09:45 تا 10:00</button>
+              <button type="button" class="bf-slot" aria-pressed="false">10:00 تا 10:15</button>
+              <button type="button" class="bf-slot" disabled>10:15 تا 10:30</button>
+              <button type="button" class="bf-slot" aria-pressed="false">10:30 تا 10:45</button>
+              <button type="button" class="bf-slot" aria-pressed="false">10:45 تا 11:00</button>
+              <button type="button" class="bf-slot" aria-pressed="false">11:00 تا 11:15</button>
+              <button type="button" class="bf-slot" disabled>11:15 تا 11:30</button>
+              <button type="button" class="bf-slot" aria-pressed="false">11:30 تا 11:45</button>
+              <button type="button" class="bf-slot" aria-pressed="false">11:45 تا 12:00</button>
+            </div>
+          </div>
+        </section>
+
+        <section data-od-id="notes-field">
+          <div class="bf-field">
+            <label class="bf-field__label" for="notes">یادداشت‌های اضافی</label>
+            <textarea class="bf-textarea" id="notes" rows="4" placeholder="هر درخواست خاص یا سوالی دارید اینجا بنویسید…"></textarea>
+            <p class="bf-field__help">اختیاری: هر نیاز خاص یا سوالی اضافه کنید</p>
+          </div>
+        </section>
+
+        <hr class="bf-divider" />
+
+        <div class="bf-actions" data-od-id="submit-row">
+          <a class="bf-btn bf-btn--primary" href="./booking-success.html" data-od-id="cta-book">رزرو نوبت</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var dates = document.querySelectorAll(".bf-date:not([disabled])");
+      dates.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          dates.forEach(function (d) { d.setAttribute("aria-selected", "false"); });
+          btn.setAttribute("aria-selected", "true");
+          var title = document.getElementById("slot-title");
+          if (title && btn.dataset.date) {
+            title.textContent = "بازه‌های زمانی موجود برای " + btn.dataset.date.replace(/\//g, "/");
+            // keep Western digits for product sample consistency with screenshots
+            title.textContent = "بازه‌های زمانی موجود برای " + btn.dataset.date;
+          }
+        });
+      });
+
+      var slots = document.querySelectorAll(".bf-slot:not([disabled])");
+      slots.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          slots.forEach(function (s) { s.setAttribute("aria-pressed", "false"); });
+          btn.setAttribute("aria-pressed", "true");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

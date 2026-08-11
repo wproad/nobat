@@ -1,0 +1,71 @@
+/* Soft Slot — Booking Form Plugin tokens
+ * Placeholder accent (teal) is swappable via --accent*.
+ * Host theming knobs: --accent, --accent-soft, --accent-hover, --accent-on only.
+ * Do not override status tokens from the host.
+ */
+
+.bf-root {
+  /* Surfaces — light plugin canvas */
+  --bg:           oklch(0.985 0.004 250);
+  --surface:      oklch(1 0 0);
+  --surface-2:    oklch(0.965 0.006 250);
+  --fg:           oklch(0.22 0.02 260);
+  --muted:        oklch(0.55 0.02 260);
+  --border:       oklch(0.88 0.01 260);
+
+  /* Accent — PLACEHOLDER teal (swappable) */
+  --accent:       oklch(0.55 0.12 195);
+  --accent-on:    oklch(0.99 0 0);
+  --accent-soft:  oklch(0.94 0.03 195);
+  --accent-hover: oklch(0.48 0.12 195);
+
+  /* Focus */
+  --focus-ring:   0 0 0 3px color-mix(in oklab, var(--accent), transparent 70%);
+
+  /* Wells */
+  --well-note-bg:       var(--surface-2);
+  --well-note-border:   var(--border);
+  --well-cancel-bg:     oklch(0.96 0.03 55);
+  --well-cancel-fg:     oklch(0.42 0.12 25);
+  --well-cancel-border: oklch(0.88 0.04 45);
+
+  /* Status badges — paired bg/fg; never encode status with --accent alone */
+  --status-pending-bg:    oklch(0.96 0.04 85);
+  --status-pending-fg:    oklch(0.45 0.10 70);
+  --status-confirmed-bg:  oklch(0.95 0.04 155);
+  --status-confirmed-fg:  oklch(0.40 0.10 155);
+  --status-cancelled-bg:  oklch(0.95 0.03 15);
+  --status-cancelled-fg:  oklch(0.48 0.14 20);
+  --status-past-bg:       oklch(0.94 0.01 260);
+  --status-past-fg:       oklch(0.42 0.02 260);
+  --status-upcoming-bg:   oklch(0.95 0.02 195);
+  --status-upcoming-fg:   oklch(0.42 0.08 195);
+
+  /* Neutral count pill (tabs) — not a status color */
+  --badge-count-bg: oklch(0.28 0.02 260);
+  --badge-count-fg: oklch(0.99 0 0);
+
+  /* Danger reserved (cancel confirm later) */
+  --danger-bg: oklch(0.95 0.03 15);
+  --danger-fg: oklch(0.42 0.14 20);
+  --danger-border: oklch(0.88 0.04 20);
+
+  /* Type */
+  --font-ui: inherit, "Vazirmatn", "IRANSansX", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Radius / space / elevation */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-pill: 9999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --elev: 0 1px 2px oklch(0.2 0.02 260 / 0.06);
+
+  /* Motion */
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}

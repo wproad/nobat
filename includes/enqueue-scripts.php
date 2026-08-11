@@ -165,12 +165,58 @@ function nobat_front_enqueue_scripts() {
 		'reservationMessage' => get_option( 'nobat_success_message', '' ),
 	) );
 
+	// Soft Slot font fallback (host font wins via inherit)
+	wp_enqueue_style(
+		'nobat-vazirmatn',
+		'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600&display=swap',
+		array(),
+		null
+	);
+
 	// Enqueue styles
 	wp_enqueue_style(
 		'nobat-front-style',
 		NOBAT_PLUGIN_URL . 'build/bookingNew.css',
-		array(), // No dependencies - everything is bundled
+		array( 'nobat-vazirmatn' ),
 		$version,
 	);
+
+	// Admin-configurable Soft Slot accent knobs (--accent*)
+	$colors = function_exists( 'nobat_get_brand_colors' )
+		? nobat_get_brand_colors()
+		: array(
+			'accent' => '#2A9B9B',
+			'on'     => '#FCFCFC',
+			'soft'   => '#E6F3F3',
+			'hover'  => '#217A7A',
+		);
+
+	$accent_css = sprintf(
+		'.bf-root{--accent:%1$s;--accent-on:%2$s;--accent-soft:%3$s;--accent-hover:%4$s;--focus-ring:0 0 0 3px color-mix(in oklab, %1$s, transparent 70%%);}',
+		$colors['accent'],
+		$colors['on'],
+		$colors['soft'],
+		$colors['hover']
+	);
+	wp_add_inline_style( 'nobat-front-style', $accent_css );
 }
 add_action( 'wp_enqueue_scripts', 'nobat_front_enqueue_scripts' );
+
+/**
+ * Enqueue WP color picker on Nobat settings page.
+ *
+ * @param string $admin_page Current admin page hook.
+ */
+function nobat_settings_enqueue_scripts( $admin_page ) {
+	if ( strpos( $admin_page, 'nobat-settings' ) === false ) {
+		return;
+	}
+
+	wp_enqueue_style( 'wp-color-picker' );
+	wp_enqueue_script( 'wp-color-picker' );
+	wp_add_inline_script(
+		'wp-color-picker',
+		"jQuery(function($){ $('.nobat-brand-color-field').wpColorPicker(); });"
+	);
+}
+add_action( 'admin_enqueue_scripts', 'nobat_settings_enqueue_scripts' );

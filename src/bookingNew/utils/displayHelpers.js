@@ -1,25 +1,24 @@
 import { __ } from "../../utils/i18n.js";
 
 /**
- * Get CSS class for status badge based on appointment status
- * Maps each status to a corresponding CSS class for automatic styling
- * @param {string} status - Appointment status value (pending, confirmed, completed, cancelled, etc.)
- * @returns {string} CSS class name
+ * Get CSS class for Soft Slot status badge based on appointment status
+ * @param {string} status - Appointment status value
+ * @returns {string} Soft Slot badge modifier class
  */
 export const getStatusClass = (status) => {
   switch (status) {
     case "pending":
-      return "status-pending";
+      return "bf-badge--pending";
     case "confirmed":
-      return "status-confirmed";
+      return "bf-badge--confirmed";
     case "completed":
-      return "status-completed";
+      return "bf-badge--past";
     case "cancelled":
-      return "status-cancelled";
+      return "bf-badge--cancelled";
     case "cancel_requested":
-      return "status-cancel-requested";
+      return "bf-badge--cancelled";
     default:
-      return "status-default";
+      return "bf-badge--past";
   }
 };
 
@@ -52,7 +51,7 @@ export const getStatusText = (status) => {
  */
 export const stripSeconds = (time) => {
   if (!time) return "";
-  return time.substring(0, 5); // Remove seconds
+  return time.substring(0, 5);
 };
 
 /**

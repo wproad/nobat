@@ -1,14 +1,10 @@
 /**
  * AppointmentRow Component
  *
- * Displays individual appointment item in the appointments list with full details.
- * Conditionally shows cancel button based on appointment status and date.
- * Integrates CancellationModal and useAppointmentCancellation hook for cancellation flow.
- * Displays appointment notes and cancellation reasons when present.
- * Manages success/error notices via useNotice hook.
+ * Soft Slot appointment card with optional note/cancel wells and cancel action.
  *
  * @param {Object} appointment - Appointment object containing appointment details
- * @param {Function} onCancelled - Optional callback function called after successful cancellation (e.g., refresh list)
+ * @param {Function} onCancelled - Optional callback after successful cancellation
  */
 import { AppointmentInfo } from "./AppointmentInfo.jsx";
 import { CancellationModal } from "./CancellationModal.jsx";
@@ -37,33 +33,32 @@ const AppointmentRow = ({ appointment, onCancelled }) => {
   } = useAppointmentCancellation(appointment.id, onCancelled);
 
   return (
-    <div className="appointment-item">
-      <div className="appointment-item-header">
-        <AppointmentInfo appointment={appointment} />
-
-        {cancelAllowed && (
-          <div className="appointment-actions">
-            <button
-              className="btn-cancel"
-              onClick={openModal}
-              disabled={isCancelling}
-            >
-              {__("Cancel Appointment", "nobat")}
-            </button>
-          </div>
-        )}
-      </div>
+    <article className="bf-card">
+      <AppointmentInfo appointment={appointment} />
 
       {appointment.note && (
-        <div className="appointment-note">
-          <strong>{__("Note:", "nobat")}</strong> {appointment.note}
+        <div className="bf-well">
+          {__("Note:", "nobat")} {appointment.note}
         </div>
       )}
 
       {appointment.cancellation_reason && (
-        <div className="cancellation-reason">
-          <strong>{__("Cancellation Reason:", "nobat")}</strong>{" "}
+        <div className="bf-well bf-well--cancel">
+          {__("Cancellation Reason:", "nobat")}{" "}
           {appointment.cancellation_reason}
+        </div>
+      )}
+
+      {cancelAllowed && (
+        <div className="bf-card__actions">
+          <button
+            type="button"
+            className="bf-link-cancel"
+            onClick={openModal}
+            disabled={isCancelling}
+          >
+            {__("Cancel Appointment", "nobat")}
+          </button>
         </div>
       )}
 
@@ -82,7 +77,7 @@ const AppointmentRow = ({ appointment, onCancelled }) => {
         cancellationReason={cancellationReason}
         onReasonChange={setCancellationReason}
       />
-    </div>
+    </article>
   );
 };
 
