@@ -9,7 +9,6 @@ const plugins = defaultConfig.plugins.filter(
 module.exports = {
   ...defaultConfig,
   entry: {
-    booking: "./src/frontend/booking/index.js",
     cal: "./src/admin/cal/index.js",
     schedule: "./src/admin/schedule/index.js",
     bookingNew: "./src/bookingNew/index.js",

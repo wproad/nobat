@@ -110,70 +110,21 @@ function nobat_admin_enqueue_scripts( $admin_page ) {
 add_action( 'admin_enqueue_scripts', 'nobat_admin_enqueue_scripts' );
 
 /**
- * Enqueues frontend booking form scripts
- * Only loads when the shortcode is present
- */
-function nobat_frontend_enqueue_scripts() {
-	// Only enqueue if we're on a page/post that contains our shortcode
-	global $post;
-	if ( ! $post || ! has_shortcode( $post->post_content, 'nobat_booking' ) ) {
-		return;
-	}
-
-	// Use file modification time as version for cache busting
-	$js_file = NOBAT_PLUGIN_DIR . 'build/booking.js';
-	$css_file = NOBAT_PLUGIN_DIR . 'build/booking.css';
-	$version = file_exists( $js_file ) ? filemtime( $js_file ) : NOBAT_VERSION;
-
-	// Enqueue our standalone React bundle (no WordPress dependencies)
-	wp_enqueue_script(
-		'nobat-frontend-script',
-		NOBAT_PLUGIN_URL . 'build/booking.js',
-		array(), // No dependencies - everything is bundled
-		$version,
-		array(
-			'in_footer' => true,
-		)
-	);
-
-	// Load JS translations for the frontend handle
-	wp_set_script_translations( 'nobat-frontend-script', 'nobat', NOBAT_PLUGIN_DIR . 'languages' );
-
-	// Localize script with REST API nonce and user data
-	wp_localize_script( 'nobat-frontend-script', 'wpApiSettings', array(
-		'root' => esc_url_raw( rest_url() ),
-		'nonce' => wp_create_nonce( 'wp_rest' ),
-	) );
-
-	// Enqueue styles
-	wp_enqueue_style(
-		'nobat-frontend-style',
-		NOBAT_PLUGIN_URL . 'build/booking.css',
-		array(), // No dependencies - everything is bundled
-		$version,
-	);
-}
-add_action( 'wp_enqueue_scripts', 'nobat_frontend_enqueue_scripts' );
-
-/**
  * Enqueues bookingNew.js for pages that need it
- * Checks if page has the nobat_new shortcode
+ * Checks if page has the nobat_booking or nobat_new shortcode
  */
 function nobat_front_enqueue_scripts() {
 	global $post;
-	
-	// Check if we need to enqueue bookingNew.js
-	$should_enqueue = false;
-	
-	// Check if we're on a page/post
-	if ( $post ) {
-		// Check if post content contains 'nobat-new' id or has the shortcode
-		if ( strpos( $post->post_content, 'nobat-new' ) !== false || 
-			 has_shortcode( $post->post_content, 'nobat_new' ) ) {
-			$should_enqueue = true;
-		}
+
+	if ( ! $post ) {
+		return;
 	}
-	
+
+	$should_enqueue =
+		has_shortcode( $post->post_content, 'nobat_booking' ) ||
+		has_shortcode( $post->post_content, 'nobat_new' ) ||
+		strpos( $post->post_content, 'nobat-new' ) !== false;
+
 	if ( ! $should_enqueue ) {
 		return;
 	}
