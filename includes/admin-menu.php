@@ -61,9 +61,9 @@ function nobat_admin_page() {
 		'schedule_list_page_callback'
 	);
 
-    // Add scheduling page (hidden from menu - accessed via "Add New" button on schedules list)
-    add_submenu_page(
-		null, // Parent slug null = hidden from menu
+	// Add scheduling sub page
+	add_submenu_page(
+		'nobat',
 		__( 'Add Schedule', 'nobat' ),
 		__( 'Add Schedule', 'nobat' ),
 		'manage_options',
