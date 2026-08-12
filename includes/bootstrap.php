@@ -70,28 +70,31 @@ function nobat_bootstrap() {
 		);
 	} );
 
-	$container->singleton( 'schedule_service', function( $c ) {
-		return new ScheduleService(
-			$c->resolve( 'schedule_repository' ),
-			$c->resolve( 'working_hours_repository' ),
-			$c->resolve( 'slot_repository' ),
-			$c->resolve( 'db_transaction' )
-		);
-	} );
-
-	$container->singleton( 'slot_service', function( $c ) {
-		return new SlotService(
-			$c->resolve( 'slot_repository' ),
-			$c->resolve( 'appointment_repository' )
-		);
-	} );
-
 	$container->singleton( 'appointment_service', function( $c ) {
 		return new AppointmentService(
 			$c->resolve( 'appointment_repository' ),
 			$c->resolve( 'slot_repository' ),
 			$c->resolve( 'appointment_history_repository' ),
 			$c->resolve( 'db_transaction' )
+		);
+	} );
+
+	$container->singleton( 'schedule_service', function( $c ) {
+		return new ScheduleService(
+			$c->resolve( 'schedule_repository' ),
+			$c->resolve( 'working_hours_repository' ),
+			$c->resolve( 'slot_repository' ),
+			$c->resolve( 'db_transaction' ),
+			$c->resolve( 'appointment_repository' ),
+			$c->resolve( 'appointment_history_repository' ),
+			$c->resolve( 'appointment_service' )
+		);
+	} );
+
+	$container->singleton( 'slot_service', function( $c ) {
+		return new SlotService(
+			$c->resolve( 'slot_repository' ),
+			$c->resolve( 'schedule_repository' )
 		);
 	} );
 

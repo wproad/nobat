@@ -227,11 +227,11 @@ class Router {
 			'permission_callback' => '__return_true',
 		) );
 
-		// Get single schedule (admin)
+		// Get single schedule (public — used by shortcode schedule_id)
 		register_rest_route( $this->namespace, '/schedules/(?P<id>\d+)', array(
 			'methods' => 'GET',
 			'callback' => array( $this->schedule_controller, 'get_one' ),
-			'permission_callback' => array( 'Nobat\Middleware\AuthMiddleware', 'require_admin' ),
+			'permission_callback' => '__return_true',
 		) );
 
 		// Update schedule (admin)
@@ -300,7 +300,7 @@ class Router {
 			'permission_callback' => '__return_true',
 			'args' => array(
 				'schedule_id' => array(
-					'required' => true,
+					'required' => false,
 					'type' => 'integer'
 				),
 				'date_from' => array(

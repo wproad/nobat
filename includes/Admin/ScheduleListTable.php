@@ -7,7 +7,6 @@
  * @package Nobat
  * @since 2.0.0
  */
-
 namespace Nobat\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -58,18 +57,28 @@ class ScheduleListTable extends \WP_List_Table {
 	 * @return string
 	 */
 	protected function column_name( $item ) {
+		$id = intval( $item['id'] );
+		$delete_confirm = esc_js(
+			__( 'Are you sure you want to delete this schedule? This will permanently delete all appointments on this schedule.', 'nobat' )
+		);
+
 		$actions = [
+			'edit' => sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( admin_url( 'admin.php?page=nobat-schedule-edit&id=' . $id ) ),
+				__( 'Edit', 'nobat' )
+			),
+			'show' => sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( admin_url( 'admin.php?page=nobat&schedule_id=' . $id ) ),
+				__( 'View Calendar', 'nobat' )
+			),
 			'delete' => sprintf(
 				'<a href="%s" onclick="return confirm(\'%s\');">%s</a>',
-				wp_nonce_url( admin_url( 'admin.php?page=nobat-schedules&action=delete&id=' . intval( $item['id'] ) ), 'delete_schedule_' . intval( $item['id'] ) ),
-				esc_js( __( 'Are you sure you want to delete this schedule?', 'nobat' ) ),
+				wp_nonce_url( admin_url( 'admin.php?page=nobat-schedules&action=delete&id=' . $id ), 'delete_schedule_' . $id ),
+				$delete_confirm,
 				__( 'Delete', 'nobat' )
 			),
-			// 'show' => sprintf(
-			// 	'<a href="%s">%s</a>',
-			// 	esc_url( admin_url( 'admin.php?page=nobat-cal&schedule_id=' . intval( $item['id'] ) ) ),
-			// 	__( 'Show Calendar View', 'nobat' )
-			// ),
 		];
 
 		return sprintf(
@@ -93,12 +102,12 @@ class ScheduleListTable extends \WP_List_Table {
 				'<span style="background-color:#5cb85c; color:#fff; padding:3px 8px; border-radius:6px; font-size:12px;">%s</span>',
 				esc_html__( 'Active', 'nobat' )
 			);
-		} else {
-			return sprintf(
-				'<span style="background-color:#777; color:#fff; padding:3px 8px; border-radius:6px; font-size:12px;">%s</span>',
-				esc_html__( 'Inactive', 'nobat' )
-			);
 		}
+
+		return sprintf(
+			'<span style="background-color:#777; color:#fff; padding:3px 8px; border-radius:6px; font-size:12px;">%s</span>',
+			esc_html__( 'Inactive', 'nobat' )
+		);
 	}
 
 	/**
@@ -128,11 +137,10 @@ class ScheduleListTable extends \WP_List_Table {
 	 */
 	public function extra_tablenav( $which ) {
 		if ( 'top' === $which ) {
-			$selected_status = isset( $_GET['status_filter'] ) ? sanitize_text_field( $_GET['status_filter'] ) : '';
+			$selected_status = isset( $_GET['status_filter'] ) ? sanitize_text_field( wp_unslash( $_GET['status_filter'] ) ) : '';
 
 			echo '<div class="alignleft actions">';
 
-			// Status filter
 			echo '<select name="status_filter">';
 			echo '<option value="">' . esc_html__( 'All Statuses', 'nobat' ) . '</option>';
 			echo '<option value="1" ' . selected( $selected_status, '1', false ) . '>' . esc_html__( 'Active', 'nobat' ) . '</option>';
@@ -155,12 +163,10 @@ class ScheduleListTable extends \WP_List_Table {
 
 		$where = '1=1';
 		
-		// Status filter
 		if ( isset( $_GET['status_filter'] ) && $_GET['status_filter'] !== '' ) {
 			$where .= $wpdb->prepare( ' AND is_active = %d', intval( $_GET['status_filter'] ) );
 		}
 
-		// Pagination
 		$per_page     = 30;
 		$current_page = $this->get_pagenum();
 		$total_items  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM $table WHERE $where" );
@@ -184,4 +190,3 @@ class ScheduleListTable extends \WP_List_Table {
 		] );
 	}
 }
-

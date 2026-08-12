@@ -7,7 +7,6 @@
  * @package Nobat
  * @since 2.0.0
  */
-
 namespace Nobat\Repositories;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,7 +26,7 @@ class ScheduleRepository extends BaseRepository {
 	protected $table = 'nobat_schedules';
 	
 	/**
-	 * Find the active schedule
+	 * Find the latest active schedule
 	 * 
 	 * @return array|null
 	 */
@@ -87,50 +86,23 @@ class ScheduleRepository extends BaseRepository {
 	}
 	
 	/**
-	 * Deactivate all schedules
-	 * 
-	 * @return bool
-	 */
-	public function deactivate_all() {
-		$result = $this->wpdb->update(
-			$this->table_name,
-			array( 'is_active' => 0 ),
-			array( 'is_active' => 1 ),
-			array( '%d' ),
-			array( '%d' )
-		);
-		
-		return $result !== false;
-	}
-	
-	/**
-	 * Activate a specific schedule (and deactivate others)
+	 * Activate a specific schedule (does not deactivate others)
 	 * 
 	 * @param int $schedule_id
 	 * @return bool
 	 */
 	public function activate( $schedule_id ) {
-		$this->begin_transaction();
-		
-		try {
-			// Deactivate all schedules
-			$this->deactivate_all();
-			
-			// Activate the specified schedule
-			$result = $this->update( $schedule_id, array( 'is_active' => 1 ) );
-			
-			if ( ! $result ) {
-				throw new \Exception( 'Failed to activate schedule' );
-			}
-			
-			$this->commit();
-			return true;
-			
-		} catch ( Exception $e ) {
-			$this->rollback();
-			error_log( 'Failed to activate schedule: ' . $e->getMessage() );
-			return false;
-		}
+		return $this->update( $schedule_id, array( 'is_active' => 1 ) );
+	}
+	
+	/**
+	 * Deactivate a specific schedule
+	 * 
+	 * @param int $schedule_id
+	 * @return bool
+	 */
+	public function deactivate( $schedule_id ) {
+		return $this->update( $schedule_id, array( 'is_active' => 0 ) );
 	}
 	
 	/**
@@ -179,4 +151,3 @@ class ScheduleRepository extends BaseRepository {
 		return $schedule;
 	}
 }
-

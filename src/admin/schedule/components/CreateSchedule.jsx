@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   TextControl,
-  ToggleControl,
   Button,
   Notice,
   JalaliDatePickerInput,
@@ -13,7 +12,6 @@ import { useSchedule } from "../../../hooks/useSchedule";
 
 function CreateSchedule() {
   const [name, setName] = useState("");
-  const [isActive, setIsActive] = useState(true);
   const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
   const [meetingDuration, setMeetingDuration] = useState(30);
@@ -23,9 +21,18 @@ function CreateSchedule() {
   const buffer = 0;
 
   const handleSubmit = () => {
+    const overlapWarning = __(
+      "Schedules with overlapping date ranges may interfere with each other. Make sure this is intentional before continuing.",
+      "nobat"
+    );
+
+    if (!window.confirm(overlapWarning)) {
+      return;
+    }
+
     const payload = {
       name,
-      isActive,
+      isActive: false,
       startDate: startDay, // Jalali format YYYY/MM/DD - will be converted to Gregorian in API
       endDate: endDay, // Jalali format YYYY/MM/DD - will be converted to Gregorian in API
       meetingDuration,
@@ -67,13 +74,20 @@ function CreateSchedule() {
         </Notice>
       )}
 
+      <Notice status="warning" isDismissible={false}>
+        {__(
+          "New schedules are created inactive. Activate them later from the Schedules list. Overlapping date ranges across schedules may interfere — review existing schedules before creating another.",
+          "nobat"
+        )}
+      </Notice>
+
       <div className="schedule-section">
         <div className="section-header">
           <h2 className="section-title">
             {__("Basic Information", "nobat")}
           </h2>
           <p className="section-description">
-            {__("Give your schedule a name and set its status", "nobat")}
+            {__("Give your schedule a name", "nobat")}
           </p>
         </div>
 
@@ -89,27 +103,6 @@ function CreateSchedule() {
                   "A descriptive name to identify this schedule",
                   "nobat"
                 )}
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-field">
-              <ToggleControl
-                label={__("Activate Schedule", "nobat")}
-                checked={isActive}
-                onChange={setIsActive}
-                help={
-                  isActive
-                    ? __(
-                        "This schedule is active and visible to users",
-                        "nobat"
-                      )
-                    : __(
-                        "This schedule is inactive and hidden from users",
-                        "nobat"
-                      )
-                }
               />
             </div>
           </div>

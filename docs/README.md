@@ -30,8 +30,8 @@ See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for full setup.
 ### Booking shortcode
 
 ```
-[nobat_new]
-[nobat_new schedule_id="5"]
+[nobat_booking]
+[nobat_booking schedule_id="5"]
 ```
 
 ---

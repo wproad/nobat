@@ -69,8 +69,10 @@ class SlotController {
 	public function get_available( $request ) {
 		$days = $request->get_param( 'days' );
 		$days = $days ? (int) $days : 7;
+		$schedule_id = $request->get_param( 'schedule_id' );
+		$schedule_id = $schedule_id ? (int) $schedule_id : null;
 		
-		$result = $this->slot_service->get_available_slots( $days );
+		$result = $this->slot_service->get_available_slots( $days, $schedule_id );
 		
 		if ( is_wp_error( $result ) ) {
 			return $result;

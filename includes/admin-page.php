@@ -85,53 +85,26 @@ function nobat_handle_schedule_deletions() {
 		return;
 	}
 
-	global $wpdb;
-	$table = $wpdb->prefix . 'nobat_schedules';
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
 
-	// Handle single delete
+	// Handle single delete via service (cascades appointments/slots/hours)
 	if ( isset( $_GET['action'] ) && $_GET['action'] === 'delete' && isset( $_GET['id'] ) ) {
 		$id = intval( $_GET['id'] );
 		check_admin_referer( 'delete_schedule_' . $id );
-		
-		$wpdb->delete( $table, [ 'id' => $id ], [ '%d' ] );
-		
-		wp_redirect( add_query_arg( 'deleted', 1, remove_query_arg( [ 'action', 'id', '_wpnonce' ] ) ) );
+
+		$schedule_service = nobat_service( 'schedule_service' );
+		$result = $schedule_service->delete_schedule( $id );
+
+		$redirect_args = is_wp_error( $result )
+			? array( 'delete_error' => 1 )
+			: array( 'deleted' => 1 );
+
+		wp_redirect( add_query_arg( $redirect_args, remove_query_arg( array( 'action', 'id', '_wpnonce', 'deleted', 'delete_error' ) ) ) );
 		exit;
 	}
 
-	// Handle bulk delete from top dropdown
-	/*
-	if ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
-		check_admin_referer( 'bulk-schedules' );
-		
-		$ids = array_map( 'intval', (array) $_REQUEST['schedule'] );
-		
-		if ( ! empty( $ids ) ) {
-			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
-			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
-			
-			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'schedule', '_wpnonce' ] ) ) );
-			exit;
-		}
-	}
-	*/
-
-	// Handle bulk delete from bottom dropdown
-	/*
-	if ( isset( $_REQUEST['action2'] ) && $_REQUEST['action2'] === 'delete' && isset( $_REQUEST['schedule'] ) ) {
-		check_admin_referer( 'bulk-schedules' );
-		
-		$ids = array_map( 'intval', (array) $_REQUEST['schedule'] );
-		
-		if ( ! empty( $ids ) ) {
-			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
-			$wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN ($placeholders)", $ids ) );
-			
-			wp_redirect( add_query_arg( 'deleted', count( $ids ), remove_query_arg( [ 'action', 'action2', 'schedule', '_wpnonce' ] ) ) );
-			exit;
-		}
-	}
-	*/
 }
 add_action( 'admin_init', 'nobat_handle_schedule_deletions' );
 
@@ -743,6 +716,20 @@ function schedule_list_page_callback() {
 		);
 	}
 
+	if ( isset( $_GET['delete_error'] ) ) {
+		printf(
+			'<div class="notice notice-error is-dismissible"><p>%s</p></div>',
+			esc_html__( 'Failed to delete schedule.', 'nobat' )
+		);
+	}
+
+	if ( isset( $_GET['updated'] ) ) {
+		printf(
+			'<div class="updated notice is-dismissible"><p>%s</p></div>',
+			esc_html__( 'Schedule updated.', 'nobat' )
+		);
+	}
+
 	echo '<form method="get">';
 	echo '<input type="hidden" name="page" value="nobat-schedules" />';
 
@@ -751,6 +738,187 @@ function schedule_list_page_callback() {
 	$table->display();
 
 	echo '</form></div>';
+}
+
+/**
+ * Handle schedule edit form submission
+ */
+function nobat_handle_schedule_edit() {
+	if ( ! isset( $_POST['nobat_edit_schedule'] ) ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$schedule_id = isset( $_POST['schedule_id'] ) ? intval( $_POST['schedule_id'] ) : 0;
+	if ( ! $schedule_id ) {
+		return;
+	}
+
+	check_admin_referer( 'nobat_edit_schedule_' . $schedule_id );
+
+	$was_active = ! empty( $_POST['was_active'] );
+	$is_active = ! empty( $_POST['is_active'] );
+
+	if ( $was_active && ! $is_active ) {
+		// Extra confirmation flag from the form JS/UI
+		if ( empty( $_POST['confirm_deactivate'] ) ) {
+			wp_die(
+				esc_html__( 'Deactivating this schedule will cancel all open appointments on it. Please confirm and try again.', 'nobat' ),
+				esc_html__( 'Confirmation required', 'nobat' ),
+				array( 'response' => 400, 'back_link' => true )
+			);
+		}
+	}
+
+	$name = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+	if ( $name === '' ) {
+		wp_die(
+			esc_html__( 'Schedule name is required.', 'nobat' ),
+			esc_html__( 'Validation error', 'nobat' ),
+			array( 'response' => 400, 'back_link' => true )
+		);
+	}
+
+	$schedule_service = nobat_service( 'schedule_service' );
+	$result = $schedule_service->update_schedule(
+		$schedule_id,
+		array(
+			'name' => $name,
+			'is_active' => $is_active ? 1 : 0,
+		),
+		get_current_user_id()
+	);
+
+	if ( is_wp_error( $result ) ) {
+		wp_die(
+			esc_html( $result->get_error_message() ),
+			esc_html__( 'Update failed', 'nobat' ),
+			array( 'response' => 500, 'back_link' => true )
+		);
+	}
+
+	wp_safe_redirect( admin_url( 'admin.php?page=nobat-schedules&updated=1' ) );
+	exit;
+}
+add_action( 'admin_init', 'nobat_handle_schedule_edit' );
+
+/**
+ * Edit schedule admin page (name + is_active)
+ */
+function nobat_schedule_edit_page_html() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$schedule_id = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : 0;
+	$schedule = $schedule_id
+		? nobat_service( 'schedule_repository' )->find( $schedule_id )
+		: null;
+
+	if ( ! $schedule ) {
+		echo '<div class="wrap"><h1>' . esc_html__( 'Edit Schedule', 'nobat' ) . '</h1>';
+		echo '<div class="notice notice-error"><p>' . esc_html__( 'Schedule not found.', 'nobat' ) . '</p></div>';
+		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=nobat-schedules' ) ) . '">' . esc_html__( 'Back to Schedules', 'nobat' ) . '</a></p></div>';
+		return;
+	}
+
+	$is_active = ! empty( $schedule['is_active'] );
+	$deactivate_msg = esc_js(
+		__( 'Deactivating this schedule will cancel all open appointments on it (pending, confirmed, and cancellation requests). Continue?', 'nobat' )
+	);
+	?>
+	<div class="wrap">
+		<h1><?php echo esc_html__( 'Edit Schedule', 'nobat' ); ?></h1>
+		<p>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=nobat-schedules' ) ); ?>">
+				<?php echo esc_html__( 'Back to Schedules', 'nobat' ); ?>
+			</a>
+			|
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=nobat&schedule_id=' . intval( $schedule['id'] ) ) ); ?>">
+				<?php echo esc_html__( 'View Calendar', 'nobat' ); ?>
+			</a>
+		</p>
+
+		<form method="post" id="nobat-edit-schedule-form">
+			<?php wp_nonce_field( 'nobat_edit_schedule_' . intval( $schedule['id'] ) ); ?>
+			<input type="hidden" name="nobat_edit_schedule" value="1" />
+			<input type="hidden" name="schedule_id" value="<?php echo esc_attr( $schedule['id'] ); ?>" />
+			<input type="hidden" name="was_active" value="<?php echo $is_active ? '1' : '0'; ?>" />
+			<input type="hidden" name="confirm_deactivate" id="nobat-confirm-deactivate" value="" />
+
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row">
+						<label for="nobat-schedule-name"><?php echo esc_html__( 'Schedule Name', 'nobat' ); ?></label>
+					</th>
+					<td>
+						<input
+							type="text"
+							class="regular-text"
+							id="nobat-schedule-name"
+							name="name"
+							value="<?php echo esc_attr( $schedule['name'] ); ?>"
+							required
+						/>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php echo esc_html__( 'Status', 'nobat' ); ?></th>
+					<td>
+						<label for="nobat-schedule-active">
+							<input
+								type="checkbox"
+								id="nobat-schedule-active"
+								name="is_active"
+								value="1"
+								<?php checked( $is_active ); ?>
+							/>
+							<?php echo esc_html__( 'Active', 'nobat' ); ?>
+						</label>
+						<p class="description">
+							<?php echo esc_html__( 'Multiple schedules can be active at the same time. Deactivating cancels open appointments on this schedule.', 'nobat' ); ?>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php echo esc_html__( 'Date Range', 'nobat' ); ?></th>
+					<td>
+						<code><?php echo esc_html( $schedule['start_date'] . ' — ' . $schedule['end_date'] ); ?></code>
+						<p class="description"><?php echo esc_html__( 'Dates cannot be edited here.', 'nobat' ); ?></p>
+					</td>
+				</tr>
+			</table>
+
+			<?php submit_button( __( 'Save Changes', 'nobat' ) ); ?>
+		</form>
+	</div>
+	<script>
+	(function () {
+		var form = document.getElementById('nobat-edit-schedule-form');
+		if (!form) return;
+		var wasActive = <?php echo $is_active ? 'true' : 'false'; ?>;
+		var confirmInput = document.getElementById('nobat-confirm-deactivate');
+		var activeCheckbox = document.getElementById('nobat-schedule-active');
+		var message = '<?php echo $deactivate_msg; ?>';
+
+		form.addEventListener('submit', function (e) {
+			var willDeactivate = wasActive && activeCheckbox && !activeCheckbox.checked;
+			if (willDeactivate) {
+				if (!window.confirm(message)) {
+					e.preventDefault();
+					return;
+				}
+				if (confirmInput) {
+					confirmInput.value = '1';
+				}
+			}
+		});
+	})();
+	</script>
+	<?php
 }
 
 /**

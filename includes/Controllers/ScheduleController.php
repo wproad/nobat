@@ -157,7 +157,7 @@ class ScheduleController {
 		// Sanitize and prepare data (use converted Gregorian dates)
 		$schedule_data = array(
 			'name' => sanitize_text_field( $name ),
-			'is_active' => ! empty( $data['isActive'] ) || ! empty( $data['is_active'] ) ? 1 : 0,
+			'is_active' => 0,
 			'start_date' => sanitize_text_field( $start_date_gregorian ),
 			'end_date' => sanitize_text_field( $end_date_gregorian ),
 			'meeting_duration' => (int) $meeting_duration,
@@ -255,6 +255,55 @@ class ScheduleController {
 	}
 	
 	/**
+	 * Update a schedule (name, is_active)
+	 *
+	 * @param WP_REST_Request $request
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function update( $request ) {
+		$schedule_id = (int) $request->get_param( 'id' );
+		$data = $request->get_json_params();
+		if ( ! is_array( $data ) ) {
+			$data = array();
+		}
+
+		$update = array();
+		if ( array_key_exists( 'name', $data ) ) {
+			$update['name'] = sanitize_text_field( $data['name'] );
+		}
+		if ( array_key_exists( 'isActive', $data ) || array_key_exists( 'is_active', $data ) ) {
+			$update['is_active'] = ! empty( $data['isActive'] ) || ! empty( $data['is_active'] ) ? 1 : 0;
+		}
+
+		if ( empty( $update ) ) {
+			return new WP_Error(
+				'missing_field',
+				__( 'Nothing to update. Provide name and/or is_active.', 'nobat' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		$result = $this->schedule_service->update_schedule(
+			$schedule_id,
+			$update,
+			get_current_user_id()
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		return new WP_REST_Response(
+			array(
+				'success' => true,
+				'message' => __( 'Schedule updated successfully.', 'nobat' ),
+				'schedule' => $result,
+			),
+			200
+		);
+	}
+
+	/**
 	 * Activate a schedule
 	 * 
 	 * @param WP_REST_Request $request
@@ -273,6 +322,33 @@ class ScheduleController {
 			array(
 				'success' => true,
 				'message' => __( 'Schedule activated successfully.', 'nobat' )
+			),
+			200
+		);
+	}
+
+	/**
+	 * Deactivate a schedule (cancels open appointments)
+	 *
+	 * @param WP_REST_Request $request
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function deactivate( $request ) {
+		$schedule_id = (int) $request->get_param( 'id' );
+
+		$result = $this->schedule_service->deactivate_schedule(
+			$schedule_id,
+			get_current_user_id()
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		return new WP_REST_Response(
+			array(
+				'success' => true,
+				'message' => __( 'Schedule deactivated successfully. Open appointments were cancelled.', 'nobat' ),
 			),
 			200
 		);

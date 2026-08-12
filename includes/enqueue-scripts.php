@@ -139,7 +139,7 @@ add_action( 'admin_enqueue_scripts', 'nobat_admin_enqueue_scripts' );
 
 /**
  * Enqueues bookingNew.js for pages that need it
- * Checks if page has the nobat_booking or nobat_new shortcode
+ * Checks if page has the nobat_booking shortcode
  */
 function nobat_front_enqueue_scripts() {
 	global $post;
@@ -148,10 +148,7 @@ function nobat_front_enqueue_scripts() {
 		return;
 	}
 
-	$should_enqueue =
-		has_shortcode( $post->post_content, 'nobat_booking' ) ||
-		has_shortcode( $post->post_content, 'nobat_new' ) ||
-		strpos( $post->post_content, 'nobat-new' ) !== false;
+	$should_enqueue = has_shortcode( $post->post_content, 'nobat_booking' );
 
 	if ( ! $should_enqueue ) {
 		return;

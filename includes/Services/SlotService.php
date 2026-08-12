@@ -48,14 +48,18 @@ class SlotService {
 	}
 	
 	/**
-	 * Get available slots for active schedule
+	 * Get available slots for a schedule
 	 * 
 	 * @param int $days Number of days to retrieve (default 7)
+	 * @param int|null $schedule_id Schedule ID; falls back to latest active when omitted
 	 * @return array|WP_Error
 	 */
-	public function get_available_slots( $days = 7 ) {
-		// Get active schedule
-		$schedule = $this->schedule_repo->find_active();
+	public function get_available_slots( $days = 7, $schedule_id = null ) {
+		if ( $schedule_id ) {
+			$schedule = $this->schedule_repo->find( (int) $schedule_id );
+		} else {
+			$schedule = $this->schedule_repo->find_active();
+		}
 		
 		if ( ! $schedule ) {
 			return new WP_Error(
@@ -68,15 +72,6 @@ class SlotService {
 		$today = current_time( 'Y-m-d' );
 		$end_date = date( 'Y-m-d', strtotime( "+{$days} days" ) );
 		
-		// Get available slots
-		$slots = $this->slot_repo->find_available(
-			$schedule['id'],
-			$today,
-			$end_date,
-			null
-		);
-		
-		// Group by date
 		return $this->slot_repo->get_grouped_by_date(
 			$schedule['id'],
 			$today,

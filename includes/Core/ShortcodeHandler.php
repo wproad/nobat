@@ -25,7 +25,6 @@ class ShortcodeHandler {
 	 */
 	public function register() {
 		add_shortcode( 'nobat_booking', array( $this, 'booking_form' ) );
-		add_shortcode( 'nobat_new', array( $this, 'booking_form' ) );
 	}
 
 	/**

@@ -129,6 +129,58 @@ class AppointmentRepository extends BaseRepository {
 	}
 	
 	/**
+	 * Find cancellable appointments for a schedule
+	 * (pending, confirmed, cancel_requested)
+	 *
+	 * @param int $schedule_id
+	 * @return array
+	 */
+	public function find_cancellable_by_schedule( $schedule_id ) {
+		return $this->wpdb->get_results(
+			$this->wpdb->prepare(
+				"SELECT * FROM {$this->table_name}
+				WHERE schedule_id = %d
+				AND status IN ('pending', 'confirmed', 'cancel_requested')",
+				$schedule_id
+			),
+			ARRAY_A
+		);
+	}
+
+	/**
+	 * Delete all appointments for a schedule
+	 *
+	 * @param int $schedule_id
+	 * @return bool
+	 */
+	public function delete_by_schedule( $schedule_id ) {
+		$result = $this->wpdb->delete(
+			$this->table_name,
+			array( 'schedule_id' => $schedule_id ),
+			array( '%d' )
+		);
+
+		return $result !== false;
+	}
+
+	/**
+	 * Get appointment IDs for a schedule
+	 *
+	 * @param int $schedule_id
+	 * @return int[]
+	 */
+	public function get_ids_by_schedule( $schedule_id ) {
+		$ids = $this->wpdb->get_col(
+			$this->wpdb->prepare(
+				"SELECT id FROM {$this->table_name} WHERE schedule_id = %d",
+				$schedule_id
+			)
+		);
+
+		return array_map( 'intval', $ids ?: array() );
+	}
+
+	/**
 	 * Find appointments by slot ID
 	 * 
 	 * @param int $slot_id

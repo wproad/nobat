@@ -452,6 +452,32 @@ class AppointmentService {
 	public function get_cancellation_requests() {
 		return $this->appointment_repo->find_cancellation_requests();
 	}
+
+	/**
+	 * Cancel all cancellable appointments for a schedule
+	 * (pending, confirmed, cancel_requested). Leaves completed/cancelled alone.
+	 *
+	 * @param int $schedule_id
+	 * @param int $admin_id
+	 * @param string|null $reason
+	 * @return true|\WP_Error
+	 */
+	public function cancel_appointments_for_schedule( $schedule_id, $admin_id, $reason = null ) {
+		if ( ! $reason ) {
+			$reason = __( 'Schedule deactivated by admin', 'nobat' );
+		}
+
+		$appointments = $this->appointment_repo->find_cancellable_by_schedule( $schedule_id );
+
+		foreach ( $appointments as $appointment ) {
+			$result = $this->cancel_appointment( (int) $appointment['id'], $admin_id, $reason );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+		}
+
+		return true;
+	}
 	
 	/**
 	 * Get appointment by ID

@@ -54,6 +54,25 @@ class AppointmentHistoryRepository extends BaseRepository {
 	}
 	
 	/**
+	 * Delete history entries for the given appointment IDs
+	 *
+	 * @param int[] $appointment_ids
+	 * @return bool
+	 */
+	public function delete_by_appointment_ids( $appointment_ids ) {
+		if ( empty( $appointment_ids ) ) {
+			return true;
+		}
+
+		$ids_sql = implode( ',', array_map( 'intval', $appointment_ids ) );
+		$result = $this->wpdb->query(
+			"DELETE FROM {$this->table_name} WHERE appointment_id IN ($ids_sql)"
+		);
+
+		return $result !== false;
+	}
+
+	/**
 	 * Find history by appointment ID
 	 * 
 	 * @param int $appointment_id

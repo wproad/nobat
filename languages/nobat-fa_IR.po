@@ -264,15 +264,13 @@ msgstr "تاریخ پایان"
 msgid "Duration (min)"
 msgstr "مدت زمان (دقیقه)"
 
-#: includes/admin-page.php:619
-#: includes/Admin/ScheduleListTable.php:65
-msgid "Are you sure you want to delete this schedule?"
-msgstr "آیا مطمئن هستید که می‌خواهید این زمانبندی را حذف کنید؟"
+#: includes/Admin/ScheduleListTable.php
+msgid "Are you sure you want to delete this schedule? This will permanently delete all appointments on this schedule."
+msgstr "آیا مطمئن هستید که می‌خواهید این زمانبندی را حذف کنید؟ با این کار همه نوبت‌های این زمانبندی برای همیشه حذف می‌شوند."
 
-#: includes/admin-page.php:625
-#: includes/Admin/ScheduleListTable.php:71
-msgid "Show Calendar View"
-msgstr "نمایش جزئیات"
+#: includes/Admin/ScheduleListTable.php
+msgid "View Calendar"
+msgstr "مشاهده تقویم"
 
 #: includes/admin-page.php:672
 #: includes/admin-page.php:724
@@ -1540,3 +1538,80 @@ msgstr "این برنامه غیرفعال است و برای کاربران م�
 #: src/bookingNew/components/Main.jsx:41
 msgid "View My Appointments"
 msgstr "مشاهده نوبت‌ها من"
+
+#: src/admin/schedule/components/CreateSchedule.jsx
+msgid "Schedules with overlapping date ranges may interfere with each other. Make sure this is intentional before continuing."
+msgstr "زمانبندی‌هایی با بازه تاریخ هم‌پوشان ممکن است با یکدیگر تداخل داشته باشند. قبل از ادامه مطمئن شوید این کار عمدی است."
+
+#: src/admin/schedule/components/CreateSchedule.jsx
+msgid "New schedules are created inactive. Activate them later from the Schedules list. Overlapping date ranges across schedules may interfere — review existing schedules before creating another."
+msgstr "زمانبندی‌های جدید به‌صورت غیرفعال ایجاد می‌شوند. بعداً از فهرست زمانبندی‌ها آن‌ها را فعال کنید. بازه‌های تاریخ هم‌پوشان ممکن است تداخل ایجاد کنند — قبل از ایجاد زمانبندی جدید، زمانبندی‌های موجود را بررسی کنید."
+
+#: src/admin/schedule/components/CreateSchedule.jsx
+msgid "Give your schedule a name"
+msgstr "برای زمانبندی خود یک نام بگذارید"
+
+#: includes/admin-menu.php
+#: includes/admin-page.php
+msgid "Edit Schedule"
+msgstr "ویرایش زمانبندی"
+
+#: includes/admin-page.php
+msgid "Back to Schedules"
+msgstr "بازگشت به زمانبندی‌ها"
+
+#: includes/admin-page.php
+msgid "Deactivating this schedule will cancel all open appointments on it. Please confirm and try again."
+msgstr "غیرفعال کردن این زمانبندی همه نوبت‌های باز آن را لغو می‌کند. لطفاً تأیید کنید و دوباره تلاش کنید."
+
+#: includes/admin-page.php
+msgid "Confirmation required"
+msgstr "تأیید لازم است"
+
+#: includes/admin-page.php
+msgid "Schedule name is required."
+msgstr "نام زمانبندی الزامی است."
+
+#: includes/admin-page.php
+msgid "Validation error"
+msgstr "خطای اعتبارسنجی"
+
+#: includes/admin-page.php
+msgid "Update failed"
+msgstr "به‌روزرسانی ناموفق بود"
+
+#: includes/admin-page.php
+msgid "Schedule updated."
+msgstr "زمانبندی به‌روزرسانی شد."
+
+#: includes/admin-page.php
+msgid "Deactivating this schedule will cancel all open appointments on it (pending, confirmed, and cancellation requests). Continue?"
+msgstr "غیرفعال کردن این زمانبندی همه نوبت‌های باز آن (در انتظار، تأییدشده و درخواست لغو) را لغو می‌کند. ادامه می‌دهید؟"
+
+#: includes/admin-page.php
+msgid "Multiple schedules can be active at the same time. Deactivating cancels open appointments on this schedule."
+msgstr "چند زمانبندی می‌توانند هم‌زمان فعال باشند. غیرفعال کردن، نوبت‌های باز این زمانبندی را لغو می‌کند."
+
+#: includes/admin-page.php
+msgid "Date Range"
+msgstr "بازه تاریخ"
+
+#: includes/admin-page.php
+msgid "Dates cannot be edited here."
+msgstr "تاریخ‌ها از اینجا قابل ویرایش نیستند."
+
+#: includes/admin-page.php
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#: includes/Services/AppointmentService.php
+msgid "Schedule deactivated by admin"
+msgstr "زمانبندی توسط مدیر غیرفعال شد"
+
+#: includes/Controllers/ScheduleController.php
+msgid "Schedule updated successfully."
+msgstr "زمانبندی با موفقیت به‌روزرسانی شد."
+
+#: includes/Controllers/ScheduleController.php
+msgid "Schedule deactivated successfully. Open appointments were cancelled."
+msgstr "زمانبندی با موفقیت غیرفعال شد. نوبت‌های باز لغو شدند."

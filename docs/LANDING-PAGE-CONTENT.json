@@ -86,8 +86,8 @@
             "id": "shortcode_embed",
             "title_fa": "نصب روی هر صفحه با شورت‌کد",
             "title_en": "Embed on any page via shortcode",
-            "description_fa": "با `[nobat_new]` فرم رزرو را در برگه یا نوشته قرار دهید. در صورت نیاز می‌توانید یک برنامه زمانی مشخص را با `schedule_id` هدف بگیرید.",
-            "description_en": "Add `[nobat_new]` to any page or post. Optionally target a specific schedule with `schedule_id`.",
+            "description_fa": "با `[nobat_booking]` فرم رزرو را در برگه یا نوشته قرار دهید. در صورت نیاز می‌توانید یک برنامه زمانی مشخص را با `schedule_id` هدف بگیرید.",
+            "description_en": "Add `[nobat_booking]` to any page or post. Optionally target a specific schedule with `schedule_id`.",
             "customer_benefit_fa": "بدون نیاز به صفحه جدا یا افزونه پیچیده؛ داخل همان سایت شما کار می‌کند.",
             "customer_benefit_en": "Works inside your existing site—no separate booking portal required."
           },
@@ -308,8 +308,8 @@
           "step": 3,
           "title_fa": "قرار دادن فرم در سایت",
           "title_en": "Place the form on your site",
-          "body_fa": "شورت‌کد `[nobat_new]` را در صفحه رزرو بگذارید و در صورت نیاز رنگ برند را تنظیم کنید.",
-          "body_en": "Add `[nobat_new]` to your booking page and optionally set brand colors."
+          "body_fa": "شورت‌کد `[nobat_booking]` را در صفحه رزرو بگذارید و در صورت نیاز رنگ برند را تنظیم کنید.",
+          "body_en": "Add `[nobat_booking]` to your booking page and optionally set brand colors."
         },
         {
           "step": 4,
@@ -366,8 +366,8 @@
       {
         "q_fa": "چطور فرم را در سایت می‌گذارم؟",
         "q_en": "How do I add the form to my site?",
-        "a_fa": "شورت‌کد `[nobat_new]` را در هر برگه یا نوشته قرار دهید. برای برنامه خاص: `[nobat_new schedule_id=\"ID\"]`.",
-        "a_en": "Place `[nobat_new]` on any page or post. For a specific schedule: `[nobat_new schedule_id=\"ID\"]`."
+        "a_fa": "شورت‌کد `[nobat_booking]` را در هر برگه یا نوشته قرار دهید. برای برنامه خاص: `[nobat_booking schedule_id=\"ID\"]`.",
+        "a_en": "Place `[nobat_booking]` on any page or post. For a specific schedule: `[nobat_booking schedule_id=\"ID\"]`."
       },
       {
         "q_fa": "آیا می‌توانم ظاهر فرم را با برند هماهنگ کنم؟",
@@ -398,7 +398,7 @@
     }
   },
   "feature_checklist_flat": [
-    "WordPress shortcode booking form (`[nobat_new]`)",
+    "WordPress shortcode booking form (`[nobat_booking]`)",
     "Optional `schedule_id` shortcode attribute",
     "Persian / Jalali calendar support",
     "RTL Soft Slot booking UI",

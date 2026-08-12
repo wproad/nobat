@@ -223,7 +223,7 @@ See [API-ENDPOINTS.md](API-ENDPOINTS.md) for complete API documentation.
 **Frontend booking (Soft Slot):**
 
 3. **Booking interface** (`src/bookingNew/`)
-   - Shortcodes: `[nobat_new]` and `[nobat_booking]` (same handler)
+   - Shortcode: `[nobat_booking]`
    - Optional attribute: `schedule_id`
    - Features: login gate, my appointments, book flow, cancellation requests
    - Brand colors from Settings inject Soft Slot `--accent*` tokens

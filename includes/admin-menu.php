@@ -61,6 +61,16 @@ function nobat_admin_page() {
 		'schedule_list_page_callback'
 	);
 
+	// Edit schedule (hidden from menu — linked from list row actions)
+	add_submenu_page(
+		'',
+		__( 'Edit Schedule', 'nobat' ),
+		__( 'Edit Schedule', 'nobat' ),
+		'manage_options',
+		'nobat-schedule-edit',
+		'nobat_schedule_edit_page_html'
+	);
+
 	// Add scheduling sub page
 	add_submenu_page(
 		'nobat',
