@@ -1343,7 +1343,7 @@ msgstr "یک کاربر این بازه زمانی را رزرو کرده است
 #: build/cal.js:1
 #: src/admin/cal/components/CalendarView.jsx:24
 msgid "Example: Monday 10:00 AM - 11:00 AM is booked by John Doe"
-msgstr "مثال: دوشنبه 10:00 صبح - 11:00 صبح توسط جان دو رزرو شده است"
+msgstr "مثال: دوشنبه 10:00 صبح - 11:00 صبح توسط سارا احمدی رزرو شده است"
 
 #: build/cal.js:1
 #: src/admin/cal/components/CalendarView.jsx:29
