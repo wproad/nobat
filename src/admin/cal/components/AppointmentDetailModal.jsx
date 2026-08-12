@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Modal, TextareaControl } from "../../../ui";
 import apiFetch from "../../../utils/api-fetch";
 import {
-  getStatusColor,
+  getStatusBadgeClass,
   getStatusLabel,
   formatDate,
   generateWhatsAppLink,
@@ -246,12 +246,7 @@ const AppointmentDetailModal = ({
               </div>
               <div className="info-row">
                 <strong>{__("Status:", "nobat")}</strong>
-                <span
-                  className="status-badge"
-                  style={{
-                    backgroundColor: getStatusColor(appointment.status),
-                  }}
-                >
+                <span className={getStatusBadgeClass(appointment.status)}>
                   {getStatusLabel(appointment.status)}
                 </span>
               </div>

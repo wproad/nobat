@@ -1,30 +1,19 @@
 import { __ } from "../../../utils/i18n";
 import { useState } from "react";
 import { AppointmentDetailModal } from "./AppointmentDetailModal";
-import {
-  getStatusColor,
-  getStatusBorderColor,
-} from "../../../lib/appointmentUtils";
+import { getStatusClass } from "../../../lib/appointmentUtils";
 
 const AppointmentSlot = ({ appointment, onStatusUpdate, onDelete }) => {
   const [showDetailModal, setShowDetailModal] = useState(false);
 
-  console.log("🎯 AppointmentSlot received appointment:", appointment);
-
   const handleTimeBlockClick = () => {
-    console.log("👆 Clicked appointment slot, opening modal with data:", appointment);
     setShowDetailModal(true);
   };
 
   return (
     <>
       <div
-        className="time-block clickable"
-        style={{
-          backgroundColor: getStatusColor(appointment.status),
-          borderLeftColor: getStatusBorderColor(appointment.status),
-          cursor: "pointer",
-        }}
+        className={`time-block clickable ${getStatusClass(appointment.status)}`}
         onClick={handleTimeBlockClick}
       >
         <div className="time-block-content">

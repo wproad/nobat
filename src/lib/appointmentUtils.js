@@ -1,32 +1,40 @@
 import { __ } from "../utils/i18n";
 
-export const getStatusColor = (status) => {
+/**
+ * Soft Slot status class for appointment time-blocks (paired bg/fg via CSS).
+ */
+export const getStatusClass = (status) => {
   switch (status) {
     case "pending":
-      return "#f0ad4e"; // Orange
+    case "cancel_requested":
+      return "appt-status--pending";
     case "confirmed":
-      return "#5cb85c"; // Green
+      return "appt-status--confirmed";
     case "completed":
-      return "#337ab7"; // Blue
+      return "appt-status--past";
     case "cancelled":
-      return "#d9534f"; // Red
+      return "appt-status--cancelled";
     default:
-      return "#777"; // Gray
+      return "appt-status--past";
   }
 };
 
-export const getStatusBorderColor = (status) => {
+/**
+ * Soft Slot bf-badge class pair for appointment status chips.
+ */
+export const getStatusBadgeClass = (status) => {
   switch (status) {
     case "pending":
-      return "#d58512";
+    case "cancel_requested":
+      return "bf-badge bf-badge--pending";
     case "confirmed":
-      return "#449d44";
+      return "bf-badge bf-badge--confirmed";
     case "completed":
-      return "#286090";
+      return "bf-badge bf-badge--past";
     case "cancelled":
-      return "#b52b27";
+      return "bf-badge bf-badge--cancelled";
     default:
-      return "#333333";
+      return "bf-badge bf-badge--past";
   }
 };
 

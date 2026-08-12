@@ -552,7 +552,7 @@ function appointment_add_new_page_callback() {
  */
 function nobat_cal_page_html() {
 	printf(
-		'<div class="wrap" id="nobat-cal">%s</div>',
+		'<div class="wrap bf-root" id="nobat-cal" dir="rtl">%s</div>',
 		esc_html__( 'Loading cal...', 'nobat' )
 	);
 }
@@ -564,7 +564,7 @@ function nobat_cal_page_html() {
  */
 function nobat_scheduling_page_html() {
 		printf(
-		'<div class="wrap" id="nobat-scheduling">%s</div>',
+		'<div class="wrap bf-root" id="nobat-scheduling" dir="rtl">%s</div>',
 		esc_html__( 'Loading scheduling...', 'nobat' )
 	);
 }

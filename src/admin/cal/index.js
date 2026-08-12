@@ -1,5 +1,7 @@
-import "./cal.scss";
+import "../../bookingNew/soft-slot/tokens.css";
+import "../../bookingNew/soft-slot/booking-form.css";
 import "../../ui/ui-components.scss";
+import "./cal.scss";
 import domReady from "../../utils/dom-ready";
 import { createRoot } from "react-dom/client";
 import { CalendarView } from "./components";

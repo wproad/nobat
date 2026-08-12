@@ -99,13 +99,41 @@ function nobat_admin_enqueue_scripts( $admin_page ) {
 		'nonce' => wp_create_nonce( 'wp_rest' ),
 	) );
 
-	// Enqueue styles
+	// Soft Slot font fallback (host/admin font wins via inherit)
 	wp_enqueue_style(
-		"appointment-booking-{$style_name}-style",
+		'nobat-vazirmatn',
+		'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600&display=swap',
+		array(),
+		null
+	);
+
+	// Enqueue styles
+	$style_handle = "appointment-booking-{$style_name}-style";
+	wp_enqueue_style(
+		$style_handle,
 		NOBAT_PLUGIN_URL . "build/{$style_name}.css",
-		array(), // No dependencies - everything is bundled
+		array( 'nobat-vazirmatn' ),
 		$version,
 	);
+
+	// Soft Slot accent knobs on custom admin React screens only
+	$colors = function_exists( 'nobat_get_brand_colors' )
+		? nobat_get_brand_colors()
+		: array(
+			'accent' => '#2A9B9B',
+			'on'     => '#FCFCFC',
+			'soft'   => '#E6F3F3',
+			'hover'  => '#217A7A',
+		);
+
+	$accent_css = sprintf(
+		'.bf-root{--accent:%1$s;--accent-on:%2$s;--accent-soft:%3$s;--accent-hover:%4$s;--focus-ring:0 0 0 3px color-mix(in oklab, %1$s, transparent 70%%);}',
+		$colors['accent'],
+		$colors['on'],
+		$colors['soft'],
+		$colors['hover']
+	);
+	wp_add_inline_style( $style_handle, $accent_css );
 }
 add_action( 'admin_enqueue_scripts', 'nobat_admin_enqueue_scripts' );
 

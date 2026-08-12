@@ -13,8 +13,9 @@ export function Modal({
     <Transition show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className={`nobat-modal ${className || ''}`}
+        className={`nobat-modal bf-root ${className || ''}`}
         onClose={onRequestClose}
+        dir="rtl"
         {...props}
       >
         <Transition.Child

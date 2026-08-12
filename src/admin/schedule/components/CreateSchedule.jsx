@@ -35,7 +35,6 @@ function CreateSchedule() {
 
     saveSchedule(payload)
       .then(() => {
-        // Redirect to all schedules page after successful creation
         window.location.href =
           "/wp-admin/admin.php?page=nobat-schedules&message=1";
       })
@@ -48,7 +47,7 @@ function CreateSchedule() {
     <div className="create-schedule-container">
       <div className="schedule-header">
         <h1 className="schedule-title">
-          📅 {__("Create New Schedule", "nobat")}
+          {__("Create New Schedule", "nobat")}
         </h1>
         <p className="schedule-subtitle">
           {__(
@@ -68,11 +67,9 @@ function CreateSchedule() {
         </Notice>
       )}
 
-      {/* Basic Information Section */}
       <div className="schedule-section">
         <div className="section-header">
           <h2 className="section-title">
-            <span className="section-icon">ℹ️</span>
             {__("Basic Information", "nobat")}
           </h2>
           <p className="section-description">
@@ -119,11 +116,9 @@ function CreateSchedule() {
         </div>
       </div>
 
-      {/* Schedule Period Section */}
       <div className="schedule-section">
         <div className="section-header">
           <h2 className="section-title">
-            <span className="section-icon">📆</span>
             {__("Schedule Period", "nobat")}
           </h2>
           <p className="section-description">
@@ -134,7 +129,6 @@ function CreateSchedule() {
         <div className="section-content">
           <div className="form-row two-columns">
             <div className="form-field">
-              {/* TODO: show georgian date picker when parsi-date is not available */}
               <JalaliDatePickerInput
                 id="start-day"
                 label={__("Start Date", "nobat")}
@@ -155,11 +149,9 @@ function CreateSchedule() {
         </div>
       </div>
 
-      {/* Appointment Settings Section */}
       <div className="schedule-section">
         <div className="section-header">
           <h2 className="section-title">
-            <span className="section-icon">⏱️</span>
             {__("Appointment Settings", "nobat")}
           </h2>
           <p className="section-description">
@@ -184,11 +176,9 @@ function CreateSchedule() {
         </div>
       </div>
 
-      {/* Weekly Hours Section */}
       <div className="schedule-section weekly-hours-section">
         <div className="section-header">
           <h2 className="section-title">
-            <span className="section-icon">🕐</span>
             {__("Weekly Working Hours", "nobat")}
           </h2>
           <p className="section-description">
@@ -208,7 +198,6 @@ function CreateSchedule() {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="schedule-actions">
         <Button
           variant="secondary"
@@ -221,7 +210,6 @@ function CreateSchedule() {
           onClick={handleSubmit}
           disabled={!name || !startDay || !endDay}
         >
-          <span className="button-icon">💾</span>
           {__("Create Schedule", "nobat")}
         </Button>
       </div>
