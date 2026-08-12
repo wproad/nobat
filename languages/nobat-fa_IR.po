@@ -1023,14 +1023,77 @@ msgid "No available time slots for this day"
 msgstr "هیچ بازه زمانی موجودی برای این روز وجود ندارد"
 
 #: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "رزرو با موفقیت انجام شد"
+msgstr "رزرو با موفقیت انجام شد"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت."
+msgstr "کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت."
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "شماره نوبت"
+msgstr "شماره نوبت"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "وضعیت"
+msgstr "وضعیت"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "تاریخ و زمان"
+msgstr "تاریخ و زمان"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "یادداشت"
+msgstr "یادداشت"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/components/AppointmentTicket.jsx
+msgid "مشاهده نوبت‌های من"
+msgstr "مشاهده نوبت‌های من"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "در انتظار تأیید"
+msgstr "در انتظار تأیید"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "تأیید شده"
+msgstr "تأیید شده"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "انجام‌شده"
+msgstr "انجام‌شده"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "لغو شده"
+msgstr "لغو شده"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "درخواست لغو"
+msgstr "درخواست لغو"
+
+#: build/bookingNew.js:1
+#: src/bookingNew/utils/displayHelpers.js
+msgid "تا"
+msgstr "تا"
+
+#: build/bookingNew.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:248
-#: src/bookingNew/components/AppointmentTicket.jsx:51
 msgid "Status:"
 msgstr "وضعیت:"
 
 #: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx:63
 msgid "Appointment Number:"
 msgstr "شماره نوبت:"
 
@@ -1615,3 +1678,12 @@ msgstr "زمانبندی با موفقیت به‌روزرسانی شد."
 #: includes/Controllers/ScheduleController.php
 msgid "Schedule deactivated successfully. Open appointments were cancelled."
 msgstr "زمانبندی با موفقیت غیرفعال شد. نوبت‌های باز لغو شدند."
+
+#: src/bookingNew/components/AppointmentRow.jsx
+msgid "Show Ticket"
+msgstr "مشاهده بلیت"
+
+#: src/bookingNew/components/AppointmentTicket.jsx
+#: src/bookingNew/components/MyAppointments.jsx
+msgid "Back to Appointments"
+msgstr "بازگشت به نوبت‌ها"

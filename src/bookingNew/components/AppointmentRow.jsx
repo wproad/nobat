@@ -5,6 +5,7 @@
  *
  * @param {Object} appointment - Appointment object containing appointment details
  * @param {Function} onCancelled - Optional callback after successful cancellation
+ * @param {Function} onShowTicket - Optional callback to open the appointment ticket view
  */
 import { AppointmentInfo } from "./AppointmentInfo.jsx";
 import { CancellationModal } from "./CancellationModal.jsx";
@@ -13,10 +14,11 @@ import { userAllowedToCancelAppointment } from "../utils/appointmentHelpers.js";
 import { Notice } from "../../ui/index.js";
 import { __ } from "../../utils/i18n.js";
 
-const AppointmentRow = ({ appointment, onCancelled }) => {
+const AppointmentRow = ({ appointment, onCancelled, onShowTicket }) => {
   if (!appointment) return null;
 
   const cancelAllowed = userAllowedToCancelAppointment(appointment);
+  const canShowTicket = typeof onShowTicket === "function";
 
   const {
     isCancelling,
@@ -49,16 +51,27 @@ const AppointmentRow = ({ appointment, onCancelled }) => {
         </div>
       )}
 
-      {cancelAllowed && (
+      {(canShowTicket || cancelAllowed) && (
         <div className="bf-card__actions">
-          <button
-            type="button"
-            className="bf-link-cancel"
-            onClick={openModal}
-            disabled={isCancelling}
-          >
-            {__("Cancel Appointment", "nobat")}
-          </button>
+          {canShowTicket && (
+            <button
+              type="button"
+              className="bf-link"
+              onClick={() => onShowTicket(appointment)}
+            >
+              {__("Show Ticket", "nobat")}
+            </button>
+          )}
+          {cancelAllowed && (
+            <button
+              type="button"
+              className="bf-link-cancel"
+              onClick={openModal}
+              disabled={isCancelling}
+            >
+              {__("Cancel Appointment", "nobat")}
+            </button>
+          )}
         </div>
       )}
 

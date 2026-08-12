@@ -1,9 +1,11 @@
 /**
  * AppointmentTicket Component
  *
- * Soft Slot success summary after booking: lead → meta → status → queue chip.
+ * Soft Slot success ticket after booking (matches booking-success design).
  *
- * @param {Object} appointment - Appointment object containing id, dates, times, and status
+ * @param {Object} appointment - Appointment object containing id, dates, times, note, and status
+ * @param {Function} [onBack] - Optional callback for the back / list navigation button
+ * @param {string} [backLabel] - Optional label for the back button
  */
 import {
   getStatusClass,
@@ -12,51 +14,129 @@ import {
 } from "../utils/displayHelpers";
 import { __ } from "../../utils/i18n";
 
-const AppointmentTicket = ({ appointment }) => {
+/**
+ * Build footer REF from jalali date + appointment number, e.g. REF-14050517-0006
+ * @param {string} jalaliDate
+ * @param {number|string} appointmentId
+ * @returns {string}
+ */
+const buildRefCode = (jalaliDate, appointmentId) => {
+  const datePart = String(jalaliDate || "").replace(/\D/g, "");
+  const idPart = String(appointmentId ?? "").padStart(4, "0");
+  return `REF-${datePart}-${idPart}`;
+};
+
+const AppointmentTicket = ({ appointment, onBack, backLabel }) => {
   if (!appointment) {
     return null;
   }
 
-  const { id, slot_date_jalali, start_time, end_time, status, slot_date } =
-    appointment;
+  const {
+    id,
+    slot_date_jalali,
+    start_time,
+    end_time,
+    status,
+    slot_date,
+    note,
+  } = appointment;
+
+  const displayDate = slot_date_jalali || slot_date;
+  const dateTimeLabel = `${displayDate} · ${formatTimeRange(start_time, end_time)}`;
+  const refCode = buildRefCode(displayDate, id);
+  const noteText = typeof note === "string" ? note.trim() : "";
+  const hasNote = Boolean(noteText);
 
   const reservationMessage =
-    (typeof window !== "undefined" &&
-      window.wpApiSettings?.reservationMessage) ||
-    __("Appointment booked successfully!", "nobat");
+    typeof window !== "undefined" && window.wpApiSettings?.reservationMessage;
+  const defaultSubtitle = __(
+    "کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت.",
+    "nobat"
+  );
+  const navLabel = backLabel || __("مشاهده نوبت‌های من", "nobat");
 
   return (
-    <section className="bf-card bf-success">
-      <p
-        className="bf-success__lead"
-        dangerouslySetInnerHTML={{ __html: reservationMessage }}
-      />
-      <hr className="bf-divider" />
-      <div className="bf-success__rows">
-        <div className="bf-success__row">
-          <span className="bf-success__label">{__("Date", "nobat")}</span>
-          <span className="bf-success__value">
-            {slot_date_jalali || slot_date}
-          </span>
+    <div className="bf-success-page">
+      {typeof onBack === "function" && (
+        <div className="bf-success-page__nav">
+          <button
+            type="button"
+            className="bf-btn bf-btn--ghost"
+            onClick={onBack}
+          >
+            {navLabel}
+          </button>
         </div>
-        <div className="bf-success__row">
-          <span className="bf-success__label">{__("Time", "nobat")}</span>
-          <span className="bf-success__value">
-            {formatTimeRange(start_time, end_time)}
-          </span>
+      )}
+
+      <article
+        className={`bf-ticket${hasNote ? " bf-ticket--has-note" : ""}`}
+        aria-labelledby="ticket-title"
+      >
+        <header className="bf-ticket__hero">
+          <div className="bf-ticket__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+          <h1 className="bf-ticket__title" id="ticket-title">
+            {__("رزرو با موفقیت انجام شد", "nobat")}
+          </h1>
+          {reservationMessage ? (
+            <p
+              className="bf-ticket__subtitle"
+              dangerouslySetInnerHTML={{ __html: reservationMessage }}
+            />
+          ) : (
+            <p className="bf-ticket__subtitle">{defaultSubtitle}</p>
+          )}
+        </header>
+
+        <div className="bf-ticket__tear" aria-hidden="true">
+          <span className="bf-ticket__notch bf-ticket__notch--start" />
+          <span className="bf-ticket__tear-line" />
+          <span className="bf-ticket__notch bf-ticket__notch--end" />
         </div>
-        <div className="bf-success__row">
-          <span className="bf-success__label">{__("Status", "nobat")}</span>
-          <span className={`bf-badge ${getStatusClass(status)}`}>
-            {getStatusText(status)}
-          </span>
+
+        <div className="bf-ticket__body">
+          <dl className="bf-ticket__grid">
+            <div className="bf-ticket__field">
+              <dt className="bf-ticket__label">
+                {__("شماره نوبت", "nobat")}
+              </dt>
+              <dd className="bf-ticket__value">#{id}</dd>
+            </div>
+            <div className="bf-ticket__field bf-ticket__field--end">
+              <dt className="bf-ticket__label">{__("وضعیت", "nobat")}</dt>
+              <dd>
+                <span className={`bf-badge ${getStatusClass(status)}`}>
+                  {getStatusText(status)}
+                </span>
+              </dd>
+            </div>
+            <div className="bf-ticket__field bf-ticket__field--full">
+              <dt className="bf-ticket__label">
+                {__("تاریخ و زمان", "nobat")}
+              </dt>
+              <dd className="bf-ticket__value">{dateTimeLabel}</dd>
+            </div>
+          </dl>
+
+          {hasNote && (
+            <div className="bf-ticket__note">
+              <p className="bf-ticket__note-label">{__("یادداشت", "nobat")}</p>
+              <p className="bf-ticket__note-text">{noteText}</p>
+            </div>
+          )}
         </div>
-      </div>
-      <hr className="bf-divider" />
-      <div className="bf-queue">
-        {__("Appointment Number:", "nobat")} #{id}
-      </div>
-    </section>
+
+        <div className="bf-ticket__perforation" aria-hidden="true" />
+
+        <footer className="bf-ticket__footer">
+          <p className="bf-ticket__code">{refCode}</p>
+        </footer>
+      </article>
+    </div>
   );
 };
 

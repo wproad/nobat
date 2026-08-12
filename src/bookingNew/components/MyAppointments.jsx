@@ -2,17 +2,20 @@
  * MyAppointments Component
  *
  * Soft Slot tabs + appointment cards for upcoming / cancelled / past.
+ * Supports switching into a single AppointmentTicket view with back navigation.
  */
 import { useState } from "react";
 import { useGet } from "../hooks/useFetch.js";
 import { categorizeAppointments } from "../utils/appointmentHelpers.js";
 import AppointmentRow from "./AppointmentRow.jsx";
+import AppointmentTicket from "./AppointmentTicket.jsx";
 import EmptyAppointmentsState from "./EmptyAppointmentsState.jsx";
 import { Spinner, Notice } from "../../ui/index.js";
 import { __ } from "../../utils/i18n.js";
 
 const MyAppointments = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   const {
     data: appointmentsData,
@@ -44,6 +47,16 @@ const MyAppointments = () => {
       count: categorizedAppointments.past.length,
     },
   ];
+
+  if (selectedTicket) {
+    return (
+      <AppointmentTicket
+        appointment={selectedTicket}
+        onBack={() => setSelectedTicket(null)}
+        backLabel={__("Back to Appointments", "nobat")}
+      />
+    );
+  }
 
   return (
     <div>
@@ -98,6 +111,7 @@ const MyAppointments = () => {
             <AppointmentRow
               key={appointment.id}
               appointment={appointment}
+              onShowTicket={setSelectedTicket}
               onCancelled={() => {
                 refetch().catch(() => {});
               }}

@@ -30,15 +30,15 @@ export const getStatusClass = (status) => {
 export const getStatusText = (status) => {
   switch (status) {
     case "pending":
-      return __("Pending Confirmation", "nobat");
+      return __("در انتظار تأیید", "nobat");
     case "confirmed":
-      return __("Confirmed", "nobat");
+      return __("تأیید شده", "nobat");
     case "completed":
-      return __("Completed", "nobat");
+      return __("انجام‌شده", "nobat");
     case "cancelled":
-      return __("Cancelled", "nobat");
+      return __("لغو شده", "nobat");
     case "cancel_requested":
-      return __("Cancel Requested", "nobat");
+      return __("درخواست لغو", "nobat");
     default:
       return status;
   }
@@ -63,7 +63,7 @@ export const stripSeconds = (time) => {
 export const formatTimeRange = (startTime, endTime) => {
   const formattedStart = stripSeconds(startTime);
   const formattedEnd = stripSeconds(endTime);
-  return `${formattedStart} ${__("to", "nobat")} ${formattedEnd}`;
+  return `${formattedStart} ${__("تا", "nobat")} ${formattedEnd}`;
 };
 
 /**

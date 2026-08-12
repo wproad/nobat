@@ -468,60 +468,288 @@
   color: var(--well-cancel-fg);
 }
 
-.bf-success {
-  max-width: 520px;
-  margin: var(--space-6) auto 0;
+/* Success ticket — receipt-style confirmation */
+.bf-ticket {
+  position: relative;
+  max-width: 480px;
+  margin: var(--space-4) auto 0;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow:
+    var(--elev),
+    0 12px 32px oklch(0.2 0.02 260 / 0.08);
+}
+
+.bf-ticket__hero {
+  padding: var(--space-6) var(--space-5, 20px) var(--space-4);
   text-align: center;
 }
 
-.bf-success__lead {
-  margin: 0 0 var(--space-4);
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: var(--fg);
-  text-wrap: pretty;
-}
-
-.bf-success__rows {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  text-align: start;
-}
-
-.bf-success__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  font-size: 14px;
-}
-
-.bf-success__label {
-  color: var(--muted);
-  font-weight: 400;
-}
-
-.bf-success__value {
-  color: var(--fg);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-
-.bf-queue {
+.bf-ticket__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: var(--space-4);
-  padding: 8px 12px;
-  border-radius: var(--radius-control);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-3);
+  border-radius: 50%;
+  background: var(--status-confirmed-bg);
+  color: var(--status-confirmed-fg);
+}
+
+.bf-ticket__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bf-ticket__title {
+  margin: 0 0 var(--space-3);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--fg);
-  font-size: 13px;
+  line-height: 1.3;
+}
+
+.bf-ticket__subtitle {
+  margin: 0 auto;
+  max-width: 42ch;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.bf-ticket__tear {
+  position: relative;
+  height: 24px;
+}
+
+.bf-ticket__tear-line {
+  position: absolute;
+  top: 50%;
+  inset-inline: 28px;
+  transform: translateY(-50%);
+  border-top: 1px dashed color-mix(in oklab, var(--border), var(--muted) 30%);
+}
+
+.bf-ticket__notch {
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ticket-notch-bg, var(--bg));
+  border: 1px solid var(--border);
+  transform: translateY(-50%);
+}
+
+.bf-ticket__notch--start {
+  inset-inline-start: -11px;
+}
+
+.bf-ticket__notch--end {
+  inset-inline-end: -11px;
+}
+
+.bf-ticket__body {
+  padding: var(--space-4);
+}
+
+.bf-ticket__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+}
+
+.bf-ticket__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  margin: 0;
+}
+
+.bf-ticket__field--full {
+  grid-column: 1 / -1;
+}
+
+.bf-ticket__field--end {
+  align-items: flex-end;
+  text-align: end;
+}
+
+.bf-ticket__label {
+  margin: 0;
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.bf-ticket__value {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg);
   font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.bf-ticket__field dd {
+  margin: 0;
+}
+
+.bf-ticket__note {
+  display: none;
+  margin-top: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--well-note-border);
+  background: var(--well-note-bg);
+  text-align: start;
+}
+
+.bf-ticket--has-note .bf-ticket__note {
+  display: block;
+}
+
+.bf-ticket__note-label {
+  margin: 0 0 var(--space-1);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.bf-ticket__note-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--fg);
+  word-break: break-word;
+  text-wrap: pretty;
+}
+
+.bf-ticket__payment {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+  border-radius: var(--radius-control);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in oklab, var(--accent), transparent 75%);
+}
+
+.bf-ticket--paid .bf-ticket__payment {
+  display: flex;
+}
+
+.bf-ticket__payment-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.bf-ticket__payment-icon svg {
+  width: 28px;
+  height: 18px;
+}
+
+.bf-ticket__payment-copy {
+  min-width: 0;
+  text-align: start;
+}
+
+.bf-ticket__payment-title {
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.bf-ticket__payment-meta {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bf-ticket__perforation {
+  height: 14px;
+  background-color: var(--surface);
+  background-image: radial-gradient(
+    circle at 10px 0,
+    var(--ticket-notch-bg, var(--bg)) 5px,
+    transparent 5.5px
+  );
+  background-size: 20px 14px;
+  background-repeat: repeat-x;
+  background-position: center top;
+}
+
+.bf-ticket__footer {
+  padding: var(--space-4);
+  text-align: center;
+  background: var(--surface-2);
+}
+
+.bf-ticket__qr {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto var(--space-2);
+}
+
+.bf-ticket__qr-img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  padding: var(--space-2);
+  background: oklch(1 0 0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+}
+
+.bf-ticket__code {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bf-success-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: var(--space-2) var(--space-6);
+}
+
+.bf-success-page__nav {
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: var(--space-4);
+  text-align: start;
 }
 
 .bf-stack {

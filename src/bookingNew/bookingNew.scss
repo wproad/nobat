@@ -43,8 +43,29 @@
   }
 
   .bf-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
     margin-top: var(--space-3);
     text-align: start;
+  }
+
+  .bf-link {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: text-decoration-color var(--motion-fast) var(--ease);
+
+    &:hover:not(:disabled) {
+      text-decoration-color: var(--accent);
+    }
   }
 
   .bf-link-cancel {
