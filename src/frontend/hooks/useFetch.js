@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { __ } from "../../utils/i18n";
 
 /**
  * Custom hook for making HTTP requests with loading states and error handling
@@ -89,13 +90,16 @@ export const useFetch = (url, options = {}, { immediate = true } = {}) => {
       } catch (err) {
         // Enhanced error handling for network errors
         if (err.message === "Failed to fetch") {
-          err.message = "Network error. Please check your connection.";
+          err.message = __(
+            "Network error. Please check your connection.",
+            "nobat"
+          );
         }
         // Ensure we store an Error object, not just a string
         const errorObj =
           err instanceof Error
             ? err
-            : new Error(err.message || "An error occurred");
+            : new Error(err.message || __("An error occurred", "nobat"));
         // Keep prior data so manual callers (forms) can still show UI while
         // error state is handled via `error` / thrown promise.
         setError(errorObj);

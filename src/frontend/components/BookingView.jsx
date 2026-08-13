@@ -39,7 +39,7 @@ const BookingView = ({ scheduleId }) => {
     return (
       <div className="bf-empty">
         <p className="bf-empty__muted">
-          {__("فعلا برنامه خالی نداریم.", "nobat")}
+          {__("No schedule available right now.", "nobat")}
         </p>
       </div>
     );
