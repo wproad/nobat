@@ -2,7 +2,14 @@ import { __ } from "../../../utils/i18n";
 import { AppointmentSlot } from "./AppointmentSlot";
 import { Slot } from "./Slot";
 
-const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
+const DayColumn = ({
+  day,
+  scheduleId,
+  onStatusUpdate,
+  onDelete,
+  onChangeSlotStatus,
+  onBooked,
+}) => {
   const today = new Date().toISOString().split("T")[0];
   const isToday = day.date === today;
 
@@ -45,7 +52,9 @@ const DayColumn = ({ day, onStatusUpdate, onDelete, onChangeSlotStatus }) => {
                   <Slot
                     slot={slot}
                     date={day.date}
+                    scheduleId={scheduleId}
                     onChangeStatus={onChangeSlotStatus}
+                    onBooked={onBooked}
                   />
                 )}
               </div>

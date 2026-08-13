@@ -15,6 +15,7 @@ use Nobat\Middleware\AuthMiddleware;
 use Nobat\Controllers\AppointmentController;
 use Nobat\Controllers\ScheduleController;
 use Nobat\Controllers\SlotController;
+use Nobat\Controllers\UserController;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -54,12 +55,20 @@ class Router {
 	private $slot_controller;
 
 	/**
+	 * User controller
+	 *
+	 * @var UserController
+	 */
+	private $user_controller;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->appointment_controller = new AppointmentController();
 		$this->schedule_controller = new ScheduleController();
 		$this->slot_controller = new SlotController();
+		$this->user_controller = new UserController();
 	}
 
 	/**
@@ -69,6 +78,7 @@ class Router {
 		$this->register_appointment_routes();
 		$this->register_schedule_routes();
 		$this->register_slot_routes();
+		$this->register_user_routes();
 	}
 
 	/**
@@ -92,6 +102,32 @@ class Router {
 				'note' => array(
 					'required' => false,
 					'type' => 'string'
+				),
+			),
+		) );
+
+		// Create appointment for a user (admin)
+		register_rest_route( $this->namespace, '/appointments/admin', array(
+			'methods' => 'POST',
+			'callback' => array( $this->appointment_controller, 'create_for_user' ),
+			'permission_callback' => array( 'Nobat\Middleware\AuthMiddleware', 'require_admin' ),
+			'args' => array(
+				'user_id' => array(
+					'required' => true,
+					'type' => 'integer',
+				),
+				'slot_id' => array(
+					'required' => true,
+					'type' => 'integer',
+				),
+				'schedule_id' => array(
+					'required' => true,
+					'type' => 'integer',
+				),
+				'note' => array(
+					'required' => false,
+					'type' => 'string',
+					'sanitize_callback' => 'sanitize_textarea_field',
 				),
 			),
 		) );
@@ -350,6 +386,24 @@ class Router {
 				'slot_ids' => array(
 					'required' => true,
 					'type' => 'array'
+				),
+			),
+		) );
+	}
+
+	/**
+	 * Register user routes
+	 */
+	private function register_user_routes() {
+		register_rest_route( $this->namespace, '/users/search', array(
+			'methods' => 'GET',
+			'callback' => array( $this->user_controller, 'search' ),
+			'permission_callback' => array( 'Nobat\Middleware\AuthMiddleware', 'require_admin' ),
+			'args' => array(
+				'q' => array(
+					'required' => true,
+					'type' => 'string',
+					'sanitize_callback' => 'sanitize_text_field',
 				),
 			),
 		) );

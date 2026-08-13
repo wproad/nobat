@@ -129,6 +129,62 @@ class UserRepository {
 	public function get_all_admins() {
 		return get_users( array( 'role' => 'administrator' ) );
 	}
+
+	/**
+	 * Search users by display name, email, or phone meta.
+	 *
+	 * @param string $query Search term
+	 * @param int    $limit Max results
+	 * @return array[] List of { id, name, email, phone }
+	 */
+	public function search( $query, $limit = 20 ) {
+		global $wpdb;
+
+		$query = trim( (string) $query );
+		if ( strlen( $query ) < 2 ) {
+			return array();
+		}
+
+		$limit = max( 1, min( 50, (int) $limit ) );
+		$like  = '%' . $wpdb->esc_like( $query ) . '%';
+
+		$sql = $wpdb->prepare(
+			"SELECT DISTINCT u.ID, u.display_name, u.user_email,
+				(SELECT meta_value FROM {$wpdb->usermeta}
+				 WHERE user_id = u.ID AND meta_key = 'phone' LIMIT 1) AS phone
+			FROM {$wpdb->users} u
+			LEFT JOIN {$wpdb->usermeta} um_phone
+				ON u.ID = um_phone.user_id AND um_phone.meta_key = 'phone'
+			WHERE u.display_name LIKE %s
+				OR u.user_email LIKE %s
+				OR u.user_login LIKE %s
+				OR um_phone.meta_value LIKE %s
+			ORDER BY u.display_name ASC
+			LIMIT %d",
+			$like,
+			$like,
+			$like,
+			$like,
+			$limit
+		);
+
+		$rows = $wpdb->get_results( $sql, ARRAY_A );
+		if ( ! $rows ) {
+			return array();
+		}
+
+		$results = array();
+		foreach ( $rows as $row ) {
+			$results[] = array(
+				'id'    => (int) $row['ID'],
+				'name'  => $row['display_name'],
+				'email' => $row['user_email'],
+				'phone' => $row['phone'] ? (string) $row['phone'] : '',
+			);
+		}
+
+		return $results;
+	}
 	
 	/**
 	 * Get user meta

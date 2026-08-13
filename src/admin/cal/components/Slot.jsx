@@ -1,43 +1,50 @@
 import { __ } from "../../../utils/i18n";
 import { useState } from "react";
 import { Modal, Button } from "../../../ui";
+import { AdminBookForm } from "./AdminBookForm";
 
-const Slot = ({ slot, date, onChangeStatus }) => {
+const Slot = ({ slot, date, scheduleId, onChangeStatus, onBooked }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState("manage"); // manage | book
 
   // Get label and CSS class based on status
   const getSlotInfo = (status) => {
     switch (status) {
       case "booked":
-        return { 
-          label: __("Booked", "nobat"), 
-          className: "slot-booked" 
+        return {
+          label: __("Booked", "nobat"),
+          className: "slot-booked",
         };
       case "blocked":
-        return { 
-          label: __("Blocked", "nobat"), 
-          className: "slot-blocked" 
+        return {
+          label: __("Blocked", "nobat"),
+          className: "slot-blocked",
         };
       case "unavailable":
-        return { 
-          label: __("Unavailable", "nobat"), 
-          className: "slot-unavailable" 
+        return {
+          label: __("Unavailable", "nobat"),
+          className: "slot-unavailable",
         };
       case "available":
       default:
-        return { 
-          label: __("Available", "nobat"), 
-          className: "slot-available" 
+        return {
+          label: __("Available", "nobat"),
+          className: "slot-available",
         };
     }
   };
 
   const slotInfo = getSlotInfo(slot?.status || "available");
+  const canBook = (slot?.status || "available") === "available" && !!slot?.id;
 
   const open = () => {
+    setMode("manage");
     setIsOpen(true);
   };
-  const close = () => setIsOpen(false);
+  const close = () => {
+    setIsOpen(false);
+    setMode("manage");
+  };
 
   const handleStatusChange = async (newStatus) => {
     try {
@@ -49,121 +56,169 @@ const Slot = ({ slot, date, onChangeStatus }) => {
     }
   };
 
+  const handleBookSuccess = async () => {
+    if (typeof onBooked === "function") {
+      await onBooked();
+    }
+    close();
+  };
+
   // Get available actions based on current status
   const getSlotActions = () => {
     const currentStatus = slot?.status || "available";
-    
+
     const actions = {
       makeAvailable: {
-        label: __('Make Available', 'nobat'),
-        description: __('Open this slot for booking', 'nobat'),
-        status: 'available',
-        variant: 'primary',
-        icon: '✓'
+        label: __("Make Available", "nobat"),
+        description: __("Open this slot for booking", "nobat"),
+        status: "available",
+        variant: "primary",
+        icon: "✓",
       },
       block: {
-        label: __('Block Slot', 'nobat'),
-        description: __('Block this slot (lunch, meeting, etc)', 'nobat'),
-        status: 'blocked',
-        variant: 'secondary',
-        icon: '🚫'
+        label: __("Block Slot", "nobat"),
+        description: __("Block this slot (lunch, meeting, etc)", "nobat"),
+        status: "blocked",
+        variant: "secondary",
+        icon: "🚫",
       },
       makeUnavailable: {
-        label: __('Make Unavailable', 'nobat'),
-        description: __('Mark as outside working hours', 'nobat'),
-        status: 'unavailable',
-        variant: 'secondary',
-        icon: '⏸'
-      }
+        label: __("Make Unavailable", "nobat"),
+        description: __("Mark as outside working hours", "nobat"),
+        status: "unavailable",
+        variant: "secondary",
+        icon: "⏸",
+      },
     };
-    
+
     // Return available actions based on current status
     switch (currentStatus) {
-      case 'available':
+      case "available":
         return [actions.block, actions.makeUnavailable];
-      
-      case 'blocked':
+
+      case "blocked":
         return [actions.makeAvailable, actions.makeUnavailable];
-      
-      case 'unavailable':
+
+      case "unavailable":
         return [actions.makeAvailable, actions.block];
-      
+
       default:
         return [actions.makeAvailable, actions.block, actions.makeUnavailable];
     }
   };
 
   const slotActions = getSlotActions();
+  const modalTitle =
+    mode === "book"
+      ? __("Book for User", "nobat")
+      : __("Manage Time Slot", "nobat");
 
   return (
     <>
-      <div 
-        className={`empty-slot clickable ${slotInfo.className}`} 
+      <div
+        className={`empty-slot clickable ${slotInfo.className}`}
         onClick={open}
       >
         {slotInfo.label}
       </div>
       <Modal
         isOpen={isOpen}
-        title={__("Manage Time Slot", "nobat")}
+        title={modalTitle}
         onRequestClose={close}
         className="slot-status-modal-wrapper"
       >
-          <div className="slot-status-modal">
-            <div className="slot-info-box">
-              <div className="slot-info-label">
-                {__("Time Slot:", "nobat")}
-              </div>
-              <div className="slot-info-time">
-                {slot.start} - {slot.end}
-              </div>
-              <div className="slot-info-status">
-                {__("Current Status:", "nobat")} <strong>{slotInfo.label}</strong>
-              </div>
+        <div className="slot-status-modal">
+          <div className="slot-info-box">
+            <div className="slot-info-label">
+              {__("Time Slot:", "nobat")}
             </div>
+            <div className="slot-info-time">
+              {slot.start} - {slot.end}
+            </div>
+            <div className="slot-info-status">
+              {__("Current Status:", "nobat")}{" "}
+              <strong>{slotInfo.label}</strong>
+            </div>
+          </div>
 
-            {slotActions.length > 0 && (
-              <div className="slot-actions-section">
-                <h4 className="actions-title">
-                  {__('Available Actions', 'nobat')}
-                </h4>
-                <div className="actions-list">
-                  {slotActions.map((action) => (
+          {mode === "book" ? (
+            <AdminBookForm
+              slot={slot}
+              scheduleId={scheduleId}
+              onCancel={() => setMode("manage")}
+              onSuccess={handleBookSuccess}
+            />
+          ) : (
+            <>
+              {canBook && (
+                <div className="slot-actions-section">
+                  <h4 className="actions-title">
+                    {__("Book Appointment", "nobat")}
+                  </h4>
+                  <div className="actions-list">
                     <Button
-                      key={action.status}
-                      variant={action.variant}
-                      onClick={() => handleStatusChange(action.status)}
+                      variant="primary"
+                      onClick={() => setMode("book")}
                       className="slot-action-button"
                     >
                       <div className="action-content">
-                        <span className="action-icon">
-                          {action.icon}
-                        </span>
+                        <span className="action-icon">📅</span>
                         <div className="action-text">
                           <span className="action-label">
-                            {action.label}
+                            {__("Book for User", "nobat")}
                           </span>
                           <span className="action-description">
-                            {action.description}
+                            {__(
+                              "Create a confirmed appointment for a patient",
+                              "nobat"
+                            )}
                           </span>
                         </div>
                       </div>
                     </Button>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div className="slot-modal-footer">
-              <Button 
-                variant="tertiary" 
-                onClick={close}
-              >
-                {__("Close", "nobat")}
-              </Button>
-            </div>
-          </div>
-        </Modal>
+              {slotActions.length > 0 && (
+                <div className="slot-actions-section">
+                  <h4 className="actions-title">
+                    {__("Available Actions", "nobat")}
+                  </h4>
+                  <div className="actions-list">
+                    {slotActions.map((action) => (
+                      <Button
+                        key={action.status}
+                        variant={action.variant}
+                        onClick={() => handleStatusChange(action.status)}
+                        className="slot-action-button"
+                      >
+                        <div className="action-content">
+                          <span className="action-icon">{action.icon}</span>
+                          <div className="action-text">
+                            <span className="action-label">
+                              {action.label}
+                            </span>
+                            <span className="action-description">
+                              {action.description}
+                            </span>
+                          </div>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="slot-modal-footer">
+                <Button variant="tertiary" onClick={close}>
+                  {__("Close", "nobat")}
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </Modal>
     </>
   );
 };

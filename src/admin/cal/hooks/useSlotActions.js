@@ -51,9 +51,15 @@ export const useSlotActions = (
     return ok;
   };
 
+  const handleBookedWithRefresh = async () => {
+    await refetchAppointments();
+    await refetchSchedule();
+  };
+
   return {
     updateSlotStatus,
     handleStatusUpdateWithRefresh,
     handleDeleteWithRefresh,
+    handleBookedWithRefresh,
   };
 };

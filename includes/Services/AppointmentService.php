@@ -176,6 +176,68 @@ class AppointmentService {
 			);
 		}
 	}
+
+	/**
+	 * Book an appointment on behalf of a user (admin action).
+	 *
+	 * Skips the max-appointments limit, creates as confirmed, and records the admin as actor.
+	 *
+	 * @param int         $user_id     Patient user ID
+	 * @param int         $slot_id
+	 * @param int         $schedule_id
+	 * @param int         $admin_id    Admin performing the booking
+	 * @param string|null $note
+	 * @return array|\WP_Error Appointment data or error
+	 */
+	public function book_appointment_for_user( $user_id, $slot_id, $schedule_id, $admin_id, $note = null ) {
+		try {
+			$result = $this->transaction->execute( function() use ( $user_id, $slot_id, $schedule_id, $admin_id, $note ) {
+				if ( ! $this->slot_repo->is_available( $slot_id ) ) {
+					throw new \Exception( __( 'This time slot is no longer available.', 'nobat' ) );
+				}
+
+				if ( $this->appointment_repo->user_has_slot_booked( $user_id, $slot_id ) ) {
+					throw new \Exception( __( 'This user already has this time slot booked.', 'nobat' ) );
+				}
+
+				if ( ! $this->slot_repo->mark_as_booked( $slot_id ) ) {
+					throw new \Exception( __( 'Failed to reserve the time slot.', 'nobat' ) );
+				}
+
+				$appointment_id = $this->appointment_repo->insert( array(
+					'user_id'            => $user_id,
+					'slot_id'            => $slot_id,
+					'schedule_id'        => $schedule_id,
+					'assigned_admin_id'  => $admin_id,
+					'note'               => $note,
+					'status'             => 'confirmed',
+					'confirmed_at'       => current_time( 'mysql' ),
+				) );
+
+				if ( ! $appointment_id ) {
+					throw new \Exception( __( 'Failed to create appointment.', 'nobat' ) );
+				}
+
+				$this->history_repo->add_entry(
+					$appointment_id,
+					$admin_id,
+					'created_by_admin',
+					__( 'Appointment created by admin', 'nobat' )
+				);
+
+				return $appointment_id;
+			} );
+
+			return $this->appointment_repo->get_with_details( $result );
+
+		} catch ( \Exception $e ) {
+			return new \WP_Error(
+				'booking_failed',
+				$e->getMessage(),
+				array( 'status' => 400 )
+			);
+		}
+	}
 	
 	/**
 	 * Request appointment cancellation (user action)

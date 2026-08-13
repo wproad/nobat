@@ -104,6 +104,57 @@ class AppointmentController {
 			201
 		);
 	}
+
+	/**
+	 * Create an appointment for a user (admin action)
+	 *
+	 * @param WP_REST_Request $request
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function create_for_user( $request ) {
+		$admin_id    = $this->auth_service->get_current_user_id();
+		$user_id     = (int) $request->get_param( 'user_id' );
+		$slot_id     = (int) $request->get_param( 'slot_id' );
+		$schedule_id = (int) $request->get_param( 'schedule_id' );
+		$note        = $request->get_param( 'note' );
+
+		if ( ! $user_id || ! $slot_id || ! $schedule_id ) {
+			return new WP_Error(
+				'missing_parameters',
+				__( 'user_id, slot_id and schedule_id are required.', 'nobat' ),
+				array( 'status' => 400 )
+			);
+		}
+
+		if ( ! get_user_by( 'id', $user_id ) ) {
+			return new WP_Error(
+				'invalid_user',
+				__( 'User not found.', 'nobat' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		$result = $this->appointment_service->book_appointment_for_user(
+			$user_id,
+			$slot_id,
+			$schedule_id,
+			$admin_id,
+			$note
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		return new WP_REST_Response(
+			array(
+				'success'     => true,
+				'message'     => __( 'Appointment created successfully.', 'nobat' ),
+				'appointment' => $result,
+			),
+			201
+		);
+	}
 	
 	/**
 	 * Get user's appointments

@@ -36,6 +36,7 @@ const CalendarGrid = () => {
     updateSlotStatus,
     handleStatusUpdateWithRefresh,
     handleDeleteWithRefresh,
+    handleBookedWithRefresh,
   } = useSlotActions(
     scheduleIdFromData,
     { refetchSchedule, refetchAppointments },
@@ -71,9 +72,11 @@ const CalendarGrid = () => {
         <DayColumn
           key={day.date}
           day={day}
+          scheduleId={scheduleIdFromData}
           onStatusUpdate={handleStatusUpdateWithRefresh}
           onChangeSlotStatus={updateSlotStatus}
           onDelete={handleDeleteWithRefresh}
+          onBooked={handleBookedWithRefresh}
         />
       ))}
     </div>
