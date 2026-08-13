@@ -45,10 +45,10 @@ const AppointmentRow = ({ appointment, onCancelled, onShowTicket }) => {
       )}
 
       {appointment.cancellation_reason && (
-        <div className="bf-well bf-well--cancel">
+        <p className="bf-cancel-reason">
           {__("Cancellation Reason:", "nobat")}{" "}
           {appointment.cancellation_reason}
-        </div>
+        </p>
       )}
 
       {(canShowTicket || cancelAllowed) && (

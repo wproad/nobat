@@ -42,6 +42,16 @@
     font-size: 14px;
   }
 
+  .bf-cancel-reason {
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
   .bf-card__actions {
     display: flex;
     flex-wrap: wrap;
