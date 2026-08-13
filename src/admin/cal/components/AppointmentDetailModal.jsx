@@ -22,8 +22,33 @@ const AppointmentDetailModal = ({
   const [isSavingReport, setIsSavingReport] = useState(false);
   const [reportMessage, setReportMessage] = useState(null);
   const [isEditingReport, setIsEditingReport] = useState(!appointment?.report);
+  const [phoneCopied, setPhoneCopied] = useState(false);
 
   if (!appointment) return null;
+
+  const handleCopyPhone = async () => {
+    const phone = appointment.user_phone;
+    if (!phone) return;
+
+    try {
+      await navigator.clipboard.writeText(phone);
+      setPhoneCopied(true);
+      setTimeout(() => setPhoneCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers / insecure contexts
+      const textarea = document.createElement("textarea");
+      textarea.value = phone;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "absolute";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setPhoneCopied(true);
+      setTimeout(() => setPhoneCopied(false), 2000);
+    }
+  };
 
   const handleWhatsAppClick = () => {
     const timeSlot = `${appointment.start_time.substring(
@@ -226,7 +251,22 @@ const AppointmentDetailModal = ({
               </div>
               <div className="info-row">
                 <strong>{__("Phone:", "nobat")}</strong>
-                <span className="phone-number">{appointment.user_phone}</span>
+                <span className="phone-field">
+                  <span className="phone-number">{appointment.user_phone}</span>
+                  {appointment.user_phone && (
+                    <Button
+                      variant="secondary"
+                      size="compact"
+                      className="copy-phone-btn"
+                      onClick={handleCopyPhone}
+                      aria-label={__("Copy phone number", "nobat")}
+                    >
+                      {phoneCopied
+                        ? __("Copied!", "nobat")
+                        : __("Copy", "nobat")}
+                    </Button>
+                  )}
+                </span>
               </div>
               <div className="info-row">
                 <strong>{__("Date:", "nobat")}</strong>

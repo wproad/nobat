@@ -685,12 +685,29 @@
           }
         }
 
+        .phone-field {
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 8px;
+          flex: 1;
+          text-align: end;
+        }
+
         .phone-number,
         .date-value,
         .time-slot {
           font-variant-numeric: tabular-nums;
           direction: ltr;
           text-align: end;
+        }
+
+        .copy-phone-btn {
+          flex-shrink: 0;
+          padding: 2px 8px;
+          min-height: 0;
+          font-size: 12px;
+          line-height: 1.4;
         }
 
         .admin-name {
@@ -1163,10 +1180,15 @@
           }
 
           span,
+          .phone-field,
           .phone-number,
           .date-value,
           .time-slot {
             text-align: start;
+          }
+
+          .phone-field {
+            justify-content: flex-start;
           }
         }
       }
