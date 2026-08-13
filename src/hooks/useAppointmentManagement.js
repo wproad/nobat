@@ -25,7 +25,6 @@ export const useAppointmentManagement = () => {
       return true;
     } catch (err) {
       setError("Failed to update appointment status");
-      console.error("Error updating appointment status:", err);
       return false;
     }
   }, []);
@@ -50,7 +49,6 @@ export const useAppointmentManagement = () => {
       return true;
     } catch (err) {
       setError("Failed to delete appointment");
-      console.error("Error deleting appointment:", err);
       return false;
     }
   }, []);

@@ -12,7 +12,6 @@ export function useSchedule() {
       data: payload,
     })
       .then((response) => {
-        // console.log("Schedule save response:", response);
         setNotice({
           status: "success",
           message: __("Settings saved successfully!", "nobat"),
@@ -20,7 +19,6 @@ export function useSchedule() {
         return response;
       })
       .catch((error) => {
-        console.error("Schedule save error:", error);
         let errorMessage = __("Error saving settings.", "nobat");
 
         if (error && error.message) {

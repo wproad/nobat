@@ -20,8 +20,6 @@ export const useActiveSchedule = (scheduleId) => {
           )}`
         : `/wp-json/nobat/v2/schedules/active`;
 
-      console.log("path", path);
-
       const response = await fetch(path, {
         method: "GET",
         headers: {
@@ -41,13 +39,11 @@ export const useActiveSchedule = (scheduleId) => {
       }
 
       const data = await response.json();
-      console.log("API Response:", data);
-      
+
       // Extract schedule from response (API returns { success: true, schedule: {...} })
       const scheduleData = data.schedule || data;
       setSchedule(scheduleData);
     } catch (err) {
-      console.error("Error fetching active schedule:", err);
       const errorMessage = err.message || "Failed to load schedule";
       setError(errorMessage);
       setSchedule(null);

@@ -6,6 +6,7 @@
  */
 
 use Nobat\Core\DatabaseManager;
+use Nobat\Utilities\Logger;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -24,25 +25,11 @@ function nobat_activate() {
 function nobat_check_database() {
 	try {
 		$db_manager = new DatabaseManager();
-		
-		$current_version = $db_manager->get_current_version();
-		$needs_update = $db_manager->needs_update();
-		
-		error_log( sprintf(
-			'Nobat DB Check: Current=%s, Required=%s, NeedsUpdate=%s',
-			$current_version,
-			DatabaseManager::DB_VERSION,
-			$needs_update ? 'YES' : 'NO'
-		) );
-		
-		if ( $needs_update ) {
-			error_log( 'Nobat: Running database schema update...' );
-			$result = $db_manager->update_database();
-			error_log( 'Nobat: Database updated to version ' . DatabaseManager::DB_VERSION );
-			
-			// Verify tables were created
-			$tables = $db_manager->check_tables();
-			error_log( 'Nobat: Table status - ' . print_r( $tables, true ) );
+
+		if ( $db_manager->needs_update() ) {
+			Logger::debug( 'Nobat: Running database schema update...' );
+			$db_manager->update_database();
+			Logger::debug( 'Nobat: Database updated to version ' . DatabaseManager::DB_VERSION );
 		}
 	} catch ( Exception $e ) {
 		error_log( 'Nobat: Database check error - ' . $e->getMessage() );

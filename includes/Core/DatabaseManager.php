@@ -11,6 +11,8 @@
 
 namespace Nobat\Core;
 
+use Nobat\Utilities\Logger;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -88,39 +90,24 @@ class DatabaseManager {
 	 * @return bool Success
 	 */
 	public function update_database() {
-		error_log( 'Nobat DatabaseManager: Starting database update...' );
-		
+		Logger::debug( 'Nobat DatabaseManager: Starting database update...' );
+
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		
+
 		$charset_collate = $this->wpdb->get_charset_collate();
-		error_log( 'Nobat DatabaseManager: Charset collate = ' . $charset_collate );
-		
-		// Create/update all tables
-		error_log( 'Nobat DatabaseManager: Creating schedules table...' );
+
 		$this->create_schedules_table( $charset_collate );
-		
-		error_log( 'Nobat DatabaseManager: Creating working_hours table...' );
 		$this->create_working_hours_table( $charset_collate );
-		
-		error_log( 'Nobat DatabaseManager: Creating slots table...' );
 		$this->create_slots_table( $charset_collate );
-		
-		error_log( 'Nobat DatabaseManager: Creating appointments table...' );
 		$this->create_appointments_table( $charset_collate );
-		
-		error_log( 'Nobat DatabaseManager: Creating history table...' );
 		$this->create_history_table( $charset_collate );
-		
-		// Run migrations for existing data
-		error_log( 'Nobat DatabaseManager: Running data migrations...' );
+
 		$this->run_data_migrations();
-		
-		// Update version
-		error_log( 'Nobat DatabaseManager: Updating version option to ' . self::DB_VERSION );
+
 		update_option( self::DB_VERSION_OPTION, self::DB_VERSION );
-		
-		error_log( 'Nobat DatabaseManager: Database update completed successfully' );
-		
+
+		Logger::debug( 'Nobat DatabaseManager: Database update completed successfully (v' . self::DB_VERSION . ')' );
+
 		return true;
 	}
 	
@@ -316,33 +303,32 @@ class DatabaseManager {
 	 * Migrate existing slots to include Jalali dates
 	 */
 	private function migrate_slot_jalali_dates() {
-		error_log( 'Nobat DatabaseManager: Migrating slot Jalali dates...' );
-		
+		Logger::debug( 'Nobat DatabaseManager: Migrating slot Jalali dates...' );
+
 		// Check if wp-parsidate plugin is available
 		if ( ! function_exists( 'parsidate' ) ) {
-			error_log( 'Nobat DatabaseManager: wp-parsidate plugin not available, skipping Jalali migration' );
+			Logger::debug( 'Nobat DatabaseManager: wp-parsidate plugin not available, skipping Jalali migration' );
 			return;
 		}
-		
+
 		$table_name = $this->prefix . 'nobat_slots';
-		
+
 		// Get all slots that don't have Jalali date
 		$slots = $this->wpdb->get_results(
 			"SELECT id, slot_date FROM {$table_name} WHERE slot_date_jalali IS NULL OR slot_date_jalali = ''",
 			ARRAY_A
 		);
-		
+
 		if ( empty( $slots ) ) {
-			error_log( 'Nobat DatabaseManager: No slots need Jalali date migration' );
 			return;
 		}
-		
-		error_log( sprintf( 'Nobat DatabaseManager: Found %d slots to migrate', count( $slots ) ) );
-		
+
+		Logger::debug( sprintf( 'Nobat DatabaseManager: Found %d slots to migrate', count( $slots ) ) );
+
 		$updated = 0;
 		foreach ( $slots as $slot ) {
 			$jalali_date = \Nobat\Utilities\DateTimeHelper::gregorian_to_jalali( $slot['slot_date'] );
-			
+
 			if ( $jalali_date ) {
 				$result = $this->wpdb->update(
 					$table_name,
@@ -351,14 +337,14 @@ class DatabaseManager {
 					array( '%s' ),
 					array( '%d' )
 				);
-				
+
 				if ( $result !== false ) {
 					$updated++;
 				}
 			}
 		}
-		
-		error_log( sprintf( 'Nobat DatabaseManager: Updated %d slots with Jalali dates', $updated ) );
+
+		Logger::debug( sprintf( 'Nobat DatabaseManager: Updated %d slots with Jalali dates', $updated ) );
 	}
 }
 

@@ -27,6 +27,7 @@ class ComposerStaticInit1c6c0d11f26756ab9e7eaf99ac3b32dc
         'Nobat\\Controllers\\AppointmentController' => __DIR__ . '/../..' . '/includes/Controllers/AppointmentController.php',
         'Nobat\\Controllers\\ScheduleController' => __DIR__ . '/../..' . '/includes/Controllers/ScheduleController.php',
         'Nobat\\Controllers\\SlotController' => __DIR__ . '/../..' . '/includes/Controllers/SlotController.php',
+        'Nobat\\Controllers\\UserController' => __DIR__ . '/../..' . '/includes/Controllers/UserController.php',
         'Nobat\\Core\\Container' => __DIR__ . '/../..' . '/includes/Core/Container.php',
         'Nobat\\Core\\DatabaseManager' => __DIR__ . '/../..' . '/includes/Core/DatabaseManager.php',
         'Nobat\\Core\\DatabaseTransaction' => __DIR__ . '/../..' . '/includes/Core/DatabaseTransaction.php',
@@ -45,6 +46,7 @@ class ComposerStaticInit1c6c0d11f26756ab9e7eaf99ac3b32dc
         'Nobat\\Services\\ScheduleService' => __DIR__ . '/../..' . '/includes/Services/ScheduleService.php',
         'Nobat\\Services\\SlotService' => __DIR__ . '/../..' . '/includes/Services/SlotService.php',
         'Nobat\\Utilities\\DateTimeHelper' => __DIR__ . '/../..' . '/includes/Utilities/DateTimeHelper.php',
+        'Nobat\\Utilities\\Logger' => __DIR__ . '/../..' . '/includes/Utilities/Logger.php',
         'Nobat\\Utilities\\SlotGenerator' => __DIR__ . '/../..' . '/includes/Utilities/SlotGenerator.php',
         'Nobat\\Utilities\\Validator' => __DIR__ . '/../..' . '/includes/Utilities/Validator.php',
     );

@@ -201,14 +201,7 @@ class SlotRepository extends BaseRepository {
 	 * @return bool
 	 */
 	public function mark_as_available( $slot_id ) {
-		$result = $this->update_status( $slot_id, 'available' );
-		error_log( sprintf( 
-			'[Nobat] Slot #%d mark_as_available called. Result: %s. New status in DB: %s', 
-			$slot_id,
-			$result ? 'SUCCESS' : 'FAILED',
-			$this->get_status( $slot_id )
-		) );
-		return $result;
+		return $this->update_status( $slot_id, 'available' );
 	}
 	
 	/**

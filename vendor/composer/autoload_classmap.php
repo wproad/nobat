@@ -12,6 +12,7 @@ return array(
     'Nobat\\Controllers\\AppointmentController' => $baseDir . '/includes/Controllers/AppointmentController.php',
     'Nobat\\Controllers\\ScheduleController' => $baseDir . '/includes/Controllers/ScheduleController.php',
     'Nobat\\Controllers\\SlotController' => $baseDir . '/includes/Controllers/SlotController.php',
+    'Nobat\\Controllers\\UserController' => $baseDir . '/includes/Controllers/UserController.php',
     'Nobat\\Core\\Container' => $baseDir . '/includes/Core/Container.php',
     'Nobat\\Core\\DatabaseManager' => $baseDir . '/includes/Core/DatabaseManager.php',
     'Nobat\\Core\\DatabaseTransaction' => $baseDir . '/includes/Core/DatabaseTransaction.php',
@@ -30,6 +31,7 @@ return array(
     'Nobat\\Services\\ScheduleService' => $baseDir . '/includes/Services/ScheduleService.php',
     'Nobat\\Services\\SlotService' => $baseDir . '/includes/Services/SlotService.php',
     'Nobat\\Utilities\\DateTimeHelper' => $baseDir . '/includes/Utilities/DateTimeHelper.php',
+    'Nobat\\Utilities\\Logger' => $baseDir . '/includes/Utilities/Logger.php',
     'Nobat\\Utilities\\SlotGenerator' => $baseDir . '/includes/Utilities/SlotGenerator.php',
     'Nobat\\Utilities\\Validator' => $baseDir . '/includes/Utilities/Validator.php',
 );

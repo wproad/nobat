@@ -396,13 +396,10 @@ class AppointmentService {
 				
 					// Mark slot as available again
 				$slot_updated = $this->slot_repo->mark_as_available( $appointment['slot_id'] );
-				error_log( sprintf( 
-					'[Nobat] Appointment #%d cancelled. Slot #%d status updated to available: %s', 
-					$appointment_id, 
-					$appointment['slot_id'],
-					$slot_updated ? 'SUCCESS' : 'FAILED'
-				) );
-				
+				if ( ! $slot_updated ) {
+					throw new \Exception( __( 'Failed to free appointment slot.', 'nobat' ) );
+				}
+
 				// Add history entry
 				$this->history_repo->add_entry(
 					$appointment_id,

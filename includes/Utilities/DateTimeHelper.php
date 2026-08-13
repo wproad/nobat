@@ -35,12 +35,12 @@ class DateTimeHelper {
 				// Use wp-parsidate plugin function
 				return gregdate( 'Y-m-d', $jalali_date );
 			} catch ( Exception $e ) {
-				error_log( 'DateTimeHelper: Jalali to Gregorian conversion failed: ' . $e->getMessage() );
+				Logger::debug( 'DateTimeHelper: Jalali to Gregorian conversion failed: ' . $e->getMessage() );
 				return false;
 			}
 		}
 
-		error_log( 'DateTimeHelper: wp-parsidate plugin not available for Jalali conversion' );
+		// Silently return false if wp-parsidate is not available
 		return false;
 	}
 
@@ -59,7 +59,7 @@ class DateTimeHelper {
 					parsidate( 'Y/m/d', $gregorian_date )
 				);
 			} catch ( Exception $e ) {
-				error_log( 'DateTimeHelper: Gregorian to Jalali conversion failed: ' . $e->getMessage() );
+				Logger::debug( 'DateTimeHelper: Gregorian to Jalali conversion failed: ' . $e->getMessage() );
 				return false;
 			}
 		}

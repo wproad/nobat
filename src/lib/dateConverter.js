@@ -67,14 +67,12 @@ function gregorianToJalaaliCore(gy, gm, gd) {
  */
 export function gregorianToJalali(gregorianDate) {
   if (!gregorianDate || typeof gregorianDate !== "string") {
-    console.error("gregorianToJalali: Invalid input", gregorianDate);
     return "";
   }
 
   // Parse Gregorian date (format: YYYY-MM-DD)
   const parts = gregorianDate.split("-");
   if (parts.length !== 3) {
-    console.error("gregorianToJalali: Invalid date format", gregorianDate);
     return "";
   }
 
@@ -83,7 +81,6 @@ export function gregorianToJalali(gregorianDate) {
   const gDay = parseInt(parts[2], 10);
 
   if (isNaN(gYear) || isNaN(gMonth) || isNaN(gDay)) {
-    console.error("gregorianToJalali: Invalid date values", gregorianDate);
     return "";
   }
 
@@ -96,7 +93,6 @@ export function gregorianToJalali(gregorianDate) {
     gDay < 1 ||
     gDay > 31
   ) {
-    console.error("gregorianToJalali: Date out of range", gregorianDate);
     return "";
   }
 
@@ -109,12 +105,8 @@ export function gregorianToJalali(gregorianDate) {
     const month = String(jMonth).padStart(2, "0");
     const day = String(jDay).padStart(2, "0");
 
-    const result = `${year}/${month}/${day}`;
-    console.log("gregorianToJalali: Converted", gregorianDate, "→", result);
-
-    return result;
+    return `${year}/${month}/${day}`;
   } catch (error) {
-    console.error("gregorianToJalali: Conversion error", error);
     return "";
   }
 }

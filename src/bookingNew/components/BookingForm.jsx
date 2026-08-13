@@ -39,7 +39,6 @@ const BookingForm = ({ schedule }) => {
       const errorMessage =
         (error instanceof Error ? error.message : error) ||
         __("An error occurred while booking the appointment.", "nobat");
-      console.log("booking form error: ", errorMessage);
       showError(errorMessage);
     }
   }, [error, showError]);
@@ -81,8 +80,8 @@ const BookingForm = ({ schedule }) => {
         setSelectedDay(null);
         setSelectedSlot(null);
       }
-    } catch (err) {
-      console.error("Failed to book appointment:", err);
+    } catch {
+      // Error is surfaced via useFetch + useNotice.
     }
   };
 

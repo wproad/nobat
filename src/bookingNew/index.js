@@ -23,7 +23,6 @@ domReady(() => {
   const containers = document.querySelectorAll(".nobat-new-container");
 
   if (containers.length === 0) {
-    console.warn("Nobat: No new booking form containers found on page");
     return;
   }
 
@@ -32,14 +31,11 @@ domReady(() => {
     const appContainer = container.querySelector(".nobat-new-app");
 
     if (!appContainer) {
-      console.warn("Nobat: Booking app container not found", container);
       return;
     }
 
     // Get schedule ID from data attribute
     const scheduleId = container.dataset.scheduleId || "";
-
-    console.log("Nobat: Initializing new booking form", { scheduleId });
 
     // Create React root and render
     const root = createRoot(appContainer);

@@ -25,9 +25,8 @@ export const useSlotActions = (
       if (!response.ok) throw new Error("Failed to update slot status");
       await response.json().catch(() => ({}));
       refetchSchedule();
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+    } catch {
+      // Slot status update failed; calendar stays unchanged until next refetch.
     }
   };
 
@@ -38,15 +37,10 @@ export const useSlotActions = (
   };
 
   const handleDeleteWithRefresh = async (id) => {
-    console.log("🗑️ Deleting appointment:", id);
     const ok = await handleDelete(id);
     if (ok) {
-      console.log("✅ Appointment deleted successfully, refreshing data...");
       await refetchAppointments();
       await refetchSchedule();
-      console.log("🔄 Data refreshed - slot should now be available");
-    } else {
-      console.error("❌ Failed to delete appointment");
     }
     return ok;
   };
