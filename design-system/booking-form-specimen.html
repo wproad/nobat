@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Soft Slot · Specimen</title>
-  <link rel="stylesheet" href="./tokens.css" />
-  <link rel="stylesheet" href="./booking-form.css" />
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/tokens.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/booking-form.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
   <style>
     body { margin: 0; background: oklch(0.97 0.004 250); font-family: "Vazirmatn", system-ui, sans-serif; }
     .page { max-width: 880px; margin: 0 auto; padding: 24px 16px 64px; }
@@ -28,12 +28,13 @@
         <a href="./index.html">Launcher</a>
         <a href="./booking-screen.html">A · رزرو</a>
         <a href="./booking-success.html">B · موفقیت</a>
+        <a href="./booking-success-paid.html">B′ · موفقیت + پرداخت</a>
         <a href="./my-appointments.html">C · نوبت‌های من</a>
       </nav>
     </header>
 
     <section class="bf-specimen-section" data-od-id="specimen-badges">
-      <h2>Badges</h2>
+      <h2>Badges · نوبت‌ها</h2>
       <div class="bf-root bf-specimen-row" style="background:transparent;padding:0">
         <span class="bf-badge bf-badge--pending">در انتظار تأیید</span>
         <span class="bf-badge bf-badge--confirmed">تأیید شده</span>
@@ -41,6 +42,49 @@
         <span class="bf-badge bf-badge--past">گذشته</span>
         <span class="bf-badge bf-badge--upcoming">پیش رو</span>
         <span class="bf-badge bf-badge--count">3</span>
+      </div>
+      <h2 style="margin-top:16px">Badges · تقویم</h2>
+      <div class="bf-root bf-specimen-row" style="background:transparent;padding:0">
+        <span class="bf-badge bf-badge--available">در دسترس</span>
+        <span class="bf-badge bf-badge--cancel-requested">درخواست لغو</span>
+        <span class="bf-badge bf-badge--completed">تمام شده</span>
+        <span class="bf-badge bf-badge--blocked">مسدود شده</span>
+        <span class="bf-badge bf-badge--unavailable">در دسترس نیست</span>
+      </div>
+    </section>
+
+    <section class="bf-specimen-section" data-od-id="specimen-legend">
+      <h2>Calendar legend · قابل باز/بسته</h2>
+      <div class="bf-root" style="background:transparent;padding:0;max-width:640px">
+        <div class="bf-legend" data-od-id="specimen-calendar-legend" data-open="true">
+          <button type="button" class="bf-legend__toggle" aria-expanded="true" aria-controls="specimen-legend-panel" data-od-id="specimen-legend-toggle">
+            <span class="bf-legend__toggle-meta">
+              <span class="bf-legend__toggle-dots" aria-hidden="true">
+                <span class="bf-legend__dot bf-legend__dot--available"></span>
+                <span class="bf-legend__dot bf-legend__dot--pending"></span>
+                <span class="bf-legend__dot bf-legend__dot--confirmed"></span>
+                <span class="bf-legend__dot bf-legend__dot--cancel-requested"></span>
+              </span>
+              <span class="bf-legend__toggle-label">راهنمای وضعیت‌ها</span>
+            </span>
+            <svg class="bf-legend__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 6.5L8 10.5L12 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="bf-legend__panel" id="specimen-legend-panel" role="region" aria-label="فهرست وضعیت‌های تقویم">
+            <ul class="bf-legend__list">
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--available" aria-hidden="true"></span><span class="bf-legend__label">در دسترس</span><button type="button" class="bf-legend__info" title="بازهٔ آزاد" aria-label="توضیح: در دسترس">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--pending" aria-hidden="true"></span><span class="bf-legend__label">در انتظار</span><button type="button" class="bf-legend__info" title="منتظر تأیید" aria-label="توضیح: در انتظار">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--confirmed" aria-hidden="true"></span><span class="bf-legend__label">تأیید شده</span><button type="button" class="bf-legend__info" title="نوبت قطعی" aria-label="توضیح: تأیید شده">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--cancel-requested" aria-hidden="true"></span><span class="bf-legend__label">درخواست لغو</span><button type="button" class="bf-legend__info" title="در حال بررسی لغو" aria-label="توضیح: درخواست لغو">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--cancelled" aria-hidden="true"></span><span class="bf-legend__label">لغو شده</span><button type="button" class="bf-legend__info" title="لغو شده" aria-label="توضیح: لغو شده">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--completed" aria-hidden="true"></span><span class="bf-legend__label">تمام شده</span><button type="button" class="bf-legend__info" title="برگزار شده" aria-label="توضیح: تمام شده">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--blocked" aria-hidden="true"></span><span class="bf-legend__label">مسدود شده</span><button type="button" class="bf-legend__info" title="مسدود توسط مدیر" aria-label="توضیح: مسدود شده">i</button></li>
+              <li class="bf-legend__item"><span class="bf-legend__swatch bf-legend__swatch--unavailable" aria-hidden="true"></span><span class="bf-legend__label">در دسترس نیست</span><button type="button" class="bf-legend__info" title="خارج از دسترس" aria-label="توضیح: در دسترس نیست">i</button></li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:10px 0 0;font-size:12px;color:var(--muted)">کلاس‌ها: <code>bf-legend</code> + <code>data-open</code> · صفحهٔ اختصاصی: <a href="./calendar-legend.html">calendar-legend.html</a></p>
       </div>
     </section>
 
@@ -114,17 +158,79 @@
       </section>
 
       <section class="bf-specimen-section" data-od-id="specimen-success">
-        <h2>Success summary</h2>
-        <div class="bf-card bf-success">
-          <p class="bf-success__lead">نوبت شما با موفقیت رزرو شد. کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت.</p>
-          <hr class="bf-divider" />
-          <div class="bf-success__rows">
-            <div class="bf-success__row"><span class="bf-success__label">تاریخ</span><span class="bf-success__value">1405/05/17</span></div>
-            <div class="bf-success__row"><span class="bf-success__label">زمان</span><span class="bf-success__value">09:00 تا 09:15</span></div>
-            <div class="bf-success__row"><span class="bf-success__label">وضعیت</span><span class="bf-badge bf-badge--pending">در انتظار تأیید</span></div>
-          </div>
-          <hr class="bf-divider" />
-          <div class="bf-queue">شماره نوبت: #6</div>
+        <h2>Success ticket</h2>
+        <div class="bf-root" style="--ticket-notch-bg: oklch(0.97 0.004 250); background: transparent; padding: 0;">
+          <article class="bf-ticket bf-ticket--has-note" data-od-id="specimen-ticket">
+            <header class="bf-ticket__hero">
+              <div class="bf-ticket__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <h3 class="bf-ticket__title">رزرو با موفقیت انجام شد</h3>
+              <p class="bf-ticket__subtitle">کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت.</p>
+            </header>
+            <div class="bf-ticket__tear" aria-hidden="true">
+              <span class="bf-ticket__notch bf-ticket__notch--start"></span>
+              <span class="bf-ticket__tear-line"></span>
+              <span class="bf-ticket__notch bf-ticket__notch--end"></span>
+            </div>
+            <div class="bf-ticket__body">
+              <dl class="bf-ticket__grid">
+                <div class="bf-ticket__field"><dt class="bf-ticket__label">شماره نوبت</dt><dd class="bf-ticket__value">#6</dd></div>
+                <div class="bf-ticket__field bf-ticket__field--end"><dt class="bf-ticket__label">وضعیت</dt><dd><span class="bf-badge bf-badge--pending">در انتظار تأیید</span></dd></div>
+                <div class="bf-ticket__field bf-ticket__field--full"><dt class="bf-ticket__label">تاریخ و زمان</dt><dd class="bf-ticket__value">1405/05/17 · 09:00 تا 09:15</dd></div>
+              </dl>
+              <div class="bf-ticket__note" data-od-id="ticket-note">
+                <p class="bf-ticket__note-label">یادداشت</p>
+                <p class="bf-ticket__note-text">در مورد روتین پوستی مناسب خودم میخواستم اطلاعات دریافت کنم</p>
+              </div>
+            </div>
+            <div class="bf-ticket__perforation" aria-hidden="true"></div>
+            <footer class="bf-ticket__footer">
+              <div class="bf-ticket__qr"><img class="bf-ticket__qr-img" src="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/qr-ref.png?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" width="120" height="120" alt="کد QR نوبت: REF-14050517-0006" /></div>
+              <p class="bf-ticket__code">REF-14050517-0006</p>
+            </footer>
+          </article>
+
+          <p style="margin: 20px 0 8px; font-size: 13px; color: var(--muted);">با یادداشت — کلاس <code>bf-ticket--has-note</code> · با پرداخت — <code>bf-ticket--paid</code></p>
+          <article class="bf-ticket bf-ticket--paid bf-ticket--has-note" data-od-id="specimen-ticket-paid" style="margin-top: 0;">
+            <header class="bf-ticket__hero">
+              <div class="bf-ticket__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <h3 class="bf-ticket__title">رزرو با موفقیت انجام شد</h3>
+              <p class="bf-ticket__subtitle">پرداخت شما با موفقیت انجام شد.</p>
+            </header>
+            <div class="bf-ticket__tear" aria-hidden="true">
+              <span class="bf-ticket__notch bf-ticket__notch--start"></span>
+              <span class="bf-ticket__tear-line"></span>
+              <span class="bf-ticket__notch bf-ticket__notch--end"></span>
+            </div>
+            <div class="bf-ticket__body">
+              <dl class="bf-ticket__grid">
+                <div class="bf-ticket__field"><dt class="bf-ticket__label">شماره نوبت</dt><dd class="bf-ticket__value">#6</dd></div>
+                <div class="bf-ticket__field bf-ticket__field--end"><dt class="bf-ticket__label">مبلغ</dt><dd class="bf-ticket__value">۳۸۰,۰۰۰ تومان</dd></div>
+                <div class="bf-ticket__field bf-ticket__field--full"><dt class="bf-ticket__label">تاریخ و زمان</dt><dd class="bf-ticket__value">1405/05/17 · 09:00 تا 09:15</dd></div>
+              </dl>
+              <div class="bf-ticket__note" data-od-id="ticket-note-paid">
+                <p class="bf-ticket__note-label">یادداشت</p>
+                <p class="bf-ticket__note-text">مشاوره برای دریافت روتین پوستی مناسب پوستم</p>
+              </div>
+              <div class="bf-ticket__payment">
+                <div class="bf-ticket__payment-icon" aria-hidden="true">
+                  <svg viewBox="0 0 36 24" fill="none"><rect x="1" y="4" width="34" height="16" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="12" r="5" fill="#EB001B" opacity="0.9"/><circle cx="20" cy="12" r="5" fill="#F79E1B" opacity="0.9"/></svg>
+                </div>
+                <div class="bf-ticket__payment-copy">
+                  <p class="bf-ticket__payment-title">پرداخت با موفقیت انجام شد</p>
+                  <p class="bf-ticket__payment-meta">کارت منتهی به ۴۵۶۷</p>
+                </div>
+              </div>
+            </div>
+            <div class="bf-ticket__perforation" aria-hidden="true"></div>
+            <footer class="bf-ticket__footer">
+              <div class="bf-ticket__qr"><img class="bf-ticket__qr-img" src="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/qr-paid.png?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" width="120" height="120" alt="کد QR پیگیری: 0120077398910288" /></div>
+              <p class="bf-ticket__code">0120077398910288</p>
+            </footer>
+          </article>
         </div>
       </section>
 
@@ -141,5 +247,25 @@
       </section>
     </div>
   </div>
+  <script>
+    (function () {
+      document.querySelectorAll(".bf-legend").forEach(function (root) {
+        var toggle = root.querySelector(".bf-legend__toggle");
+        var panel = root.querySelector(".bf-legend__panel");
+        if (!toggle || !panel) return;
+        function sync() {
+          var open = root.getAttribute("data-open") === "true";
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) panel.removeAttribute("hidden");
+          else panel.setAttribute("hidden", "");
+        }
+        toggle.addEventListener("click", function () {
+          root.setAttribute("data-open", root.getAttribute("data-open") !== "true" ? "true" : "false");
+          sync();
+        });
+        sync();
+      });
+    })();
+  </script>
 </body>
 </html>

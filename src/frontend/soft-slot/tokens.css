@@ -29,7 +29,7 @@
   --well-cancel-fg:     oklch(0.42 0.12 25);
   --well-cancel-border: oklch(0.88 0.04 45);
 
-  /* Status badges — paired bg/fg; never encode status with --accent alone */
+  /* Status — appointment list */
   --status-pending-bg:    oklch(0.96 0.04 85);
   --status-pending-fg:    oklch(0.45 0.10 70);
   --status-confirmed-bg:  oklch(0.95 0.04 155);
@@ -40,6 +40,18 @@
   --status-past-fg:       oklch(0.42 0.02 260);
   --status-upcoming-bg:   oklch(0.95 0.02 195);
   --status-upcoming-fg:   oklch(0.42 0.08 195);
+
+  /* Status — calendar legend */
+  --status-available-bg:         oklch(0.94 0.03 195);
+  --status-available-fg:         oklch(0.42 0.08 195);
+  --status-cancel-requested-bg:  oklch(0.96 0.04 55);
+  --status-cancel-requested-fg:  oklch(0.48 0.12 45);
+  --status-completed-bg:         oklch(0.94 0.015 250);
+  --status-completed-fg:         oklch(0.45 0.03 250);
+  --status-blocked-bg:           oklch(0.94 0.04 15);
+  --status-blocked-fg:           oklch(0.40 0.14 15);
+  --status-unavailable-bg:       oklch(0.95 0.015 290);
+  --status-unavailable-fg:       oklch(0.50 0.03 290);
 
   /* Neutral count pill (tabs) — not a status color */
   --badge-count-bg: oklch(0.28 0.02 260);

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soft Slot · راهنمای وضعیت تقویم</title>
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/tokens.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <link rel="stylesheet" href="/api/projects/9ec2a92e-954c-4094-acba-2164124671ff/raw/booking-form.css?workspaceId=jh5zk2i50ryax451n9ne0lw6&workspaceMemberId=s9idgwrtt1b7qj4q5nn0u2qd" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600&display=swap");
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: oklch(0.97 0.004 250);
+      color: oklch(0.22 0.02 260);
+      font-family: "Vazirmatn", system-ui, sans-serif;
+    }
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 28px 16px 64px;
+    }
+    .page-intro h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .page-intro p {
+      margin: 0 0 20px;
+      color: oklch(0.55 0.02 260);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 6px 12px;
+      border: 1px solid oklch(0.88 0.01 260);
+      border-radius: 8px;
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .demo-stack {
+      display: grid;
+      gap: 16px;
+    }
+    .hint {
+      margin: 12px 0 0;
+      font-size: 12px;
+      color: oklch(0.55 0.02 260);
+      line-height: 1.5;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      background: oklch(0.965 0.006 250);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page" data-od-id="calendar-legend-page">
+    <header class="page-intro" data-od-id="legend-intro">
+      <h1>راهنمای وضعیت تقویم</h1>
+      <p>کامپوننت قابل باز/بسته شدن برای افسانهٔ رنگ‌های تقویم — هشت وضعیت Soft Slot، مناسب افزونهٔ جاسازی‌شده.</p>
+      <nav class="nav-links" aria-label="ناوبری">
+        <a href="./index.html">Launcher</a>
+        <a href="./booking-form-specimen.html">Specimen</a>
+        <a href="./booking-screen.html">A · رزرو</a>
+      </nav>
+    </header>
+
+    <div class="bf-root demo-stack" data-od-id="legend-demo">
+      <!-- Default: open -->
+      <div
+        class="bf-legend"
+        data-od-id="calendar-legend"
+        data-open="true"
+        id="bf-legend-root"
+      >
+        <button
+          type="button"
+          class="bf-legend__toggle"
+          id="bf-legend-toggle"
+          aria-expanded="true"
+          aria-controls="bf-legend-panel"
+          data-od-id="legend-toggle"
+        >
+          <span class="bf-legend__toggle-meta">
+            <span class="bf-legend__toggle-dots" aria-hidden="true">
+              <span class="bf-legend__dot bf-legend__dot--available"></span>
+              <span class="bf-legend__dot bf-legend__dot--pending"></span>
+              <span class="bf-legend__dot bf-legend__dot--confirmed"></span>
+              <span class="bf-legend__dot bf-legend__dot--cancel-requested"></span>
+            </span>
+            <span class="bf-legend__toggle-label">راهنمای وضعیت‌ها</span>
+          </span>
+          <svg class="bf-legend__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6.5L8 10.5L12 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="bf-legend__panel" id="bf-legend-panel" role="region" aria-label="فهرست وضعیت‌های تقویم">
+          <ul class="bf-legend__list" data-od-id="legend-list">
+            <li class="bf-legend__item" data-od-id="legend-available">
+              <span class="bf-legend__swatch bf-legend__swatch--available" aria-hidden="true"></span>
+              <span class="bf-legend__label">در دسترس</span>
+              <button type="button" class="bf-legend__info" title="بازهٔ زمانی آزاد برای رزرو" aria-label="توضیح: در دسترس">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-pending">
+              <span class="bf-legend__swatch bf-legend__swatch--pending" aria-hidden="true"></span>
+              <span class="bf-legend__label">در انتظار</span>
+              <button type="button" class="bf-legend__info" title="رزرو ثبت شده و منتظر تأیید است" aria-label="توضیح: در انتظار">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-confirmed">
+              <span class="bf-legend__swatch bf-legend__swatch--confirmed" aria-hidden="true"></span>
+              <span class="bf-legend__label">تأیید شده</span>
+              <button type="button" class="bf-legend__info" title="نوبت تأیید و قطعی شده است" aria-label="توضیح: تأیید شده">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-cancel-requested">
+              <span class="bf-legend__swatch bf-legend__swatch--cancel-requested" aria-hidden="true"></span>
+              <span class="bf-legend__label">درخواست لغو</span>
+              <button type="button" class="bf-legend__info" title="درخواست لغو ثبت شده و در حال بررسی است" aria-label="توضیح: درخواست لغو">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-cancelled">
+              <span class="bf-legend__swatch bf-legend__swatch--cancelled" aria-hidden="true"></span>
+              <span class="bf-legend__label">لغو شده</span>
+              <button type="button" class="bf-legend__info" title="نوبت لغو شده است" aria-label="توضیح: لغو شده">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-completed">
+              <span class="bf-legend__swatch bf-legend__swatch--completed" aria-hidden="true"></span>
+              <span class="bf-legend__label">تمام شده</span>
+              <button type="button" class="bf-legend__info" title="نوبت برگزار و به پایان رسیده است" aria-label="توضیح: تمام شده">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-blocked">
+              <span class="bf-legend__swatch bf-legend__swatch--blocked" aria-hidden="true"></span>
+              <span class="bf-legend__label">مسدود شده</span>
+              <button type="button" class="bf-legend__info" title="توسط مدیر مسدود شده و قابل رزرو نیست" aria-label="توضیح: مسدود شده">i</button>
+            </li>
+            <li class="bf-legend__item" data-od-id="legend-unavailable">
+              <span class="bf-legend__swatch bf-legend__swatch--unavailable" aria-hidden="true"></span>
+              <span class="bf-legend__label">در دسترس نیست</span>
+              <button type="button" class="bf-legend__info" title="خارج از ساعات کاری یا غیرفعال" aria-label="توضیح: در دسترس نیست">i</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="hint">
+        باز/بسته با <code>data-open</code> · پیش‌فرض باز.
+        برای شروع بسته: <code>data-open="false"</code> و <code>aria-expanded="false"</code>.
+      </p>
+
+      <!-- Collapsed preview -->
+      <div
+        class="bf-legend"
+        data-od-id="calendar-legend-collapsed"
+        data-open="false"
+      >
+        <button
+          type="button"
+          class="bf-legend__toggle"
+          aria-expanded="false"
+          aria-controls="bf-legend-panel-b"
+          data-od-id="legend-toggle-b"
+        >
+          <span class="bf-legend__toggle-meta">
+            <span class="bf-legend__toggle-dots" aria-hidden="true">
+              <span class="bf-legend__dot bf-legend__dot--available"></span>
+              <span class="bf-legend__dot bf-legend__dot--pending"></span>
+              <span class="bf-legend__dot bf-legend__dot--confirmed"></span>
+              <span class="bf-legend__dot bf-legend__dot--cancel-requested"></span>
+            </span>
+            <span class="bf-legend__toggle-label">راهنمای وضعیت‌ها · بسته</span>
+          </span>
+          <svg class="bf-legend__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6.5L8 10.5L12 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="bf-legend__panel" id="bf-legend-panel-b" hidden>
+          <ul class="bf-legend__list">
+            <li class="bf-legend__item">
+              <span class="bf-legend__swatch bf-legend__swatch--available" aria-hidden="true"></span>
+              <span class="bf-legend__label">در دسترس</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <section data-od-id="legend-badge-map" style="margin-top:8px">
+        <h2 style="margin:0 0 12px;font-size:15px;font-weight:600">بج‌های متناظر</h2>
+        <div class="bf-specimen-row" style="padding:0">
+          <span class="bf-badge bf-badge--available">در دسترس</span>
+          <span class="bf-badge bf-badge--pending">در انتظار</span>
+          <span class="bf-badge bf-badge--confirmed">تأیید شده</span>
+          <span class="bf-badge bf-badge--cancel-requested">درخواست لغو</span>
+          <span class="bf-badge bf-badge--cancelled">لغو شده</span>
+          <span class="bf-badge bf-badge--completed">تمام شده</span>
+          <span class="bf-badge bf-badge--blocked">مسدود شده</span>
+          <span class="bf-badge bf-badge--unavailable">در دسترس نیست</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      function bindLegend(root) {
+        if (!root) return;
+        var toggle = root.querySelector(".bf-legend__toggle");
+        var panel = root.querySelector(".bf-legend__panel");
+        if (!toggle || !panel) return;
+
+        function sync() {
+          var open = root.getAttribute("data-open") === "true";
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) {
+            panel.removeAttribute("hidden");
+          } else {
+            panel.setAttribute("hidden", "");
+          }
+        }
+
+        toggle.addEventListener("click", function () {
+          var next = root.getAttribute("data-open") !== "true";
+          root.setAttribute("data-open", next ? "true" : "false");
+          sync();
+        });
+
+        sync();
+      }
+
+      document.querySelectorAll(".bf-legend").forEach(bindLegend);
+    })();
+  </script>
+</body>
+</html>

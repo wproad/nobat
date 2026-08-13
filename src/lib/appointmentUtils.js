@@ -6,12 +6,13 @@ import { __ } from "../utils/i18n";
 export const getStatusClass = (status) => {
   switch (status) {
     case "pending":
-    case "cancel_requested":
       return "appt-status--pending";
+    case "cancel_requested":
+      return "appt-status--cancel-requested";
     case "confirmed":
       return "appt-status--confirmed";
     case "completed":
-      return "appt-status--past";
+      return "appt-status--completed";
     case "cancelled":
       return "appt-status--cancelled";
     default:
@@ -25,12 +26,13 @@ export const getStatusClass = (status) => {
 export const getStatusBadgeClass = (status) => {
   switch (status) {
     case "pending":
-    case "cancel_requested":
       return "bf-badge bf-badge--pending";
+    case "cancel_requested":
+      return "bf-badge bf-badge--cancel-requested";
     case "confirmed":
       return "bf-badge bf-badge--confirmed";
     case "completed":
-      return "bf-badge bf-badge--past";
+      return "bf-badge bf-badge--completed";
     case "cancelled":
       return "bf-badge bf-badge--cancelled";
     default:
@@ -42,6 +44,8 @@ export const getStatusLabel = (status) => {
   switch (status) {
     case "pending":
       return __("Pending", "nobat");
+    case "cancel_requested":
+      return __("Cancellation requested", "nobat");
     case "confirmed":
       return __("Confirmed", "nobat");
     case "completed":

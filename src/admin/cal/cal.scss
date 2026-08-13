@@ -65,103 +65,8 @@
     }
   }
 
-  .calendar-legend {
-    padding: var(--space-3) var(--space-4);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
+  .bf-legend {
     margin-bottom: var(--space-4);
-    box-shadow: var(--elev);
-
-    .legend-items {
-      display: flex;
-      gap: var(--space-4);
-      align-items: center;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      padding: 5px 10px;
-      border-radius: var(--radius-control);
-      transition: background var(--motion-fast) var(--ease);
-
-      &.clickable {
-        cursor: pointer;
-
-        &:hover {
-          background: var(--accent-soft);
-
-          .legend-info-icon {
-            opacity: 1;
-            color: var(--accent);
-          }
-        }
-      }
-
-      .legend-color {
-        width: 18px;
-        height: 18px;
-        border-radius: 4px;
-        border: 1px solid var(--border);
-        flex-shrink: 0;
-
-        &.slot-available {
-          background: transparent;
-          border: 2px solid var(--accent);
-        }
-
-        &.slot-booked {
-          background: var(--status-confirmed-bg);
-          border-color: color-mix(
-            in oklab,
-            var(--status-confirmed-fg),
-            transparent 50%
-          );
-        }
-
-        &.slot-blocked {
-          background: var(--status-cancelled-bg);
-          border-color: color-mix(
-            in oklab,
-            var(--status-cancelled-fg),
-            transparent 50%
-          );
-        }
-
-        &.slot-unavailable {
-          background: var(--status-past-bg);
-          border-color: var(--border);
-        }
-      }
-
-      .legend-label {
-        color: var(--fg);
-        font-weight: 500;
-        white-space: nowrap;
-        font-size: 13px;
-      }
-
-      .legend-info-icon {
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 600;
-        color: var(--muted);
-        opacity: 0.7;
-        width: 16px;
-        height: 16px;
-        border-radius: var(--radius-pill);
-        border: 1px solid var(--border);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all var(--motion-fast) var(--ease);
-      }
-    }
   }
 
   .status-info-modal {
@@ -176,39 +81,13 @@
         margin-bottom: var(--space-6);
         border: 1px solid var(--border);
 
-        .color-box {
-          width: 60px;
-          height: 40px;
+        .color-box.bf-legend__item {
+          display: block;
+          width: 48px;
+          height: 36px;
+          min-height: 0;
+          padding: 0;
           border-radius: var(--radius-control);
-          display: inline-block;
-          border: 1px solid var(--border);
-
-          &.slot-available {
-            background: transparent;
-            border: 2px solid var(--accent);
-          }
-
-          &.slot-booked {
-            background: var(--status-confirmed-bg);
-            border-color: color-mix(
-              in oklab,
-              var(--status-confirmed-fg),
-              transparent 50%
-            );
-          }
-
-          &.slot-blocked {
-            background: var(--status-cancelled-bg);
-            border-color: color-mix(
-              in oklab,
-              var(--status-cancelled-fg),
-              transparent 50%
-            );
-          }
-
-          &.slot-unavailable {
-            background: var(--status-past-bg);
-          }
         }
 
         .status-name {
@@ -398,7 +277,7 @@
         transition: background-color var(--motion-fast) var(--ease);
 
         &.excluded {
-          background: var(--status-past-bg);
+          background: transparent;
         }
 
         &.past-full {
@@ -419,7 +298,7 @@
           border-bottom: 2px solid var(--border);
 
           &.excluded {
-            background: color-mix(in oklab, var(--status-past-bg), var(--fg) 4%);
+            background: color-mix(in oklab, var(--surface), var(--fg) 2%);
           }
         }
 
@@ -466,31 +345,45 @@
             }
 
             &.slot-blocked {
-              background: var(--status-cancelled-bg);
-              color: var(--status-cancelled-fg);
+              color: var(--status-blocked-fg);
               font-weight: 600;
               font-style: normal;
+              background-color: transparent;
+              background-image: repeating-linear-gradient(
+                -45deg,
+                color-mix(in oklab, var(--status-blocked-fg) 28%, transparent) 0,
+                color-mix(in oklab, var(--status-blocked-fg) 28%, transparent) 1px,
+                transparent 1px,
+                transparent 5px
+              );
 
               &:hover {
-                background: color-mix(
+                background-color: color-mix(
                   in oklab,
-                  var(--status-cancelled-bg),
-                  var(--status-cancelled-fg) 8%
+                  var(--status-blocked-fg) 8%,
+                  transparent
                 );
               }
             }
 
             &.slot-unavailable {
-              background: var(--status-past-bg);
-              color: var(--status-past-fg);
+              color: var(--status-unavailable-fg);
               font-weight: 500;
               font-style: normal;
+              background-color: transparent;
+              background-image: repeating-linear-gradient(
+                -45deg,
+                color-mix(in oklab, var(--status-unavailable-fg) 22%, transparent) 0,
+                color-mix(in oklab, var(--status-unavailable-fg) 22%, transparent) 1px,
+                transparent 1px,
+                transparent 5px
+              );
 
               &:hover {
-                background: color-mix(
+                background-color: color-mix(
                   in oklab,
-                  var(--status-past-bg),
-                  var(--status-past-fg) 8%
+                  var(--status-unavailable-fg) 6%,
+                  transparent
                 );
               }
             }
@@ -504,7 +397,7 @@
   .time-block {
     height: 100%;
     border-radius: var(--radius-control);
-    border-inline-start: 3px solid;
+    border-inline-start: 4px solid;
     font-size: 11px;
     cursor: pointer;
     transition: box-shadow var(--motion-fast) var(--ease);
@@ -520,10 +413,22 @@
       border-inline-start-color: var(--status-pending-fg);
     }
 
+    &.appt-status--cancel-requested {
+      background: var(--status-cancel-requested-bg);
+      color: var(--status-cancel-requested-fg);
+      border-inline-start-color: var(--status-cancel-requested-fg);
+    }
+
     &.appt-status--confirmed {
       background: var(--status-confirmed-bg);
       color: var(--status-confirmed-fg);
       border-inline-start-color: var(--status-confirmed-fg);
+    }
+
+    &.appt-status--completed {
+      background: var(--status-completed-bg);
+      color: var(--status-completed-fg);
+      border-inline-start-color: var(--status-completed-fg);
     }
 
     &.appt-status--past {

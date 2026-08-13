@@ -32,16 +32,42 @@ Do **not** encourage hosts to override status, well, or count tokens.
 
 ### Status badges (required pairs)
 
+**Appointment list**
+
 | Class | Label | Meaning |
 |-------|-------|--------|
 | `bf-badge--pending` | در انتظار تأیید | Awaiting confirmation |
 | `bf-badge--confirmed` | تأیید شده | Approved / booked |
 | `bf-badge--cancelled` | لغو شده | Cancelled |
-| `bf-badge--past` | گذشته | Completed / past |
-| `bf-badge--upcoming` | پیش رو | Upcoming |
+| `bf-badge--past` | گذشته | Past (list filter) |
+| `bf-badge--upcoming` | پیش رو | Upcoming (list filter) |
 | `bf-badge--count` | (number) | Neutral tab counter — not a status |
 
+**Calendar (legend + cells)**
+
+| Class | Label | Meaning |
+|-------|-------|--------|
+| `bf-badge--available` | در دسترس | Free slot |
+| `bf-badge--pending` | در انتظار | Awaiting confirmation |
+| `bf-badge--confirmed` | تأیید شده | Confirmed booking |
+| `bf-badge--cancel-requested` | درخواست لغو | Cancellation requested |
+| `bf-badge--cancelled` | لغو شده | Cancelled |
+| `bf-badge--completed` | تمام شده | Finished appointment |
+| `bf-badge--blocked` | مسدود شده | Blocked by admin |
+| `bf-badge--unavailable` | در دسترس نیست | Outside hours / inactive |
+
 **Rule:** Badges always use paired `bg` + `fg`. Never encode status with `--accent` alone.
+
+### Calendar legend (toggleable)
+
+| Piece | Notes |
+|-------|-------|
+| `.bf-legend` | Root; `data-open="true\|false"` |
+| `.bf-legend__toggle` | Full-width disclosure control (≥44px) |
+| `.bf-legend__swatch--*` | Soft fill + status-colored border square |
+| `.bf-legend__info` | Optional help chip (`title` / `aria-label`) |
+
+Demo: `calendar-legend.html`. Keep labels Persian; do not ship English status strings in UI.
 
 ## 3. Typography
 
