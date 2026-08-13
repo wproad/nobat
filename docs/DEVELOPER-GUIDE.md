@@ -91,7 +91,7 @@ nobat/
 ├── includes/               # PHP backend (Core, Repositories, Services, Controllers, …)
 ├── src/
 │   ├── admin/             # Calendar + schedule builder
-│   ├── bookingNew/        # Soft Slot booking UI
+│   ├── frontend/        # Soft Slot booking UI
 │   ├── ui/
 │   ├── hooks/
 │   ├── lib/

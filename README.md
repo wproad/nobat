@@ -206,11 +206,11 @@ nobat/
 │   ├── admin/
 │   │   ├── cal/              # Admin calendar (React)
 │   │   └── schedule/         # Create schedule (React)
-│   ├── bookingNew/           # Front booking UI (React)
+│   ├── frontend/           # Front booking UI (React)
 │   ├── hooks/                # Shared React hooks
 │   ├── ui/                   # Shared UI components
 │   └── utils/
-├── build/                    # Compiled JS/CSS (cal, schedule, bookingNew)
+├── build/                    # Compiled JS/CSS (cal, schedule, frontend)
 ├── languages/                # i18n (.po / .mo)
 └── docs/                     # Developer documentation
 ```
@@ -241,7 +241,7 @@ Edit SCSS / CSS under `src/`, then rebuild:
 
 - `src/admin/cal/cal.scss`
 - `src/admin/schedule/schedule.scss`
-- `src/bookingNew/bookingNew.scss` and `src/bookingNew/soft-slot/`
+- `src/frontend/frontend.scss` and `src/frontend/soft-slot/`
 - `src/ui/ui-components.scss`
 
 ```bash

@@ -74,7 +74,7 @@ nobat/
 │   │   └── schedule/            # Schedule builder
 │   │       ├── index.js
 │   │       └── components/
-│   ├── bookingNew/              # Frontend booking interface (Soft Slot)
+│   ├── frontend/              # Frontend booking interface (Soft Slot)
 │   │   ├── index.js
 │   │   ├── soft-slot/          # Design tokens & booking form CSS
 │   │   ├── components/
@@ -91,7 +91,7 @@ nobat/
 ├── build/                       # Compiled assets (generated)
 │   ├── cal.js / cal.css
 │   ├── schedule.js / schedule.css
-│   ├── bookingNew.js / bookingNew.css
+│   ├── frontend.js / frontend.css
 │   └── *.asset.php
 │
 ├── languages/                   # Translation files
@@ -222,7 +222,7 @@ See [API-ENDPOINTS.md](API-ENDPOINTS.md) for complete API documentation.
 
 **Frontend booking (Soft Slot):**
 
-3. **Booking interface** (`src/bookingNew/`)
+3. **Booking interface** (`src/frontend/`)
    - Shortcode: `[nobat_booking]`
    - Optional attribute: `schedule_id`
    - Features: login gate, my appointments, book flow, cancellation requests

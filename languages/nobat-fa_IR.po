@@ -352,9 +352,9 @@ msgid "slot_id and schedule_id are required."
 msgstr "slot_id و schedule_id الزامی هستند."
 
 #: includes/Controllers/AppointmentController.php:101
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx:31
-#: src/bookingNew/components/BookingForm.jsx:48
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx:31
+#: src/frontend/components/BookingForm.jsx:48
 msgid "Appointment booked successfully!"
 msgstr "وقت با موفقیت رزرو شد!"
 
@@ -363,8 +363,8 @@ msgid "You do not have permission to view this appointment."
 msgstr "شما اجازه مشاهده این وقت را ندارید."
 
 #: includes/Controllers/AppointmentController.php:241
-#: build/bookingNew.js:1
-#: src/bookingNew/hooks/useAppointmentCancellation.js:62
+#: build/frontend.js:1
+#: src/frontend/hooks/useAppointmentCancellation.js:62
 msgid "Cancellation request submitted. An admin will review your request."
 msgstr "درخواست لغو ارسال شد. یک مدیر درخواست شما را بررسی خواهد کرد."
 
@@ -537,8 +537,8 @@ msgid "This appointment cannot be cancelled."
 msgstr "این نوبت قابل لغو نیست."
 
 #: includes/Services/AppointmentService.php:209
-#: build/bookingNew.js:1
-#: src/bookingNew/hooks/useAppointmentCancellation.js:81
+#: build/frontend.js:1
+#: src/frontend/hooks/useAppointmentCancellation.js:81
 msgid "Failed to request cancellation."
 msgstr "درخواست لغو ناموفق بود."
 
@@ -646,10 +646,10 @@ msgid "Failed to unblock slot."
 msgstr "رفع مسدودیت بازه زمانی ناموفق بود."
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/TimeSlotButton.jsx:32
-#: src/bookingNew/components/TimeSlotButton.jsx:48
-#: src/bookingNew/utils/displayHelpers.js:67
+#: build/frontend.js:1
+#: src/frontend/components/TimeSlotButton.jsx:32
+#: src/frontend/components/TimeSlotButton.jsx:48
+#: src/frontend/utils/displayHelpers.js:67
 #: src/frontend/booking/components/MyAppointments.jsx:259
 #: src/frontend/booking/components/TimeSlotButton.jsx:29
 #: src/frontend/booking/components/TimeSlotButton.jsx:45
@@ -667,8 +667,8 @@ msgid "Available Hours"
 msgstr "بازه‌های زمانی موجود"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js:34
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js:34
 #: src/frontend/booking/components/AppointmentTicket.jsx:43
 msgid "Pending Confirmation"
 msgstr "در انتظار تأیید"
@@ -717,8 +717,8 @@ msgid "Book Another Appointment"
 msgstr "رزرو یک نوبت دیگر"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/Main.jsx:36
+#: build/frontend.js:1
+#: src/frontend/components/Main.jsx:36
 #: src/frontend/booking/components/BookingForm.jsx:80
 #: src/frontend/booking/components/BookingForm.jsx:157
 msgid "Book an Appointment"
@@ -750,14 +750,14 @@ msgid "Add any additional information or special requests"
 msgstr "هر اطلاعات یا درخواست خاص دیگری را اضافه کنید"
 
 #: build/booking.js:1
-#: src/bookingNew/components/BookingForm.jsx:150
+#: src/frontend/components/BookingForm.jsx:150
 #: src/frontend/booking/components/BookingForm.jsx:234
 msgid "Booking..."
 msgstr "در حال رزرو..."
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingForm.jsx:151
+#: build/frontend.js:1
+#: src/frontend/components/BookingForm.jsx:151
 #: src/frontend/booking/components/BookingForm.jsx:237
 msgid "Book Appointment"
 msgstr "رزرو نوبت"
@@ -768,16 +768,16 @@ msgid "You must be logged in to book appointments."
 msgstr "برای رزرو نوبتها باید وارد شوید."
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/LoginRequired.jsx:37
+#: build/frontend.js:1
+#: src/frontend/components/LoginRequired.jsx:37
 #: src/frontend/booking/components/BookingForm.jsx:96
 #: src/frontend/booking/components/MyAppointments.jsx:191
 msgid "Log In"
 msgstr "ورود"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/LoginRequired.jsx:44
+#: build/frontend.js:1
+#: src/frontend/components/LoginRequired.jsx:44
 #: src/frontend/booking/components/BookingForm.jsx:103
 msgid "Register"
 msgstr "ثبت‌نام"
@@ -791,9 +791,9 @@ msgid "Pending"
 msgstr "در انتظار"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
-#: src/bookingNew/utils/displayHelpers.js:36
+#: src/frontend/utils/displayHelpers.js:36
 #: src/frontend/booking/components/MyAppointments.jsx:151
 #: src/lib/appointmentUtils.js:38
 #: src/lib/appointmentUtils.js:50
@@ -801,9 +801,9 @@ msgid "Confirmed"
 msgstr "تأیید شده"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
-#: src/bookingNew/utils/displayHelpers.js:38
+#: src/frontend/utils/displayHelpers.js:38
 #: src/frontend/booking/components/MyAppointments.jsx:152
 #: src/lib/appointmentUtils.js:40
 #: src/lib/appointmentUtils.js:51
@@ -811,10 +811,10 @@ msgid "Completed"
 msgstr "تمام شده"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
-#: src/bookingNew/components/MyAppointments.jsx:47
-#: src/bookingNew/utils/displayHelpers.js:40
+#: src/frontend/components/MyAppointments.jsx:47
+#: src/frontend/utils/displayHelpers.js:40
 #: src/frontend/booking/components/MyAppointments.jsx:153
 #: src/lib/appointmentUtils.js:42
 #: src/lib/appointmentUtils.js:52
@@ -826,30 +826,30 @@ msgstr "لغو شده"
 msgid "Cancellation Requested"
 msgstr "درخواست لغو شده"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js:41
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js:41
 msgid "Cancel Requested"
 msgstr "درخواست لغو شده"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/Main.jsx:35
+#: build/frontend.js:1
+#: src/frontend/components/Main.jsx:35
 #: src/frontend/booking/components/MyAppointments.jsx:171
 #: src/frontend/booking/components/MyAppointments.jsx:205
 msgid "My Appointments"
 msgstr "نوبت های من"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:75
-#: src/bookingNew/components/Main.jsx:40
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:75
+#: src/frontend/components/Main.jsx:40
 #: src/frontend/booking/components/MyAppointments.jsx:214
 msgid "Book New Appointment"
 msgstr "رزرو نوبت جدید"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/MyAppointments.jsx:80
+#: build/frontend.js:1
+#: src/frontend/components/MyAppointments.jsx:80
 #: src/frontend/booking/components/MyAppointments.jsx:234
 msgid "Loading appointments..."
 msgstr "در حال بارگذاری نوبتها..."
@@ -860,10 +860,10 @@ msgid "You don't have any appointments yet. Click the button above to book your 
 msgstr "شما هنوز هیچ وقت‌نظری ندارید. برای رزرو اولین وقت‌نظرتان، روی دکمه بالا کلیک کنید."
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:266
-#: src/bookingNew/components/AppointmentRow.jsx:59
+#: src/frontend/components/AppointmentRow.jsx:59
 #: src/frontend/booking/components/MyAppointments.jsx:277
 msgid "Note:"
 msgstr "یادداشت:"
@@ -874,62 +874,62 @@ msgid "Assigned to:"
 msgstr "اختصاص داده شده به:"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: build/schedule.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:380
 #: src/admin/cal/components/AppointmentDetailModal.jsx:417
 #: src/admin/schedule/components/CreateSchedule.jsx:217
-#: src/bookingNew/components/CancellationModal.jsx:79
+#: src/frontend/components/CancellationModal.jsx:79
 #: src/frontend/booking/components/MyAppointments.jsx:299
 #: src/frontend/booking/components/MyAppointments.jsx:382
 msgid "Cancel"
 msgstr "انصراف"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:35
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:35
 #: src/frontend/booking/components/MyAppointments.jsx:315
 msgid "Request Cancellation"
 msgstr "درخواست لغو"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:40
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:40
 #: src/frontend/booking/components/MyAppointments.jsx:324
 msgid "Are you sure you want to request cancellation for this appointment?"
 msgstr "آیا مطمئن هستید که می‌خواهید برای این نوبت درخواست لغو بدهید؟"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:232
-#: src/bookingNew/components/AppointmentTicket.jsx:41
-#: src/bookingNew/components/CancellationModal.jsx:51
+#: src/frontend/components/AppointmentTicket.jsx:41
+#: src/frontend/components/CancellationModal.jsx:51
 #: src/frontend/booking/components/MyAppointments.jsx:333
 msgid "Date:"
 msgstr "تاریخ:"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:239
-#: src/bookingNew/components/AppointmentTicket.jsx:46
-#: src/bookingNew/components/CancellationModal.jsx:55
+#: src/frontend/components/AppointmentTicket.jsx:46
+#: src/frontend/components/CancellationModal.jsx:55
 #: src/frontend/booking/components/MyAppointments.jsx:338
 msgid "Time:"
 msgstr "زمان:"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:61
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:61
 #: src/frontend/booking/components/MyAppointments.jsx:345
 msgid "Reason for cancellation (optional)"
 msgstr "دلیل لغو (اختیاری)"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:64
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:64
 #: src/frontend/booking/components/MyAppointments.jsx:348
 msgid "Please provide a reason for cancellation"
 msgstr "لطفاً دلیل لغو را ارائه دهید"
@@ -940,15 +940,15 @@ msgid "Cancellation request submitted successfully!"
 msgstr "درخواست لغو با موفقیت ارسال شد!"
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:91
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:91
 #: src/frontend/booking/components/MyAppointments.jsx:366
 msgid "Submitting..."
 msgstr "در حال ارسال..."
 
 #: build/booking.js:1
-#: build/bookingNew.js:1
-#: src/bookingNew/components/CancellationModal.jsx:94
+#: build/frontend.js:1
+#: src/frontend/components/CancellationModal.jsx:94
 #: src/frontend/booking/components/MyAppointments.jsx:369
 msgid "Submit Request"
 msgstr "ارسال درخواست"
@@ -958,182 +958,182 @@ msgstr "ارسال درخواست"
 msgid "You must be logged in to view your appointments."
 msgstr "برای مشاهده نوبتهای خود باید وارد شوید."
 
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:114
-#: src/bookingNew/components/AppointmentRow.jsx:51
+#: src/frontend/components/AppointmentRow.jsx:51
 msgid "Cancel Appointment"
 msgstr "لغو نوبت"
 
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:273
-#: src/bookingNew/components/AppointmentRow.jsx:65
+#: src/frontend/components/AppointmentRow.jsx:65
 msgid "Cancellation Reason:"
 msgstr "دلیل لغو:"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:47
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:47
 msgid "You don't have any appointments yet"
 msgstr "شما هنوز هیچ نوبتی ندارید"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:51
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:51
 msgid "It's time to book your first appointment! Contact us and benefit from our quality services."
 msgstr "وقت آن است که اولین نوبت خود را رزرو کنید! با ما تماس بگیرید و از خدمات با کیفیت ما بهره‌مند شوید."
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:97
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:97
 msgid "Easy and Fast Booking"
 msgstr "رزرو آسان و سریع"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:139
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:139
 msgid "Quality Services"
 msgstr "خدمات با کیفیت"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/EmptyAppointmentsState.jsx:174
+#: build/frontend.js:1
+#: src/frontend/components/EmptyAppointmentsState.jsx:174
 msgid "24/7 Support"
 msgstr "پشتیبانی 24/7"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/MyAppointments.jsx:42
+#: build/frontend.js:1
+#: src/frontend/components/MyAppointments.jsx:42
 msgid "Upcoming"
 msgstr "پیش رو"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/MyAppointments.jsx:52
+#: build/frontend.js:1
+#: src/frontend/components/MyAppointments.jsx:52
 msgid "Past"
 msgstr "گذشته"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/MyAppointments.jsx:90
+#: build/frontend.js:1
+#: src/frontend/components/MyAppointments.jsx:90
 msgid "Nothing here!"
 msgstr "چیزی اینجا نیست!"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/TimeSlotSelector.jsx:48
+#: build/frontend.js:1
+#: src/frontend/components/TimeSlotSelector.jsx:48
 msgid "Available time slots for"
 msgstr "بازه‌های زمانی موجود برای"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/TimeSlotSelector.jsx:65
+#: build/frontend.js:1
+#: src/frontend/components/TimeSlotSelector.jsx:65
 msgid "No available time slots for this day"
 msgstr "هیچ بازه زمانی موجودی برای این روز وجود ندارد"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "رزرو با موفقیت انجام شد"
 msgstr "رزرو با موفقیت انجام شد"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت."
 msgstr "کارشناسان ما در اولین فرصت با شما تماس خواهند گرفت."
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "شماره نوبت"
 msgstr "شماره نوبت"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "وضعیت"
 msgstr "وضعیت"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "تاریخ و زمان"
 msgstr "تاریخ و زمان"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "یادداشت"
 msgstr "یادداشت"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/AppointmentTicket.jsx
+#: build/frontend.js:1
+#: src/frontend/components/AppointmentTicket.jsx
 msgid "مشاهده نوبت‌های من"
 msgstr "مشاهده نوبت‌های من"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "در انتظار تأیید"
 msgstr "در انتظار تأیید"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "تأیید شده"
 msgstr "تأیید شده"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "انجام‌شده"
 msgstr "انجام‌شده"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "لغو شده"
 msgstr "لغو شده"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "درخواست لغو"
 msgstr "درخواست لغو"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/utils/displayHelpers.js
+#: build/frontend.js:1
+#: src/frontend/utils/displayHelpers.js
 msgid "تا"
 msgstr "تا"
 
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 #: build/cal.js:1
 #: src/admin/cal/components/AppointmentDetailModal.jsx:248
 msgid "Status:"
 msgstr "وضعیت:"
 
-#: build/bookingNew.js:1
+#: build/frontend.js:1
 msgid "Appointment Number:"
 msgstr "شماره نوبت:"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingForm.jsx:39
+#: build/frontend.js:1
+#: src/frontend/components/BookingForm.jsx:39
 msgid "An error occurred while booking the appointment."
 msgstr "خطایی در حین رزرو نوبت رخ داد."
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingForm.jsx:128
+#: build/frontend.js:1
+#: src/frontend/components/BookingForm.jsx:128
 msgid "Additional Notes"
 msgstr "یادداشت‌های اضافی"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingForm.jsx:131
+#: build/frontend.js:1
+#: src/frontend/components/BookingForm.jsx:131
 msgid "Any special requests or additional information"
 msgstr "هر درخواست خاص یا اطلاعات اضافی"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingForm.jsx:136
+#: build/frontend.js:1
+#: src/frontend/components/BookingForm.jsx:136
 msgid "Optional: Add any specific requirements or questions"
 msgstr "اختیاری: هر نیاز خاص یا سوالی اضافه کنید"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingView.jsx:39
+#: build/frontend.js:1
+#: src/frontend/components/BookingView.jsx:39
 msgid "Loading schedule..."
 msgstr "در حال بارگذاری برنامه..."
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/BookingView.jsx:49
+#: build/frontend.js:1
+#: src/frontend/components/BookingView.jsx:49
 msgid "No active schedule found. Please contact the administrator."
 msgstr "هیچ برنامه فعالی یافت نشد. لطفاً با مدیر تماس بگیرید."
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/LoginRequired.jsx:27
+#: build/frontend.js:1
+#: src/frontend/components/LoginRequired.jsx:27
 msgid "Access Required"
 msgstr "دسترسی مورد نیاز"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/LoginRequired.jsx:32
+#: build/frontend.js:1
+#: src/frontend/components/LoginRequired.jsx:32
 msgid "You must be logged in to view appointments."
 msgstr "برای مشاهده نوبت‌ها باید وارد شوید."
 
@@ -1597,8 +1597,8 @@ msgstr "این برنامه فعال است و برای کاربران قابل 
 msgid "This schedule is inactive and hidden from users"
 msgstr "این برنامه غیرفعال است و برای کاربران مخفی است"
 
-#: build/bookingNew.js:1
-#: src/bookingNew/components/Main.jsx:41
+#: build/frontend.js:1
+#: src/frontend/components/Main.jsx:41
 msgid "View My Appointments"
 msgstr "مشاهده نوبت‌ها من"
 
@@ -1679,11 +1679,11 @@ msgstr "زمانبندی با موفقیت به‌روزرسانی شد."
 msgid "Schedule deactivated successfully. Open appointments were cancelled."
 msgstr "زمانبندی با موفقیت غیرفعال شد. نوبت‌های باز لغو شدند."
 
-#: src/bookingNew/components/AppointmentRow.jsx
+#: src/frontend/components/AppointmentRow.jsx
 msgid "Show Ticket"
 msgstr "مشاهده بلیت"
 
-#: src/bookingNew/components/AppointmentTicket.jsx
-#: src/bookingNew/components/MyAppointments.jsx
+#: src/frontend/components/AppointmentTicket.jsx
+#: src/frontend/components/MyAppointments.jsx
 msgid "Back to Appointments"
 msgstr "بازگشت به نوبت‌ها"

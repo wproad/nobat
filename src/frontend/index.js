@@ -11,7 +11,7 @@
  */
 import "./soft-slot/tokens.css";
 import "./soft-slot/booking-form.css";
-import "./bookingNew.scss";
+import "./frontend.scss";
 import "../ui/ui-components.scss";
 import domReady from "../utils/dom-ready";
 import { createRoot } from "react-dom/client";

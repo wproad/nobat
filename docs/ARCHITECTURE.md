@@ -397,7 +397,7 @@ nobat/
 │   └── enqueue-scripts.php
 ├── src/
 │   ├── admin/         # Calendar + schedule builder
-│   ├── bookingNew/    # Soft Slot booking UI
+│   ├── frontend/    # Soft Slot booking UI
 │   ├── ui/
 │   ├── hooks/
 │   ├── lib/

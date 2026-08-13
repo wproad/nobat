@@ -138,7 +138,7 @@ function nobat_admin_enqueue_scripts( $admin_page ) {
 add_action( 'admin_enqueue_scripts', 'nobat_admin_enqueue_scripts' );
 
 /**
- * Enqueues bookingNew.js for pages that need it
+ * Enqueues frontend.js for pages that need it
  * Checks if page has the nobat_booking shortcode
  */
 function nobat_front_enqueue_scripts() {
@@ -155,14 +155,14 @@ function nobat_front_enqueue_scripts() {
 	}
 
 	// Use file modification time as version for cache busting
-	$js_file = NOBAT_PLUGIN_DIR . 'build/bookingNew.js';
-	$css_file = NOBAT_PLUGIN_DIR . 'build/bookingNew.css';
+	$js_file = NOBAT_PLUGIN_DIR . 'build/frontend.js';
+	$css_file = NOBAT_PLUGIN_DIR . 'build/frontend.css';
 	$version = file_exists( $js_file ) ? filemtime( $js_file ) : NOBAT_VERSION;
 
 	// Enqueue our standalone React bundle (no WordPress dependencies)
 	wp_enqueue_script(
 		'nobat-front-script',
-		NOBAT_PLUGIN_URL . 'build/bookingNew.js',
+		NOBAT_PLUGIN_URL . 'build/frontend.js',
 		array(), // No dependencies - everything is bundled
 		$version,
 		array(
@@ -201,7 +201,7 @@ function nobat_front_enqueue_scripts() {
 	// Enqueue styles
 	wp_enqueue_style(
 		'nobat-front-style',
-		NOBAT_PLUGIN_URL . 'build/bookingNew.css',
+		NOBAT_PLUGIN_URL . 'build/frontend.css',
 		array( 'nobat-vazirmatn' ),
 		$version,
 	);

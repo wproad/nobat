@@ -1,5 +1,5 @@
-import "../../bookingNew/soft-slot/tokens.css";
-import "../../bookingNew/soft-slot/booking-form.css";
+import "../../frontend/soft-slot/tokens.css";
+import "../../frontend/soft-slot/booking-form.css";
 import "../../ui/ui-components.scss";
 import "./schedule.scss";
 import domReady from "../../utils/dom-ready";
