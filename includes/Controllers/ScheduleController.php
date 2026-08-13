@@ -124,6 +124,14 @@ class ScheduleController {
 				array( 'status' => 400 )
 			);
 		}
+
+		if ( $end_date_gregorian <= $start_date_gregorian ) {
+			return new WP_Error(
+				'invalid_date_range',
+				__( 'End date must be after start date.', 'nobat' ),
+				array( 'status' => 400 )
+			);
+		}
 		
 		// Transform weekly hours from frontend format to service format
 		$working_hours = array();

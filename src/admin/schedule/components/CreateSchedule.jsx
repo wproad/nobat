@@ -19,8 +19,17 @@ function CreateSchedule() {
 
   const { notice, setNotice, saveSchedule } = useSchedule();
   const buffer = 0;
+  const isEndAfterStart = Boolean(startDay && endDay && endDay > startDay);
 
   const handleSubmit = () => {
+    if (!isEndAfterStart) {
+      setNotice({
+        status: "error",
+        message: __("End date must be after start date.", "nobat"),
+      });
+      return;
+    }
+
     const overlapWarning = __(
       "Schedules with overlapping date ranges may interfere with each other. Make sure this is intentional before continuing.",
       "nobat"
@@ -137,6 +146,11 @@ function CreateSchedule() {
                 value={endDay}
                 onChange={setEndDay}
               />
+              {startDay && endDay && !isEndAfterStart && (
+                <p className="components-base-control__help" style={{ color: "#b32d2e" }}>
+                  {__("End date must be after start date.", "nobat")}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -201,7 +215,7 @@ function CreateSchedule() {
         <Button
           variant="primary"
           onClick={handleSubmit}
-          disabled={!name || !startDay || !endDay}
+          disabled={!name || !startDay || !endDay || !isEndAfterStart}
         >
           {__("Create Schedule", "nobat")}
         </Button>
