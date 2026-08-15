@@ -1,0 +1,40 @@
+.nobat-bulk-edit {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	margin: 12px 0 16px;
+	padding: 16px 20px;
+}
+
+.nobat-bulk-edit h2 {
+	font-size: 14px;
+	margin: 0 0 8px;
+}
+
+.nobat-bulk-edit-count {
+	color: #646970;
+	margin: 0 0 12px;
+}
+
+.nobat-bulk-edit-fields {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px 24px;
+	margin-bottom: 8px;
+}
+
+.nobat-bulk-edit-fields label {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	font-weight: 600;
+}
+
+.nobat-bulk-edit-fields select {
+	min-width: 200px;
+}
+
+.nobat-bulk-edit .submit {
+	margin: 8px 0 0;
+	padding: 0;
+}

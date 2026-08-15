@@ -355,49 +355,17 @@ class AppointmentController {
 		$appointment_id = $request->get_param( 'id' );
 		$new_status = $request->get_param( 'status' );
 		$admin_id = $this->auth_service->get_current_user_id();
-		
-		// Get current appointment to check status
-		$appointment = $this->appointment_service->get_appointment( $appointment_id );
-		
-		if ( ! $appointment ) {
-			return new WP_Error(
-				'not_found',
-				__( 'Appointment not found.', 'nobat' ),
-				array( 'status' => 404 )
-			);
-		}
-		
-		// Route to appropriate service method based on target status and current status
-		switch ( $new_status ) {
-			case 'confirmed':
-				// If restoring from cancelled/completed, use restore method
-				if ( in_array( $appointment['status'], array( 'cancelled', 'completed' ), true ) ) {
-					$result = $this->appointment_service->restore_appointment( $appointment_id, $admin_id );
-					$message = __( 'Appointment restored successfully.', 'nobat' );
-				} else {
-					// Normal confirm from pending
-					$result = $this->appointment_service->confirm_appointment( $appointment_id, $admin_id );
-					$message = __( 'Appointment confirmed successfully.', 'nobat' );
-				}
-				break;
-			
-			case 'completed':
-				$result = $this->appointment_service->complete_appointment( $appointment_id, $admin_id );
-				$message = __( 'Appointment marked as completed.', 'nobat' );
-				break;
-			
-		case 'cancelled':
-			$result = $this->appointment_service->cancel_appointment( $appointment_id, $admin_id );
-			$message = __( 'Appointment cancelled successfully.', 'nobat' );
-			break;
-			
-			default:
-				return new WP_Error(
-					'invalid_status',
-					__( 'Invalid status provided.', 'nobat' ),
-					array( 'status' => 400 )
-				);
-		}
+
+		$result = $this->appointment_service->change_status( $appointment_id, $new_status, $admin_id );
+
+		$messages = array(
+			'confirmed' => __( 'Appointment confirmed successfully.', 'nobat' ),
+			'completed' => __( 'Appointment marked as completed.', 'nobat' ),
+			'cancelled' => __( 'Appointment cancelled successfully.', 'nobat' ),
+		);
+		$message = isset( $messages[ $new_status ] )
+			? $messages[ $new_status ]
+			: __( 'Appointment updated successfully.', 'nobat' );
 		
 		if ( is_wp_error( $result ) ) {
 			return $result;

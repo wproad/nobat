@@ -432,9 +432,9 @@ class AppointmentService {
 					throw new \Exception( __( 'Appointment not found.', 'nobat' ) );
 				}
 				
-				// Can only restore cancelled or completed appointments
-				if ( ! in_array( $appointment['status'], array( 'cancelled', 'completed' ), true ) ) {
-					throw new \Exception( __( 'Only cancelled or completed appointments can be restored.', 'nobat' ) );
+				// Can restore cancelled, completed, or cancellation-requested appointments
+				if ( ! in_array( $appointment['status'], array( 'cancelled', 'completed', 'cancel_requested' ), true ) ) {
+					throw new \Exception( __( 'Only cancelled, completed, or cancellation-requested appointments can be restored.', 'nobat' ) );
 				}
 				
 				// Update status to confirmed
@@ -465,6 +465,147 @@ class AppointmentService {
 		}
 	}
 	
+	/**
+	 * Change appointment status using the same transition rules as the REST API.
+	 *
+	 * @param int         $appointment_id
+	 * @param string      $new_status
+	 * @param int         $admin_id
+	 * @param string|null $reason
+	 * @return bool|\WP_Error
+	 */
+	public function change_status( $appointment_id, $new_status, $admin_id, $reason = null ) {
+		$appointment = $this->appointment_repo->find( $appointment_id );
+
+		if ( ! $appointment ) {
+			return new \WP_Error( 'not_found', __( 'Appointment not found.', 'nobat' ), array( 'status' => 404 ) );
+		}
+
+		if ( $appointment['status'] === $new_status ) {
+			return true;
+		}
+
+		switch ( $new_status ) {
+			case 'confirmed':
+				if ( in_array( $appointment['status'], array( 'cancelled', 'completed', 'cancel_requested' ), true ) ) {
+					return $this->restore_appointment( $appointment_id, $admin_id );
+				}
+				return $this->confirm_appointment( $appointment_id, $admin_id );
+
+			case 'completed':
+				return $this->complete_appointment( $appointment_id, $admin_id );
+
+			case 'cancelled':
+				return $this->cancel_appointment( $appointment_id, $admin_id, $reason );
+
+			default:
+				return new \WP_Error(
+					'invalid_status',
+					__( 'Invalid status provided.', 'nobat' ),
+					array( 'status' => 400 )
+				);
+		}
+	}
+
+	/**
+	 * Assign or clear the admin on an appointment.
+	 *
+	 * @param int      $appointment_id
+	 * @param int|null $admin_id User ID, or null/0 to clear
+	 * @return bool|\WP_Error
+	 */
+	public function assign_admin( $appointment_id, $admin_id ) {
+		$appointment = $this->appointment_repo->find( $appointment_id );
+
+		if ( ! $appointment ) {
+			return new \WP_Error( 'not_found', __( 'Appointment not found.', 'nobat' ), array( 'status' => 404 ) );
+		}
+
+		$admin_id = $admin_id ? (int) $admin_id : null;
+
+		$success = $this->appointment_repo->update(
+			$appointment_id,
+			array( 'assigned_admin_id' => $admin_id )
+		);
+
+		if ( ! $success ) {
+			return new \WP_Error( 'update_failed', __( 'Failed to assign admin.', 'nobat' ), array( 'status' => 500 ) );
+		}
+
+		$actor_id = get_current_user_id();
+		$this->history_repo->add_entry(
+			$appointment_id,
+			$actor_id,
+			'admin_assigned',
+			$admin_id
+				? sprintf( __( 'Assigned admin ID %d', 'nobat' ), $admin_id )
+				: __( 'Assigned admin cleared', 'nobat' )
+		);
+
+		return true;
+	}
+
+	/**
+	 * Apply bulk field changes to appointments.
+	 *
+	 * Empty string values mean "no change". assigned_admin_id of 0 clears the assignment.
+	 *
+	 * @param int[] $ids
+	 * @param array $changes {
+	 *     @type string     $status            Optional target status.
+	 *     @type string|int $assigned_admin_id Optional admin user ID, or 0 to clear.
+	 *     @type string     $cancellation_reason Optional reason when cancelling.
+	 * }
+	 * @param int   $admin_id
+	 * @return array{updated:int,failed:int,errors:string[]}
+	 */
+	public function bulk_update( $ids, $changes, $admin_id ) {
+		$updated = 0;
+		$failed  = 0;
+		$errors  = array();
+
+		$status            = isset( $changes['status'] ) ? sanitize_text_field( $changes['status'] ) : '';
+		$has_admin_change  = array_key_exists( 'assigned_admin_id', $changes ) && $changes['assigned_admin_id'] !== '' && $changes['assigned_admin_id'] !== null;
+		$cancellation_reason = ! empty( $changes['cancellation_reason'] )
+			? sanitize_text_field( $changes['cancellation_reason'] )
+			: null;
+
+		foreach ( $ids as $id ) {
+			$id      = (int) $id;
+			$changed = false;
+
+			if ( $status !== '' ) {
+				$result = $this->change_status( $id, $status, $admin_id, $cancellation_reason );
+				if ( is_wp_error( $result ) ) {
+					$failed++;
+					$errors[] = sprintf( '#%d: %s', $id, $result->get_error_message() );
+					continue;
+				}
+				$changed = true;
+			}
+
+			if ( $has_admin_change ) {
+				$result = $this->assign_admin( $id, (int) $changes['assigned_admin_id'] );
+				if ( is_wp_error( $result ) ) {
+					$failed++;
+					$errors[] = sprintf( '#%d: %s', $id, $result->get_error_message() );
+					continue;
+				}
+				$changed = true;
+			}
+
+			if ( $changed ) {
+				$updated++;
+			}
+		}
+
+		return array(
+			'updated' => $updated,
+			'failed'  => $failed,
+			'errors'  => $errors,
+		);
+	}
+
 	/**
 	 * Update appointment report
 	 *

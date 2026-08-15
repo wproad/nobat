@@ -69,6 +69,38 @@ function nobat_admin_enqueue_scripts( $admin_page ) {
 			true
 		);
 	}
+	// Appointments list: bulk-edit UI only (no React bundle)
+	elseif ( strpos( $admin_page, 'nobat-appointments' ) !== false ) {
+		$js_file  = NOBAT_PLUGIN_DIR . 'assets/admin/appointments-list.js';
+		$css_file = NOBAT_PLUGIN_DIR . 'assets/admin/appointments-list.css';
+		$version  = file_exists( $js_file ) ? filemtime( $js_file ) : NOBAT_VERSION;
+
+		wp_enqueue_style(
+			'nobat-appointments-list',
+			NOBAT_PLUGIN_URL . 'assets/admin/appointments-list.css',
+			array(),
+			file_exists( $css_file ) ? filemtime( $css_file ) : $version
+		);
+
+		wp_enqueue_script(
+			'nobat-appointments-list',
+			NOBAT_PLUGIN_URL . 'assets/admin/appointments-list.js',
+			array(),
+			$version,
+			true
+		);
+
+		wp_localize_script(
+			'nobat-appointments-list',
+			'nobatAppointmentsList',
+			array(
+				'selectAppointments' => __( 'Please select one or more appointments.', 'nobat' ),
+				'confirmDelete'      => __( 'Are you sure you want to delete the selected appointments? This will cancel them and free their time slots.', 'nobat' ),
+				'selectedCount'      => __( '%d appointment(s) selected.', 'nobat' ),
+			)
+		);
+		return;
+	}
 	// Schedules list page and other admin pages don't need React scripts
 	else {
 		return;
