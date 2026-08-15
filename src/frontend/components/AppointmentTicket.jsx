@@ -3,7 +3,7 @@
  *
  * Soft Slot success ticket after booking (matches booking-success design).
  *
- * @param {Object} appointment - Appointment object containing id, dates, times, note, and status
+ * @param {Object} appointment - Appointment object containing id, dates, times, note, status, and user_name
  * @param {Function} [onBack] - Optional callback for the back / list navigation button
  * @param {string} [backLabel] - Optional label for the back button
  */
@@ -11,6 +11,7 @@ import {
   getStatusClass,
   getStatusText,
   formatTimeRange,
+  getUserDisplayName,
 } from "../utils/displayHelpers";
 import { __ } from "../../utils/i18n";
 
@@ -46,6 +47,10 @@ const AppointmentTicket = ({ appointment, onBack, backLabel }) => {
   const refCode = buildRefCode(displayDate, id);
   const noteText = typeof note === "string" ? note.trim() : "";
   const hasNote = Boolean(noteText);
+  const currentUser =
+    typeof window !== "undefined" ? window.wpApiSettings?.currentUser : null;
+  const userName =
+    getUserDisplayName(appointment) || getUserDisplayName(currentUser);
 
   const reservationMessage =
     typeof window !== "undefined" && window.wpApiSettings?.reservationMessage;
@@ -114,6 +119,12 @@ const AppointmentTicket = ({ appointment, onBack, backLabel }) => {
                 </span>
               </dd>
             </div>
+            {userName && (
+              <div className="bf-ticket__field bf-ticket__field--full">
+                <dt className="bf-ticket__label">{__("نام", "nobat")}</dt>
+                <dd className="bf-ticket__value">{userName}</dd>
+              </div>
+            )}
             <div className="bf-ticket__field bf-ticket__field--full">
               <dt className="bf-ticket__label">
                 {__("تاریخ و زمان", "nobat")}

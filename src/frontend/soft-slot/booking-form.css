@@ -28,6 +28,7 @@
 .bf-shell {
   max-width: 720px;
   margin-inline: auto;
+  margin-bottom: 300px;
   padding: var(--space-4);
 }
 

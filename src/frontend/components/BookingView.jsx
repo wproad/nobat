@@ -4,7 +4,7 @@
  * Parent component that handles schedule fetching with smart endpoint selection.
  * Supports both active schedule and specific schedule ID scenarios.
  * Manages loading states with Spinner, error handling, and data extraction.
- * Renders BookingForm with validated schedule data.
+ * Renders BookingForm only when the fetched schedule exists and is active.
  *
  * @param {string} scheduleId - Optional schedule ID, uses active schedule if not provided
  */
@@ -25,6 +25,7 @@ const BookingView = ({ scheduleId }) => {
   } = useGet(endpoint);
 
   const schedule = scheduleData?.schedule || null;
+  const isActive = Number(schedule?.is_active) === 1;
 
   if (scheduleLoading) {
     return (
@@ -35,7 +36,7 @@ const BookingView = ({ scheduleId }) => {
     );
   }
 
-  if (scheduleError || !schedule?.id) {
+  if (scheduleError || !schedule?.id || !isActive) {
     return (
       <div className="bf-empty">
         <p className="bf-empty__muted">

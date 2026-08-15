@@ -42,7 +42,7 @@ const Main = ({ scheduleId }) => {
       : "bf-btn bf-btn--ghost";
 
   return (
-    <div className="bf-shell">
+    <div className="bf-shell" >
       <header className="bf-header">
         <h1 className="bf-title">{headerTitle}</h1>
         <button type="button" className={headerBtnClass} onClick={toggleView}>
